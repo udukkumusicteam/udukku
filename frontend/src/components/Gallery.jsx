@@ -1,54 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
-// Curated event / performance / workshop imagery.
-// Replace these URLs with the studio's actual photography when ready —
-// the layout will adapt to any image dimensions.
+// Photographs from life at Udukku.
 const PHOTOS = [
   {
-    src: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Open-mic night',
-    caption: 'Open-mic night · Spring recital',
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6csi50ns_DSC05863%20%281%29.jpg',
+    alt: 'A moment at Udukku',
+    caption: 'In the room where the music lives',
   },
   {
-    src: 'https://images.unsplash.com/photo-1485579149621-3123dd979885?auto=format&fit=crop&w=1000&q=80',
-    alt: 'Live performance',
-    caption: 'Student showcase',
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/ddnac6h8_DSC06010%20%281%29.jpg',
+    alt: 'A moment at Udukku',
+    caption: 'Quiet hours together',
   },
   {
-    src: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80',
-    alt: 'Drum workshop',
-    caption: 'Percussion workshop',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Acoustic afternoon',
-    caption: 'Acoustic afternoons',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1000&q=80',
-    alt: 'Strings ensemble',
-    caption: 'Strings ensemble',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Studio jam',
-    caption: 'Studio jam · Tuesday nights',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1000&q=80',
-    alt: 'Solo piano',
-    caption: 'Solo piano · Winter recital',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Voice circle',
-    caption: 'Voice circle',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1488376986648-2512dfc6f736?auto=format&fit=crop&w=1000&q=80',
-    alt: 'Backstage moment',
-    caption: 'Backstage · After the encore',
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/3mcpimz7_DSC05252%20%281%29.jpg',
+    alt: 'A moment at Udukku',
+    caption: 'Small gatherings, warm afternoons',
   },
 ];
 
