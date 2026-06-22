@@ -67,7 +67,7 @@ const CATEGORIES = [
     name: 'Percussion',
     icon: Drum,
     image:
-      'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/w74xnqq6_DSC05418%20%281%29.jpg',
+      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1800&q=80',
     note: 'The pulse that holds every song together. Learn to listen, then play.',
     sub: [
       { name: 'Tabla', icon: Drum },
@@ -81,7 +81,7 @@ const CATEGORIES = [
     name: 'Wind',
     icon: WindIcon,
     image:
-      'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6mwlqdin_IMG_3251.jpg',
+      'https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1800&q=80',
     note: 'Air becomes a melody. One steady breath at a time.',
     sub: [
       { name: 'Flute / Bansuri', icon: WindIcon },
