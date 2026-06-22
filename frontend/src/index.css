@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ffffff;
+  color: #2D1A0A;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 24 53% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 24 53% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 53% 11%;
+    --primary: 14 78% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 41% 93%;
+    --secondary-foreground: 24 53% 11%;
+    --muted: 35 41% 93%;
+    --muted-foreground: 28 35% 35%;
+    --accent: 35 41% 93%;
+    --accent-foreground: 24 53% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 28 35% 85%;
+    --input: 28 35% 85%;
+    --ring: 14 78% 44%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-display {
+    font-family: 'Hanken Grotesk', sans-serif;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    font-weight: 600;
+  }
+  .text-italic-serif {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero-radial-overlay {
+    background: radial-gradient(
+      circle at 75% 45%,
+      rgba(255, 220, 180, 0.22) 0%,
+      rgba(255, 220, 180, 0) 55%
+    );
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .sepia-soft {
+    filter: saturate(0.78) sepia(0.18) contrast(1.02);
+  }
+  .multiply-overlay {
+    mix-blend-mode: multiply;
+  }
+  .udukku-section {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+  @media (max-width: 1100px) {
+    .udukku-section {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .udukku-section {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .udukku-section {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+}
+
+[data-debug-wrapper="true"] {
+  display: contents !important;
+}

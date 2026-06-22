@@ -1,0 +1,139 @@
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { TUTORS } from '../data/mockData';
+
+export const TutorsSlider = () => {
+  const scrollRef = useRef(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const updateBounds = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 4);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    updateBounds();
+    el.addEventListener('scroll', updateBounds, { passive: true });
+    window.addEventListener('resize', updateBounds);
+    return () => {
+      el.removeEventListener('scroll', updateBounds);
+      window.removeEventListener('resize', updateBounds);
+    };
+  }, [updateBounds]);
+
+  // Translate vertical wheel into horizontal scroll
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onWheel = (e) => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      e.preventDefault();
+      el.scrollBy({ left: e.deltaY, behavior: 'auto' });
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
+
+  const scrollByCards = (dir) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.querySelector('[data-card]');
+    const step = card ? card.clientWidth + 24 : 300;
+    el.scrollBy({ left: dir * step * 1.2, behavior: 'smooth' });
+  };
+
+  return (
+    <section
+      data-testid="tutors-section"
+      className="bg-cream text-brown-dark"
+    >
+      <div className="udukku-section pt-24 md:pt-32 pb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
+          <div className="max-w-2xl">
+            <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
+              Our Tutors
+            </span>
+            <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px]">
+              Learn from those who{' '}
+              <span className="text-italic-serif text-orange">lived</span> the
+              music.
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              data-testid="tutors-prev"
+              onClick={() => scrollByCards(-1)}
+              disabled={atStart}
+              aria-label="Previous tutor"
+              className="w-12 h-12 rounded-full border border-brown-dark/30 inline-flex items-center justify-center text-brown-dark transition-all enabled:hover:bg-brown-dark enabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              data-testid="tutors-next"
+              onClick={() => scrollByCards(1)}
+              disabled={atEnd}
+              aria-label="Next tutor"
+              className="w-12 h-12 rounded-full border border-brown-dark/30 inline-flex items-center justify-center text-brown-dark transition-all enabled:hover:bg-brown-dark enabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        ref={scrollRef}
+        className="udukku-section pb-24 md:pb-32 overflow-x-auto scrollbar-hide"
+        data-testid="tutors-scroll"
+        style={{ scrollSnapType: 'x mandatory' }}
+      >
+        <div className="flex gap-6 md:gap-7">
+          {TUTORS.map((t, i) => (
+            <article
+              key={t.id}
+              data-card
+              data-testid={`tutor-card-${i}`}
+              className="shrink-0 snap-start w-[192px] sm:w-[230px] md:w-[276px]"
+            >
+              <div
+                className="relative w-full overflow-hidden rounded-2xl bg-brown-light/40"
+                style={{ aspectRatio: '3 / 4' }}
+              >
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover sepia-soft"
+                />
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                  <span className="px-2.5 py-1 rounded-full bg-white/85 text-brown-dark text-[10px] uppercase tracking-widest">
+                    Mentor
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-black/45 text-white text-[10px] tracking-wide">
+                    {t.experience}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-4">
+                <h3 className="text-xl md:text-2xl font-semibold text-brown-dark">
+                  {t.name}
+                </h3>
+                <p className="text-sm text-brown-mid mt-1">{t.role}</p>
+              </div>
+            </article>
+          ))}
+          <div className="shrink-0 w-1" aria-hidden="true" />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TutorsSlider;
