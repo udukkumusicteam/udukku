@@ -48,13 +48,6 @@ export const Hero = () => (
           Book Now
           <ArrowUpRight className="w-4 h-4" />
         </Link>
-        <Link
-          to="/about"
-          data-testid="hero-our-story"
-          className="inline-flex items-center gap-2 h-11 px-6 rounded-full border border-white/50 text-white text-sm font-medium hover:bg-white/10 transition-colors min-w-[44px]"
-        >
-          Our Story
-        </Link>
       </div>
 
       <div

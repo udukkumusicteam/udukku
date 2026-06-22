@@ -4,6 +4,7 @@ import StatsSection from '../components/StatsSection';
 import VisionMission from '../components/VisionMission';
 import TutorsSlider from '../components/TutorsSlider';
 import Testimonials from '../components/Testimonials';
+import Gallery from '../components/Gallery';
 import BottomCTA from '../components/BottomCTA';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <VisionMission />
       <TutorsSlider />
       <Testimonials />
+      <Gallery />
       <BottomCTA />
     </main>
   );
