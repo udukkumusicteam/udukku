@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { Mail, MapPin, Phone, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Mail, MapPin, Phone, ArrowUpRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { contactService } from '../services/apiService';
 import { SITE } from '../data/mockData';
 import WaveDivider from '../components/WaveDivider';
@@ -88,12 +89,32 @@ export default function Contact() {
               />
             </div>
 
-            <div className="mt-10 rounded-3xl overflow-hidden border border-brown-dark/10">
-              <img
-                src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=1200&q=80"
-                alt="Udukku studio"
-                className="w-full h-64 object-cover sepia-soft"
-              />
+            <div className="mt-10 rounded-3xl p-8 md:p-9 bg-cream border border-brown-dark/10 relative overflow-hidden">
+              <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-orange/10 blur-2xl pointer-events-none" />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 text-orange">
+                  <Sparkles className="w-4 h-4" />
+                  <span className="text-xs uppercase tracking-[0.22em]">
+                    Looking to learn?
+                  </span>
+                </div>
+                <h3 className="text-display mt-3 text-2xl md:text-[28px] text-brown-dark leading-tight">
+                  Hoping to book a session{' '}
+                  <span className="text-italic-serif text-orange">instead</span>?
+                </h3>
+                <p className="mt-3 text-brown-mid text-sm leading-relaxed max-w-sm">
+                  Lessons, trial classes, and quiet first steps live on a
+                  separate page. Step in and we'll find a time that feels right.
+                </p>
+                <Link
+                  to="/booking"
+                  data-testid="contact-book-cta"
+                  className="mt-6 inline-flex items-center gap-2 h-12 px-7 rounded-full bg-orange text-white text-base font-medium hover:bg-orange-dark transition-colors"
+                >
+                  Book a session
+                  <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
 
