@@ -5,9 +5,9 @@
 export const SITE = {
   brand: 'udukku',
   tagline: 'The Music In You',
-  phone: '+91 98765 43210',
-  email: 'hello@udukku.studio',
-  address: '14 Banyan Lane, Indiranagar, Bengaluru 560038',
+  phone: '+91 96803 78292',
+  email: 'udukkumusic@gmail.com',
+  address: 'M-23, Income Tax Colony, Durgapura, Tonk Road, Jaipur, Rajasthan 302004',
   social: [
     { label: 'Instagram', url: 'https://instagram.com', icon: 'instagram' },
     { label: 'YouTube', url: 'https://youtube.com', icon: 'youtube' },
