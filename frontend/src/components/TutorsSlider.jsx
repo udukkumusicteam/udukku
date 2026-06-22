@@ -26,18 +26,8 @@ export const TutorsSlider = () => {
     };
   }, [updateBounds]);
 
-  // Translate vertical wheel into horizontal scroll
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-      e.preventDefault();
-      el.scrollBy({ left: e.deltaY, behavior: 'auto' });
-    };
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, []);
+  // (Vertical scroll no longer hijacks the carousel. Navigation is via the
+  // arrow buttons and native touch / trackpad horizontal gestures.)
 
   const scrollByCards = (dir) => {
     const el = scrollRef.current;
