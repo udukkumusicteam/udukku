@@ -59,12 +59,13 @@ export default function Contact() {
           {/* Info column */}
           <div>
             <h2 className="text-display text-3xl md:text-4xl text-brown-dark">
-              Find us, write to us, drop by.
+              Have a question, an idea, or want to know more about{' '}
+              <span className="text-italic-serif text-orange">Udukku</span>?
             </h2>
             <p className="mt-4 text-brown-mid text-base leading-relaxed max-w-md">
-              Our studio is open Tuesday through Sunday. Walk in any time. If
-              you would like a mentor to be ready for you, a short note ahead
-              of your visit helps.
+              We'd love to hear from you. Whether you're a student, teacher,
+              musician, parent, or music enthusiast, reach out and we'll get
+              back to you as soon as we can.
             </p>
 
             <div className="mt-10 space-y-6">
