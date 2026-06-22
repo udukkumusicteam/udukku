@@ -47,7 +47,7 @@ export default function Booking() {
     <main data-testid="booking-page" className="bg-cream">
       {/* Page hero */}
       <section className="bg-hero-gradient text-white">
-        <div className="udukku-section pt-36 md:pt-44 pb-20 md:pb-24">
+        <div className="udukku-section pt-28 md:pt-32 pb-14 md:pb-16">
           <span className="uppercase tracking-[0.28em] text-[11px] text-white/80">
             Book a session
           </span>
@@ -63,8 +63,8 @@ export default function Booking() {
         <WaveDivider fill="#F5F0E5" />
       </section>
 
-      <section className="udukku-section py-20 md:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16">
+      <section className="udukku-section py-14 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-12">
           {/* Form */}
           <form
             onSubmit={submit}

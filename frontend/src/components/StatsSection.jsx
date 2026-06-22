@@ -6,8 +6,8 @@ export const StatsSection = () => (
     data-testid="stats-section"
     className="bg-cream text-brown-dark"
   >
-    <div className="udukku-section py-24 md:py-32">
-      <div className="max-w-3xl mb-16 md:mb-20">
+    <div className="udukku-section py-16 md:py-20">
+      <div className="max-w-3xl mb-10 md:mb-14">
         <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
           Why Udukku
         </span>
@@ -17,7 +17,7 @@ export const StatsSection = () => (
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10">
         {STATS.map((s, idx) => (
           <div
             key={s.title}

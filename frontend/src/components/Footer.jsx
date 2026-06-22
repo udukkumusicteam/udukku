@@ -16,8 +16,8 @@ export const Footer = () => (
     data-testid="site-footer"
     className="bg-orange-dark text-white border-t border-white/15"
   >
-    <div className="udukku-section py-16 md:py-20">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
+    <div className="udukku-section py-12 md:py-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-10">
         {/* Brand */}
         <div className="space-y-6">
           <Logo color="#FFFFFF" />
@@ -110,7 +110,7 @@ export const Footer = () => (
         </div>
       </div>
 
-      <div className="mt-14 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/70">
+      <div className="mt-10 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/70">
         <span>© {new Date().getFullYear()} udukku. The music in you.</span>
         <span className="text-italic-serif">Made with quiet intention.</span>
       </div>

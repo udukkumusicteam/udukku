@@ -16,7 +16,7 @@ export const BottomCTA = () => (
         className="absolute inset-0"
         style={{ backgroundColor: 'rgba(20, 8, 0, 0.58)' }}
       />
-      <div className="relative udukku-section py-28 md:py-40 flex flex-col items-center text-center">
+      <div className="relative udukku-section py-20 md:py-24 flex flex-col items-center text-center">
         <span className="uppercase tracking-[0.28em] text-xs text-white/80">
           Your First Step
         </span>

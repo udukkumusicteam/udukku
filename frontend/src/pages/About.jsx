@@ -10,7 +10,7 @@ export default function About() {
     <main data-testid="about-page">
       {/* Hero */}
       <section className="bg-hero-gradient text-white">
-        <div className="udukku-section pt-36 md:pt-44 pb-20 md:pb-28">
+        <div className="udukku-section pt-28 md:pt-32 pb-14 md:pb-20">
           <span className="uppercase tracking-[0.28em] text-[11px] text-white/80">
             About Udukku
           </span>
@@ -31,7 +31,7 @@ export default function About() {
 
       {/* Story */}
       <section className="bg-cream">
-        <div className="udukku-section py-24 md:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="udukku-section py-16 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
             <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
               Our Story
@@ -67,8 +67,8 @@ export default function About() {
 
       {/* Tutors grid */}
       <section className="bg-cream">
-        <div className="udukku-section py-24 md:py-32">
-          <div className="max-w-2xl mb-14">
+        <div className="udukku-section py-16 md:py-20">
+          <div className="max-w-2xl mb-10 md:mb-12">
             <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
               Meet the mentors
             </span>
@@ -108,7 +108,7 @@ export default function About() {
             ))}
           </div>
 
-          <div className="mt-16 flex justify-center">
+          <div className="mt-12 flex justify-center">
             <Link
               to="/booking"
               data-testid="about-cta"

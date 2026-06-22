@@ -52,8 +52,8 @@ export const TutorsSlider = () => {
       data-testid="tutors-section"
       className="bg-cream text-brown-dark"
     >
-      <div className="udukku-section pt-24 md:pt-32 pb-10">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
+      <div className="udukku-section pt-16 md:pt-20 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
           <div className="max-w-2xl">
             <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
               Our Tutors
@@ -90,7 +90,7 @@ export const TutorsSlider = () => {
 
       <div
         ref={scrollRef}
-        className="udukku-section pb-24 md:pb-32 overflow-x-auto scrollbar-hide"
+        className="udukku-section pb-16 md:pb-20 overflow-x-auto scrollbar-hide"
         data-testid="tutors-scroll"
         style={{ scrollSnapType: 'x mandatory' }}
       >

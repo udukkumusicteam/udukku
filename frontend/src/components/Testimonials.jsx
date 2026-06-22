@@ -6,8 +6,8 @@ export const Testimonials = () => (
     data-testid="testimonials-section"
     className="bg-orange text-white"
   >
-    <div className="udukku-section py-24 md:py-32">
-      <div className="max-w-3xl mb-14 md:mb-20">
+    <div className="udukku-section py-16 md:py-20">
+      <div className="max-w-3xl mb-10 md:mb-14">
         <span className="uppercase tracking-[0.28em] text-xs text-white/80">
           Voices from our students
         </span>

@@ -8,8 +8,8 @@ export const VisionMission = () => (
     data-testid="vision-mission-section"
     className="bg-orange text-white"
   >
-    <div className="udukku-section py-24 md:py-32">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <div className="udukku-section py-16 md:py-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* Image card */}
         <div className="relative">
           <div
@@ -47,7 +47,7 @@ export const VisionMission = () => (
             </span>
           </h2>
 
-          <div className="mt-12 space-y-10">
+          <div className="mt-8 space-y-8">
             <div data-testid="vision-block">
               <h3 className="text-italic-serif text-2xl mb-3">
                 {VISION_MISSION.vision.title}
@@ -69,7 +69,7 @@ export const VisionMission = () => (
           <Link
             to="/about"
             data-testid="vision-read-story"
-            className="mt-10 inline-flex items-center gap-2 h-12 px-7 rounded-full bg-brown-dark text-white text-base font-medium hover:bg-black transition-colors"
+            className="mt-8 inline-flex items-center gap-2 h-12 px-7 rounded-full bg-brown-dark text-white text-base font-medium hover:bg-black transition-colors"
           >
             Read Our Story <ArrowUpRight className="w-4 h-4" />
           </Link>

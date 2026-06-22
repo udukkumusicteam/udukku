@@ -37,7 +37,7 @@ export default function Contact() {
   return (
     <main data-testid="contact-page" className="bg-white">
       <section className="bg-hero-gradient text-white">
-        <div className="udukku-section pt-36 md:pt-44 pb-20 md:pb-24">
+        <div className="udukku-section pt-28 md:pt-32 pb-14 md:pb-16">
           <span className="uppercase tracking-[0.28em] text-[11px] text-white/80">
             Contact
           </span>
@@ -53,8 +53,8 @@ export default function Contact() {
         <WaveDivider fill="#FFFFFF" />
       </section>
 
-      <section className="udukku-section py-20 md:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-16">
+      <section className="udukku-section py-14 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-12">
           {/* Info column */}
           <div>
             <h2 className="text-display text-3xl md:text-4xl text-brown-dark">
