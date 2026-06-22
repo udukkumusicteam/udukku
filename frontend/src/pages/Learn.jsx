@@ -67,7 +67,7 @@ const CATEGORIES = [
     name: 'Percussion',
     icon: Drum,
     image:
-      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1524230659092-07f99a75c013?auto=format&fit=crop&w=1800&q=80',
     note: 'The pulse that holds every song together. Learn to listen, then play.',
     sub: [
       { name: 'Tabla', icon: Drum },
