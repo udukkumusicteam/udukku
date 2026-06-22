@@ -100,8 +100,19 @@ export default function About() {
       {/* EVERY VOICE WAS ONCE AFRAID (dark essay section) ------------------- */}
       <section data-testid="essay-section" className="bg-brown-dark text-white">
         <div className="udukku-section py-16 md:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-12 items-stretch">
+            {/* Image: stretches to match the full height of the text column */}
+            <div className="relative rounded-3xl overflow-hidden bg-orange/20 min-h-[420px] lg:min-h-0">
+              <img
+                src="https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/7iz9q8gt_DSC05252%20%281%29.jpg"
+                alt="The Udukku easel: The Music in You"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ objectPosition: 'center 35%' }}
+              />
+            </div>
+
+            {/* Text column */}
+            <div className="flex flex-col">
               <span className="uppercase tracking-[0.28em] text-xs text-white/60">
                 How We Started
               </span>
@@ -109,63 +120,65 @@ export default function About() {
                 Every great thing starts with a{' '}
                 <span className="text-italic-serif text-orange">feeling</span>.
               </h2>
-            </div>
 
-            <div className="space-y-6 text-white/85 text-base md:text-lg leading-relaxed">
-              <p>
-                Back in 2020, the idea was simple. Create a space where
-                musicians could find each other, connect, and create something
-                meaningful together. Singers could collaborate with producers,
-                tabla players could meet composers, and artists from different
-                backgrounds could come together through music. The idea was
-                planted, and it quietly waited for the right time to grow.
-              </p>
-              <p>
-                Then life took an unexpected turn. During the COVID years, our
-                founder began teaching music online. It started with just ten
-                students and one on one lessons, but it was enough to keep the
-                passion alive. Even after that chapter ended, the questions
-                kept coming from friends, families, and aspiring musicians.
-              </p>
+              <div className="mt-8 space-y-6 text-white/85 text-base md:text-lg leading-relaxed">
+                <p>
+                  Back in 2020, the idea was simple. Create a space where
+                  musicians could find each other, connect, and create
+                  something meaningful together. Singers could collaborate with
+                  producers, tabla players could meet composers, and artists
+                  from different backgrounds could come together through music.
+                  The idea was planted, and it quietly waited for the right
+                  time to grow.
+                </p>
+                <p>
+                  Then life took an unexpected turn. During the COVID years,
+                  our founder began teaching music online. It started with
+                  just ten students and one on one lessons, but it was enough
+                  to keep the passion alive. Even after that chapter ended,
+                  the questions kept coming from friends, families, and
+                  aspiring musicians.
+                </p>
 
-              <div className="pl-5 border-l-2 border-orange/70 space-y-2 text-italic-serif text-white text-lg md:text-xl">
-                <p>"Do you know a good vocal coach?"</p>
-                <p>"Can you recommend a keyboard teacher?"</p>
-                <p>"Is there someone who teaches online?"</p>
+                <div className="pl-5 border-l-2 border-orange/70 space-y-2 text-italic-serif text-white text-lg md:text-xl">
+                  <p>"Do you know a good vocal coach?"</p>
+                  <p>"Can you recommend a keyboard teacher?"</p>
+                  <p>"Is there someone who teaches online?"</p>
+                </div>
+
+                <p>
+                  It became clear that there was a growing need for a trusted
+                  music community.
+                </p>
+                <p>
+                  That is when everything clicked. The community already
+                  existed. It simply needed a name and a place to belong.
+                </p>
+                <p>
+                  On 20th August 2025, Udukku Music was officially registered.
+                  Musicians came together, a summer camp was organised, events
+                  followed, and what started as an idea began turning into
+                  something much bigger.
+                </p>
+                <p>
+                  Then came the moment to celebrate that journey. On the eve
+                  of Mahashivratri, 14th February 2026, Udukku Music was
+                  officially launched. The name "Udukku" is inspired by the
+                  Damru, the sacred instrument associated with Lord Shiva and
+                  believed to have sounded at the very beginning of creation.
+                  Launching on such a special occasion felt less like a
+                  decision and more like destiny.
+                </p>
+                <p>
+                  Today, Udukku Music is more than a platform. It is a growing
+                  home for musicians, learners, teachers, and music lovers. A
+                  place where people connect, learn, collaborate, and
+                  celebrate the art that brings us all together.
+                </p>
+                <p className="text-italic-serif text-orange text-xl md:text-2xl pt-2">
+                  And everyone is welcome here.
+                </p>
               </div>
-
-              <p>
-                It became clear that there was a growing need for a trusted
-                music community.
-              </p>
-              <p>
-                That is when everything clicked. The community already
-                existed. It simply needed a name and a place to belong.
-              </p>
-              <p>
-                On 20th August 2025, Udukku Music was officially registered.
-                Musicians came together, a summer camp was organised, events
-                followed, and what started as an idea began turning into
-                something much bigger.
-              </p>
-              <p>
-                Then came the moment to celebrate that journey. On the eve of
-                Mahashivratri, 14th February 2026, Udukku Music was officially
-                launched. The name "Udukku" is inspired by the Damru, the
-                sacred instrument associated with Lord Shiva and believed to
-                have sounded at the very beginning of creation. Launching on
-                such a special occasion felt less like a decision and more
-                like destiny.
-              </p>
-              <p>
-                Today, Udukku Music is more than a platform. It is a growing
-                home for musicians, learners, teachers, and music lovers. A
-                place where people connect, learn, collaborate, and celebrate
-                the art that brings us all together.
-              </p>
-              <p className="text-italic-serif text-orange text-xl md:text-2xl pt-2">
-                And everyone is welcome here.
-              </p>
             </div>
           </div>
         </div>
