@@ -26,8 +26,7 @@ export default function About() {
           <p className="mt-6 max-w-2xl text-white/90 text-base md:text-lg leading-relaxed">
             A music home built by a musician, for everyone who has ever wanted
             to sing, play, or listen a little more deeply. No auditions, no
-            hurry, no gatekeepers. Just a door that stays open, and a community
-            that quietly grows around the sound of you finding your own.
+            hurry, no gatekeepers. Just a door that stays open.
           </p>
         </div>
         <WaveDivider fill="#F5F0E5" />
