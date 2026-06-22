@@ -45,10 +45,8 @@ export default function Contact() {
             Say hello.{' '}
             <span className="text-italic-serif">We're listening.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-white/85 text-base md:text-lg leading-relaxed">
-            For collaborations, events, performances, press, or anything else
-            you would like to share with us, this is the place. Lessons and
-            free sessions live on the booking page.
+          <p className="mt-6 max-w-xl text-white/85 text-italic-serif text-xl md:text-2xl leading-relaxed">
+            "Every connection begins with a conversation."
           </p>
         </div>
         <WaveDivider fill="#FFFFFF" />
