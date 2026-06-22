@@ -18,6 +18,16 @@ const PHOTOS = [
     alt: 'A moment at Udukku',
     caption: 'Small gatherings, warm afternoons',
   },
+  {
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/og6vi7lu_IMG_2906.jpg',
+    alt: 'The Udukku family together',
+    caption: 'Evenings under the fairy lights',
+  },
+  {
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/iqyui4mw_c3d6cce6-82d4-430c-a2d1-4075625e9fc6.JPG',
+    alt: 'A flute in the afternoon',
+    caption: 'A flute, a sunlit room',
+  },
 ];
 
 export const Gallery = () => {
