@@ -41,7 +41,7 @@ export const STATS = [
 
 export const VISION_MISSION = {
   image:
-    'https://images.unsplash.com/photo-1519508234439-4f23643125c1?auto=format&fit=crop&w=1400&q=80',
+    'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/0rr8yyrl_Screenshot%202026-04-25%20at%2012.44.36%20PM.png',
   imageCaption: 'What is udukku?',
   est: '2025',
   vision: {

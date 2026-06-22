@@ -14,24 +14,19 @@ export const VisionMission = () => (
         <div className="relative">
           <div
             className="relative w-full overflow-hidden rounded-3xl bg-orange-dark"
-            style={{ aspectRatio: '4 / 3' }}
+            style={{ aspectRatio: '1 / 1' }}
             data-testid="vision-image-card"
           >
             <img
               src={VISION_MISSION.image}
               alt="What is udukku"
-              className="absolute inset-0 w-full h-full object-cover multiply-overlay sepia-soft"
-              style={{ mixBlendMode: 'multiply' }}
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
             <div className="absolute top-6 left-6 flex items-center gap-3">
               <span className="px-3 py-1 rounded-full bg-white/15 border border-white/30 text-white text-xs uppercase tracking-widest">
                 Est. {VISION_MISSION.est}
               </span>
             </div>
-            <h3 className="absolute bottom-6 left-6 right-6 text-display text-3xl sm:text-4xl md:text-5xl text-white">
-              {VISION_MISSION.imageCaption}
-            </h3>
           </div>
         </div>
 
