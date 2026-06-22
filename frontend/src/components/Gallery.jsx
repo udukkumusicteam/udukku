@@ -85,16 +85,16 @@ export const Gallery = () => {
       <div className="udukku-section py-16 md:py-20">
         <div className="max-w-3xl mb-10 md:mb-12">
           <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
-            Gallery
+            Life at Udukku
           </span>
           <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px] text-brown-dark">
-            Moments from the{' '}
-            <span className="text-italic-serif text-orange">community</span>.
+            Where every session becomes a{' '}
+            <span className="text-italic-serif text-orange">memory</span>.
           </h2>
           <p className="mt-4 text-brown-mid text-base md:text-lg max-w-xl leading-relaxed">
-            Recitals, workshops, late evening jams, first performances.
-            Small fragments of the life that quietly fills our studio every
-            week.
+            Open jams, first recitals, quiet workshops, friendships born over a
+            shared chord. Small moments from the life that gathers here, week
+            after week.
           </p>
         </div>
 
