@@ -103,40 +103,68 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
             <div>
               <span className="uppercase tracking-[0.28em] text-xs text-white/60">
-                Why we exist
+                How We Started
               </span>
               <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px] text-white">
-                Every voice was{' '}
-                <span className="text-italic-serif text-orange">once afraid</span>.
+                Every great thing starts with a{' '}
+                <span className="text-italic-serif text-orange">feeling</span>.
               </h2>
             </div>
 
             <div className="space-y-6 text-white/85 text-base md:text-lg leading-relaxed">
               <p>
-                Somewhere along the way, music became a thing you had to earn.
-                You had to be young enough, talented enough, disciplined enough,
-                brave enough. So most of us learned to listen, and very few of
-                us ever learned to play.
+                Back in 2020, the idea was simple. Create a space where
+                musicians could find each other, connect, and create something
+                meaningful together. Singers could collaborate with producers,
+                tabla players could meet composers, and artists from different
+                backgrounds could come together through music. The idea was
+                planted, and it quietly waited for the right time to grow.
               </p>
               <p>
-                We think that is a loss worth fixing. Not by lowering the
-                ceiling, but by softening the door. Our students arrive with
-                every kind of story. Some are eight. Some are sixty eight. Some
-                are returning to an instrument they left behind in school. Some
-                are starting for the very first time, terrified that it is too
-                late.
+                Then life took an unexpected turn. During the COVID years, our
+                founder began teaching music online. It started with just ten
+                students and one on one lessons, but it was enough to keep the
+                passion alive. Even after that chapter ended, the questions
+                kept coming from friends, families, and aspiring musicians.
+              </p>
+
+              <div className="pl-5 border-l-2 border-orange/70 space-y-2 text-italic-serif text-white text-lg md:text-xl">
+                <p>"Do you know a good vocal coach?"</p>
+                <p>"Can you recommend a keyboard teacher?"</p>
+                <p>"Is there someone who teaches online?"</p>
+              </div>
+
+              <p>
+                It became clear that there was a growing need for a trusted
+                music community.
               </p>
               <p>
-                It is not too late. It is never too late.
+                That is when everything clicked. The community already
+                existed. It simply needed a name and a place to belong.
               </p>
               <p>
-                At Udukku, every voice is met where it is. Not where the
-                curriculum expects it to be. The first lesson is not about
-                scales. It is about trust. The rest is built on top of that,
-                slowly, lovingly, and at your pace.
+                On 20th August 2025, Udukku Music was officially registered.
+                Musicians came together, a summer camp was organised, events
+                followed, and what started as an idea began turning into
+                something much bigger.
               </p>
-              <p className="text-italic-serif text-orange text-xl md:text-2xl pt-4">
-                You did not fail at music. Music has been waiting for you.
+              <p>
+                Then came the moment to celebrate that journey. On the eve of
+                Mahashivratri, 14th February 2026, Udukku Music was officially
+                launched. The name "Udukku" is inspired by the Damru, the
+                sacred instrument associated with Lord Shiva and believed to
+                have sounded at the very beginning of creation. Launching on
+                such a special occasion felt less like a decision and more
+                like destiny.
+              </p>
+              <p>
+                Today, Udukku Music is more than a platform. It is a growing
+                home for musicians, learners, teachers, and music lovers. A
+                place where people connect, learn, collaborate, and celebrate
+                the art that brings us all together.
+              </p>
+              <p className="text-italic-serif text-orange text-xl md:text-2xl pt-2">
+                And everyone is welcome here.
               </p>
             </div>
           </div>
