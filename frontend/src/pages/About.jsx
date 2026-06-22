@@ -59,32 +59,36 @@ export default function About() {
 
             <div className="order-2">
               <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
-                A note from the founder
+                Meet Our Founder
               </span>
               <h2 className="text-display mt-3 text-4xl sm:text-5xl lg:text-[56px] text-brown-dark">
                 Ishita Parakh
               </h2>
               <p className="text-italic-serif text-orange text-lg mt-1">
-                Founder & Artistic Director
+                Singer-songwriter & Founder, Udukku Music
               </p>
 
               <div className="mt-7 space-y-5 text-brown-mid text-base md:text-lg leading-relaxed max-w-2xl">
                 <p>
-                  I grew up loving music in spaces that did not always love me
-                  back. Classes that measured everything except joy. Recitals
-                  that rewarded the polished few and quietly dismissed the rest.
-                  I kept playing anyway, but I never forgot how that felt.
+                  Ishita Parakh is a musician, educator, and creator whose life
+                  orbits music, creativity, and the deep joy of helping others
+                  find their voice. As a singer-songwriter, she has built a
+                  following drawn to her soulful, genre-bending sound. Music
+                  that feels both intimate and expansive.
                 </p>
                 <p>
-                  Udukku is what I wish I had walked into when I was eleven and
-                  trying to find my voice. A room that begins with patience. A
-                  mentor who listens before they correct. The freedom to be a
-                  beginner for as long as you need to.
+                  Her approach to teaching is shaped by lived experience, in
+                  the classroom, on stage, and within the quiet spaces where
+                  music meets emotion. She honours the roots of tradition while
+                  making room for personal evolution, and that philosophy is
+                  woven into everything Udukku stands for.
                 </p>
                 <p>
-                  I do not believe music belongs to anyone. I believe music
-                  belongs to whoever is brave enough to reach for it. Our work
-                  is simply to keep that door wide open.
+                  Ishita has guided learners of every age and background, not
+                  just to play better, but to feel more freely. Through Udukku,
+                  she is building something she always wished existed. A place
+                  where music education is warm, accessible, and genuinely
+                  transformative.
                 </p>
               </div>
             </div>
