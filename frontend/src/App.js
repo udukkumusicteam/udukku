@@ -14,6 +14,7 @@ import Home from '@/pages/Home';
 import Booking from '@/pages/Booking';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
+import Learn from '@/pages/Learn';
 import Admin from '@/pages/Admin';
 
 const ScrollToTop = () => {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/about" element={<About />} />
+          <Route path="/learn" element={<Learn />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
