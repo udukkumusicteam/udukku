@@ -8,7 +8,7 @@ import WaveDivider from '../components/WaveDivider';
 // Each one is independent; aspect ratios are preserved by the layout.
 // ---------------------------------------------------------------------------
 const IMAGE_FOUNDER =
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=80';
+  'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/2zn5nfa0_Founder_photo.jpg';
 const IMAGE_LEARNERS =
   'https://images.unsplash.com/photo-1519508234439-4f23643125c1?auto=format&fit=crop&w=1400&q=80';
 
@@ -47,7 +47,8 @@ export default function About() {
                 <img
                   src={IMAGE_FOUNDER}
                   alt="Ishita Parakh, founder of Udukku"
-                  className="absolute inset-0 w-full h-full object-cover sepia-soft"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: 'center 30%' }}
                 />
                 <div className="absolute top-5 left-5">
                   <span className="px-3 py-1 rounded-full bg-white/85 text-brown-dark text-[10px] uppercase tracking-widest">
