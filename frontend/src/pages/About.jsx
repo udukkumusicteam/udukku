@@ -24,9 +24,10 @@ export default function About() {
             <span className="text-italic-serif">Built for belonging.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-white/90 text-base md:text-lg leading-relaxed">
-            Udukku began with a quiet question. What if learning music felt
-            less like a test and more like coming home? Five years later, that
-            question still shapes everything we do.
+            A music home built by a musician, for everyone who has ever wanted
+            to sing, play, or listen a little more deeply. No auditions, no
+            hurry, no gatekeepers. Just a door that stays open, and a community
+            that quietly grows around the sound of you finding your own.
           </p>
         </div>
         <WaveDivider fill="#F5F0E5" />
