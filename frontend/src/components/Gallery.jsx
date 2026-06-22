@@ -96,33 +96,38 @@ export const Gallery = () => {
           </p>
         </div>
 
-        {/* Masonry via CSS columns */}
+        {/* Responsive dense grid — no awkward gaps at any breakpoint */}
         <div
-          data-testid="gallery-masonry"
-          className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]"
+          data-testid="gallery-grid"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5 grid-flow-dense"
         >
-          {PHOTOS.map((p, i) => (
-            <button
-              key={p.src}
-              type="button"
-              data-testid={`gallery-tile-${i}`}
-              onClick={() => setActive(i)}
-              className="group relative mb-5 block w-full overflow-hidden rounded-2xl bg-brown-light/20 break-inside-avoid focus:outline-none focus:ring-2 focus:ring-orange/60"
-            >
-              <img
-                src={p.src}
-                alt={p.alt}
-                loading="lazy"
-                className="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] sepia-soft"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="pointer-events-none absolute left-4 right-4 bottom-4 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 text-left">
-                <span className="text-white text-sm tracking-wide">
-                  {p.caption}
-                </span>
-              </div>
-            </button>
-          ))}
+          {PHOTOS.map((p, i) => {
+            const isFeature = i === 0;
+            return (
+              <button
+                key={p.src}
+                type="button"
+                data-testid={`gallery-tile-${i}`}
+                onClick={() => setActive(i)}
+                className={`group relative block w-full overflow-hidden rounded-2xl bg-brown-light/20 focus:outline-none focus:ring-2 focus:ring-orange/60 aspect-square ${
+                  isFeature ? 'col-span-2 md:row-span-2' : ''
+                }`}
+              >
+                <img
+                  src={p.src}
+                  alt={p.alt}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] sepia-soft"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="pointer-events-none absolute left-4 right-4 bottom-4 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 text-left">
+                  <span className="text-white text-sm tracking-wide">
+                    {p.caption}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
 
