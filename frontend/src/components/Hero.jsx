@@ -71,17 +71,26 @@ export const Hero = () => (
       </div>
     </div>
 
-    {/* Bottom wave divider — transitions hero orange into the cream Stats section */}
+    {/* Bottom continuous wave divider — multi-crest wave transitions hero orange into the cream Stats section */}
     <svg
       aria-hidden="true"
       data-testid="hero-wave-divider"
-      className="relative block w-full h-[80px] sm:h-[110px] md:h-[140px] -mb-px"
-      viewBox="0 0 1440 140"
+      className="relative block w-full h-[70px] sm:h-[95px] md:h-[120px] -mb-px"
+      viewBox="0 0 1440 120"
       preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M0,55 C160,95 320,118 520,98 C700,80 860,52 1040,38 C1200,26 1330,16 1440,8 L1440,140 L0,140 Z"
+        d="M0,60
+           C 60,30 120,30 180,60
+           C 240,90 300,90 360,60
+           C 420,30 480,30 540,60
+           C 600,90 660,90 720,60
+           C 780,30 840,30 900,60
+           C 960,90 1020,90 1080,60
+           C 1140,30 1200,30 1260,60
+           C 1320,90 1380,90 1440,60
+           L 1440,120 L 0,120 Z"
         fill="#F5F0E5"
       />
     </svg>
