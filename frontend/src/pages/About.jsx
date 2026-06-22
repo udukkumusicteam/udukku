@@ -191,30 +191,29 @@ export default function About() {
               What we stand for
             </span>
             <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px]">
-              Classical music{' '}
+              Music{' '}
               <span className="text-italic-serif">for everyone</span>.
             </h2>
             <p className="mt-5 text-white/90 text-base md:text-lg leading-relaxed">
-              These are not slogans on a wall. They are the small daily choices
-              we make about how a lesson begins, how a mistake is held, and how
-              a student is sent home.
+              Whether you sing, strum, play, or are simply beginning to listen,
+              these are the quiet promises we keep.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {VALUES.map((v, i) => (
               <article
                 key={v.title}
                 data-testid={`value-${i}`}
-                className="bg-orange-dark/40 border border-white/15 rounded-3xl p-7"
+                className="bg-orange-dark/40 border border-white/15 rounded-3xl p-6"
               >
                 <div className="text-white/60 text-[11px] tracking-[0.28em] uppercase">
                   0{i + 1}
                 </div>
-                <h3 className="text-italic-serif text-2xl md:text-[26px] mt-2">
+                <h3 className="text-italic-serif text-2xl mt-2">
                   {v.title}
                 </h3>
-                <p className="mt-3 text-white/90 text-[15px] leading-relaxed">
+                <p className="mt-2 text-white/90 text-sm leading-relaxed">
                   {v.body}
                 </p>
               </article>
@@ -253,32 +252,18 @@ export default function About() {
 const VALUES = [
   {
     title: 'Begin with patience',
-    body:
-      'Every lesson starts with listening. We do not push, prescribe, or rush. The right speed is the speed you can return to next week.',
+    body: 'Every lesson opens with listening, never with pressure.',
   },
   {
     title: 'Match before method',
-    body:
-      'You are matched with a mentor whose temperament fits yours. Method comes after trust, not before.',
+    body: 'You are paired with a mentor whose temperament fits yours.',
   },
   {
-    title: 'Effort, not polish',
-    body:
-      'Our recitals reward the leap, not the landing. The bravest performance in the room is always the most honest one.',
+    title: 'Effort over polish',
+    body: 'We celebrate the leap, not the landing. Honesty over perfection.',
   },
   {
     title: 'No gatekeepers',
-    body:
-      'No auditions, no waitlist screening, no quiet messages that say you are not ready. If you want to learn, you are welcome.',
-  },
-  {
-    title: 'Music as a habit',
-    body:
-      'Talent is a story. Habit is a fact. We help you build a small daily relationship with music that you can carry for a lifetime.',
-  },
-  {
-    title: 'A community, not a classroom',
-    body:
-      'Open jams, listening evenings, and student showcases keep music alive between lessons. You belong to the studio, not just the schedule.',
+    body: 'No auditions, no waitlists. If you want to learn, you are welcome.',
   },
 ];
