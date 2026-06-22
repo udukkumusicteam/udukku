@@ -70,6 +70,21 @@ export const Hero = () => (
         ))}
       </div>
     </div>
+
+    {/* Bottom wave divider — transitions hero orange into the cream Stats section */}
+    <svg
+      aria-hidden="true"
+      data-testid="hero-wave-divider"
+      className="relative block w-full h-[80px] sm:h-[110px] md:h-[140px] -mb-px"
+      viewBox="0 0 1440 140"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,55 C160,95 320,118 520,98 C700,80 860,52 1040,38 C1200,26 1330,16 1440,8 L1440,140 L0,140 Z"
+        fill="#F5F0E5"
+      />
+    </svg>
   </section>
 );
 
