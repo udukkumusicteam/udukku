@@ -44,7 +44,7 @@ export const TutorsSlider = () => {
     >
       <div className="udukku-section pt-16 md:pt-20 pb-6">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
-          <div className="max-w-2xl">
+          <div className="reveal max-w-2xl">
             <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
               Our Tutors
             </span>
@@ -90,17 +90,17 @@ export const TutorsSlider = () => {
               key={t.id}
               data-card
               data-testid={`tutor-card-${i}`}
-              className="shrink-0 snap-start w-[230px] sm:w-[270px] md:w-[320px] lg:w-[360px]"
+              className="shrink-0 snap-start w-[230px] sm:w-[270px] md:w-[320px] lg:w-[360px] group"
             >
               <div
-                className="relative w-full overflow-hidden rounded-2xl bg-brown-light/40"
+                className="relative w-full overflow-hidden rounded-2xl bg-brown-light/40 card-lift"
                 style={{ aspectRatio: '3 / 4' }}
               >
                 <img
                   src={t.image}
                   alt={t.name}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover sepia-soft"
+                  className="absolute inset-0 w-full h-full object-cover sepia-soft transition-transform duration-[1100ms] ease-out group-hover:scale-105"
                 />
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                   <span className="px-2.5 py-1 rounded-full bg-white/85 text-brown-dark text-[10px] uppercase tracking-widest">

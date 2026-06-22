@@ -241,7 +241,7 @@ const CategoryBlock = ({ category, index }) => {
 
 export default function Learn() {
   return (
-    <main data-testid="learn-page" className="bg-white">
+    <main data-testid="learn-page" className="bg-white page-fade-in">
       {/* Inline keyframes (page-scoped, no global side effects) */}
       <style>{`
         @keyframes udukku-rise {

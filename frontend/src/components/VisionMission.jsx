@@ -11,16 +11,16 @@ export const VisionMission = () => (
     <div className="udukku-section py-16 md:py-20">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* Image card */}
-        <div className="relative">
+        <div className="reveal relative">
           <div
-            className="relative w-full overflow-hidden rounded-3xl bg-orange-dark"
+            className="relative w-full overflow-hidden rounded-3xl bg-orange-dark card-lift"
             style={{ aspectRatio: '1 / 1' }}
             data-testid="vision-image-card"
           >
             <img
               src={VISION_MISSION.image}
               alt="What is udukku"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover kenburns"
             />
             <div className="absolute top-6 left-6 flex items-center gap-3">
               <span className="px-3 py-1 rounded-full bg-white/15 border border-white/30 text-white text-xs uppercase tracking-widest">
@@ -31,7 +31,7 @@ export const VisionMission = () => (
         </div>
 
         {/* Text */}
-        <div>
+        <div className="reveal" style={{ transitionDelay: '120ms' }}>
           <span className="uppercase tracking-[0.28em] text-xs text-white/80">
             Shaping musicians since {VISION_MISSION.est}
           </span>

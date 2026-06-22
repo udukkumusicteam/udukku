@@ -36,7 +36,7 @@ export default function Contact() {
   };
 
   return (
-    <main data-testid="contact-page" className="bg-white">
+    <main data-testid="contact-page" className="bg-white page-fade-in">
       <section className="bg-hero-gradient text-white">
         <div className="udukku-section pt-28 md:pt-32 pb-14 md:pb-16">
           <span className="uppercase tracking-[0.28em] text-[11px] text-white/80">

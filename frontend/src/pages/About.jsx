@@ -11,7 +11,7 @@ const IMAGE_FOUNDER =
 
 export default function About() {
   return (
-    <main data-testid="about-page" className="bg-cream">
+    <main data-testid="about-page" className="bg-cream page-fade-in">
       {/* HERO ---------------------------------------------------------------- */}
       <section className="bg-hero-gradient text-white">
         <div className="udukku-section pt-28 md:pt-32 pb-14 md:pb-20">

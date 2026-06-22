@@ -8,10 +8,10 @@ export const StatsSection = () => (
   >
     <div className="udukku-section py-16 md:py-20">
       <div className="max-w-3xl mb-10 md:mb-14">
-        <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
+        <span className="reveal uppercase tracking-[0.28em] text-xs text-brown-mid">
           Why Udukku
         </span>
-        <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[64px]">
+        <h2 className="reveal text-display mt-4 text-4xl sm:text-5xl lg:text-[64px]" style={{ transitionDelay: '80ms' }}>
           Music is not taught here.{' '}
           <span className="text-italic-serif text-orange">It is set free.</span>
         </h2>
@@ -22,7 +22,8 @@ export const StatsSection = () => (
           <div
             key={s.title}
             data-testid={`stat-card-${idx}`}
-            className="flex flex-col"
+            className="reveal flex flex-col"
+            style={{ transitionDelay: `${120 + idx * 90}ms` }}
           >
             <div className="text-orange text-display text-6xl md:text-7xl lg:text-[88px] leading-none">
               {s.number}

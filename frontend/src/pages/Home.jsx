@@ -9,7 +9,7 @@ import BottomCTA from '../components/BottomCTA';
 
 export default function Home() {
   return (
-    <main data-testid="home-page">
+    <main data-testid="home-page" className="page-fade-in">
       <Hero />
       <StatsSection />
       <VisionMission />

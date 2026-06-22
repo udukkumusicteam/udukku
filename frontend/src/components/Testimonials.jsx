@@ -8,10 +8,10 @@ export const Testimonials = () => (
   >
     <div className="udukku-section py-16 md:py-20">
       <div className="max-w-3xl mb-10 md:mb-14">
-        <span className="uppercase tracking-[0.28em] text-xs text-white/80">
+        <span className="reveal uppercase tracking-[0.28em] text-xs text-white/80">
           Voices from our students
         </span>
-        <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px]">
+        <h2 className="reveal text-display mt-4 text-4xl sm:text-5xl lg:text-[56px]" style={{ transitionDelay: '80ms' }}>
           Music changed something{' '}
           <span className="text-italic-serif text-white">in them, gently.</span>
         </h2>
@@ -22,7 +22,8 @@ export const Testimonials = () => (
           <article
             key={q.id}
             data-testid={`testimonial-${i}`}
-            className="relative bg-orange-dark/40 border border-white/15 rounded-3xl p-8 md:p-9 flex flex-col"
+            className="reveal card-lift relative bg-orange-dark/40 border border-white/15 rounded-3xl p-8 md:p-9 flex flex-col"
+            style={{ transitionDelay: `${120 + i * 100}ms` }}
           >
             <span
               aria-hidden="true"

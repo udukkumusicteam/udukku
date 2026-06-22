@@ -44,7 +44,7 @@ export default function Booking() {
   };
 
   return (
-    <main data-testid="booking-page" className="bg-cream">
+    <main data-testid="booking-page" className="bg-cream page-fade-in">
       {/* Page hero */}
       <section className="bg-hero-gradient text-white">
         <div className="udukku-section pt-28 md:pt-32 pb-14 md:pb-16">

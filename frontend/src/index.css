@@ -112,3 +112,94 @@ body {
 [data-debug-wrapper="true"] {
   display: contents !important;
 }
+
+/* ============================================================================
+   Tasteful site-wide motion enhancements (kept layout-neutral)
+   ============================================================================ */
+@layer utilities {
+  /* Scroll-triggered reveal. Apply `.reveal` to any element; the global
+     IntersectionObserver in App.js will add `.is-revealed` on view. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.85s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Page entrance, used on each <main> */
+  @keyframes udukku-page-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .page-fade-in {
+    animation: udukku-page-in 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  /* Floating particle drift */
+  @keyframes udukku-float-particle {
+    0%   { transform: translate3d(0, 0, 0); }
+    50%  { transform: translate3d(8px, -22px, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+
+  /* Soft pulsing glow */
+  @keyframes udukku-pulse-glow {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+  .glow-pulse {
+    animation: udukku-pulse-glow 6s ease-in-out infinite;
+  }
+
+  /* Subtle card hover lift, keeps layout but adds depth */
+  .card-lift {
+    transition:
+      transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 40px -22px rgba(168, 61, 20, 0.35);
+  }
+
+  /* Primary button warm glow on hover */
+  .btn-glow {
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.55s ease,
+      transform 0.4s ease;
+  }
+  .btn-glow:hover {
+    box-shadow:
+      0 14px 34px -14px rgba(232, 136, 58, 0.55),
+      0 0 0 4px rgba(232, 136, 58, 0.15);
+  }
+
+  /* Slow Ken Burns drift for hero photos. Apply to <img>. */
+  @keyframes udukku-kenburns {
+    0%   { transform: scale(1) translate3d(0, 0, 0); }
+    100% { transform: scale(1.08) translate3d(-1.5%, -1.5%, 0); }
+  }
+  .kenburns {
+    animation: udukku-kenburns 18s ease-in-out infinite alternate;
+  }
+
+  /* Respect users who prefer no motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .page-fade-in,
+    .kenburns,
+    .glow-pulse {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
