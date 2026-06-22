@@ -5,12 +5,9 @@ import WaveDivider from '../components/WaveDivider';
 
 // ---------------------------------------------------------------------------
 // IMAGE ASSETS — replace these placeholder URLs with the studio's own photos.
-// Each one is independent; aspect ratios are preserved by the layout.
 // ---------------------------------------------------------------------------
 const IMAGE_FOUNDER =
   'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/2zn5nfa0_Founder_photo.jpg';
-const IMAGE_LEARNERS =
-  'https://images.unsplash.com/photo-1519508234439-4f23643125c1?auto=format&fit=crop&w=1400&q=80';
 
 export default function About() {
   return (
@@ -222,58 +219,6 @@ export default function About() {
                 </p>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* MADE FOR LEARNERS (alternating image / text) ----------------------- */}
-      <section data-testid="learners-section" className="bg-cream">
-        <div className="udukku-section py-16 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-[6fr_5fr] gap-10 lg:gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
-                How we teach
-              </span>
-              <h2 className="text-display mt-3 text-4xl sm:text-5xl lg:text-[56px] text-brown-dark">
-                Made for learners to{' '}
-                <span className="text-italic-serif text-orange">
-                  stay learners
-                </span>.
-              </h2>
-              <p className="mt-5 text-brown-mid text-base md:text-lg leading-relaxed max-w-xl">
-                Most students leave music when the room stops being kind. We
-                designed Udukku so that does not have to happen. Small class
-                sizes. Mentors who teach the way they once wished to be taught.
-                Practice frames that fit your week instead of crowding it.
-              </p>
-
-              <ul className="mt-7 space-y-3 text-brown-dark">
-                {[
-                  'One on one and small group formats, both online and in studio',
-                  'Mentor matching based on temperament, not just instrument',
-                  'Recitals that celebrate effort over polish',
-                  'Open community jams every Tuesday evening',
-                ].map((point) => (
-                  <li key={point} className="flex items-start gap-3">
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-orange shrink-0" />
-                    <span className="text-[15px] leading-relaxed">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="order-1 lg:order-2">
-              <div
-                className="relative w-full overflow-hidden rounded-3xl bg-brown-light/40"
-                style={{ aspectRatio: '4 / 5' }}
-              >
-                <img
-                  src={IMAGE_LEARNERS}
-                  alt="A student practising at Udukku"
-                  className="absolute inset-0 w-full h-full object-cover sepia-soft"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
