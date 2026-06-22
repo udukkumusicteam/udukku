@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube, Facebook, Music } from 'lucide-react';
+import { Instagram, Youtube, Facebook, Music, Phone, Mail, MapPin } from 'lucide-react';
 import { Logo } from './Logo';
 import { SITE, COURSE_CATEGORIES } from '../data/mockData';
 
@@ -99,13 +99,20 @@ export const Footer = () => (
             Reach Us
           </h4>
           <ul className="space-y-3 text-[15px] text-white/90">
-            <li data-testid="footer-phone">{SITE.phone}</li>
-            <li>
+            <li data-testid="footer-phone" className="flex items-start gap-3">
+              <Phone className="w-4 h-4 mt-1 shrink-0 text-white/70" />
+              <span>{SITE.phone}</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Mail className="w-4 h-4 mt-1 shrink-0 text-white/70" />
               <a href={`mailto:${SITE.email}`} className="hover:text-white" data-testid="footer-email">
                 {SITE.email}
               </a>
             </li>
-            <li className="leading-relaxed" data-testid="footer-address">{SITE.address}</li>
+            <li data-testid="footer-address" className="flex items-start gap-3 leading-relaxed">
+              <MapPin className="w-4 h-4 mt-1 shrink-0 text-white/70" />
+              <span>{SITE.address}</span>
+            </li>
           </ul>
         </div>
       </div>
