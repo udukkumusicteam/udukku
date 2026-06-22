@@ -71,21 +71,20 @@ export const Hero = () => (
       </div>
     </div>
 
-    {/* Bottom continuous wave divider — wide, soft, slightly slanted upward to the right */}
+    {/* Bottom continuous wave divider — two broad soft waves, gently slanted */}
     <svg
       aria-hidden="true"
       data-testid="hero-wave-divider"
-      className="relative block w-full h-[70px] sm:h-[95px] md:h-[120px] -mb-px"
-      viewBox="0 0 1440 100"
+      className="relative block w-full h-[90px] sm:h-[120px] md:h-[150px] -mb-px"
+      viewBox="0 0 1440 110"
       preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M0,62
-           C 220,40 380,80 580,58
-           C 800,34 980,72 1180,42
-           C 1300,26 1380,16 1440,10
-           L 1440,100 L 0,100 Z"
+        d="M0,38
+           C 240,78 460,82 700,55
+           C 940,28 1180,22 1440,48
+           L 1440,110 L 0,110 Z"
         fill="#F5F0E5"
       />
     </svg>
