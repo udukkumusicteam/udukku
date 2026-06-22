@@ -4,10 +4,19 @@ import {
   ArrowUpRight,
   Sparkles,
   Music,
+  Music2,
+  Music3,
+  Music4,
   Mic,
+  Mic2,
+  Radio,
+  AudioLines,
   Drum,
+  Guitar,
   Wind as WindIcon,
   Piano,
+  BookOpen,
+  Disc,
   Clock,
   Home as HomeIcon,
   UserCheck,
@@ -32,26 +41,10 @@ const CATEGORIES = [
     note:
       'Six strings, four, or one. Find the voice that resonates with yours.',
     sub: [
-      {
-        name: 'Guitar',
-        image:
-          'https://images.unsplash.com/photo-1525201548942-d8732f6617a0?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Violin',
-        image:
-          'https://images.unsplash.com/photo-1567619822659-2094d3ebef04?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Sitar',
-        image:
-          'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6csi50ns_DSC05863%20%281%29.jpg',
-      },
-      {
-        name: 'Ukulele',
-        image:
-          'https://images.unsplash.com/photo-1535359056830-d4badde79747?auto=format&fit=crop&w=900&q=80',
-      },
+      { name: 'Guitar', icon: Guitar },
+      { name: 'Violin', icon: Music2 },
+      { name: 'Sitar', icon: Music },
+      { name: 'Ukulele', icon: Music3 },
     ],
   },
   {
@@ -63,26 +56,10 @@ const CATEGORIES = [
     note:
       'The most personal instrument of all. Your breath, gently shaped into sound.',
     sub: [
-      {
-        name: 'Hindustani',
-        image:
-          'https://images.unsplash.com/photo-1547357812-4a336d835928?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Carnatic',
-        image:
-          'https://images.unsplash.com/photo-1566913485242-694e995731b4?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Western',
-        image:
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Playback',
-        image:
-          'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=900&q=80',
-      },
+      { name: 'Hindustani', icon: Mic },
+      { name: 'Carnatic', icon: Mic2 },
+      { name: 'Western', icon: AudioLines },
+      { name: 'Playback', icon: Radio },
     ],
   },
   {
@@ -93,26 +70,10 @@ const CATEGORIES = [
       'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/w74xnqq6_DSC05418%20%281%29.jpg',
     note: 'The pulse that holds every song together. Learn to listen, then play.',
     sub: [
-      {
-        name: 'Tabla',
-        image:
-          'https://images.unsplash.com/photo-1524230659092-07f99a75c013?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Drums',
-        image:
-          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Cajon',
-        image:
-          'https://images.unsplash.com/photo-1485579149621-3123dd979885?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Mridangam',
-        image:
-          'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=900&q=80',
-      },
+      { name: 'Tabla', icon: Drum },
+      { name: 'Drums', icon: Disc },
+      { name: 'Cajon', icon: Drum },
+      { name: 'Mridangam', icon: Drum },
     ],
   },
   {
@@ -123,26 +84,10 @@ const CATEGORIES = [
       'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6mwlqdin_IMG_3251.jpg',
     note: 'Air becomes a melody. One steady breath at a time.',
     sub: [
-      {
-        name: 'Flute / Bansuri',
-        image:
-          'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/iqyui4mw_c3d6cce6-82d4-430c-a2d1-4075625e9fc6.JPG',
-      },
-      {
-        name: 'Saxophone',
-        image:
-          'https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Harmonica',
-        image:
-          'https://images.unsplash.com/photo-1488376986648-2512dfc6f736?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Shehnai',
-        image:
-          'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=80',
-      },
+      { name: 'Flute / Bansuri', icon: WindIcon },
+      { name: 'Saxophone', icon: Music4 },
+      { name: 'Harmonica', icon: AudioLines },
+      { name: 'Shehnai', icon: WindIcon },
     ],
   },
   {
@@ -154,26 +99,10 @@ const CATEGORIES = [
     note:
       'Eighty eight keys, infinite stories. The gentle way music begins for many.',
     sub: [
-      {
-        name: 'Piano',
-        image:
-          'https://images.unsplash.com/photo-1561447920-aa5c68129cff?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Harmonium',
-        image:
-          'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6mwlqdin_IMG_3251.jpg',
-      },
-      {
-        name: 'Keyboard',
-        image:
-          'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        name: 'Music Theory',
-        image:
-          'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=900&q=80',
-      },
+      { name: 'Piano', icon: Piano },
+      { name: 'Harmonium', icon: Piano },
+      { name: 'Keyboard', icon: Piano },
+      { name: 'Music Theory', icon: BookOpen },
     ],
   },
 ];
@@ -198,66 +127,57 @@ const EXPERIENCE = [
 
 /* ------------------------------ Components -------------------------------- */
 
-const PARTICLES = Array.from({ length: 18 }).map((_, i) => ({
-  id: i,
-  left: `${(i * 53) % 100}%`,
-  top: `${(i * 37) % 100}%`,
-  size: 4 + ((i * 13) % 8),
-  delay: (i % 9) * 0.7,
-  duration: 9 + (i % 6),
-  opacity: 0.18 + ((i % 5) * 0.06),
-}));
-
-const FloatingParticles = () => (
-  <div
-    aria-hidden="true"
-    className="pointer-events-none absolute inset-0 overflow-hidden"
-  >
-    {PARTICLES.map((p) => (
-      <span
-        key={p.id}
-        className="absolute rounded-full bg-white blur-[1px]"
+const SubCard = ({ item, index }) => {
+  const Icon = item.icon;
+  return (
+    <div
+      data-testid={`sub-card-${item.name.toLowerCase().replace(/[^a-z]/g, '-')}`}
+      className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-brown-dark/10 cursor-default"
+      style={{ animation: `udukku-rise 0.7s ease ${0.05 * index}s both` }}
+    >
+      {/* Warm earthy gradient base */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-br from-cream via-orange-hero3/35 to-orange/55 transition-transform duration-[1100ms] ease-out group-hover:scale-[1.04]"
+      />
+      {/* Soft glow halo behind the icon */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-12 -right-12 w-44 h-44 rounded-full bg-orange/40 blur-3xl opacity-70 group-hover:opacity-100 transition-opacity duration-700"
+      />
+      {/* Subtle grain via inner shadow + radial highlight */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
         style={{
-          left: p.left,
-          top: p.top,
-          width: p.size,
-          height: p.size,
-          opacity: p.opacity,
-          animation: `udukku-float ${p.duration}s ease-in-out ${p.delay}s infinite`,
+          background:
+            'radial-gradient(120% 60% at 20% 0%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 55%)',
         }}
       />
-    ))}
-  </div>
-);
 
-const SubCard = ({ item, index }) => (
-  <div
-    data-testid={`sub-card-${item.name.toLowerCase().replace(/[^a-z]/g, '-')}`}
-    className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-brown-dark/10 bg-cream"
-    style={{ animation: `udukku-rise 0.7s ease ${0.05 * index}s both` }}
-  >
-    <img
-      src={item.image}
-      alt={item.name}
-      loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110 sepia-soft"
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/85 via-brown-dark/25 to-transparent" />
-    <div className="absolute inset-x-4 bottom-3 flex items-center justify-between">
-      <span className="text-white text-sm md:text-base font-medium tracking-wide drop-shadow">
-        {item.name}
-      </span>
-      <span className="opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-500 text-white/90">
-        <ArrowUpRight className="w-4 h-4" />
-      </span>
+      {/* Icon */}
+      <div className="absolute top-5 left-5 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/30 border border-white/45 backdrop-blur-md text-brown-dark shadow-[0_8px_24px_-12px_rgba(45,26,10,0.4)] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[-4deg]">
+        <Icon className="w-5 h-5" strokeWidth={1.8} />
+      </div>
+
+      {/* Caption */}
+      <div className="absolute inset-x-5 bottom-4 flex items-end justify-between gap-3">
+        <span className="text-brown-dark text-base md:text-lg font-medium tracking-tight">
+          {item.name}
+        </span>
+        <span className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-brown-dark/70">
+          <ArrowUpRight className="w-4 h-4" />
+        </span>
+      </div>
+
+      {/* Hover ring */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-orange/40 transition-[ring] duration-500"
+      />
     </div>
-    <div className="pointer-events-none absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-      style={{
-        boxShadow: '0 0 60px 0 rgba(232,136,58,0.45) inset',
-      }}
-    />
-  </div>
-);
+  );
+};
 
 const CategoryBlock = ({ category, index }) => {
   const Icon = category.icon;
@@ -324,11 +244,6 @@ export default function Learn() {
     <main data-testid="learn-page" className="bg-white">
       {/* Inline keyframes (page-scoped, no global side effects) */}
       <style>{`
-        @keyframes udukku-float {
-          0%   { transform: translateY(0) translateX(0); }
-          50%  { transform: translateY(-22px) translateX(8px); }
-          100% { transform: translateY(0) translateX(0); }
-        }
         @keyframes udukku-rise {
           from { opacity: 0; transform: translateY(14px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -345,7 +260,6 @@ export default function Learn() {
         className="relative overflow-hidden bg-hero-gradient text-white"
       >
         <div className="absolute inset-0 hero-radial-overlay pointer-events-none" />
-        <FloatingParticles />
 
         <div className="relative udukku-section pt-28 md:pt-32 pb-14 md:pb-16">
           <span className="inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/85 mb-5">
@@ -442,7 +356,6 @@ export default function Learn() {
         className="relative overflow-hidden bg-hero-gradient text-white"
       >
         <div className="absolute inset-0 hero-radial-overlay pointer-events-none" />
-        <FloatingParticles />
 
         <div className="relative udukku-section py-16 md:py-24">
           <div className="max-w-3xl mb-12">
