@@ -47,12 +47,12 @@ export const VISION_MISSION = {
   vision: {
     title: 'Our Vision',
     body:
-      'A world where music is for everyone. Where picking up an instrument feels as natural as humming along to a song you love, and where expression is never out of reach, no matter your age or where you are starting from.',
+      'A world where music is for everyone, and expression is never out of reach.',
   },
   mission: {
     title: 'Our Mission',
     body:
-      'To walk beside each student, gently and intentionally, on a musical journey that is wholly their own. From the first hesitant note to the moment the music flows freely, we are here for every quiet step in between.',
+      'To walk beside each student, gently, on a musical journey that is wholly their own.',
   },
 };
 

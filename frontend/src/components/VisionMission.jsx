@@ -35,27 +35,27 @@ export const VisionMission = () => (
           <span className="uppercase tracking-[0.28em] text-xs text-white/80">
             Shaping musicians since {VISION_MISSION.est}
           </span>
-          <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px] leading-[1.05]">
+          <h2 className="text-display mt-3 text-3xl sm:text-4xl lg:text-[44px] leading-[1.1]">
             A space that holds you{' '}
             <span className="text-italic-serif text-white">
               while you find your sound.
             </span>
           </h2>
 
-          <div className="mt-8 space-y-8">
+          <div className="mt-6 space-y-5">
             <div data-testid="vision-block">
-              <h3 className="text-italic-serif text-2xl mb-3">
+              <h3 className="text-italic-serif text-xl mb-1">
                 {VISION_MISSION.vision.title}
               </h3>
-              <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-xl">
+              <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-xl">
                 {VISION_MISSION.vision.body}
               </p>
             </div>
             <div data-testid="mission-block">
-              <h3 className="text-italic-serif text-2xl mb-3">
+              <h3 className="text-italic-serif text-xl mb-1">
                 {VISION_MISSION.mission.title}
               </h3>
-              <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-xl">
+              <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-xl">
                 {VISION_MISSION.mission.body}
               </p>
             </div>
@@ -64,7 +64,7 @@ export const VisionMission = () => (
           <Link
             to="/about"
             data-testid="vision-read-story"
-            className="mt-8 inline-flex items-center gap-2 h-12 px-7 rounded-full bg-brown-dark text-white text-base font-medium hover:bg-black transition-colors"
+            className="mt-6 inline-flex items-center gap-2 h-11 px-6 rounded-full bg-brown-dark text-white text-sm font-medium hover:bg-black transition-colors"
           >
             Read Our Story <ArrowUpRight className="w-4 h-4" />
           </Link>
