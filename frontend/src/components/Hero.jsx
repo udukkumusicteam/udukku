@@ -20,14 +20,14 @@ export const Hero = () => (
 
       <h1
         data-testid="hero-title"
-        className="text-display text-white text-4xl sm:text-5xl lg:text-6xl xl:text-[72px] max-w-[14ch]"
+        className="text-display text-white whitespace-nowrap text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px]"
       >
-        Helping You Tap Into <br className="hidden md:block" />
+        Helping You Tap Into
+        <br />
         The{' '}
-        <span className="text-italic-serif text-white/95">
-          Power Of Music
-        </span>
-        .
+        <span className="text-italic-serif text-white/95">Power Of</span>
+        <br />
+        <span className="text-italic-serif text-white/95">Music</span>.
       </h1>
 
       <p
