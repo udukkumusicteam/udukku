@@ -46,8 +46,9 @@ export default function Contact() {
             <span className="text-italic-serif">We're listening.</span>
           </h1>
           <p className="mt-6 max-w-xl text-white/85 text-base md:text-lg leading-relaxed">
-            Questions about lessons, mentors, or whether music is "for you"? We
-            answer every message ourselves — usually within a day.
+            Questions about lessons, mentors, or whether music is for you? We
+            read every message ourselves, and we usually write back within a
+            day.
           </p>
         </div>
         <WaveDivider fill="#FFFFFF" />
@@ -61,8 +62,9 @@ export default function Contact() {
               Find us, write to us, drop by.
             </h2>
             <p className="mt-4 text-brown-mid text-base leading-relaxed max-w-md">
-              Our studio is open Tuesday through Sunday. Walk-ins welcome — but
-              if you'd like a mentor to be free for you, a quick message helps.
+              Our studio is open Tuesday through Sunday. Walk in any time. If
+              you would like a mentor to be ready for you, a short note ahead
+              of your visit helps.
             </p>
 
             <div className="mt-10 space-y-6">

@@ -13,7 +13,7 @@ export const Testimonials = () => (
         </span>
         <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px]">
           Music changed something{' '}
-          <span className="text-italic-serif text-white">in them.</span>
+          <span className="text-italic-serif text-white">in them, gently.</span>
         </h2>
       </div>
 

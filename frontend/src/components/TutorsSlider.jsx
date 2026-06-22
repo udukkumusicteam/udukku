@@ -59,7 +59,7 @@ export const TutorsSlider = () => {
               Our Tutors
             </span>
             <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[56px]">
-              Learn from those who{' '}
+              Learn from those who have{' '}
               <span className="text-italic-serif text-orange">lived</span> the
               music.
             </h2>

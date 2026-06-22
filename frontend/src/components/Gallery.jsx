@@ -92,8 +92,9 @@ export const Gallery = () => {
             <span className="text-italic-serif text-orange">community</span>.
           </h2>
           <p className="mt-4 text-brown-mid text-base md:text-lg max-w-xl leading-relaxed">
-            Recitals, workshops, late-night jams, first performances — fragments
-            of the life that fills our studio every week.
+            Recitals, workshops, late evening jams, first performances.
+            Small fragments of the life that quietly fills our studio every
+            week.
           </p>
         </div>
 

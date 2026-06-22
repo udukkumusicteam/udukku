@@ -12,8 +12,8 @@ export const StatsSection = () => (
           Why Udukku
         </span>
         <h2 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[64px]">
-          Music isn't taught here.{' '}
-          <span className="text-italic-serif text-orange">It's set free.</span>
+          Music is not taught here.{' '}
+          <span className="text-italic-serif text-orange">It is set free.</span>
         </h2>
       </div>
 

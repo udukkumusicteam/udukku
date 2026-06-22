@@ -34,9 +34,9 @@ export const Hero = () => (
         data-testid="hero-subtitle"
         className="mt-5 max-w-xl text-base md:text-lg text-white/85 leading-relaxed"
       >
-        Music doesn't need to be earned — it needs to be felt. Step in, slow
-        down, and let the right mentor help you find the sound that was always
-        yours.
+        Music does not need to be earned. It only needs to be felt. Step in,
+        slow down, and let a gentle mentor help you find the sound that has
+        quietly been yours all along.
       </p>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">

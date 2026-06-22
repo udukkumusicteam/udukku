@@ -56,8 +56,8 @@ export default function Booking() {
             <span className="text-italic-serif">first lesson</span>.
           </h1>
           <p className="mt-6 max-w-xl text-white/85 text-base md:text-lg leading-relaxed">
-            Your first session is on us. No auditions. No pressure. Just a quiet
-            hour with a mentor who'll help you find your sound.
+            Your first session is on us. No auditions. No pressure. Just a
+            quiet hour with a mentor who will help you find your sound.
           </p>
         </div>
         <WaveDivider fill="#F5F0E5" />
@@ -75,7 +75,8 @@ export default function Booking() {
               Tell us a little about you.
             </h2>
             <p className="text-brown-mid mt-2">
-              Fields marked are how we'll reach out with your session details.
+              These details are simply how we will reach you with your session
+              note.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
@@ -207,9 +208,9 @@ export default function Booking() {
             <div className="bg-brown-dark text-white rounded-3xl p-7">
               <h3 className="text-italic-serif text-2xl">What happens next</h3>
               <ul className="mt-5 space-y-4 text-sm text-white/85">
-                <Step n="1" t="A real human reads your note" />
-                <Step n="2" t="We match you with a mentor that fits your goals" />
-                <Step n="3" t="You get a calendar invite — and one hour of quiet music" />
+                <Step n="1" t="A real person reads your note, gently" />
+                <Step n="2" t="We pair you with a mentor whose temperament fits yours" />
+                <Step n="3" t="You receive a calendar invitation and one quiet hour of music" />
               </ul>
             </div>
             <div className="bg-cream border border-brown-dark/10 rounded-3xl p-7">
