@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube, Facebook, Music, Phone, Mail, MapPin } from 'lucide-react';
+import { Instagram, Linkedin, Facebook, Music, Phone, Mail, MapPin } from 'lucide-react';
 import { Logo } from './Logo';
 import { SITE, COURSE_CATEGORIES } from '../data/mockData';
 
 const iconMap = {
   instagram: Instagram,
-  youtube: Youtube,
+  linkedin: Linkedin,
   facebook: Facebook,
   music: Music,
 };

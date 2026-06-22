@@ -9,10 +9,9 @@ export const SITE = {
   email: 'udukkumusic@gmail.com',
   address: 'M-23, Income Tax Colony, Durgapura, Tonk Road, Jaipur, Rajasthan 302004',
   social: [
-    { label: 'Instagram', url: 'https://instagram.com', icon: 'instagram' },
-    { label: 'YouTube', url: 'https://youtube.com', icon: 'youtube' },
-    { label: 'Spotify', url: 'https://spotify.com', icon: 'music' },
-    { label: 'Facebook', url: 'https://facebook.com', icon: 'facebook' },
+    { label: 'Instagram', url: 'https://www.instagram.com/udukkumusic', icon: 'instagram' },
+    { label: 'Facebook', url: 'https://www.facebook.com/udukkumusic', icon: 'facebook' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/company/udukkumusic', icon: 'linkedin' },
   ],
 };
 
