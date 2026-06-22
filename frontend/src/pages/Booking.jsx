@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { CheckCircle2, ArrowUpRight } from 'lucide-react';
 import { bookingService } from '../services/apiService';
 import { INSTRUMENTS } from '../data/mockData';
+import WaveDivider from '../components/WaveDivider';
 
 const initial = {
   name: '',
@@ -59,6 +60,7 @@ export default function Booking() {
             hour with a mentor who'll help you find your sound.
           </p>
         </div>
+        <WaveDivider fill="#F5F0E5" />
       </section>
 
       <section className="udukku-section py-20 md:py-28">

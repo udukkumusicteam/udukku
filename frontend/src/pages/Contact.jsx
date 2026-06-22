@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { Mail, MapPin, Phone, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { contactService } from '../services/apiService';
 import { SITE } from '../data/mockData';
+import WaveDivider from '../components/WaveDivider';
 
 const initial = { name: '', email: '', subject: '', message: '' };
 
@@ -49,6 +50,7 @@ export default function Contact() {
             answer every message ourselves — usually within a day.
           </p>
         </div>
+        <WaveDivider fill="#FFFFFF" />
       </section>
 
       <section className="udukku-section py-20 md:py-28">

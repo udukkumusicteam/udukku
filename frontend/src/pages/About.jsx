@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import VisionMission from '../components/VisionMission';
 import { TUTORS } from '../data/mockData';
+import WaveDivider from '../components/WaveDivider';
 
 export default function About() {
   return (
@@ -25,6 +26,7 @@ export default function About() {
             choose music for the long, soft journey.
           </p>
         </div>
+        <WaveDivider fill="#F5F0E5" />
       </section>
 
       {/* Story */}
