@@ -100,7 +100,7 @@ export const TutorsSlider = () => {
               key={t.id}
               data-card
               data-testid={`tutor-card-${i}`}
-              className="shrink-0 snap-start w-[192px] sm:w-[230px] md:w-[276px]"
+              className="shrink-0 snap-start w-[230px] sm:w-[270px] md:w-[320px] lg:w-[360px]"
             >
               <div
                 className="relative w-full overflow-hidden rounded-2xl bg-brown-light/40"
