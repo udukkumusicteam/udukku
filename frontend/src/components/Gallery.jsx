@@ -38,6 +38,16 @@ const PHOTOS = [
     alt: 'Harmonium and flute, a quiet duet',
     caption: 'Harmonium and flute, an unhurried duet',
   },
+  {
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/w74xnqq6_DSC05418%20%281%29.jpg',
+    alt: 'A song shared across generations',
+    caption: 'Voices, strings, and the youngest in the room',
+  },
+  {
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/4dhds8th_DSC06024%20%281%29.jpg',
+    alt: 'A conversation on the Udukku terrace',
+    caption: 'Chai aur baatein, on the terrace',
+  },
 ];
 
 export const Gallery = () => {
