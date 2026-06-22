@@ -46,9 +46,9 @@ export default function Contact() {
             <span className="text-italic-serif">We're listening.</span>
           </h1>
           <p className="mt-6 max-w-xl text-white/85 text-base md:text-lg leading-relaxed">
-            Questions about lessons, mentors, or whether music is for you? We
-            read every message ourselves, and we usually write back within a
-            day.
+            For collaborations, events, performances, press, or anything else
+            you would like to share with us, this is the place. Lessons and
+            free sessions live on the booking page.
           </p>
         </div>
         <WaveDivider fill="#FFFFFF" />
@@ -105,9 +105,10 @@ export default function Contact() {
             className="bg-cream rounded-3xl p-8 md:p-10 border border-brown-dark/10"
           >
             <h3 className="text-display text-2xl md:text-3xl text-brown-dark">
-              Tell us what's on your mind.
+              Tell us about your idea.
             </h3>
             <p className="text-brown-mid mt-2 text-sm">
+              Collaborations, events, partnerships, press, or just a thought.
               We read every word.
             </p>
 
@@ -140,7 +141,7 @@ export default function Contact() {
                   value={form.subject}
                   onChange={onChange('subject')}
                   className={inputCls}
-                  placeholder="What's this about?"
+                  placeholder="Collaboration, event, partnership..."
                 />
               </Field>
               <Field label="Message" htmlFor="ct-message">
@@ -151,7 +152,7 @@ export default function Contact() {
                   value={form.message}
                   onChange={onChange('message')}
                   className={`${inputCls} resize-none`}
-                  placeholder="Write a few lines about what you're looking for..."
+                  placeholder="Tell us a little about what you have in mind..."
                 />
               </Field>
             </div>
