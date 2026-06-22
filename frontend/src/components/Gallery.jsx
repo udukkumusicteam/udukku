@@ -28,6 +28,16 @@ const PHOTOS = [
     alt: 'A flute in the afternoon',
     caption: 'A flute, a sunlit room',
   },
+  {
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/amdyxgg7_IMG_5257.JPG',
+    alt: 'An attentive audience at golden hour',
+    caption: 'Listening, together, as the sun softens',
+  },
+  {
+    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6mwlqdin_IMG_3251.jpg',
+    alt: 'Harmonium and flute, a quiet duet',
+    caption: 'Harmonium and flute, an unhurried duet',
+  },
 ];
 
 export const Gallery = () => {
