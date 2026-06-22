@@ -100,15 +100,17 @@ export default function About() {
       {/* EVERY VOICE WAS ONCE AFRAID (dark essay section) ------------------- */}
       <section data-testid="essay-section" className="bg-brown-dark text-white">
         <div className="udukku-section py-16 md:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-12 items-stretch">
-            {/* Image: stretches to match the full height of the text column */}
-            <div className="relative rounded-3xl overflow-hidden bg-orange/20 min-h-[420px] lg:min-h-0">
-              <img
-                src="https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/7iz9q8gt_DSC05252%20%281%29.jpg"
-                alt="The Udukku easel: The Music in You"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ objectPosition: 'center 35%' }}
-              />
+          <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-12 items-start">
+            {/* Image column — fixed 1:1 aspect ratio so the photo is never cropped.
+                Sticks in view on desktop as the long story scrolls beside it. */}
+            <div className="lg:sticky lg:top-24 self-start w-full">
+              <div className="relative rounded-3xl overflow-hidden bg-brown-dark aspect-square">
+                <img
+                  src="https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/7iz9q8gt_DSC05252%20%281%29.jpg"
+                  alt="The Udukku easel: The Music in You"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
             </div>
 
             {/* Text column */}
