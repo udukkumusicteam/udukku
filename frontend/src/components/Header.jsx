@@ -10,7 +10,6 @@ import {
 import { Logo } from './Logo';
 
 const NAV = [
-  { to: '/booking', label: 'Booking Page' },
   { to: '/about', label: 'About Us' },
   { to: '/contact', label: 'Contact Us' },
 ];
