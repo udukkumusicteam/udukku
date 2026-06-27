@@ -15,7 +15,7 @@ export const SITE = {
   ],
 };
 
-export const HERO_PILLS = ['Keys', 'Strings', 'Vocals', 'Percussion', 'Violin', 'Theory'];
+export const HERO_PILLS = ['Keys', 'Strings', 'Vocals', 'Percussion', 'Theory'];
 
 export const STATS = [
   {
