@@ -20,7 +20,7 @@ export const Footer = () => (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-10">
         {/* Brand */}
         <div className="space-y-6">
-          <Logo color="#FFFFFF" />
+          <Logo variant="light" size={36} />
           <p className="text-italic-serif text-white/85 text-lg">
             {SITE.tagline}
           </p>

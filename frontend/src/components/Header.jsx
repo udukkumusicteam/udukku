@@ -27,10 +27,12 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Use dark text on light pages (anything not Home), white on Home hero.
+  // Every page opens against the warm orange hero, so the cream logo gives the
+  // best contrast at the top. Once the user scrolls past the hero, the frosted
+  // header sits over lighter content, so we switch to the orange logo.
   const isHome = location.pathname === '/';
   const linkColor = isHome ? 'text-white/90 hover:text-white' : 'text-brown-dark hover:text-orange';
-  const logoColor = isHome ? '#FFFFFF' : '#2D1A0A';
+  const logoVariant = scrolled ? 'dark' : 'light';
 
   return (
     <header
@@ -48,7 +50,7 @@ export const Header = () => {
     >
       <div className="udukku-section flex items-center justify-between h-[72px] md:h-[84px]">
         <Link to="/" data-testid="header-logo-link" className="flex items-center">
-          <Logo color={logoColor} />
+          <Logo variant={logoVariant} size={32} />
         </Link>
 
         {/* Desktop nav */}
@@ -94,7 +96,7 @@ export const Header = () => {
             >
               <SheetTitle className="sr-only">Navigation</SheetTitle>
               <div className="flex items-center justify-between px-6 h-[72px] border-b border-brown-dark/10">
-                <Logo color="#2D1A0A" />
+                <Logo variant="dark" size={30} />
                 <button
                   data-testid="mobile-menu-close"
                   onClick={() => setOpen(false)}
