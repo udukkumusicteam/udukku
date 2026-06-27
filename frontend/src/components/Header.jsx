@@ -29,10 +29,9 @@ export const Header = () => {
 
   // Every page opens against the warm orange hero, so the cream logo gives the
   // best contrast at the top. Once the user scrolls past the hero, the frosted
-  // header sits over lighter content, so we switch to the orange logo.
+  // header sits over lighter content, so we cross-fade to the orange logo.
   const isHome = location.pathname === '/';
   const linkColor = isHome ? 'text-white/90 hover:text-white' : 'text-brown-dark hover:text-orange';
-  const logoVariant = scrolled ? 'dark' : 'light';
 
   return (
     <header
@@ -49,8 +48,29 @@ export const Header = () => {
       }
     >
       <div className="udukku-section flex items-center justify-between h-[72px] md:h-[84px]">
-        <Link to="/" data-testid="header-logo-link" className="flex items-center">
-          <Logo variant={logoVariant} size={32} />
+        <Link
+          to="/"
+          data-testid="header-logo-link"
+          className="relative flex items-center"
+          style={{ width: 130, height: 56 }}
+        >
+          {/* Cross-fade between cream + orange logos so the swap is invisible.
+              Both variants are width-locked so the horizontal footprint is
+              identical and there is no scale jump. */}
+          <Logo
+            variant="light"
+            width={130}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 ease-out ${
+              scrolled ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+          <Logo
+            variant="dark"
+            width={130}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 ease-out ${
+              scrolled ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
         </Link>
 
         {/* Desktop nav */}

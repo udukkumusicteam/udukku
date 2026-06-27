@@ -12,24 +12,42 @@ const LOGO_CREAM = '/logo-cream.svg';
  */
 /**
  * Renders the Udukku wordmark as a transparent SVG.
- * `variant`:
+ *
+ * Sizing modes:
+ *   - `width`  → fixes the rendered width (height auto). Best for cross-fading
+ *                between the two variants since their aspect ratios differ.
+ *   - `size`   → fallback: fixes height. The cream variant is scaled to 1.5×
+ *                so its wordmark visually matches the orange variant.
+ *
+ * Variants:
  *   - 'light' → cream logo, used on dark/orange backgrounds (hero, footer)
  *   - 'dark'  → orange logo, used on light/cream/white backgrounds
- *
- * The cream variant's artwork is naturally taller relative to its wordmark,
- * so we scale it up to match the orange variant's perceived size at the
- * same nominal `size`.
  */
-export const Logo = ({ variant = 'light', className = '', size = 32 }) => {
+export const Logo = ({
+  variant = 'light',
+  className = '',
+  size,
+  width,
+  style = {},
+}) => {
   const src = variant === 'dark' ? LOGO_ORANGE : LOGO_CREAM;
-  const effectiveSize = variant === 'light' ? Math.round(size * 1.5) : size;
+  const sizeStyle =
+    width != null
+      ? { width, height: 'auto' }
+      : {
+          height:
+            variant === 'light'
+              ? Math.round((size ?? 32) * 1.5)
+              : size ?? 32,
+          width: 'auto',
+        };
   return (
     <img
       src={src}
       alt="udukku"
       data-testid="brand-logo"
       className={`select-none block ${className}`}
-      style={{ height: effectiveSize, width: 'auto' }}
+      style={{ ...sizeStyle, ...style }}
       draggable={false}
     />
   );
