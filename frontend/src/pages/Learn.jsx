@@ -358,7 +358,7 @@ export default function Learn() {
           {hasMore && (
             <p
               data-testid="and-more"
-              className="mt-8 md:mt-10 text-orange text-italic-serif text-xl md:text-2xl"
+              className="mt-8 md:mt-10 text-center text-orange text-italic-serif text-xl md:text-2xl"
             >
               and more...
             </p>
