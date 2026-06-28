@@ -112,7 +112,7 @@ export const Header = () => {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="bg-cream border-l border-brown-dark/10 w-[86vw] max-w-sm p-0"
+              className="bg-cream border-l border-brown-dark/10 w-[86vw] max-w-sm p-0 [&>button.absolute]:hidden"
             >
               <SheetTitle className="sr-only">Navigation</SheetTitle>
               <div className="flex items-center justify-between px-6 h-[72px] border-b border-brown-dark/10">
