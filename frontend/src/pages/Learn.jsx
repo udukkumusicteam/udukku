@@ -45,32 +45,34 @@ const JOURNEY = [
 
 const FILTERS = ['All', 'Strings', 'Percussion', 'Keyboard', 'Wind', 'Vocals'];
 
-// Flat instrument list. `cat` is the filter-chip label they belong to.
+// Flat instrument list. `cat` is the filter-chip label, `curated: true` marks
+// the picks we always surface. Everything else lives behind the "and more..."
+// cue and is taught on request.
 const INSTRUMENTS = [
   // Strings
-  { name: 'Guitar', cat: 'Strings', icon: Guitar, desc: 'Strum chords and find the song hiding in your fingertips.' },
-  { name: 'Violin', cat: 'Strings', icon: Music2, desc: 'Express emotion through timeless music.' },
-  { name: 'Sitar', cat: 'Strings', icon: Music, desc: 'Step into a tradition that bends time with every note.' },
+  { name: 'Guitar', cat: 'Strings', icon: Guitar, desc: 'Strum chords and find the song hiding in your fingertips.', curated: true },
+  { name: 'Violin', cat: 'Strings', icon: Music2, desc: 'Express emotion through timeless music.', curated: true },
+  { name: 'Sitar', cat: 'Strings', icon: Music, desc: 'Step into a tradition that bends time with every note.', curated: true },
   { name: 'Ukulele', cat: 'Strings', icon: Music3, desc: 'Travel light. Let four strings carry your joy.' },
   // Vocals
-  { name: 'Hindustani', cat: 'Vocals', icon: Mic, desc: 'Wander through ragas at your own breath\u2019s pace.' },
-  { name: 'Carnatic', cat: 'Vocals', icon: Mic2, desc: 'Sing the rhythms passed down through generations.' },
-  { name: 'Western', cat: 'Vocals', icon: AudioLines, desc: 'Sing the songs you already hum inside.' },
+  { name: 'Hindustani', cat: 'Vocals', icon: Mic, desc: 'Wander through ragas at your own breath\u2019s pace.', curated: true },
+  { name: 'Carnatic', cat: 'Vocals', icon: Mic2, desc: 'Sing the rhythms passed down through generations.', curated: true },
+  { name: 'Western', cat: 'Vocals', icon: AudioLines, desc: 'Sing the songs you already hum inside.', curated: true },
   { name: 'Playback', cat: 'Vocals', icon: Radio, desc: 'Step up to the mic with quiet confidence.' },
   // Percussion
-  { name: 'Tabla', cat: 'Percussion', icon: Drum, desc: 'Discover rhythm, focus and tradition.' },
-  { name: 'Drums', cat: 'Percussion', icon: Disc, desc: 'Let the room feel your heartbeat.' },
-  { name: 'Cajon', cat: 'Percussion', icon: Drum, desc: 'Carry a beat anywhere you sit.' },
+  { name: 'Tabla', cat: 'Percussion', icon: Drum, desc: 'Discover rhythm, focus and tradition.', curated: true },
+  { name: 'Drums', cat: 'Percussion', icon: Disc, desc: 'Let the room feel your heartbeat.', curated: true },
+  { name: 'Cajon', cat: 'Percussion', icon: Drum, desc: 'Carry a beat anywhere you sit.', curated: true },
   { name: 'Mridangam', cat: 'Percussion', icon: Drum, desc: 'A south Indian pulse, ancient and warm.' },
   // Wind
-  { name: 'Flute / Bansuri', cat: 'Wind', icon: WindIcon, desc: 'Breathe, relax and create beautiful melodies.' },
-  { name: 'Saxophone', cat: 'Wind', icon: Music4, desc: 'Pour soul into every long, warm note.' },
-  { name: 'Harmonica', cat: 'Wind', icon: AudioLines, desc: 'Make a pocket-sized melody anywhere.' },
+  { name: 'Flute / Bansuri', cat: 'Wind', icon: WindIcon, desc: 'Breathe, relax and create beautiful melodies.', curated: true },
+  { name: 'Saxophone', cat: 'Wind', icon: Music4, desc: 'Pour soul into every long, warm note.', curated: true },
+  { name: 'Harmonica', cat: 'Wind', icon: AudioLines, desc: 'Make a pocket-sized melody anywhere.', curated: true },
   { name: 'Shehnai', cat: 'Wind', icon: WindIcon, desc: 'Welcome each beginning with a soaring tone.' },
   // Keyboard
-  { name: 'Piano', cat: 'Keyboard', icon: Piano, desc: 'Touch a key, and a story begins.' },
-  { name: 'Harmonium', cat: 'Keyboard', icon: Piano, desc: 'A warm hum to ground every song.' },
-  { name: 'Keyboard', cat: 'Keyboard', icon: Piano, desc: 'Endless sounds, one place to play.' },
+  { name: 'Piano', cat: 'Keyboard', icon: Piano, desc: 'Touch a key, and a story begins.', curated: true },
+  { name: 'Harmonium', cat: 'Keyboard', icon: Piano, desc: 'A warm hum to ground every song.', curated: true },
+  { name: 'Keyboard', cat: 'Keyboard', icon: Piano, desc: 'Endless sounds, one place to play.', curated: true },
   { name: 'Music Theory', cat: 'Keyboard', icon: BookOpen, desc: 'Understand the language behind the songs you love.' },
 ];
 
@@ -238,8 +240,16 @@ export default function Learn() {
   const [filter, setFilter] = useState('All');
 
   const filteredInstruments = useMemo(() => {
-    if (filter === 'All') return INSTRUMENTS;
-    return INSTRUMENTS.filter((i) => i.cat === filter);
+    const curated = INSTRUMENTS.filter((i) => i.curated);
+    if (filter === 'All') return curated;
+    return curated.filter((i) => i.cat === filter);
+  }, [filter]);
+
+  // Whether at least one non-curated instrument exists in the visible scope —
+  // drives the soft "and more..." hint below the grid.
+  const hasMore = useMemo(() => {
+    if (filter === 'All') return INSTRUMENTS.some((i) => !i.curated);
+    return INSTRUMENTS.some((i) => i.cat === filter && !i.curated);
   }, [filter]);
 
   return (
@@ -344,6 +354,15 @@ export default function Learn() {
               <InstrumentCard key={item.name} item={item} index={i} />
             ))}
           </div>
+
+          {hasMore && (
+            <p
+              data-testid="and-more"
+              className="mt-8 md:mt-10 text-orange text-italic-serif text-xl md:text-2xl"
+            >
+              and more...
+            </p>
+          )}
         </div>
       </section>
 
