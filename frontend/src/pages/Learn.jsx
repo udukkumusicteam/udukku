@@ -391,9 +391,39 @@ export default function Learn() {
                 className="reveal btn-glow mt-9 inline-flex items-center gap-2 h-12 px-7 rounded-full bg-orange text-white text-base font-medium hover:bg-orange-dark"
                 style={{ transitionDelay: '220ms' }}
               >
-                Explore Music Room
+                Join Music Room
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
+
+              <ul
+                className="reveal mt-9 space-y-3 max-w-md"
+                style={{ transitionDelay: '280ms' }}
+              >
+                {[
+                  'Any instrument or any style, bring what you love',
+                  'Month to month, no long term commitment',
+                  'Cashback that quietly rewards your consistency',
+                ].map((line) => (
+                  <li key={line} className="flex items-start gap-3 text-white/80 text-sm md:text-base leading-relaxed">
+                    <CheckCircle2 className="w-4 h-4 text-orange mt-1 shrink-0" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <figure
+                className="reveal mt-10 max-w-lg pl-5 border-l-2 border-orange/60"
+                style={{ transitionDelay: '340ms' }}
+              >
+                <blockquote className="text-italic-serif text-white/90 text-lg md:text-xl leading-relaxed">
+                  The students who stay the longest are not the most talented.
+                  They are the ones who found a room they trusted enough to
+                  keep coming back to.
+                </blockquote>
+                <figcaption className="mt-3 text-white/55 text-[11px] uppercase tracking-[0.24em]">
+                  A quiet truth, from the Music Room
+                </figcaption>
+              </figure>
             </div>
 
             <div className="space-y-5">
