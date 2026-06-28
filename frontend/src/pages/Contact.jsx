@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { Mail, MapPin, Phone, ArrowUpRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { Mail, MapPin, Phone, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import BrandIcon from '../components/BrandIcon';
 import { contactService } from '../services/apiService';
 import { SITE } from '../data/mockData';
 import WaveDivider from '../components/WaveDivider';
@@ -93,7 +94,7 @@ export default function Contact() {
               <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-orange/10 blur-2xl pointer-events-none" />
               <div className="relative">
                 <div className="inline-flex items-center gap-2 text-orange">
-                  <Sparkles className="w-4 h-4" />
+                  <BrandIcon size={16} />
                   <span className="text-xs uppercase tracking-[0.22em]">
                     Looking to learn?
                   </span>

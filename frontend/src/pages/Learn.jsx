@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
   ArrowRight,
-  Sparkles,
   Compass,
   GraduationCap,
   Music,
@@ -32,6 +31,7 @@ import {
   LineChart,
 } from 'lucide-react';
 import WaveDivider from '../components/WaveDivider';
+import BrandIcon from '../components/BrandIcon';
 
 /* ---------------------------------- Data ---------------------------------- */
 
@@ -197,7 +197,7 @@ const PlanCard = ({ plan }) => (
   >
     {plan.featured && (
       <span className="absolute -top-3 left-7 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange text-white text-[10px] uppercase tracking-[0.22em]">
-        <Sparkles className="w-3 h-3" /> Most chosen
+        <BrandIcon size={12} /> Most chosen
       </span>
     )}
     <h3 className="text-display text-white text-2xl md:text-3xl">{plan.name}</h3>
@@ -259,7 +259,7 @@ export default function Learn() {
         <div className="absolute inset-0 hero-radial-overlay pointer-events-none" />
         <div className="relative udukku-section pt-28 md:pt-32 pb-16 md:pb-20">
           <span className="reveal inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/85 mb-5">
-            <Sparkles className="w-3.5 h-3.5" />
+            <BrandIcon size={14} />
             Our Services
           </span>
 
