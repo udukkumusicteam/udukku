@@ -102,20 +102,17 @@ export const TutorsSlider = () => {
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover sepia-soft transition-transform duration-[1100ms] ease-out group-hover:scale-105"
                 />
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-full bg-white/85 text-brown-dark text-[10px] uppercase tracking-widest">
-                    Mentor
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-black/45 text-white text-[10px] tracking-wide">
-                    {t.experience}
-                  </span>
-                </div>
               </div>
               <div className="mt-4">
                 <h3 className="text-xl md:text-2xl font-semibold text-brown-dark">
                   {t.name}
                 </h3>
-                <p className="text-sm text-brown-mid mt-1">{t.role}</p>
+                <p className="text-sm text-brown-mid mt-1">
+                  {t.role} <span className="text-brown-mid/70">· {t.experience}</span>
+                </p>
+                <p className="text-sm text-brown-mid mt-3 leading-relaxed">
+                  {t.bio}
+                </p>
               </div>
             </article>
           ))}
