@@ -14,8 +14,8 @@ const PILLS = [
   {
     to: '/services/music-room',
     icon: Users,
-    title: 'Udukku Music Room',
-    body: 'Join our practice community',
+    title: 'UMR',
+    body: 'Join the Udukku Music Room community',
     testid: 'services-pill-umr',
   },
   {
