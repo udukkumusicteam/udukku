@@ -61,7 +61,7 @@ export const Footer = () => (
               </Link>
             </li>
             <li>
-              <Link to="/learn" data-testid="footer-link-learn" className="hover:text-white text-white/90">
+              <Link to="/services" data-testid="footer-link-learn" className="hover:text-white text-white/90">
                 Our Services
               </Link>
             </li>

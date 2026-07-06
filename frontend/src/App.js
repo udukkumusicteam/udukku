@@ -14,7 +14,11 @@ import Home from '@/pages/Home';
 import Booking from '@/pages/Booking';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
-import Learn from '@/pages/Learn';
+import Services from '@/pages/services/Services';
+import Instruments from '@/pages/services/Instruments';
+import MusicRoom from '@/pages/services/MusicRoom';
+import MusicMeditation from '@/pages/services/MusicMeditation';
+import Events from '@/pages/services/Events';
 import Admin from '@/pages/Admin';
 
 const ScrollToTop = () => {
@@ -67,7 +71,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/about" element={<About />} />
-          <Route path="/learn" element={<Learn />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/instruments" element={<Instruments />} />
+          <Route path="/services/music-room" element={<MusicRoom />} />
+          <Route path="/services/music-meditation" element={<MusicMeditation />} />
+          <Route path="/services/events" element={<Events />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
