@@ -35,13 +35,19 @@ export const Header = () => {
   // header to stay light throughout — cream logo, white nav links, light
   // Book Now button, and a dark frosted overlay when scrolled.
   const isDarkTheme = location.pathname === '/services/music-room';
-  const isLightHeader = isHome || isDarkTheme;
+  // Full-bleed photo-hero pages (dark image behind the hero) need a light
+  // header while the hero is in view, then flip to the standard dark nav
+  // once the user scrolls past it.
+  const isPhotoHero = location.pathname === '/services/events';
+  const isLightHeader = isHome || isDarkTheme || (isPhotoHero && !scrolled);
   const linkColor = isLightHeader
     ? 'text-white/90 hover:text-white'
     : 'text-brown-dark hover:text-orange';
-  // Logo cross-fade only happens on light pages; on dark pages we lock the
-  // cream variant so it stays visible over the dark backdrop.
-  const showDarkLogo = scrolled && !isDarkTheme;
+  // The cream/light logo variant only reads well over the dark or orange
+  // backdrops (home hero, music room, photo hero on events). Everywhere else
+  // (cream pages, scrolled state on light pages) we want the dark logo.
+  const wantsCreamLogo = isDarkTheme || ((isHome || isPhotoHero) && !scrolled);
+  const showDarkLogo = !wantsCreamLogo;
 
   return (
     <header

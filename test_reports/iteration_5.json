@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only verification of the 3 rewritten hero sections (Instruments, MusicMeditation, Events) and the scroll-aware Header refactor. All acceptance criteria met: Instruments uses cream split-layout hero (bg rgb(245,240,229)) with orange BackLink/eyebrow, h1 76px, Udukku image + floating 20+ chip; MusicMeditation uses warm cream hero (rgb(245,237,222) ~= #F5EDDE) with 104px h1 'Music as medicine.', italic-serif quote block, Breath/Sound/Stillness chips; Events uses full-bleed real Udukku photo hero (min-h ~86vh -> 929px on 1080 viewport) with white 'Where music becomes community.' headline and orange italic 'community'. Header logo/nav variants render correctly per page/scroll state.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Header.jsx: scroll listener uses `passive:true` and a strict `> 40` threshold; noticed a tiny lag where at scrollY~96 the state momentarily still reads pre-scroll during rapid programmatic scrolls (Playwright window.scrollTo without dispatch). Not user-facing; native wheel/touch fires listener fine.",
+    "Instruments.jsx / Events.jsx / MusicMeditation.jsx: hero images from customer-assets.emergentagent.com are large JPGs served without srcset; consider width-based responsive sources or an image CDN transform to reduce mobile payload."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Verified logo cross-fade via getComputedStyle on both <img> variants in [data-testid=header-logo-link]. Verified nav color via computed color on [data-testid^=nav-link]. To assert scroll behavior on /services/events reliably, do window.scrollTo(0,y) AND window.dispatchEvent(new Event('scroll')) then wait >=300ms; page.mouse.wheel also works but a plain page.evaluate scrollTo may not trigger React state within Playwright. At y>=500 nav flips to brown-dark rgb(45,26,10), and dark-logo opacity crosses 1 by y~=1000. Music Room stays light logo + white nav throughout (dark theme). /services landing has no footer, /services/* sub-pages have footer.",
+  "verification_details": {
+    "instruments": {"heroBg": "rgb(245, 240, 229)", "h1FontSizePx": 76, "backLinkColor": "rgb(200, 75, 26)", "eyebrowColor": "rgb(200, 75, 26)", "imgSrc": "customer-assets.emergentagent.com/...IMG_5257.JPG", "headerLogoState": "dark logo opacity=1, cream=0", "navColor": "rgb(45, 26, 10)", "bookNowBg": "rgb(45, 26, 10)"},
+    "music_meditation": {"heroBg": "rgb(245, 237, 222)", "h1FontSizePx": 104, "headerLogoState": "dark logo opacity=1, cream=0", "navColor": "rgb(45, 26, 10)"},
+    "events_top": {"imgSrc": "customer-assets.emergentagent.com/...DSC06024...jpg", "h1Color": "rgb(255, 255, 255)", "heroHeightPx": 928.8, "viewportPx": 1080, "headerLogoState": "cream=1, dark=0", "navColor": "rgba(255, 255, 255, 0.9)"},
+    "events_scrolled_1000": {"headerLogoState": "cream=0, dark=1", "navColor": "rgb(45, 26, 10)", "headerBg": "rgba(255, 255, 255, 0.12)"},
+    "music_room": {"headerLogoState": "cream=1, dark=0 (unchanged dark theme)", "navColor": "rgba(255,255,255,0.9)", "bookNowBg": "rgb(255,255,255)"},
+    "home": {"headerLogoState": "cream=1, dark=0", "navColor": "rgba(255,255,255,0.9)"},
+    "about": {"headerLogoState": "cream=0, dark=1", "navColor": "rgb(45, 26, 10)"},
+    "services_landing": {"hasFooter": false}
+  }
+}

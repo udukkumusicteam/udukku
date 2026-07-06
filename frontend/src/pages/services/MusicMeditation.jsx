@@ -10,7 +10,6 @@ import {
   HeartPulse,
   CheckCircle2,
 } from 'lucide-react';
-import WaveDivider from '../../components/WaveDivider';
 import BrandIcon from '../../components/BrandIcon';
 import { contactService } from '../../services/apiService';
 
@@ -27,7 +26,7 @@ const BackLink = () => (
   <Link
     to="/services"
     data-testid="back-to-services"
-    className="flex w-fit items-center gap-2 text-white/80 hover:text-white text-sm transition-colors"
+    className="flex w-fit items-center gap-2 text-orange hover:text-orange-dark text-sm font-medium transition-colors"
   >
     <ArrowLeft className="w-4 h-4" /> Back to Services
   </Link>
@@ -61,30 +60,84 @@ export default function MusicMeditation() {
 
   return (
     <main data-testid="music-meditation-page" className="bg-white page-fade-in">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-hero-gradient text-white">
-        <div className="absolute inset-0 hero-radial-overlay pointer-events-none" />
-        <div className="relative udukku-section pt-28 md:pt-32 pb-16 md:pb-20">
-          <BackLink />
-          <span className="reveal mt-6 inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/85 mb-4">
-            <BrandIcon size={14} /> Music Meditation
-          </span>
-          <h1 className="reveal text-display text-white text-4xl sm:text-5xl lg:text-[64px] leading-[1.05] max-w-3xl" style={{ transitionDelay: '80ms' }}>
-            Music as{' '}
-            <span className="text-italic-serif text-white/95">medicine</span>.
-          </h1>
-          <p className="reveal mt-6 max-w-2xl text-white/85 text-base md:text-lg leading-relaxed" style={{ transitionDelay: '160ms' }}>
-            Music meditation at Udukku is not performance, it is presence. We
-            guide you to use music as a vehicle for deep rest, emotional
-            release, and inner stillness.
-          </p>
-          <figure className="reveal mt-10 max-w-xl pl-5 border-l-2 border-orange/70" style={{ transitionDelay: '220ms' }}>
-            <blockquote className="text-italic-serif text-white/95 text-lg md:text-2xl leading-relaxed">
-              Sound was the first medicine. It still is.
-            </blockquote>
-          </figure>
+      {/* Hero — serene cream with warm radial glow */}
+      <section
+        className="relative overflow-hidden"
+        style={{ backgroundColor: '#F5EDDE' }}
+      >
+        <div
+          className="absolute inset-x-0 -top-24 h-[720px] pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 900px 560px at 62% 8%, rgba(232,136,58,0.28), transparent 70%)',
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute -left-40 top-1/3 w-[520px] h-[520px] rounded-full pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(closest-side, rgba(232,136,58,0.12), transparent 70%)',
+          }}
+          aria-hidden
+        />
+        {/* Delicate corner detail */}
+        <div className="absolute top-[42%] right-8 md:right-14 hidden md:block pointer-events-none">
+          <div className="w-20 h-20 rounded-full border border-orange/30 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full border border-orange/25" />
+          </div>
         </div>
-        <WaveDivider fill="#FFFFFF" />
+
+        <div className="relative udukku-section pt-28 md:pt-36 pb-24 md:pb-32">
+          <BackLink />
+
+          <div className="mt-12 md:mt-16 max-w-4xl">
+            <span
+              className="reveal inline-flex items-center gap-2 uppercase tracking-[0.32em] text-[11px] md:text-xs text-orange mb-8"
+            >
+              <BrandIcon size={14} /> Music Meditation
+            </span>
+            <h1
+              className="reveal text-display text-brown-dark text-5xl sm:text-6xl md:text-7xl lg:text-[104px] leading-[0.98] tracking-[-0.01em]"
+              style={{ transitionDelay: '80ms' }}
+            >
+              Music as{' '}
+              <span className="text-italic-serif text-orange">medicine</span>.
+            </h1>
+
+            <figure
+              className="reveal mt-10 md:mt-12 max-w-xl pl-5 border-l-2 border-orange/60"
+              style={{ transitionDelay: '160ms' }}
+            >
+              <blockquote className="text-italic-serif text-brown-dark/85 text-xl md:text-2xl leading-relaxed">
+                Sound was the first medicine. It still is.
+              </blockquote>
+            </figure>
+
+            <p
+              className="reveal mt-8 md:mt-10 max-w-2xl text-brown-mid text-base md:text-lg leading-relaxed"
+              style={{ transitionDelay: '220ms' }}
+            >
+              Music meditation at Udukku is not performance, it is presence. We
+              guide you to use music as a vehicle for deep rest, emotional
+              release, and inner stillness.
+            </p>
+
+            <div
+              className="reveal mt-10 flex flex-wrap items-center gap-2.5"
+              style={{ transitionDelay: '280ms' }}
+            >
+              {['Breath', 'Sound', 'Stillness'].map((t) => (
+                <span
+                  key={t}
+                  className="inline-flex items-center h-9 px-4 rounded-full bg-white/70 backdrop-blur-sm border border-brown-dark/10 text-brown-dark text-xs md:text-sm"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Offerings */}

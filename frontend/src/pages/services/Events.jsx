@@ -16,7 +16,6 @@ import {
   BookOpen,
   Wand2,
 } from 'lucide-react';
-import WaveDivider from '../../components/WaveDivider';
 import BrandIcon from '../../components/BrandIcon';
 import { contactService } from '../../services/apiService';
 
@@ -135,27 +134,44 @@ export default function Events() {
 
   return (
     <main data-testid="events-page" className="bg-white page-fade-in">
-      {/* ---------- Hero ---------- */}
-      <section className="relative overflow-hidden bg-hero-gradient text-white">
-        <div className="absolute inset-0 hero-radial-overlay pointer-events-none" />
-        <div className="relative udukku-section pt-28 md:pt-32 pb-20 md:pb-28">
+      {/* ---------- Hero — full-bleed photo ---------- */}
+      <section
+        data-testid="events-hero"
+        className="relative overflow-hidden text-white"
+      >
+        <div className="absolute inset-0">
+          <img
+            src="https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/4dhds8th_DSC06024%20%281%29.jpg"
+            alt="An Udukku evening in full swing"
+            className="w-full h-full object-cover"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(20,15,10,0.70) 0%, rgba(20,15,10,0.45) 40%, rgba(20,15,10,0.85) 100%)',
+            }}
+          />
+        </div>
+
+        <div className="relative udukku-section pt-28 md:pt-40 pb-16 md:pb-24 min-h-[86vh] flex flex-col justify-end">
           <BackLink />
           <span
             data-testid="events-eyebrow"
-            className="reveal mt-8 inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/85 mb-6"
+            className="reveal mt-8 inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/90 mb-6"
           >
             <BrandIcon size={14} /> Events
           </span>
           <h1
             data-testid="events-headline"
-            className="reveal text-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-[1.02] max-w-5xl"
+            className="reveal text-display text-white text-4xl sm:text-5xl md:text-7xl lg:text-[92px] leading-[1.02] max-w-5xl"
             style={{ transitionDelay: '80ms' }}
           >
             Where music becomes{' '}
-            <span className="text-italic-serif text-white/95">community</span>.
+            <span className="text-italic-serif text-orange">community</span>.
           </h1>
           <p
-            className="reveal mt-8 max-w-2xl text-white/85 text-base md:text-lg leading-relaxed"
+            className="reveal mt-6 max-w-2xl text-white/85 text-base md:text-lg leading-relaxed"
             style={{ transitionDelay: '160ms' }}
           >
             From intimate raga listening circles to corporate wellness
@@ -164,7 +180,6 @@ export default function Events() {
             connection, and calm.
           </p>
         </div>
-        <WaveDivider fill="#FBF6EA" />
       </section>
 
       {/* ---------- Editorial gallery ---------- */}
