@@ -33,6 +33,7 @@ Build a premium, fully functional, multi-page Music Learning platform website na
 - Admin dashboard shows all form-submission fields.
 - Multi-page Services Hub: `/services`, `/services/instruments`, `/services/music-room`, `/services/music-meditation`, `/services/events`.
 - **06 Feb 2026** — Fixed BackLink overlap bug on all 4 services sub-pages: changed `inline-flex` to `flex w-fit` so the "Back to Services" link occupies its own line above the eyebrow/H1. Verified by testing agent at 1440x900 and 375x800 viewports (report: /app/test_reports/iteration_1.json).
+- **06 Feb 2026** — Rebuilt `/services` as a minimal hero-only landing page (header + full-screen hero + 4 nav pills at the bottom of the hero + footer). No cards, no extra sections. Pills grid: 4-col desktop / 2-col tablet / 1-col mobile. Verified by testing agent across desktop/tablet/mobile viewports (report: /app/test_reports/iteration_2.json).
 
 ## Backlog
 - **P1** — Verify Booking & Contact forms cleanly express mock loading/success/error states from `apiService.js`.
