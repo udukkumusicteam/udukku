@@ -7,14 +7,6 @@ import {
   MapPin,
   Send,
   CheckCircle2,
-  Building2,
-  Flame,
-  GraduationCap,
-  Music3,
-  Sparkles,
-  Users,
-  BookOpen,
-  Wand2,
 } from 'lucide-react';
 import BrandIcon from '../../components/BrandIcon';
 import { contactService } from '../../services/apiService';
@@ -77,14 +69,14 @@ const PHOTOS = [
 ];
 
 const CATEGORIES = [
-  { icon: Building2, title: 'Corporate Events' },
-  { icon: Flame, title: 'Cultural Festivals' },
-  { icon: GraduationCap, title: 'School & College Programs' },
-  { icon: Music3, title: 'Private Concerts' },
-  { icon: Sparkles, title: 'Spiritual Gatherings' },
-  { icon: Users, title: 'Community Events' },
-  { icon: BookOpen, title: 'Workshops' },
-  { icon: Wand2, title: 'Custom Performances' },
+  { title: 'Corporate Events' },
+  { title: 'Cultural Festivals' },
+  { title: 'School & College Programs' },
+  { title: 'Private Concerts' },
+  { title: 'Spiritual Gatherings' },
+  { title: 'Community Events' },
+  { title: 'Workshops' },
+  { title: 'Custom Performances' },
 ];
 
 const BackLink = () => (
@@ -255,21 +247,17 @@ export default function Events() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
           >
             {CATEGORIES.map((c, i) => {
-              const Icon = c.icon;
               const slug = c.title.toLowerCase().replace(/[^a-z]+/g, '-');
               return (
                 <article
                   key={c.title}
                   data-testid={`events-category-${slug}`}
-                  className="card-lift rounded-3xl p-7 bg-cream border border-brown-dark/10 flex flex-col items-start"
+                  className="card-lift rounded-3xl p-7 bg-cream border border-brown-dark/10 flex items-center min-h-[110px]"
                   style={{
                     animation: `udukku-rise 0.55s ease ${0.05 * i}s both`,
                   }}
                 >
-                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange/10 border border-orange/25 text-orange">
-                    <Icon className="w-5 h-5" strokeWidth={1.8} />
-                  </span>
-                  <h3 className="text-display text-brown-dark text-xl md:text-2xl mt-5">
+                  <h3 className="text-display text-brown-dark text-xl md:text-2xl">
                     {c.title}
                   </h3>
                 </article>
