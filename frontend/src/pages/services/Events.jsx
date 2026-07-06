@@ -190,8 +190,8 @@ export default function Events() {
               From our events
             </span>
             <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[52px] leading-[1.05] mt-4 max-w-3xl">
-              Moments from the{' '}
-              <span className="text-italic-serif text-orange">room</span>.
+              Evenings that{' '}
+              <span className="text-italic-serif text-orange">stayed with us</span>.
             </h2>
           </div>
 
