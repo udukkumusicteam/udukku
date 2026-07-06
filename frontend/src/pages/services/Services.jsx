@@ -40,22 +40,22 @@ const Pill = ({ pill, index }) => {
     <Link
       to={pill.to}
       data-testid={pill.testid}
-      className="group relative flex items-center gap-4 h-[76px] md:h-[84px] pl-4 pr-5 md:pl-5 md:pr-6 rounded-full bg-white/10 hover:bg-white/[0.16] border border-white/25 backdrop-blur-md transition-all duration-500 hover:-translate-y-0.5"
+      className="group relative flex items-center gap-3.5 min-h-[76px] md:min-h-[84px] py-3 pl-3.5 pr-4 md:pl-4 md:pr-5 rounded-[38px] bg-white/10 hover:bg-white/[0.16] border border-white/25 backdrop-blur-md transition-all duration-500 hover:-translate-y-0.5"
       style={{ animation: `udukku-rise 0.6s ease ${0.15 + 0.08 * index}s both` }}
     >
-      <span className="shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/15 border border-white/25 text-white transition-colors group-hover:bg-white/25">
-        <Icon className="w-[18px] h-[18px]" strokeWidth={1.8} />
+      <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/15 border border-white/25 text-white transition-colors group-hover:bg-white/25">
+        <Icon className="w-[16px] h-[16px]" strokeWidth={1.8} />
       </span>
       <span className="flex-1 min-w-0">
-        <span className="block text-white text-[15px] md:text-base font-semibold leading-tight truncate">
+        <span className="block text-white text-[15px] md:text-base font-semibold leading-tight">
           {pill.title}
         </span>
-        <span className="mt-1 block text-white/75 text-[11px] md:text-xs leading-snug truncate">
+        <span className="mt-1 block text-white/75 text-[11px] md:text-xs leading-snug">
           {pill.body}
         </span>
       </span>
       <ArrowUpRight
-        className="shrink-0 w-[18px] h-[18px] text-white/85 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        className="shrink-0 w-4 h-4 text-white/85 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
         strokeWidth={1.8}
       />
     </Link>
