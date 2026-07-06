@@ -106,10 +106,8 @@ export default function Services() {
             className="reveal mt-6 max-w-2xl text-white/85 text-base md:text-lg leading-relaxed"
             style={{ transitionDelay: '160ms' }}
           >
-            Whether you&apos;re discovering your first instrument, building a
-            consistent practice routine, or simply reconnecting with music,
-            Udukku offers experiences that nurture learning, creativity and
-            wellbeing.
+            Experiences that nurture learning, creativity, and wellbeing,
+            wherever you are with music.
           </p>
         </div>
 
