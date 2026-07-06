@@ -60,6 +60,13 @@ const RevealObserver = () => {
   return null;
 };
 
+const ConditionalFooter = () => {
+  const { pathname } = useLocation();
+  // Services landing page is a clean full-screen gateway; no footer here.
+  if (pathname === '/services') return null;
+  return <Footer />;
+};
+
 function App() {
   return (
     <div className="App">
@@ -80,7 +87,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
         </Routes>
-        <Footer />
+        <ConditionalFooter />
         <Toaster
           position="bottom-right"
           theme="light"
