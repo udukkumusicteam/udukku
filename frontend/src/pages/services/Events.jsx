@@ -78,46 +78,14 @@ const PHOTOS = [
 ];
 
 const CATEGORIES = [
-  {
-    icon: Building2,
-    title: 'Corporate Events',
-    body: 'Wellness sessions and offsites that leave rooms breathing differently.',
-  },
-  {
-    icon: Flame,
-    title: 'Cultural Festivals',
-    body: 'Traditions carried onto larger stages, arranged with care and lit by lineage.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'School & College Programs',
-    body: 'Masterclasses and listening sessions for students, seeded early, held gently.',
-  },
-  {
-    icon: Music3,
-    title: 'Private Concerts',
-    body: 'Living rooms, terraces, small halls. An ensemble sized to the space you hold.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Spiritual Gatherings',
-    body: 'Bhajans, kirtans, and devotional evenings, sung by artists who know the room.',
-  },
-  {
-    icon: Users,
-    title: 'Community Events',
-    body: 'Neighbourhood circles and open jams that build a slow, warm belonging.',
-  },
-  {
-    icon: BookOpen,
-    title: 'Workshops',
-    body: 'Instrument introductions and listening labs, calibrated for the room in front of us.',
-  },
-  {
-    icon: Wand2,
-    title: 'Custom Performances',
-    body: 'Bespoke evenings, scored and staged around your occasion, your people, your pace.',
-  },
+  { icon: Building2, title: 'Corporate Events' },
+  { icon: Flame, title: 'Cultural Festivals' },
+  { icon: GraduationCap, title: 'School & College Programs' },
+  { icon: Music3, title: 'Private Concerts' },
+  { icon: Sparkles, title: 'Spiritual Gatherings' },
+  { icon: Users, title: 'Community Events' },
+  { icon: BookOpen, title: 'Workshops' },
+  { icon: Wand2, title: 'Custom Performances' },
 ];
 
 const BackLink = () => (
@@ -284,7 +252,7 @@ export default function Events() {
                 <article
                   key={c.title}
                   data-testid={`events-category-${slug}`}
-                  className="card-lift rounded-3xl p-7 bg-cream border border-brown-dark/10 min-h-[220px] flex flex-col"
+                  className="card-lift rounded-3xl p-7 bg-cream border border-brown-dark/10 flex flex-col items-start"
                   style={{
                     animation: `udukku-rise 0.55s ease ${0.05 * i}s both`,
                   }}
@@ -295,9 +263,6 @@ export default function Events() {
                   <h3 className="text-display text-brown-dark text-xl md:text-2xl mt-5">
                     {c.title}
                   </h3>
-                  <p className="mt-2 text-brown-mid text-sm leading-relaxed">
-                    {c.body}
-                  </p>
                 </article>
               );
             })}
