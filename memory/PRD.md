@@ -20,14 +20,19 @@ Build a premium, fully functional, multi-page Music Learning platform website na
 │   └── components/             # Hero, Gallery, WaveDivider, TutorsSlider, etc.
 ```
 
-## Implemented (as of 22 Jun 2026)
+## Implemented (as of 06 Feb 2026)
 - Multi-page routing with shared Header, Footer, WaveDivider.
 - Home page: Hero, VisionMission, "What is Udukku?", TutorsSlider, Gallery, Testimonials.
 - About: Story, Founder, finalized image layouts.
 - Contact page: collaboration/event-focused copy, address with icons.
 - Booking page: lesson booking form via mock `apiService.js`.
 - Unified spacing (`py-16 md:py-20`) and tone audit (no em dashes).
-- Photo Gallery now populated with three DSC photographs from real Udukku life.
+- Photo Gallery populated with real Udukku DSC photographs (grid-flow-dense).
+- Global animations: RevealObserver, FloatingParticles, staggered fade-ins.
+- Custom Udukku SVG branding via Logo.jsx and BrandIcon.jsx with cream/orange cross-fade.
+- Admin dashboard shows all form-submission fields.
+- Multi-page Services Hub: `/services`, `/services/instruments`, `/services/music-room`, `/services/music-meditation`, `/services/events`.
+- **06 Feb 2026** — Fixed BackLink overlap bug on all 4 services sub-pages: changed `inline-flex` to `flex w-fit` so the "Back to Services" link occupies its own line above the eyebrow/H1. Verified by testing agent at 1440x900 and 375x800 viewports (report: /app/test_reports/iteration_1.json).
 
 ## Backlog
 - **P1** — Verify Booking & Contact forms cleanly express mock loading/success/error states from `apiService.js`.
