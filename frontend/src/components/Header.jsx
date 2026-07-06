@@ -31,7 +31,17 @@ export const Header = () => {
   // best contrast at the top. Once the user scrolls past the hero, the frosted
   // header sits over lighter content, so we cross-fade to the orange logo.
   const isHome = location.pathname === '/';
-  const linkColor = isHome ? 'text-white/90 hover:text-white' : 'text-brown-dark hover:text-orange';
+  // Dark-theme pages (deep brown background from top to bottom) need the
+  // header to stay light throughout — cream logo, white nav links, light
+  // Book Now button, and a dark frosted overlay when scrolled.
+  const isDarkTheme = location.pathname === '/services/music-room';
+  const isLightHeader = isHome || isDarkTheme;
+  const linkColor = isLightHeader
+    ? 'text-white/90 hover:text-white'
+    : 'text-brown-dark hover:text-orange';
+  // Logo cross-fade only happens on light pages; on dark pages we lock the
+  // cream variant so it stays visible over the dark backdrop.
+  const showDarkLogo = scrolled && !isDarkTheme;
 
   return (
     <header
@@ -43,7 +53,11 @@ export const Header = () => {
       }`}
       style={
         scrolled
-          ? { backgroundColor: 'rgba(255, 255, 255, 0.12)' }
+          ? {
+              backgroundColor: isDarkTheme
+                ? 'rgba(20, 15, 10, 0.55)'
+                : 'rgba(255, 255, 255, 0.12)',
+            }
           : { backgroundColor: 'transparent' }
       }
     >
@@ -61,14 +75,14 @@ export const Header = () => {
             variant="light"
             width={130}
             className={`absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 ease-out ${
-              scrolled ? 'opacity-0' : 'opacity-100'
+              showDarkLogo ? 'opacity-0' : 'opacity-100'
             }`}
           />
           <Logo
             variant="dark"
             width={130}
             className={`absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 ease-out ${
-              scrolled ? 'opacity-100' : 'opacity-0'
+              showDarkLogo ? 'opacity-100' : 'opacity-0'
             }`}
           />
         </Link>
@@ -88,7 +102,11 @@ export const Header = () => {
           <Link
             to="/booking"
             data-testid="header-book-now"
-            className="inline-flex items-center justify-center h-11 px-6 rounded-full bg-brown-dark text-white text-[15px] font-medium hover:bg-black transition-colors min-w-[44px]"
+            className={`inline-flex items-center justify-center h-11 px-6 rounded-full text-[15px] font-medium transition-colors min-w-[44px] ${
+              isDarkTheme
+                ? 'bg-white text-brown-dark hover:bg-cream'
+                : 'bg-brown-dark text-white hover:bg-black'
+            }`}
           >
             Book Now
           </Link>
@@ -102,7 +120,7 @@ export const Header = () => {
                 aria-label="Open menu"
                 data-testid="mobile-menu-trigger"
                 className={`inline-flex items-center justify-center w-11 h-11 rounded-full border ${
-                  isHome
+                  isLightHeader
                     ? 'border-white/40 text-white'
                     : 'border-brown-dark/30 text-brown-dark'
                 }`}

@@ -85,8 +85,10 @@ export const contentService = {
 export const bookingService = {
   async create(payload) {
     await wait();
-    if (!payload?.name || !payload?.email) {
-      throw new Error('Name and email are required');
+    // Some booking flows collect a phone / WhatsApp number instead of email.
+    // We accept either as a valid contact point so the mock stays flexible.
+    if (!payload?.name || (!payload?.email && !payload?.phone)) {
+      throw new Error('Name and a contact (email or phone) are required');
     }
     const record = {
       id: uid(),

@@ -1,0 +1,45 @@
+{
+  "summary": "Frontend-only Playwright regression for the Music Room dark-theme refactor and booking form. All 15 spec bullets from the review request verified end-to-end on the preview URL. Success card renders, localStorage payload matches spec, no em dashes in copy, no email field in form, plans/tiers/features render exactly per brochure. Header behaves correctly on /services/music-room (light throughout, dark scrolled overlay) and on /services/instruments (dark nav after scroll). Services pills still route to all 4 sub-pages and footer is absent on /services + present on /services/music-room.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home header", "issues": ["Per review spec, home nav should switch from white -> dark-brown after scroll. Current Header.jsx forces isLightHeader=true when isHome, so nav text stays white(255,255,255,.9) even after scroll past the hero. Logo cross-fade to the orange variant DOES fire on scroll as expected. If home has non-orange content below the hero, the white nav could reduce contrast. Low priority — flagging as a spec deviation rather than a visible bug since the hero occupies most of the viewport."]}
+    ]
+  },
+  "verified_checks": [
+    "MR page bg-brown-dark (rgb(45,26,10)) applied to <main data-testid=music-room-page>",
+    "Header at top on MR: transparent bg, nav white(255,255,255,.9), Book Now white bg + brown-dark text",
+    "Header after scroll on MR: bg rgba(20,15,10,0.55) (dark frosted overlay)",
+    "Back to Services link color rgb(200,75,26) (orange), navigates to /services",
+    "Hero H1 exact copy with italic serif orange span; NO em dashes anywhere on the page",
+    "5 feature cards with exact titles: Consistent Practice, Community Network, Accountability, 1-on-1 Checks, Progress Plotting",
+    "2 plan cards: Habit 12-Day (₹999/₹1,200, 3 days/week) and Habit 24-Day (₹1,899/₹2,400, 6 days/week, MOST POPULAR badge)",
+    "Cashback tiers per plan match brochure ranges (0-6/7-10/11-12 for 12-Day; 0-12/14-20/20-24 for 24-Day)",
+    "Clicking non-featured plan updates selection UI + 'Selected plan: Habit 12-Day' hint",
+    "Cashback Offer + Referrals cards render on dark background with orange icon badges",
+    "Booking form has exactly: name, whatsapp (tel), location, frequency radio (2 opts), time radio (4 opts), submit. Zero email inputs on the page.",
+    "Selected frequency/time chip toggles to orange border rgb(200,75,26)",
+    "Submit with valid data → umr-success card 'You're in.' appears (no 'Name and email are required' error)",
+    "localStorage 'udukku.bookings' top record: name=Aditi Sharma, phone=+91 9800000000, experience='UMR · Habit 24-Day', preferredTime=Morning",
+    "/services still shows 4 pills with correct hrefs to all sub-pages; footer absent on /services",
+    "/services/music-room: footer present in DOM",
+    "/services/instruments header nav color rgb(45,26,10) (dark-brown) after scroll — no regression"
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "OPTIONAL/LOW: Reconcile Home header spec — either update the review expectation, or make isHome flip nav to dark once scrolled (currently locked to light). Not blocking."
+  ],
+  "critical_code_review_comments": [
+    "MusicRoom.jsx is ~575 lines and still fine, but the inline PLANS/FEATURES arrays and the Field sub-component could be split into a small module if this page grows further.",
+    "bookingService.create validation now accepts phone-or-email — good; consider adding a lightweight phone regex to avoid junk entries in the future.",
+    "Header.jsx isDarkTheme is hard-coded to a single pathname; if more dark-theme sub-pages are added, promote this to a route-level prop or a whitelist array."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped per request)", "frontend": "100% of listed spec bullets verified"},
+  "seed_data_creation": "One booking record was persisted to preview localStorage under 'udukku.bookings' during the flow test.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Music Room sub-page is stable at iteration_3. Header has route-level isDarkTheme flag — if new dark-theme routes are added, extend the whitelist in Header.jsx line 37. Home nav-color-on-scroll spec mismatch is documented but not fixed."
+}
