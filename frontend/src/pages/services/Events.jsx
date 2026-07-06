@@ -236,9 +236,8 @@ export default function Events() {
               </h2>
             </div>
             <p className="lg:col-span-6 lg:col-start-7 text-brown-mid text-base md:text-lg leading-relaxed">
-              Just a few examples of what we hold. We shape every performance
-              around the room in front of us, so if what you have in mind is
-              not listed here, tell us. We probably do it anyway.
+              Just a few examples of what we hold. If what you have in mind is
+              not listed here, tell us.
             </p>
           </div>
 
