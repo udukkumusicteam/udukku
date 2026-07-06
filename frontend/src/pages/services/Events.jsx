@@ -7,6 +7,14 @@ import {
   MapPin,
   Send,
   CheckCircle2,
+  Building2,
+  Flame,
+  GraduationCap,
+  Music3,
+  Sparkles,
+  Users,
+  BookOpen,
+  Wand2,
 } from 'lucide-react';
 import WaveDivider from '../../components/WaveDivider';
 import BrandIcon from '../../components/BrandIcon';
@@ -71,52 +79,44 @@ const PHOTOS = [
 
 const CATEGORIES = [
   {
-    n: '01',
+    icon: Building2,
     title: 'Corporate Events',
-    body: 'Wellness sessions, offsites, and celebrations that leave rooms breathing differently.',
-    tag: 'Wellness · Offsites · Launches',
+    body: 'Wellness sessions and offsites that leave rooms breathing differently.',
   },
   {
-    n: '02',
+    icon: Flame,
     title: 'Cultural Festivals',
-    body: 'Traditions carried into large stages, arranged with care and lit by lineage.',
-    tag: 'Heritage · Community stages',
+    body: 'Traditions carried onto larger stages, arranged with care and lit by lineage.',
   },
   {
-    n: '03',
+    icon: GraduationCap,
     title: 'School & College Programs',
     body: 'Masterclasses and listening sessions for students, seeded early, held gently.',
-    tag: 'Masterclasses · Awareness',
   },
   {
-    n: '04',
+    icon: Music3,
     title: 'Private Concerts',
     body: 'Living rooms, terraces, small halls. An ensemble sized to the space you hold.',
-    tag: 'Intimate · Curated',
   },
   {
-    n: '05',
+    icon: Sparkles,
     title: 'Spiritual Gatherings',
     body: 'Bhajans, kirtans, and devotional evenings, sung by artists who know the room.',
-    tag: 'Devotional · Sattvic',
   },
   {
-    n: '06',
+    icon: Users,
     title: 'Community Events',
     body: 'Neighbourhood circles and open jams that build a slow, warm belonging.',
-    tag: 'Circles · Open jams',
   },
   {
-    n: '07',
+    icon: BookOpen,
     title: 'Workshops',
     body: 'Instrument introductions and listening labs, calibrated for the room in front of us.',
-    tag: 'Intro · Listening · Practice',
   },
   {
-    n: '08',
+    icon: Wand2,
     title: 'Custom Performances',
     body: 'Bespoke evenings, scored and staged around your occasion, your people, your pace.',
-    tag: 'Bespoke · One of one',
   },
 ];
 
@@ -253,7 +253,7 @@ export default function Events() {
         </div>
       </section>
 
-      {/* ---------- Storytelling category index ---------- */}
+      {/* ---------- Category icon cards (examples, not navigational) ---------- */}
       <section className="bg-white">
         <div className="udukku-section py-20 md:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 mb-12 md:mb-16">
@@ -262,53 +262,46 @@ export default function Events() {
                 What we hold
               </span>
               <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[52px] leading-[1.05] mt-4">
-                Eight kinds of{' '}
+                A few kinds of{' '}
                 <span className="text-italic-serif text-orange">evenings</span>.
               </h2>
             </div>
             <p className="lg:col-span-6 lg:col-start-7 text-brown-mid text-base md:text-lg leading-relaxed">
-              Each format has a temperature, a tempo, and a purpose. We shape
-              every performance around the room in front of us, so the music
-              lands in a way that stays with the people who came to listen.
+              Just a few examples of what we hold. We shape every performance
+              around the room in front of us, so if what you have in mind is
+              not listed here, tell us. We probably do it anyway.
             </p>
           </div>
 
-          <ol
-            data-testid="events-category-index"
-            className="border-t border-brown-dark/10"
+          <div
+            data-testid="events-category-grid"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
           >
-            {CATEGORIES.map((c) => (
-              <li
-                key={c.n}
-                data-testid={`events-category-${c.n}`}
-                className="group border-b border-brown-dark/10"
-              >
-                <div className="grid grid-cols-12 gap-4 md:gap-8 items-baseline py-7 md:py-9 transition-colors duration-500 group-hover:bg-cream/60 -mx-4 md:-mx-6 px-4 md:px-6">
-                  <div className="col-span-2 md:col-span-1 text-brown-mid/60 text-xs md:text-sm tracking-[0.28em] font-medium pt-2">
-                    {c.n}
-                  </div>
-                  <div className="col-span-10 md:col-span-7">
-                    <h3 className="text-display text-brown-dark text-2xl sm:text-3xl md:text-[40px] leading-[1.08] transition-colors duration-500 group-hover:text-orange">
-                      {c.title}
-                    </h3>
-                    <p className="mt-2 text-brown-mid text-sm md:text-base leading-relaxed max-w-xl">
-                      {c.body}
-                    </p>
-                  </div>
-                  <div className="hidden md:flex col-span-3 items-center pt-3">
-                    <span className="text-brown-mid/70 text-xs uppercase tracking-[0.24em]">
-                      {c.tag}
-                    </span>
-                  </div>
-                  <div className="col-span-12 md:col-span-1 flex md:justify-end items-center pt-3 md:pt-1">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-brown-dark/15 text-brown-dark group-hover:border-orange group-hover:text-orange transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
+            {CATEGORIES.map((c, i) => {
+              const Icon = c.icon;
+              const slug = c.title.toLowerCase().replace(/[^a-z]+/g, '-');
+              return (
+                <article
+                  key={c.title}
+                  data-testid={`events-category-${slug}`}
+                  className="card-lift rounded-3xl p-7 bg-cream border border-brown-dark/10 min-h-[220px] flex flex-col"
+                  style={{
+                    animation: `udukku-rise 0.55s ease ${0.05 * i}s both`,
+                  }}
+                >
+                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange/10 border border-orange/25 text-orange">
+                    <Icon className="w-5 h-5" strokeWidth={1.8} />
+                  </span>
+                  <h3 className="text-display text-brown-dark text-xl md:text-2xl mt-5">
+                    {c.title}
+                  </h3>
+                  <p className="mt-2 text-brown-mid text-sm leading-relaxed">
+                    {c.body}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
