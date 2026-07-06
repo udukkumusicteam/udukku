@@ -185,20 +185,14 @@ export default function Events() {
       {/* ---------- Editorial gallery ---------- */}
       <section className="bg-cream">
         <div className="udukku-section pt-16 md:pt-20 pb-20 md:pb-28">
-          <div className="flex items-end justify-between flex-wrap gap-6 mb-10 md:mb-14">
-            <div>
-              <span className="uppercase tracking-[0.28em] text-xs text-orange">
-                From our events
-              </span>
-              <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[52px] leading-[1.05] mt-4 max-w-2xl">
-                Rooms we have{' '}
-                <span className="text-italic-serif text-orange">held</span>.
-              </h2>
-            </div>
-            <p className="text-brown-mid max-w-sm text-sm md:text-base leading-relaxed">
-              A quiet archive of evenings, mornings, and afternoons that music
-              gathered around itself.
-            </p>
+          <div className="mb-10 md:mb-14">
+            <span className="uppercase tracking-[0.28em] text-xs text-orange">
+              From our events
+            </span>
+            <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[52px] leading-[1.05] mt-4 max-w-3xl">
+              Moments from the{' '}
+              <span className="text-italic-serif text-orange">room</span>.
+            </h2>
           </div>
 
           {/* Masonry columns — natural varied sizes */}
