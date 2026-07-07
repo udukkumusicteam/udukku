@@ -39,8 +39,7 @@ export const STATS = [
 ];
 
 export const VISION_MISSION = {
-  image:
-    'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/0rr8yyrl_Screenshot%202026-04-25%20at%2012.44.36%20PM.png',
+  image: '/assets/images/what-is-udukku.png',
   imageCaption: 'What is udukku?',
   est: '2025',
   vision: {
@@ -61,8 +60,7 @@ export const TUTORS = [
     name: 'Aryan',
     role: 'Piano & Music Theory',
     experience: '12 years exp.',
-    image:
-      'https://images.unsplash.com/photo-1561447920-aa5c68129cff?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/images/people/tutor-1.jpg',
     bio:
       'Classically trained at the Berklee College of Music. Aryan brings technical craft and warmth to every lesson.',
   },
@@ -71,8 +69,7 @@ export const TUTORS = [
     name: 'Meera',
     role: 'Carnatic Vocals',
     experience: '9 years exp.',
-    image:
-      'https://images.unsplash.com/photo-1566913485242-694e995731b4?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/images/people/tutor-2.jpg',
     bio:
       'A disciple of the Kiraana gharana, Meera weaves classical Carnatic tradition with quiet, contemporary storytelling.',
   },
@@ -81,8 +78,7 @@ export const TUTORS = [
     name: 'Rohan',
     role: 'Guitar & Fingerstyle',
     experience: '8 years exp.',
-    image:
-      'https://images.unsplash.com/photo-1525201548942-d8732f6617a0?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/images/people/tutor-3.jpg',
     bio:
       'A self-taught guitarist who helps students find their own voice on the instrument, well beyond the scales.',
   },
@@ -91,8 +87,7 @@ export const TUTORS = [
     name: 'Priya',
     role: 'Violin & Strings',
     experience: '11 years exp.',
-    image:
-      'https://images.unsplash.com/photo-1567619822659-2094d3ebef04?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/images/people/tutor-4.jpg',
     bio:
       'Trained under maestros in Chennai, Priya begins every lesson the same way. By listening.',
   },
@@ -101,8 +96,7 @@ export const TUTORS = [
     name: 'Kabir',
     role: 'Percussion & Tabla',
     experience: '14 years exp.',
-    image:
-      'https://images.unsplash.com/photo-1524230659092-07f99a75c013?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/images/people/tutor-5.jpg',
     bio:
       'Kabir has performed across three continents, gently blending Indian classical rhythms with jazz and world music.',
   },
@@ -111,8 +105,7 @@ export const TUTORS = [
     name: 'Ananya',
     role: 'Hindustani Vocals',
     experience: '10 years exp.',
-    image:
-      'https://images.unsplash.com/photo-1547357812-4a336d835928?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/images/people/tutor-6.jpg',
     bio:
       'Ananya carries the legacy of the Jaipur Atrauli tradition into modern studios with quiet devotion.',
   },
@@ -158,8 +151,7 @@ export const BOTTOM_CTA = {
   heading: 'Want to try a free demo?',
   subheading:
     'No pressure. No auditions. Your first hour with us is a gift. A quiet space to listen, to play, and to remember what music means to you.',
-  image:
-    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=2000&q=80',
+  image: '/assets/backgrounds/story-hero.jpg',
 };
 
 export const INSTRUMENTS = [

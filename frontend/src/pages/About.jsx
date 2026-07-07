@@ -7,7 +7,7 @@ import WaveDivider from '../components/WaveDivider';
 // IMAGE ASSETS — replace these placeholder URLs with the studio's own photos.
 // ---------------------------------------------------------------------------
 const IMAGE_FOUNDER =
-  'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/2zn5nfa0_Founder_photo.jpg';
+  '/assets/images/people/founder.jpg';
 
 export default function About() {
   return (
@@ -102,7 +102,7 @@ export default function About() {
             <div className="lg:sticky lg:top-24 self-start w-full">
               <div className="relative rounded-3xl overflow-hidden bg-brown-dark aspect-square">
                 <img
-                  src="https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/7iz9q8gt_DSC05252%20%281%29.jpg"
+                  src="/assets/images/about/story.jpg"
                   alt="The Udukku easel: The Music in You"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -232,8 +232,8 @@ export default function About() {
             <span className="text-italic-serif text-orange">journey</span>?
           </h2>
           <p className="mt-5 max-w-xl text-white/80 text-base md:text-lg leading-relaxed">
-            Your first session is on us. No auditions. No pressure. Just an
-            hour to remember what music feels like.
+            Your first session is on us. No auditions. No pressure. Just a place to 
+            remember what music feels like
           </p>
           <Link
             to="/booking"

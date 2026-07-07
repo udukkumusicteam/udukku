@@ -13,55 +13,55 @@ import { contactService } from '../../services/apiService';
 
 const PHOTOS = [
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6csi50ns_DSC05863%20%281%29.jpg',
+    src: '/assets/images/events/community-listening-circle.jpg',
     alt: 'A community listening circle in session',
     caption: 'Community Listening Circle',
     ratio: 'aspect-[4/5]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/amdyxgg7_IMG_5257.JPG',
+    src: '/assets/images/events/indian-classical-evening.jpg',
     alt: 'An intimate Indian classical performance',
     caption: 'Indian Classical Evening',
     ratio: 'aspect-[3/4]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/ddnac6h8_DSC06010%20%281%29.jpg',
+    src: '/assets/images/events/gathering-in-the-round.jpg',
     alt: 'A gathering held around live music',
     caption: 'Gathering In The Round',
     ratio: 'aspect-[4/3]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/og6vi7lu_IMG_2906.jpg',
+    src: '/assets/images/events/student-masterclass.jpg',
     alt: 'A student masterclass in progress',
     caption: 'Student Masterclass',
     ratio: 'aspect-[3/4]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/3mcpimz7_DSC05252%20%281%29.jpg',
+    src: '/assets/images/events/before-the-first-note.jpg',
     alt: 'A quiet moment before the concert begins',
     caption: 'Before The First Note',
     ratio: 'aspect-[4/3]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/iqyui4mw_c3d6cce6-82d4-430c-a2d1-4075625e9fc6.JPG',
+    src: '/assets/images/events/cultural-evening.jpg',
     alt: 'A cultural performance in full swing',
     caption: 'Cultural Evening',
     ratio: 'aspect-[3/4]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6mwlqdin_IMG_3251.jpg',
+    src: '/assets/images/events/workshop-in-session.jpg',
     alt: 'A workshop with musicians and audience',
     caption: 'Workshop In Session',
     ratio: 'aspect-[4/5]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/w74xnqq6_DSC05418%20%281%29.jpg',
+    src: '/assets/images/events/the-closing-bow.jpg',
     alt: 'A performance closing with applause',
     caption: 'The Closing Bow',
     ratio: 'aspect-[4/3]',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/4dhds8th_DSC06024%20%281%29.jpg',
+    src: '/assets/images/events/between-the-ragas.jpg',
     alt: 'Musicians in conversation between sets',
     caption: 'Between The Ragas',
     ratio: 'aspect-[3/4]',
@@ -133,7 +133,7 @@ export default function Events() {
       >
         <div className="absolute inset-0">
           <img
-            src="https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/4dhds8th_DSC06024%20%281%29.jpg"
+            src="/assets/images/events/between-the-ragas.jpg"
             alt="An Udukku evening in full swing"
             className="w-full h-full object-cover"
           />

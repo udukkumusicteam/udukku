@@ -1,50 +1,50 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
-// Photographs from life at Udukku.
+// Photographs from life at Udukku. All served from local /assets/images/events/.
 const PHOTOS = [
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6csi50ns_DSC05863%20%281%29.jpg',
+    src: '/assets/images/events/community-listening-circle.jpg',
     alt: 'A moment at Udukku',
     caption: 'Shared moments',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/ddnac6h8_DSC06010%20%281%29.jpg',
+    src: '/assets/images/events/gathering-in-the-round.jpg',
     alt: 'A moment at Udukku',
     caption: 'In harmony',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/3mcpimz7_DSC05252%20%281%29.jpg',
+    src: '/assets/images/events/before-the-first-note.jpg',
     alt: 'A moment at Udukku',
     caption: 'Stories we carry',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/og6vi7lu_IMG_2906.jpg',
+    src: '/assets/images/events/student-masterclass.jpg',
     alt: 'A moment at Udukku',
     caption: 'A glimpse of joy',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/iqyui4mw_c3d6cce6-82d4-430c-a2d1-4075625e9fc6.JPG',
+    src: '/assets/images/events/cultural-evening.jpg',
     alt: 'A moment at Udukku',
     caption: 'Memories in motion',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/amdyxgg7_IMG_5257.JPG',
+    src: '/assets/images/events/indian-classical-evening.jpg',
     alt: 'A moment at Udukku',
     caption: 'Together in rhythm',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/6mwlqdin_IMG_3251.jpg',
+    src: '/assets/images/events/workshop-in-session.jpg',
     alt: 'A moment at Udukku',
     caption: 'Quiet between the notes',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/w74xnqq6_DSC05418%20%281%29.jpg',
+    src: '/assets/images/events/the-closing-bow.jpg',
     alt: 'A moment at Udukku',
     caption: 'Moments that matter',
   },
   {
-    src: 'https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/4dhds8th_DSC06024%20%281%29.jpg',
+    src: '/assets/images/events/between-the-ragas.jpg',
     alt: 'A moment at Udukku',
     caption: 'Captured memories',
   },

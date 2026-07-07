@@ -147,7 +147,7 @@ export default function Instruments() {
               >
                 <div className="aspect-[4/5]">
                   <img
-                    src="https://customer-assets.emergentagent.com/job_udukku-preview-1/artifacts/amdyxgg7_IMG_5257.JPG"
+                    src="/assets/images/events/indian-classical-evening.jpg"
                     alt="A musician mid-performance"
                     className="w-full h-full object-cover"
                   />

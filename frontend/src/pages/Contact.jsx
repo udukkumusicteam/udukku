@@ -195,7 +195,7 @@ export default function Contact() {
               >
                 <CheckCircle2 className="w-5 h-5 text-orange mt-0.5" />
                 <p className="text-sm leading-relaxed">
-                  Thank you. We've received your note and will reply personally.
+                  Thank you. We've received your note and will reply shortly.
                 </p>
               </div>
             )}

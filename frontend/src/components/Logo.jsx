@@ -1,8 +1,8 @@
 import React from 'react';
 
 // Official Udukku brand assets (transparent, tightly-cropped SVGs)
-const LOGO_ORANGE = '/logo-orange.svg';
-const LOGO_CREAM = '/logo-cream.svg';
+const LOGO_ORANGE = '/assets/logos/logo-orange.svg';
+const LOGO_CREAM = '/assets/logos/logo-cream.svg';
 
 /**
  * Renders the Udukku wordmark as a transparent SVG.
