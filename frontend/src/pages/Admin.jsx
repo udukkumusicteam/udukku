@@ -9,6 +9,7 @@ import {
   Calendar,
   Filter,
   X,
+  ChevronDown,
 } from 'lucide-react';
 import { submissionsService } from '../services/apiService';
 
@@ -300,62 +301,107 @@ const FormGroup = ({ group, onView, onExport, onStatusChange, onRequestDelete })
 /* -------------------------------------------------------------------------- */
 
 const SubmissionRow = ({ submission, onView, onStatusChange, onRequestDelete }) => {
-  const primary = Object.values(submission.fields || {}).find(Boolean);
+  const [expanded, setExpanded] = useState(false);
+  const entries = Object.entries(submission.fields || {});
+  const primary = entries.find(([, v]) => v && String(v).trim())?.[1];
+
   return (
     <article
       data-testid={`submission-${submission.id}`}
-      className="rounded-2xl bg-cream/40 border border-brown-dark/10 p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-4"
+      className="rounded-2xl bg-cream/40 border border-brown-dark/10 overflow-hidden"
     >
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <StatusPill status={submission.status} />
-          <span className="text-brown-mid text-xs">
-            {new Date(submission.submittedAt).toLocaleString()}
-          </span>
-          <span className="inline-flex items-center gap-1 text-[11px] text-brown-mid/60 font-mono">
-            <Hash className="w-3 h-3" /> {submission.id}
-          </span>
+      {/* Row summary */}
+      <div className="p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-4">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <StatusPill status={submission.status} />
+            <span className="text-brown-mid text-xs">
+              {new Date(submission.submittedAt).toLocaleString()}
+            </span>
+            <span className="inline-flex items-center gap-1 text-[11px] text-brown-mid/60 font-mono">
+              <Hash className="w-3 h-3" /> {submission.id}
+            </span>
+          </div>
+          <div className="mt-2 text-brown-dark font-medium truncate">
+            {String(primary || 'Submission')}
+          </div>
+          <div className="mt-1 text-brown-mid text-xs">
+            {entries.length} {entries.length === 1 ? 'field' : 'fields'} captured
+          </div>
         </div>
-        <div className="mt-2 text-brown-dark font-medium truncate">
-          {String(primary || 'Submission')}
-        </div>
-        <div className="mt-1 text-brown-mid text-xs truncate">
-          {Object.entries(submission.fields || {})
-            .slice(0, 3)
-            .map(([k, v]) => (v ? `${k}: ${v}` : null))
-            .filter(Boolean)
-            .join('   ·   ')}
+
+        <div className="flex items-center gap-2 shrink-0 flex-wrap">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            data-testid={`expand-${submission.id}`}
+            aria-expanded={expanded}
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs hover:bg-brown-dark hover:text-white transition-colors"
+          >
+            <ChevronDown
+              className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`}
+            />
+            {expanded ? 'Hide' : 'View Full Submission'}
+          </button>
+          <select
+            value={submission.status}
+            onChange={(e) => onStatusChange(e.target.value)}
+            data-testid={`status-${submission.id}`}
+            className="h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs focus:outline-none focus:border-orange"
+          >
+            {STATUS_OPTIONS.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={onView}
+            data-testid={`view-${submission.id}`}
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs hover:bg-brown-dark hover:text-white transition-colors"
+          >
+            <Eye className="w-3.5 h-3.5" /> View
+          </button>
+          <button
+            type="button"
+            onClick={onRequestDelete}
+            data-testid={`delete-${submission.id}`}
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs hover:bg-orange hover:text-white hover:border-orange transition-colors"
+          >
+            <Trash2 className="w-3.5 h-3.5" /> Delete
+          </button>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 shrink-0">
-        <select
-          value={submission.status}
-          onChange={(e) => onStatusChange(e.target.value)}
-          data-testid={`status-${submission.id}`}
-          className="h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs focus:outline-none focus:border-orange"
+      {/* Expanded: every submitted field, dynamic — no field is hidden */}
+      {expanded && (
+        <div
+          data-testid={`fields-${submission.id}`}
+          className="border-t border-brown-dark/10 bg-white px-4 md:px-5 py-5"
         >
-          {STATUS_OPTIONS.map((s) => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-        <button
-          type="button"
-          onClick={onView}
-          data-testid={`view-${submission.id}`}
-          className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs hover:bg-brown-dark hover:text-white transition-colors"
-        >
-          <Eye className="w-3.5 h-3.5" /> View
-        </button>
-        <button
-          type="button"
-          onClick={onRequestDelete}
-          data-testid={`delete-${submission.id}`}
-          className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs hover:bg-orange hover:text-white hover:border-orange transition-colors"
-        >
-          <Trash2 className="w-3.5 h-3.5" /> Delete
-        </button>
-      </div>
+          {entries.length === 0 ? (
+            <div className="text-brown-mid/70 text-sm italic">
+              No fields captured for this submission.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+              {entries.map(([label, value]) => (
+                <div key={label} data-testid={`field-${submission.id}-${label}`}>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-1">
+                    {label}
+                  </div>
+                  <div className="text-brown-dark text-sm leading-relaxed whitespace-pre-wrap break-words">
+                    {value === undefined || value === null || value === '' ? (
+                      <span className="text-brown-mid/50 italic">Not provided</span>
+                    ) : (
+                      String(value)
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </article>
   );
 };
