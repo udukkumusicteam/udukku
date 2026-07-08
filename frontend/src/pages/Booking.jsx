@@ -208,9 +208,9 @@ export default function Booking() {
             <div className="bg-brown-dark text-white rounded-3xl p-7">
               <h3 className="text-italic-serif text-2xl">What happens next</h3>
               <ul className="mt-5 space-y-4 text-sm text-white/85">
-                <Step n="1" t="A real person reads your note, gently" />
-                <Step n="2" t="We pair you with a mentor whose temperament fits yours" />
-                <Step n="3" t="You receive a calendar invitation and one quiet hour of music" />
+                <Step n="1" t="Tell us what you're looking for." />
+                <Step n="2" t="We pair you with a mentor who fits your learning style." />
+                <Step n="3" t="We reach out with the next steps." />
               </ul>
             </div>
             <div className="bg-cream border border-brown-dark/10 rounded-3xl p-7">

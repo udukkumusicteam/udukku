@@ -31,7 +31,7 @@ export const STATS = [
       'Our teachers do not just instruct. They sit beside you. Each one brings patience, warmth, and a love for sound that you can feel in the room.',
   },
   {
-    number: '8',
+    number: '∞',
     title: 'Instruments, one home',
     body:
       'Keys, strings, voice, percussion, and more. Whatever sound calls to you, there is a path waiting here, ready in its own time.',
