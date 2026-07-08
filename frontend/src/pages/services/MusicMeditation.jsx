@@ -351,7 +351,7 @@ export default function MusicMeditation() {
 
       {/* ---------------- FAQ ---------------- */}
       <section className="bg-cream">
-        <div className="udukku-section py-16 md:py-20">
+        <div className="udukku-section pb-16 md:pb-20">
           <h2 className="text-center text-display text-brown-dark text-3xl md:text-4xl mb-10">
             FAQ
           </h2>
