@@ -1,0 +1,28 @@
+{
+  "summary": "Frontend testing of the new dynamic Submissions Dashboard on /admin. Verified: header + toolbar testids, seed of 6 formIds renders 6 dynamic sections (main-booking, contact, umr-booking, events-bring-udukku, mm-individual, mm-corporate) with correct formLabels, admin-total='7 shown' (extra seeded record for sort). Row testids (status-pill-*, status-{id}, view-{id}, delete-{id}) all present. Search 'meera' -> 1 shown; status=Contacted filter -> 2; today-date filter -> 6; future-date filter -> 0 with admin-empty visible. admin-clear-filters resets to 7. Newest-first sort verified (a1 before a7 in same section). View modal opens with formLabel/timestamp/id/status select and every field label+value; close via X works; status change from modal reflects on row pill. Inline status change to Closed updates pill (status-pill-Closed). Delete confirm modal shows with cancel keeping row + confirm removing row and from localStorage. CSV export triggered download 'udukku-main-booking-2026-07-08.csv' matching regex, headers include id,submittedAt,status,<field labels>, rows include values. Dynamic capture: submitting Main Booking form (/booking) mirrored a record under section-main-booking (fields Name/Email/Phone/Instrument/Experience/Preferred date/Preferred time/Notes captured); submitting /contact form mirrored under section-contact. Legacy migration: seeding only udukku.bookings + udukku.contacts (no submissions, no flag) → after reloading /admin, both legacy records surfaced in inferred sections (umr-booking via 'UMR' experience prefix, contact via subject), and udukku.submissions.migrated_v1 flag was set to '1'. No regressions: /, /about, /services, /services/music-room, /services/music-meditation all rendered without JS pageerrors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/services/music-meditation", "issues": ["Pre-existing (unrelated to this change) React hydration warning: <span> cannot be a child of <option>. Emitted from the injected editor overlay attributes on <option> elements in INDIVIDUAL_PLANS select. Doesn't break UI but pollutes the console."]},
+      {"screen": "/booking", "issues": ["Preferred Date field uses the browser's native date input (mm/dd/yyyy) instead of a styled shadcn calendar. Pre-existing, not part of this change."]}
+    ]
+  },
+  "test_report_links": ["/app/test_reports/iteration_10.json"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Admin.jsx date filter: `new Date(from + 'T00:00:00')` parses in local time — this is correct and matches the user's expectation that 'today' means their local today. OK.",
+    "submissionsService.remove() also purges from legacy udukku.bookings/contacts stores — correct so admin doesn't resurrect deleted rows on next migration. Note: migration flag prevents re-migration anyway, but this is a nice belt-and-braces.",
+    "inferFormMeta() uses subject/experience string prefixes to bucket contact/booking payloads. This is brittle if any form later changes its subject/experience string — mitigated today by the _meta escape hatch on the payload. Documenting here so future form authors know they can pass `_meta: { formId, formLabel, fields }` explicitly for guaranteed correct grouping.",
+    "downloadCsv unions field labels across all items in a group so nothing is dropped — correct. CSV escaping handles quotes/commas/newlines properly.",
+    "Admin.jsx is 530 lines — still under the 700-line threshold but approaching. Consider splitting FormGroup/SubmissionRow/ViewModal/ConfirmDelete into separate files if this grows further."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "Used page.evaluate to seed/clear udukku.submissions, udukku.bookings, udukku.contacts, and the migrated_v1 flag between test phases. All test data is client-side localStorage only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The Submissions Dashboard (/admin) is a complete rewrite that groups localStorage submissions by inferred formId. All 16 requested test scenarios pass. Data lives in udukku.submissions with a migration flag udukku.submissions.migrated_v1. Each browser automation invocation gets a fresh context, so seed via page.evaluate every time. Use page.expect_download() to capture CSV exports. Note the pre-existing (not caused by this change) hydration warning on /services/music-meditation from editor overlay attributes on <option> elements — flag to main agent only if they care about console cleanliness.",
+  "rca of the issue": "N/A — no issues found."
+}

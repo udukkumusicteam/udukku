@@ -1,23 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { bookingService, contactService } from '../services/apiService';
-import { Trash2, RefreshCw, Mail, Phone, User, Calendar, Clock, Music, Sparkles, MessageSquare, Tag, Hash } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import {
+  RefreshCw,
+  Search,
+  Trash2,
+  Download,
+  Hash,
+  Eye,
+  Calendar,
+  Filter,
+  X,
+} from 'lucide-react';
+import { submissionsService } from '../services/apiService';
 
-// Lightweight read-only admin dashboard backed by the service layer.
-// Each submission renders every field exactly as the client filled it in.
+const STATUS_OPTIONS = ['New', 'Contacted', 'Closed'];
+
+const STATUS_STYLES = {
+  New: 'bg-orange/15 text-orange border-orange/30',
+  Contacted: 'bg-brown-dark/10 text-brown-dark border-brown-dark/20',
+  Closed: 'bg-green-100 text-green-800 border-green-200',
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   PAGE                                     */
+/* -------------------------------------------------------------------------- */
+
 export default function Admin() {
-  const [bookings, setBookings] = useState([]);
-  const [contacts, setContacts] = useState([]);
-  const [tab, setTab] = useState('bookings');
+  const [subs, setSubs] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [q, setQ] = useState('');
+  const [status, setStatus] = useState('all');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const [viewing, setViewing] = useState(null); // submission being viewed
+  const [confirmDelete, setConfirmDelete] = useState(null); // submission being deleted
 
   const load = async () => {
     setLoading(true);
-    const [b, c] = await Promise.all([
-      bookingService.list(),
-      contactService.list(),
-    ]);
-    setBookings(b);
-    setContacts(c);
+    const all = await submissionsService.list();
+    setSubs(all);
     setLoading(false);
   };
 
@@ -25,18 +45,77 @@ export default function Admin() {
     load();
   }, []);
 
-  const removeBooking = async (id) => {
-    await bookingService.remove(id);
-    load();
+  const clearFilters = () => {
+    setQ('');
+    setStatus('all');
+    setFrom('');
+    setTo('');
   };
-  const removeContact = async (id) => {
-    await contactService.remove(id);
-    load();
+
+  /* ---------- Filtering + grouping (dynamic per formId) ---------- */
+  const filtered = useMemo(() => {
+    const query = q.trim().toLowerCase();
+    const fromTs = from ? new Date(from + 'T00:00:00').getTime() : null;
+    const toTs = to ? new Date(to + 'T23:59:59').getTime() : null;
+
+    return subs.filter((s) => {
+      if (status !== 'all' && s.status !== status) return false;
+      const ts = new Date(s.submittedAt).getTime();
+      if (fromTs && ts < fromTs) return false;
+      if (toTs && ts > toTs) return false;
+      if (!query) return true;
+      const haystack = [
+        s.formLabel,
+        s.formId,
+        s.status,
+        s.id,
+        ...Object.values(s.fields || {}),
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(query);
+    });
+  }, [subs, q, status, from, to]);
+
+  // Group by formId, sort newest first inside each group. Dynamic: new formIds
+  // appear as new sections automatically.
+  const groups = useMemo(() => {
+    const map = new Map();
+    filtered.forEach((s) => {
+      if (!map.has(s.formId)) {
+        map.set(s.formId, { formId: s.formId, formLabel: s.formLabel, items: [] });
+      }
+      map.get(s.formId).items.push(s);
+    });
+    const arr = Array.from(map.values());
+    arr.forEach((g) =>
+      g.items.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt)),
+    );
+    arr.sort((a, b) => a.formLabel.localeCompare(b.formLabel));
+    return arr;
+  }, [filtered]);
+
+  /* ---------- Handlers ---------- */
+  const onStatusChange = async (id, next) => {
+    await submissionsService.updateStatus(id, next);
+    setSubs((prev) => prev.map((s) => (s.id === id ? { ...s, status: next } : s)));
+    if (viewing && viewing.id === id) setViewing({ ...viewing, status: next });
   };
+  const onDelete = async (id) => {
+    await submissionsService.remove(id);
+    setSubs((prev) => prev.filter((s) => s.id !== id));
+    setConfirmDelete(null);
+    if (viewing && viewing.id === id) setViewing(null);
+  };
+  const onExportGroup = (g) => downloadCsv(g.formId, g.items);
+
+  const totalCount = filtered.length;
 
   return (
     <main data-testid="admin-page" className="bg-cream min-h-screen">
       <section className="udukku-section pt-32 md:pt-40 pb-20">
+        {/* ---------- Header ---------- */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="uppercase tracking-[0.28em] text-xs text-brown-mid">
@@ -46,13 +125,14 @@ export default function Admin() {
               Submissions Dashboard
             </h1>
             <p className="text-brown-mid mt-2 text-sm max-w-lg">
-              Every field from every form, exactly as submitted. Wire any
-              backend in{' '}
-              <code className="bg-white px-1 rounded">src/services/apiService.js</code>.
+              Every field from every form on the site. Submissions from any new
+              form appear here automatically once one is received.
             </p>
           </div>
-
           <div className="flex items-center gap-3">
+            <span className="text-brown-mid text-sm" data-testid="admin-total">
+              {totalCount} shown
+            </span>
             <button
               onClick={load}
               data-testid="admin-refresh"
@@ -63,180 +143,388 @@ export default function Admin() {
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="mt-10 inline-flex p-1 bg-white rounded-full border border-brown-dark/10">
-          <TabBtn active={tab === 'bookings'} onClick={() => setTab('bookings')} testid="tab-bookings">
-            Bookings ({bookings.length})
-          </TabBtn>
-          <TabBtn active={tab === 'contacts'} onClick={() => setTab('contacts')} testid="tab-contacts">
-            Contacts ({contacts.length})
-          </TabBtn>
+        {/* ---------- Toolbar ---------- */}
+        <div className="mt-8 bg-white border border-brown-dark/10 rounded-3xl p-4 md:p-5 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center">
+          <label className="md:col-span-4 relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brown-mid" />
+            <input
+              type="search"
+              data-testid="admin-search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search name, email, message, any field…"
+              className="w-full h-11 pl-10 pr-3 rounded-full bg-cream/60 border border-brown-dark/10 text-sm text-brown-dark placeholder:text-brown-mid/60 focus:outline-none focus:border-orange"
+            />
+          </label>
+          <label className="md:col-span-3 flex items-center gap-2">
+            <Filter className="w-4 h-4 text-brown-mid" />
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              data-testid="admin-status-filter"
+              className="w-full h-11 px-3 rounded-full bg-cream/60 border border-brown-dark/10 text-sm text-brown-dark focus:outline-none focus:border-orange"
+            >
+              <option value="all">All statuses</option>
+              {STATUS_OPTIONS.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </label>
+          <label className="md:col-span-2 flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-brown-mid shrink-0" />
+            <input
+              type="date"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+              data-testid="admin-date-from"
+              className="w-full h-11 px-3 rounded-full bg-cream/60 border border-brown-dark/10 text-sm text-brown-dark focus:outline-none focus:border-orange"
+              aria-label="From date"
+            />
+          </label>
+          <label className="md:col-span-2 flex items-center gap-2">
+            <span className="text-brown-mid/80 text-xs">to</span>
+            <input
+              type="date"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+              data-testid="admin-date-to"
+              className="w-full h-11 px-3 rounded-full bg-cream/60 border border-brown-dark/10 text-sm text-brown-dark focus:outline-none focus:border-orange"
+              aria-label="To date"
+            />
+          </label>
+          <button
+            type="button"
+            onClick={clearFilters}
+            data-testid="admin-clear-filters"
+            className="md:col-span-1 h-11 rounded-full bg-cream/60 border border-brown-dark/10 text-brown-dark text-sm hover:bg-brown-dark hover:text-white transition-colors"
+          >
+            Clear
+          </button>
         </div>
 
-        <div className="mt-8 space-y-5">
-          {loading && <p className="text-brown-mid">Loading…</p>}
+        {/* ---------- Sections ---------- */}
+        <div className="mt-8 space-y-8">
+          {loading && <p className="text-brown-mid" data-testid="admin-loading">Loading…</p>}
 
-          {tab === 'bookings' && (
-            <EmptyOr
-              items={bookings}
-              empty="No bookings yet — submit the booking form to see entries here."
-              testid="bookings-list"
+          {!loading && groups.length === 0 && (
+            <div
+              data-testid="admin-empty"
+              className="bg-white border border-brown-dark/10 rounded-3xl p-12 text-brown-mid text-sm text-center"
             >
-              {bookings.map((b, idx) => (
-                <BookingCard
-                  key={b.id}
-                  booking={b}
-                  index={idx}
-                  onDelete={() => removeBooking(b.id)}
-                />
-              ))}
-            </EmptyOr>
+              No submissions match your filters yet.
+            </div>
           )}
 
-          {tab === 'contacts' && (
-            <EmptyOr
-              items={contacts}
-              empty="No messages yet — try the contact form."
-              testid="contacts-list"
-            >
-              {contacts.map((c, idx) => (
-                <ContactCard
-                  key={c.id}
-                  contact={c}
-                  index={idx}
-                  onDelete={() => removeContact(c.id)}
-                />
-              ))}
-            </EmptyOr>
-          )}
+          {groups.map((g) => (
+            <FormGroup
+              key={g.formId}
+              group={g}
+              onView={setViewing}
+              onExport={() => onExportGroup(g)}
+              onStatusChange={onStatusChange}
+              onRequestDelete={setConfirmDelete}
+            />
+          ))}
         </div>
       </section>
+
+      {/* View modal */}
+      {viewing && (
+        <ViewModal
+          submission={viewing}
+          onClose={() => setViewing(null)}
+          onStatusChange={onStatusChange}
+        />
+      )}
+
+      {/* Delete confirm */}
+      {confirmDelete && (
+        <ConfirmDelete
+          submission={confirmDelete}
+          onCancel={() => setConfirmDelete(null)}
+          onConfirm={() => onDelete(confirmDelete.id)}
+        />
+      )}
     </main>
   );
 }
 
-/* -------------------------------- UI bits -------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                              FORM GROUP CARD                                */
+/* -------------------------------------------------------------------------- */
 
-const TabBtn = ({ active, onClick, children, testid }) => (
-  <button
-    onClick={onClick}
-    data-testid={testid}
-    className={`h-10 px-5 rounded-full text-sm transition-colors ${
-      active ? 'bg-brown-dark text-white' : 'text-brown-dark hover:text-orange'
-    }`}
+const FormGroup = ({ group, onView, onExport, onStatusChange, onRequestDelete }) => (
+  <section
+    data-testid={`section-${group.formId}`}
+    className="bg-white border border-brown-dark/10 rounded-3xl p-5 md:p-7"
   >
-    {children}
-  </button>
-);
-
-const EmptyOr = ({ items, empty, testid, children }) => {
-  if (!items?.length) {
-    return (
-      <div
-        data-testid={testid}
-        className="bg-white border border-brown-dark/10 rounded-3xl p-10 text-brown-mid text-sm"
-      >
-        {empty}
-      </div>
-    );
-  }
-  return <div data-testid={testid} className="space-y-5">{children}</div>;
-};
-
-const SubmissionShell = ({ index, createdAt, id, onDelete, deleteLabel, children }) => (
-  <article className="bg-white border border-brown-dark/10 rounded-3xl p-6 md:p-8">
-    <header className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 pb-5 border-b border-brown-dark/10">
+    <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-5 border-b border-brown-dark/10">
       <div>
-        <div className="text-[11px] uppercase tracking-[0.22em] text-brown-mid">
-          Submission #{index + 1}
+        <div className="text-[11px] uppercase tracking-[0.22em] text-orange">
+          Form
         </div>
-        <div className="mt-1 text-brown-dark font-medium">
-          {new Date(createdAt).toLocaleString()}
-        </div>
-        <div className="mt-1 inline-flex items-center gap-1.5 text-[11px] text-brown-mid/80 font-mono">
-          <Hash className="w-3 h-3" /> {id}
+        <h2 className="mt-1 text-display text-brown-dark text-2xl md:text-3xl">
+          {group.formLabel}
+        </h2>
+        <div className="mt-1 text-brown-mid text-xs">
+          {group.items.length}{' '}
+          {group.items.length === 1 ? 'submission' : 'submissions'} · newest first
         </div>
       </div>
       <button
-        onClick={onDelete}
-        className="inline-flex items-center gap-2 h-9 px-3 rounded-full border border-brown-dark/15 text-brown-dark/80 hover:bg-orange hover:text-white hover:border-orange transition-colors text-xs"
-        aria-label={deleteLabel}
+        type="button"
+        onClick={onExport}
+        data-testid={`section-${group.formId}-export`}
+        className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-cream/60 border border-brown-dark/10 text-brown-dark text-sm hover:bg-brown-dark hover:text-white transition-colors"
       >
-        <Trash2 className="w-3.5 h-3.5" /> Delete
+        <Download className="w-4 h-4" /> Export CSV
       </button>
     </header>
-    <div className="pt-5">{children}</div>
-  </article>
+
+    <div className="mt-5 space-y-3">
+      {group.items.map((s) => (
+        <SubmissionRow
+          key={s.id}
+          submission={s}
+          onView={() => onView(s)}
+          onStatusChange={(next) => onStatusChange(s.id, next)}
+          onRequestDelete={() => onRequestDelete(s)}
+        />
+      ))}
+    </div>
+  </section>
 );
 
-const FieldRow = ({ icon: Icon, label, value, mono, wide }) => {
-  const display =
-    value === undefined || value === null || value === '' ? (
-      <span className="text-brown-mid/50 italic">Not provided</span>
-    ) : (
-      value
-    );
+/* -------------------------------------------------------------------------- */
+/*                              SUBMISSION ROW                                */
+/* -------------------------------------------------------------------------- */
+
+const SubmissionRow = ({ submission, onView, onStatusChange, onRequestDelete }) => {
+  const primary = Object.values(submission.fields || {}).find(Boolean);
   return (
-    <div className={wide ? 'sm:col-span-2' : ''}>
-      <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-1">
-        {Icon && <Icon className="w-3.5 h-3.5" strokeWidth={1.8} />}
-        {label}
+    <article
+      data-testid={`submission-${submission.id}`}
+      className="rounded-2xl bg-cream/40 border border-brown-dark/10 p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-4"
+    >
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <StatusPill status={submission.status} />
+          <span className="text-brown-mid text-xs">
+            {new Date(submission.submittedAt).toLocaleString()}
+          </span>
+          <span className="inline-flex items-center gap-1 text-[11px] text-brown-mid/60 font-mono">
+            <Hash className="w-3 h-3" /> {submission.id}
+          </span>
+        </div>
+        <div className="mt-2 text-brown-dark font-medium truncate">
+          {String(primary || 'Submission')}
+        </div>
+        <div className="mt-1 text-brown-mid text-xs truncate">
+          {Object.entries(submission.fields || {})
+            .slice(0, 3)
+            .map(([k, v]) => (v ? `${k}: ${v}` : null))
+            .filter(Boolean)
+            .join('   ·   ')}
+        </div>
       </div>
-      <div
-        className={`text-brown-dark text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words ${
-          mono ? 'font-mono text-[13px]' : ''
-        }`}
-      >
-        {display}
+
+      <div className="flex items-center gap-2 shrink-0">
+        <select
+          value={submission.status}
+          onChange={(e) => onStatusChange(e.target.value)}
+          data-testid={`status-${submission.id}`}
+          className="h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs focus:outline-none focus:border-orange"
+        >
+          {STATUS_OPTIONS.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+        <button
+          type="button"
+          onClick={onView}
+          data-testid={`view-${submission.id}`}
+          className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs hover:bg-brown-dark hover:text-white transition-colors"
+        >
+          <Eye className="w-3.5 h-3.5" /> View
+        </button>
+        <button
+          type="button"
+          onClick={onRequestDelete}
+          data-testid={`delete-${submission.id}`}
+          className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-xs hover:bg-orange hover:text-white hover:border-orange transition-colors"
+        >
+          <Trash2 className="w-3.5 h-3.5" /> Delete
+        </button>
       </div>
-    </div>
+    </article>
   );
 };
 
-const BookingCard = ({ booking, index, onDelete }) => (
-  <SubmissionShell
-    index={index}
-    createdAt={booking.createdAt}
-    id={booking.id}
-    onDelete={onDelete}
-    deleteLabel="Delete booking"
+const StatusPill = ({ status }) => (
+  <span
+    data-testid={`status-pill-${status}`}
+    className={`inline-flex items-center h-6 px-2.5 rounded-full text-[11px] font-medium border ${
+      STATUS_STYLES[status] || STATUS_STYLES.New
+    }`}
   >
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
-      <FieldRow icon={User} label="Name" value={booking.name} />
-      <FieldRow icon={Mail} label="Email" value={booking.email} mono />
-      <FieldRow icon={Phone} label="Phone" value={booking.phone} mono />
-      <FieldRow icon={Music} label="Instrument of interest" value={booking.instrument} />
-      <FieldRow icon={Sparkles} label="Experience level" value={booking.experience} />
-      <FieldRow icon={Calendar} label="Preferred date" value={booking.preferredDate} />
-      <FieldRow icon={Clock} label="Preferred time" value={booking.preferredTime} />
-      <FieldRow
-        icon={MessageSquare}
-        label="Notes from the student"
-        value={booking.notes}
-        wide
-      />
-    </div>
-  </SubmissionShell>
+    {status}
+  </span>
 );
 
-const ContactCard = ({ contact, index, onDelete }) => (
-  <SubmissionShell
-    index={index}
-    createdAt={contact.createdAt}
-    id={contact.id}
-    onDelete={onDelete}
-    deleteLabel="Delete message"
+/* -------------------------------------------------------------------------- */
+/*                                 VIEW MODAL                                  */
+/* -------------------------------------------------------------------------- */
+
+const ViewModal = ({ submission, onClose, onStatusChange }) => (
+  <div
+    className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50"
+    onClick={onClose}
+    data-testid="view-modal"
   >
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
-      <FieldRow icon={User} label="Name" value={contact.name} />
-      <FieldRow icon={Mail} label="Email" value={contact.email} mono />
-      <FieldRow icon={Tag} label="Subject" value={contact.subject} wide />
-      <FieldRow
-        icon={MessageSquare}
-        label="Message"
-        value={contact.message}
-        wide
-      />
+    <div
+      className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 md:p-8"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex items-start justify-between gap-4 mb-5">
+        <div>
+          <div className="text-[11px] uppercase tracking-[0.22em] text-orange">
+            {submission.formLabel}
+          </div>
+          <div className="mt-1 text-brown-dark font-medium">
+            {new Date(submission.submittedAt).toLocaleString()}
+          </div>
+          <div className="mt-1 flex items-center gap-2 text-[11px] text-brown-mid/70 font-mono">
+            <Hash className="w-3 h-3" /> {submission.id}
+          </div>
+        </div>
+        <button
+          onClick={onClose}
+          data-testid="view-modal-close"
+          className="w-9 h-9 rounded-full bg-cream/60 hover:bg-brown-dark hover:text-white flex items-center justify-center"
+          aria-label="Close"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+
+      <div className="flex items-center gap-3 mb-6 pb-5 border-b border-brown-dark/10">
+        <span className="text-[11px] uppercase tracking-[0.22em] text-brown-mid">
+          Status
+        </span>
+        <select
+          value={submission.status}
+          onChange={(e) => onStatusChange(submission.id, e.target.value)}
+          data-testid="view-modal-status"
+          className="h-9 px-3 rounded-full bg-cream/60 border border-brown-dark/15 text-brown-dark text-sm focus:outline-none focus:border-orange"
+        >
+          {STATUS_OPTIONS.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+        {Object.entries(submission.fields || {}).map(([label, value]) => (
+          <div key={label}>
+            <div className="text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-1">
+              {label}
+            </div>
+            <div className="text-brown-dark text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words">
+              {value === undefined || value === null || value === '' ? (
+                <span className="text-brown-mid/50 italic">Not provided</span>
+              ) : (
+                String(value)
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-  </SubmissionShell>
+  </div>
 );
+
+/* -------------------------------------------------------------------------- */
+/*                              DELETE CONFIRM                                 */
+/* -------------------------------------------------------------------------- */
+
+const ConfirmDelete = ({ submission, onCancel, onConfirm }) => (
+  <div
+    className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/60"
+    onClick={onCancel}
+    data-testid="confirm-delete"
+  >
+    <div
+      className="bg-white rounded-3xl max-w-md w-full p-6 md:p-7"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex items-start gap-3 mb-4">
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-orange/15 text-orange">
+          <Trash2 className="w-4 h-4" />
+        </span>
+        <div>
+          <h3 className="text-display text-brown-dark text-xl">
+            Delete this submission?
+          </h3>
+          <p className="text-brown-mid text-sm mt-1">
+            {submission.formLabel}. This cannot be undone.
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center justify-end gap-2 mt-6">
+        <button
+          type="button"
+          onClick={onCancel}
+          data-testid="confirm-delete-cancel"
+          className="h-10 px-4 rounded-full bg-cream/60 border border-brown-dark/10 text-brown-dark text-sm hover:bg-brown-dark hover:text-white transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onClick={onConfirm}
+          data-testid="confirm-delete-confirm"
+          className="h-10 px-4 rounded-full bg-orange text-white text-sm font-medium hover:bg-orange-dark transition-colors"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+/* -------------------------------------------------------------------------- */
+/*                                CSV HELPERS                                  */
+/* -------------------------------------------------------------------------- */
+
+const csvEscape = (v) => {
+  if (v === undefined || v === null) return '';
+  const s = String(v);
+  if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+  return s;
+};
+
+const downloadCsv = (formId, items) => {
+  // Collect every field label that appears in this group so nothing is lost.
+  const labelSet = new Set();
+  items.forEach((it) => Object.keys(it.fields || {}).forEach((k) => labelSet.add(k)));
+  const labels = Array.from(labelSet);
+  const header = ['id', 'submittedAt', 'status', ...labels];
+  const rows = items.map((it) => [
+    it.id,
+    it.submittedAt,
+    it.status,
+    ...labels.map((l) => it.fields?.[l]),
+  ]);
+  const csv = [header, ...rows]
+    .map((row) => row.map(csvEscape).join(','))
+    .join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `udukku-${formId}-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
