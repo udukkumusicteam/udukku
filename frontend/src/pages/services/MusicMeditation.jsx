@@ -316,6 +316,7 @@ export default function MusicMeditation() {
               icon={Users}
               title="Individual & Group Wellness"
               body="Reduce stress, improve focus and emotional balance."
+              selected={tab === 'individual'}
               onClick={() => openExplorer('individual')}
             />
             <ChoiceCard
@@ -323,6 +324,7 @@ export default function MusicMeditation() {
               icon={Building2}
               title="Corporate Wellness Programs"
               body="Improve employee focus, resilience and overall wellbeing."
+              selected={tab === 'corporate'}
               onClick={() => openExplorer('corporate')}
             />
           </div>
@@ -332,34 +334,6 @@ export default function MusicMeditation() {
       {/* ---------------- INTERACTIVE PROGRAM EXPLORER ---------------- */}
       <section ref={explorerRef} className="bg-cream">
         <div className="udukku-section py-16 md:py-20">
-          {/* Tabs */}
-          <div className="flex justify-center mb-8 md:mb-10">
-            <div
-              data-testid="explorer-tabs"
-              className="inline-flex p-1.5 rounded-full bg-white border border-brown-dark/10 shadow-sm"
-            >
-              {[
-                { id: 'individual', label: 'Individual & Group Wellness' },
-                { id: 'corporate', label: 'Corporate Wellness' },
-              ].map((t) => (
-                <button
-                  key={t.id}
-                  type="button"
-                  data-testid={`explorer-tab-${t.id}`}
-                  onClick={() => setTab(t.id)}
-                  className={`px-4 md:px-6 h-11 rounded-full text-sm md:text-[15px] font-medium transition-colors ${
-                    tab === t.id
-                      ? 'bg-orange text-white'
-                      : 'text-brown-dark/75 hover:text-brown-dark'
-                  }`}
-                  aria-pressed={tab === t.id}
-                >
-                  {t.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Panels */}
           {tab === 'individual' ? (
             <IndividualPanel
@@ -526,12 +500,21 @@ export default function MusicMeditation() {
 
 /* --------------------------- SUBCOMPONENTS --------------------------- */
 
-const ChoiceCard = ({ testid, icon: Icon, title, body, onClick }) => (
+const ChoiceCard = ({ testid, icon: Icon, title, body, onClick, selected }) => (
   <article
     data-testid={testid}
-    className="rounded-3xl bg-white border border-brown-dark/10 p-7 md:p-8 flex flex-col md:flex-row items-start gap-5"
+    aria-pressed={selected}
+    className={`rounded-3xl p-7 md:p-8 flex flex-col md:flex-row items-start gap-5 border-2 transition-all duration-500 ${
+      selected
+        ? 'bg-orange/[0.08] border-orange shadow-[0_20px_60px_-30px_rgba(232,136,58,0.55)]'
+        : 'bg-white border-brown-dark/10 hover:border-orange/40'
+    }`}
   >
-    <span className="shrink-0 inline-flex items-center justify-center w-14 h-14 rounded-full bg-orange/15 text-orange">
+    <span
+      className={`shrink-0 inline-flex items-center justify-center w-14 h-14 rounded-full transition-colors ${
+        selected ? 'bg-orange text-white' : 'bg-orange/15 text-orange'
+      }`}
+    >
       <Icon className="w-6 h-6" strokeWidth={1.6} />
     </span>
     <div className="flex-1">
@@ -545,9 +528,13 @@ const ChoiceCard = ({ testid, icon: Icon, title, body, onClick }) => (
         type="button"
         onClick={onClick}
         data-testid={`${testid}-cta`}
-        className="mt-5 inline-flex items-center h-11 px-6 rounded-full bg-orange text-white text-sm font-medium hover:bg-orange-dark transition-colors"
+        className={`mt-5 inline-flex items-center h-11 px-6 rounded-full text-sm font-medium transition-colors ${
+          selected
+            ? 'bg-brown-dark text-white hover:bg-black'
+            : 'bg-orange text-white hover:bg-orange-dark'
+        }`}
       >
-        Explore Program
+        {selected ? 'Currently Viewing' : 'Explore Program'}
       </button>
     </div>
   </article>
