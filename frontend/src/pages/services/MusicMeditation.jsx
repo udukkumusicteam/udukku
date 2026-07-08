@@ -70,9 +70,9 @@ const INDIVIDUAL_OUTCOMES = [
 ];
 
 const INDIVIDUAL_PLANS = [
-  { id: 'weekly-reset', name: 'Weekly Reset', sessions: '4 Sessions / Month', price: '₹799' },
-  { id: 'music-reset', name: 'Music Reset', sessions: '8 Sessions / Month', price: '₹999' },
-  { id: 'deep-practice', name: 'Deep Practice', sessions: '12 Sessions / Month', price: '₹1499' },
+  { id: 'weekly-reset', name: 'Weekly Reset', sessions: '4 Sessions / Month', price: '₹999' },
+  { id: 'music-reset', name: 'Music Reset', sessions: '8 Sessions / Month', price: '₹1499' },
+  { id: 'deep-practice', name: 'Deep Practice', sessions: '12 Sessions / Month', price: '₹1799' },
 ];
 
 const CORPORATE_WHY = [
