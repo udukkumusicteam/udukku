@@ -9,7 +9,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import BrandIcon from '../../components/BrandIcon';
-import { contactService } from '../../services/apiService';
+import { cityRequestsService } from '../../services/supabase';
 
 const PHOTOS = [
   {
@@ -103,25 +103,27 @@ export default function Events() {
 
   const submit = async (e) => {
     e.preventDefault();
+    if (loading) return; // prevent duplicate submissions
+    if (!form.name || !form.email || !form.city) {
+      toast.error('Name, email and city are required.');
+      return;
+    }
     setLoading(true);
     try {
-      await contactService.create({
+      await cityRequestsService.create({
         name: form.name,
         email: form.email,
-        subject: `Bring Udukku to ${form.city}`,
-        message: [
-          `City: ${form.city}`,
-          '',
-          'Kind of event they are interested in:',
-          form.interest || 'Not specified',
-        ].join('\n'),
+        city: form.city,
+        eventInterest: form.interest,
       });
       setOk(true);
+      setForm({ name: '', email: '', city: '', interest: '' });
       toast.success('Request received. We will reach out when we head your way.');
-    } catch {
-      toast.error('Something went wrong. Please try again.');
+    } catch (err) {
+      toast.error(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

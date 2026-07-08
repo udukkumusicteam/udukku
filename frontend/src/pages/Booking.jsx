@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { CheckCircle2, ArrowUpRight } from 'lucide-react';
-import { bookingService } from '../services/apiService';
+import { sessionBookingsService } from '../services/supabase';
 import { INSTRUMENTS } from '../data/mockData';
 import WaveDivider from '../components/WaveDivider';
 
@@ -32,7 +32,7 @@ export default function Booking() {
     }
     setLoading(true);
     try {
-      const record = await bookingService.create(form);
+      const record = await sessionBookingsService.createMainBooking(form);
       setDone(record);
       setForm(initial);
       toast.success('Session reserved. We\'ll be in touch shortly.');

@@ -31,7 +31,7 @@ import {
   Gift,
   CalendarCheck,
 } from 'lucide-react';
-import { bookingService, contactService } from '../../services/apiService';
+import { sessionBookingsService, corporateBookingsService } from '../../services/supabase';
 
 /* --------------------------- CONTENT --------------------------- */
 
@@ -166,33 +166,39 @@ export default function MusicMeditation() {
   /* -------- Submit -------- */
   const submit = async (e) => {
     e.preventDefault();
+    if (loading) return; // prevent duplicate submissions
     setLoading(true);
     try {
       if (kind === 'individual') {
+        if (!ind.name || !ind.email || !ind.phone || !ind.plan) {
+          toast.error('Please fill in all required fields.');
+          setLoading(false);
+          return;
+        }
         const planName = INDIVIDUAL_PLANS.find((p) => p.id === ind.plan)?.name || 'Not selected';
-        await bookingService.create({
+        await sessionBookingsService.createMMIndividual({
           name: ind.name,
           email: ind.email,
           phone: ind.phone,
-          instrument: 'Music Meditation',
-          experience: `Music Meditation · Individual · ${planName}`,
-          preferredDate: '',
-          preferredTime: '',
-          notes: `Plan: ${planName}\nGoals: ${ind.goals || 'Not shared'}`,
+          plan: ind.plan,
+          goals: ind.goals,
+          notes: `Plan label: ${planName}`,
         });
+        setInd({ name: '', email: '', phone: '', plan: '', goals: '' });
       } else {
-        await contactService.create({
-          name: corp.name,
-          email: corp.workEmail,
-          subject: `Corporate Wellness Proposal for ${corp.company || 'company'}`,
-          message: [
-            `Company: ${corp.company}`,
-            `Team size: ${corp.team || 'Not shared'}`,
-            '',
-            'Goals for the team:',
-            corp.goals || 'Not shared',
-          ].join('\n'),
+        if (!corp.name || !corp.workEmail || !corp.company) {
+          toast.error('Please fill in all required fields.');
+          setLoading(false);
+          return;
+        }
+        await corporateBookingsService.create({
+          contactName: corp.name,
+          workEmail: corp.workEmail,
+          companyName: corp.company,
+          teamSize: corp.team,
+          goals: corp.goals,
         });
+        setCorp({ name: '', workEmail: '', company: '', team: '', goals: '' });
       }
       setOk(true);
       toast.success(
@@ -200,10 +206,11 @@ export default function MusicMeditation() {
           ? 'Your session request is in. We will WhatsApp you shortly.'
           : 'Proposal request received. Our team will get back within a day.',
       );
-    } catch {
-      toast.error('Something went wrong. Please try again.');
+    } catch (err) {
+      toast.error(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

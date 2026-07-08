@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Mail, MapPin, Phone, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import BrandIcon from '../components/BrandIcon';
-import { contactService } from '../services/apiService';
+import { contactMessagesService } from '../services/supabase';
 import { SITE } from '../data/mockData';
 import WaveDivider from '../components/WaveDivider';
 
@@ -25,7 +25,7 @@ export default function Contact() {
     }
     setLoading(true);
     try {
-      await contactService.create(form);
+      await contactMessagesService.create(form);
       setForm(initial);
       setSent(true);
       toast.success('Message sent. Expect a reply within a day.');

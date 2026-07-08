@@ -11,7 +11,7 @@ import {
   X,
   ChevronDown,
 } from 'lucide-react';
-import { submissionsService } from '../services/apiService';
+import { submissionsService } from '../services/supabase';
 
 const STATUS_OPTIONS = ['New', 'Contacted', 'Closed'];
 
@@ -37,9 +37,15 @@ export default function Admin() {
 
   const load = async () => {
     setLoading(true);
-    const all = await submissionsService.list();
-    setSubs(all);
-    setLoading(false);
+    try {
+      const all = await submissionsService.list();
+      setSubs(all);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -99,15 +105,29 @@ export default function Admin() {
 
   /* ---------- Handlers ---------- */
   const onStatusChange = async (id, next) => {
-    await submissionsService.updateStatus(id, next);
-    setSubs((prev) => prev.map((s) => (s.id === id ? { ...s, status: next } : s)));
-    if (viewing && viewing.id === id) setViewing({ ...viewing, status: next });
+    const record = subs.find((s) => s.id === id);
+    if (!record) return;
+    try {
+      await submissionsService.updateStatus(record, next);
+      setSubs((prev) => prev.map((s) => (s.id === id ? { ...s, status: next } : s)));
+      if (viewing && viewing.id === id) setViewing({ ...viewing, status: next });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
   };
   const onDelete = async (id) => {
-    await submissionsService.remove(id);
-    setSubs((prev) => prev.filter((s) => s.id !== id));
-    setConfirmDelete(null);
-    if (viewing && viewing.id === id) setViewing(null);
+    const record = subs.find((s) => s.id === id);
+    if (!record) return;
+    try {
+      await submissionsService.remove(record);
+      setSubs((prev) => prev.filter((s) => s.id !== id));
+      setConfirmDelete(null);
+      if (viewing && viewing.id === id) setViewing(null);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
   };
   const onExportGroup = (g) => downloadCsv(g.formId, g.items);
 

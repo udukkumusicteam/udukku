@@ -19,7 +19,7 @@ import {
   Sunrise,
 } from 'lucide-react';
 import BrandIcon from '../../components/BrandIcon';
-import { bookingService } from '../../services/apiService';
+import { sessionBookingsService } from '../../services/supabase';
 
 const FEATURES = [
   {
@@ -196,6 +196,11 @@ export default function MusicRoom() {
 
   const submit = async (e) => {
     e.preventDefault();
+    if (loading) return; // prevent duplicate submissions
+    if (!form.name || !form.whatsapp || !form.location || !form.frequency || !form.time) {
+      toast.error('Please fill in all required fields.');
+      return;
+    }
     setLoading(true);
     try {
       const plan = PLANS.find((p) => p.id === selected);
@@ -205,22 +210,22 @@ export default function MusicRoom() {
       const timeLabel =
         TIME_SLOTS.find((t) => t.value === form.time)?.label || form.time;
 
-      await bookingService.create({
+      await sessionBookingsService.createUMR({
         name: form.name,
-        phone: form.whatsapp,
+        whatsapp: form.whatsapp,
         location: form.location,
-        instrument: 'Any',
-        experience: `UMR · ${plan?.name}`,
-        preferredDate: '',
+        frequency: form.frequency,
         preferredTime: timeLabel,
-        notes: `Frequency: ${freqLabel}\nCity, Country: ${form.location}\nWhatsApp: ${form.whatsapp}`,
+        notes: `Selected plan: ${plan?.name}\nFrequency (label): ${freqLabel}`,
       });
       setOk(true);
+      setForm({ name: '', whatsapp: '', location: '', frequency: '', time: '' });
       toast.success('Reservation received. The room is holding a place for you.');
-    } catch {
-      toast.error('Something went wrong. Please try again.');
+    } catch (err) {
+      toast.error(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
