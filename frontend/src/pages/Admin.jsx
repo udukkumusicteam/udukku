@@ -12,6 +12,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { submissionsService } from '../services/supabase';
+import { supabase } from '../lib/supabase';
 
 const STATUS_OPTIONS = ['New', 'Contacted', 'Closed'];
 
@@ -34,6 +35,7 @@ export default function Admin() {
   const [to, setTo] = useState('');
   const [viewing, setViewing] = useState(null); // submission being viewed
   const [confirmDelete, setConfirmDelete] = useState(null); // submission being deleted
+  const [live, setLive] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -50,6 +52,39 @@ export default function Admin() {
 
   useEffect(() => {
     load();
+
+    // Supabase Realtime — the dashboard re-fetches whenever any of the four
+    // tables receives an INSERT / UPDATE / DELETE. No manual refresh needed
+    // for new submissions coming from other browsers or devices.
+    const channel = supabase
+      .channel('udukku-admin-live')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'session_bookings' },
+        load,
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'corporate_bookings' },
+        load,
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'contact_messages' },
+        load,
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'city_requests' },
+        load,
+      )
+      .subscribe((status) => {
+        setLive(status === 'SUBSCRIBED');
+      });
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const clearFilters = () => {

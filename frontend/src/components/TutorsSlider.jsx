@@ -80,11 +80,12 @@ export const TutorsSlider = () => {
 
       <div
         ref={scrollRef}
-        className="udukku-section pb-16 md:pb-20 overflow-x-auto scrollbar-hide"
+        className="udukku-scroll overflow-x-auto scrollbar-hide pb-16 md:pb-20"
         data-testid="tutors-scroll"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         <div className="flex gap-6 md:gap-7">
+          <div className="udukku-gutter" aria-hidden="true" />
           {TUTORS.map((t, i) => (
             <article
               key={t.id}
@@ -116,7 +117,7 @@ export const TutorsSlider = () => {
               </div>
             </article>
           ))}
-          <div className="shrink-0 w-1" aria-hidden="true" />
+          <div className="udukku-gutter" aria-hidden="true" />
         </div>
       </div>
     </section>

@@ -105,6 +105,30 @@ body {
       padding-right: 1.25rem;
     }
   }
+
+  /* Horizontal carousels: use full-bleed scroll containers together with
+     `udukku-gutter` spacer children (start + end) so the first and last
+     cards always sit inside the global site margins. `scroll-padding-inline`
+     makes CSS scroll-snap respect the same gutter. */
+  .udukku-gutter {
+    flex-shrink: 0;
+    width: 6rem;
+  }
+  .udukku-scroll {
+    scroll-padding-inline: 6rem;
+  }
+  @media (max-width: 1100px) {
+    .udukku-gutter { width: 3rem; }
+    .udukku-scroll { scroll-padding-inline: 3rem; }
+  }
+  @media (max-width: 768px) {
+    .udukku-gutter { width: 1.5rem; }
+    .udukku-scroll { scroll-padding-inline: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .udukku-gutter { width: 1.25rem; }
+    .udukku-scroll { scroll-padding-inline: 1.25rem; }
+  }
 }
 
 [data-debug-wrapper="true"] {
