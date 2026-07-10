@@ -27,10 +27,20 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Every page opens against the warm orange hero, so the cream logo gives the
-  // best contrast at the top. Once the user scrolls past the hero, the frosted
-  // header sits over lighter content, so we cross-fade to the orange logo.
-  const isHome = location.pathname === '/';
+  // Pages that open against the warm orange hero (bg-hero-gradient). While
+  // the hero is in view, the header sits on orange and needs the cream logo
+  // + light nav for contrast. Once scrolled past the hero the frosted header
+  // sits over lighter content and we cross-fade to the orange logo. This is
+  // the same behaviour used on the homepage — kept in a single list so every
+  // orange-hero page stays perfectly consistent.
+  const ORANGE_HERO_ROUTES = new Set([
+    '/',
+    '/about',
+    '/contact',
+    '/booking',
+    '/services',
+  ]);
+  const hasOrangeHero = ORANGE_HERO_ROUTES.has(location.pathname);
   // Dark-theme pages (deep brown background from top to bottom) need the
   // header to stay light throughout — cream logo, white nav links, light
   // Book Now button, and a dark frosted overlay when scrolled.
@@ -39,14 +49,15 @@ export const Header = () => {
   // header while the hero is in view, then flip to the standard dark nav
   // once the user scrolls past it.
   const isPhotoHero = location.pathname === '/services/events';
-  const isLightHeader = isHome || isDarkTheme || (isPhotoHero && !scrolled);
+  const isLightHeader = isDarkTheme || ((hasOrangeHero || isPhotoHero) && !scrolled);
   const linkColor = isLightHeader
     ? 'text-white/90 hover:text-white'
     : 'text-brown-dark hover:text-orange';
   // The cream/light logo variant only reads well over the dark or orange
-  // backdrops (home hero, music room, photo hero on events). Everywhere else
-  // (cream pages, scrolled state on light pages) we want the dark logo.
-  const wantsCreamLogo = isDarkTheme || ((isHome || isPhotoHero) && !scrolled);
+  // backdrops (any orange hero, music room, photo hero on events). Everywhere
+  // else (cream pages, scrolled state on orange-hero pages) we want the dark
+  // orange logo — matching the homepage cross-fade exactly.
+  const wantsCreamLogo = isDarkTheme || ((hasOrangeHero || isPhotoHero) && !scrolled);
   const showDarkLogo = !wantsCreamLogo;
 
   return (

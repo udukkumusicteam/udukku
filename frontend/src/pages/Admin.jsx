@@ -181,8 +181,7 @@ export default function Admin() {
               Submissions Dashboard
             </h1>
             <p className="text-brown-mid mt-2 text-sm max-w-lg">
-              Every field from every form on the site. Submissions from any new
-              form appear here automatically once one is received.
+              WELCOME TO UDUKKU ADMIN DASHBOARD
             </p>
           </div>
           <div className="flex items-center gap-3">

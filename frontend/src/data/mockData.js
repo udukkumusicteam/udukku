@@ -15,7 +15,7 @@ export const SITE = {
   ],
 };
 
-export const HERO_PILLS = ['Keys', 'Strings', 'Vocals', 'Percussion', 'Theory'];
+export const HERO_PILLS = ['Keys', 'Strings', 'Vocals', 'Percussion', 'Theory & Composition'];
 
 export const STATS = [
   {
@@ -141,7 +141,7 @@ export const TESTIMONIALS = [
 export const COURSE_CATEGORIES = [
   'Percussion',
   'Strings',
-  'Yoga',
+  'Theory',
   'Wind',
   'Vocals',
   'Production',
@@ -150,7 +150,7 @@ export const COURSE_CATEGORIES = [
 export const BOTTOM_CTA = {
   heading: 'Want to try a free demo?',
   subheading:
-    'No pressure. No auditions. Your first hour with us is a gift. A quiet space to listen, to play, and to remember what music means to you.',
+    'No pressure. No auditions. Your first time with us is a gift. A quiet space to listen, to play, and to remember what music means to you.',
   image: '/assets/backgrounds/story-hero.jpg',
 };
 

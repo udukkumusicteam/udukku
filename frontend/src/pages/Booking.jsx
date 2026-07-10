@@ -57,7 +57,7 @@ export default function Booking() {
           </h1>
           <p className="mt-6 max-w-xl text-white/85 text-base md:text-lg leading-relaxed">
             Your first session is on us. No auditions. No pressure. Just a
-            quiet hour with a mentor who will help you find your sound.
+            mentor who will help you find your sound.
           </p>
         </div>
         <WaveDivider fill="#F5F0E5" />
@@ -125,6 +125,7 @@ export default function Booking() {
                       {i}
                     </option>
                   ))}
+                  <option value="Other">Other</option>
                 </select>
               </Field>
               <Field label="Experience level" htmlFor="bk-exp">
