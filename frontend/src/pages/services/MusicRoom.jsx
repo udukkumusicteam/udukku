@@ -16,6 +16,7 @@ import {
   Moon,
   Sunrise,
   Info,
+  Video,
 } from 'lucide-react';
 import ServiceHero from '../../components/services/ServiceHero';
 import ServiceCTA from '../../components/services/ServiceCTA';
@@ -28,6 +29,7 @@ const FEATURES = [
   { icon: ClipboardCheck, title: 'Accountability', body: 'An Udukku teacher; learn exactly what you want as you need.' },
   { icon: Heart, title: '1-on-1 Checks', body: 'An individual touchpoint with the Udukku team.' },
   { icon: LineChart, title: 'Progress Plotting', body: 'Revaluation and planning to make progress tangible.' },
+  { icon: Video, title: 'Session Replays', body: 'Missed a session? Every practice hour is recorded and yours to keep.' },
 ];
 
 const PLANS = [
@@ -594,9 +596,6 @@ export default function MusicRoom() {
         eyebrow="The room is open"
         headline={<>Your <span className="text-italic-serif text-orange">riyaz</span> is waiting.</>}
         description="Reserve your spot in Music Room and let the practice hold you."
-        ctaLabel="Reserve My Spot"
-        ctaTo="/booking"
-        testId="umr-book-cta"
       />
     </main>
   );

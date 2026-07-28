@@ -28,13 +28,15 @@ export const ServiceCTA = ({
           {description}
         </p>
       )}
-      <Link
-        to={ctaTo}
-        data-testid={testId}
-        className="btn-glow mt-9 inline-flex items-center gap-2 h-12 px-7 rounded-full bg-orange text-white text-base font-medium hover:bg-orange-dark"
-      >
-        {ctaLabel} <ArrowUpRight className="w-4 h-4" />
-      </Link>
+      {ctaLabel && ctaTo && (
+        <Link
+          to={ctaTo}
+          data-testid={testId}
+          className="btn-glow mt-9 inline-flex items-center gap-2 h-12 px-7 rounded-full bg-orange text-white text-base font-medium hover:bg-orange-dark"
+        >
+          {ctaLabel} <ArrowUpRight className="w-4 h-4" />
+        </Link>
+      )}
     </div>
   </section>
 );
