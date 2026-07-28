@@ -86,17 +86,35 @@ const PlanCard = ({ plan, selected, onSelect }) => (
     type="button"
     onClick={() => onSelect(plan.id)}
     data-testid={`plan-${plan.id}`}
-    className={`relative text-left rounded-3xl p-7 md:p-8 border transition-all duration-500 ${
-      plan.featured || selected
-        ? 'bg-white border-orange shadow-[0_20px_60px_-30px_rgba(232,136,58,0.55)]'
-        : 'bg-cream border-brown-dark/10 hover:border-orange/40'
+    className={`relative overflow-hidden text-left rounded-3xl p-7 md:p-8 transition-all duration-500 ${
+      selected
+        ? 'bg-white border-2 border-orange shadow-[0_25px_70px_-20px_rgba(200,75,26,0.45)] hover:-translate-y-1 hover:shadow-[0_35px_90px_-20px_rgba(200,75,26,0.55)]'
+        : 'bg-cream border border-brown-dark/10 hover:border-orange/40 hover:-translate-y-0.5'
     }`}
   >
+    {/* Premium accent bar across the top edge — only when selected */}
+    {selected && (
+      <span
+        className="absolute top-0 left-0 right-0 h-[5px] bg-orange"
+        aria-hidden
+      />
+    )}
+
     {plan.featured && (
-      <span className="absolute -top-3 left-7 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange text-white text-[10px] uppercase tracking-[0.22em]">
+      <span className="absolute -top-3.5 left-7 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-orange text-white text-[11px] font-semibold uppercase tracking-[0.22em] shadow-[0_10px_22px_-6px_rgba(200,75,26,0.6)]">
         Most popular
       </span>
     )}
+
+    {selected && (
+      <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-white pl-1 pr-3 py-1 rounded-full shadow-[0_4px_14px_-2px_rgba(200,75,26,0.25)] ring-1 ring-orange/20">
+        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange text-white">
+          <Check className="w-3 h-3" strokeWidth={3} />
+        </span>
+        <span className="text-orange text-xs font-medium">Selected</span>
+      </span>
+    )}
+
     <div className="flex items-start justify-between gap-6">
       <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
         {plan.name}
@@ -104,7 +122,11 @@ const PlanCard = ({ plan, selected, onSelect }) => (
       <div className="text-right">
         <div className="text-brown-mid/60 text-xs line-through">{plan.strike}</div>
         <div className="flex items-baseline gap-1 justify-end">
-          <span className="text-display text-brown-dark text-3xl md:text-4xl">
+          <span
+            className={`text-display text-3xl md:text-4xl ${
+              selected ? 'text-orange' : 'text-brown-dark'
+            }`}
+          >
             {plan.price}
           </span>
           <span className="text-brown-mid text-xs">/{plan.per}</span>
@@ -137,12 +159,6 @@ const PlanCard = ({ plan, selected, onSelect }) => (
         ))}
       </ul>
     </div>
-
-    {selected && (
-      <span className="absolute top-5 right-5 text-orange text-xs font-medium inline-flex items-center gap-1">
-        <Check className="w-3.5 h-3.5" /> Selected
-      </span>
-    )}
   </button>
 );
 
