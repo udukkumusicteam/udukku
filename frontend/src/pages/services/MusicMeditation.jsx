@@ -113,6 +113,7 @@ const FAQS = [
   { q: 'Can sessions be conducted online?', a: 'Yes, all sessions run online via Zoom or Google Meet. In-person sessions are available on request.' },
   { q: 'Are corporate sessions customised?', a: 'Yes, every corporate program is tailored to the specific goals and culture of your organisation.' },
   { q: 'How do bookings work?', a: 'Pick a plan or send a corporate enquiry from the form below. Our team will reach out on WhatsApp to confirm your slot.' },
+  { q: 'What if I need to reschedule or miss a session?', a: 'Life happens. Let us know at least a day in advance and we will move your slot at no extra cost. Missed live sessions are shared as a recording within a day so nothing feels lost.' },
 ];
 
 /* --------------------------- HELPERS --------------------------- */
