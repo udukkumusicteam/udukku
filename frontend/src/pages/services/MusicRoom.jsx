@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import ServiceHero from '../../components/services/ServiceHero';
 import ServiceCTA from '../../components/services/ServiceCTA';
+import BrandIcon from '../../components/BrandIcon';
 import { sessionBookingsService } from '../../services/supabase';
 
 const FEATURES = [
@@ -219,6 +220,79 @@ export default function MusicRoom() {
         chipTitle="Show Up, Every Week"
         chipSubtitle="Community and structure for your riyaz"
       />
+
+      {/* About the room — the warm editorial intro */}
+      <section className="bg-white">
+        <div className="udukku-section py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-10 md:mb-14">
+            <div className="lg:col-span-5">
+              <span className="inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-orange mb-4">
+                <BrandIcon size={14} /> The room, explained
+              </span>
+              <h2 className="text-display text-brown-dark text-3xl md:text-4xl lg:text-5xl leading-[1.05]">
+                A quiet promise to keep{' '}
+                <span className="text-italic-serif text-orange">showing up</span>.
+              </h2>
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7 text-brown-mid text-base md:text-lg leading-relaxed space-y-4">
+              <p>
+                Udukku Music Room is a monthly practice home for anyone who
+                has ever loved music and quietly hoped to come back to it. Not
+                a course. Not a class. A steady, warm place to keep showing
+                up, at your own pace, alongside people who care about the
+                same thing.
+              </p>
+              <p>
+                The teacher is present. The structure is there. Your practice,
+                your songs, and the shape of your riyaz stay entirely yours.
+                We only hold the room.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+            <article className="rounded-2xl p-7 bg-cream border border-brown-dark/10">
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
+                <BrandIcon size={16} />
+              </span>
+              <p className="text-display text-brown-dark text-xl md:text-2xl leading-tight mt-5">
+                Structure without{' '}
+                <span className="text-italic-serif text-orange">pressure</span>.
+              </p>
+              <p className="mt-2 text-brown-mid text-sm leading-relaxed">
+                Teachers who sit beside you, never above you. Everything moves
+                at the tempo you can honour.
+              </p>
+            </article>
+            <article className="rounded-2xl p-7 bg-cream border border-brown-dark/10">
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
+                <BrandIcon size={16} />
+              </span>
+              <p className="text-display text-brown-dark text-xl md:text-2xl leading-tight mt-5">
+                Your songs.{' '}
+                <span className="text-italic-serif text-orange">Our room</span>.
+              </p>
+              <p className="mt-2 text-brown-mid text-sm leading-relaxed">
+                You bring the practice. We hold the space, the rhythm, and the
+                gentle company you need to keep it going.
+              </p>
+            </article>
+            <article className="rounded-2xl p-7 bg-cream border border-brown-dark/10">
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
+                <BrandIcon size={16} />
+              </span>
+              <p className="text-display text-brown-dark text-xl md:text-2xl leading-tight mt-5">
+                A place to{' '}
+                <span className="text-italic-serif text-orange">return</span>.
+              </p>
+              <p className="mt-2 text-brown-mid text-sm leading-relaxed">
+                For everyone who has ever put music down and quietly hoped to
+                find their way back. The room stays open.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
 
       {/* What you sign up for */}
       <section className="bg-white">
