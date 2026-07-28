@@ -88,20 +88,10 @@ const PlanCard = ({ plan, selected, onSelect }) => (
     data-testid={`plan-${plan.id}`}
     className={`relative text-left rounded-3xl p-7 md:p-8 transition-all duration-500 ${
       selected
-        ? 'bg-white border-2 border-orange shadow-[0_25px_70px_-20px_rgba(200,75,26,0.45)] hover:-translate-y-1 hover:shadow-[0_35px_90px_-20px_rgba(200,75,26,0.55)]'
+        ? 'bg-white border-2 border-orange shadow-[0_25px_70px_-20px_rgba(200,75,26,0.45)] -translate-y-1.5 hover:-translate-y-2 hover:shadow-[0_35px_90px_-20px_rgba(200,75,26,0.55)]'
         : 'bg-cream border border-brown-dark/10 hover:border-orange/40 hover:-translate-y-0.5'
     }`}
   >
-    {/* Premium accent bar across the top edge — only when selected.
-        Rounded-t-3xl keeps it flush with the card's own rounded corners so we
-        don't need overflow-hidden on the parent (which was clipping the
-        MOST POPULAR pill that floats above the card). */}
-    {selected && (
-      <span
-        className="absolute top-0 left-0 right-0 h-[5px] bg-orange rounded-t-3xl"
-        aria-hidden
-      />
-    )}
 
     {plan.featured && (
       <span className="absolute -top-3.5 left-7 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-orange text-white text-[11px] font-semibold uppercase tracking-[0.22em] shadow-[0_10px_22px_-6px_rgba(200,75,26,0.6)]">
