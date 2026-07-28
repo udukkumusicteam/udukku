@@ -15,6 +15,7 @@ import {
   Sunset,
   Moon,
   Sunrise,
+  Info,
 } from 'lucide-react';
 import ServiceHero from '../../components/services/ServiceHero';
 import ServiceCTA from '../../components/services/ServiceCTA';
@@ -391,7 +392,8 @@ export default function MusicRoom() {
       {/* Booking form — dark editorial band, form wrapped in cream card */}
       <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
-          <div className="max-w-2xl mb-8 md:mb-10">
+          <div className="max-w-[960px] mx-auto">
+            <div className="max-w-2xl mb-8 md:mb-10">
             <div className="text-[11px] md:text-xs uppercase tracking-[0.28em] text-orange mb-4">
               Reserve your spot
             </div>
@@ -556,6 +558,20 @@ export default function MusicRoom() {
                 </div>
               </div>
 
+              <div className="md:col-span-2 flex items-start gap-2.5 pt-2">
+                <Info
+                  className="w-4 h-4 text-orange mt-[3px] shrink-0"
+                  strokeWidth={2}
+                />
+                <p
+                  data-testid="umr-form-note"
+                  className="text-brown-mid/75 text-xs md:text-sm leading-relaxed"
+                >
+                  We&apos;ll review your request and reach out shortly with the
+                  next steps, tutor availability, and session details.
+                </p>
+              </div>
+
               <div className="md:col-span-2 mt-1">
                 <button
                   type="submit"
@@ -569,6 +585,7 @@ export default function MusicRoom() {
               </div>
             </form>
           )}
+          </div>
           </div>
         </div>
       </section>
