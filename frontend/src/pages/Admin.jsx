@@ -181,7 +181,7 @@ export default function Admin() {
               Submissions Dashboard
             </h1>
             <p className="text-brown-mid mt-2 text-sm max-w-lg">
-              WELCOME TO UDUKKU ADMIN DASHBOARD
+              ------------------------WELCOME TO UDUKKU DASHBOARD---------------------
             </p>
           </div>
           <div className="flex items-center gap-3">

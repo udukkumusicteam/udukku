@@ -19,22 +19,22 @@ export const HERO_PILLS = ['Keys', 'Strings', 'Vocals', 'Percussion', 'Theory & 
 
 export const STATS = [
   {
-    number: '500+',
-    title: 'Lives touched by music',
+    number: '53',
+    title: 'Students Across Formats',
     body:
-      'From quiet first-timers to soulful performers, every story here began with a single, gentle note.',
+      'from 1:1 lessons to a 35-student exam stress workshop',
   },
   {
-    number: '15+',
-    title: 'Mentors who truly listen',
+    number: '4',
+    title: 'Events Run',
     body:
-      'Our teachers do not just instruct. They sit beside you. Each one brings patience, warmth, and a love for sound that you can feel in the room.',
+      'Successfully with 120+ attendees for workshops, open mics and more',
   },
   {
-    number: '∞',
-    title: 'Instruments, one home',
+    number: '100+',
+    title: 'Educators in Database',
     body:
-      'Keys, strings, voice, percussion, and more. Whatever sound calls to you, there is a path waiting here, ready in its own time.',
+      'Across subjects ranging from Vocals, Songwriting, Production and Instruments',
   },
 ];
 

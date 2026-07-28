@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import {
-  ArrowLeft,
   ArrowUpRight,
   CheckCircle2,
   ChevronDown,
@@ -18,7 +16,6 @@ import {
   Ear,
   PenLine,
   Moon,
-  BookOpen,
   Sparkles,
   Shield,
   Zap,
@@ -31,6 +28,8 @@ import {
   Gift,
   CalendarCheck,
 } from 'lucide-react';
+import ServiceHero from '../../components/services/ServiceHero';
+import ServiceCTA from '../../components/services/ServiceCTA';
 import { sessionBookingsService, corporateBookingsService } from '../../services/supabase';
 
 /* --------------------------- CONTENT --------------------------- */
@@ -118,16 +117,6 @@ const FAQS = [
 
 /* --------------------------- HELPERS --------------------------- */
 
-const BackLink = () => (
-  <Link
-    to="/services"
-    data-testid="back-to-services"
-    className="flex w-fit items-center gap-2 text-orange hover:text-orange-dark text-sm font-medium transition-colors"
-  >
-    <ArrowLeft className="w-4 h-4" /> Back to Services
-  </Link>
-);
-
 const scrollTo = (ref) => {
   if (ref?.current) {
     ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -141,17 +130,14 @@ export default function MusicMeditation() {
   const explorerRef = useRef(null);
   const bookingRef = useRef(null);
 
-  const [kind, setKind] = useState('individual'); // booking form kind
+  const [kind, setKind] = useState('individual');
   const [openFaq, setOpenFaq] = useState(0);
 
-  // Individual form state
   const [ind, setInd] = useState({ name: '', email: '', phone: '', plan: '', goals: '' });
-  // Corporate form state
   const [corp, setCorp] = useState({ name: '', workEmail: '', company: '', team: '', goals: '' });
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
 
-  /* -------- CTA handlers -------- */
   const openExplorer = (which) => {
     setTab(which);
     setTimeout(() => scrollTo(explorerRef), 30);
@@ -163,10 +149,9 @@ export default function MusicMeditation() {
     setTimeout(() => scrollTo(bookingRef), 30);
   };
 
-  /* -------- Submit -------- */
   const submit = async (e) => {
     e.preventDefault();
-    if (loading) return; // prevent duplicate submissions
+    if (loading) return;
     setLoading(true);
     try {
       if (kind === 'individual') {
@@ -214,91 +199,52 @@ export default function MusicMeditation() {
   };
 
   return (
-    <main data-testid="music-meditation-page" className="bg-cream page-fade-in">
+    <main data-testid="music-meditation-page" className="bg-white page-fade-in">
       <style>{`
         @keyframes udukku-rise { from { opacity:0; transform:translateY(14px);} to { opacity:1; transform:translateY(0);} }
+        @keyframes udukku-drift { 0% { transform: translateY(0px) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(-2deg); } 100% { transform: translateY(0px) rotate(-2deg); } }
         .tab-panel { animation: udukku-fade 0.45s ease both; }
         @keyframes udukku-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-        .mm-input { background:#fff; border:1px solid rgba(70,40,20,0.12); color:#1a1410; }
-        .mm-input:focus { outline:none; border-color:#E8883A; box-shadow: 0 0 0 3px rgba(232,136,58,0.15); }
-        .mm-input::placeholder { color: rgba(70,40,20,0.4); }
       `}</style>
 
-      {/* ---------------- HERO ---------------- */}
-      <section className="relative overflow-hidden bg-cream">
-        <div
-          className="absolute -top-40 -right-32 w-[520px] h-[520px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(closest-side, rgba(232,136,58,0.20), transparent 70%)' }}
-          aria-hidden
-        />
-        <div className="relative udukku-section pt-28 md:pt-32 pb-16 md:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          <div className="lg:col-span-6">
-            <BackLink />
-            <h1 className="reveal mt-8 text-display text-brown-dark text-4xl sm:text-5xl md:text-6xl lg:text-[64px] leading-[1.02]">
-              Experience the{' '}
-              <span className="text-italic-serif text-orange">
-                Healing Power
-              </span>{' '}
-              of Music
-            </h1>
-            <p className="reveal mt-5 max-w-xl text-brown-mid text-base md:text-lg leading-relaxed" style={{ transitionDelay: '80ms' }}>
-              Discover guided music wellness experiences designed to reduce
-              stress, improve focus, enhance emotional wellbeing, and help you
-              reconnect with yourself or empower your team through the
-              transformative power of music.
-            </p>
-            <div className="reveal mt-8 flex flex-wrap items-center gap-3" style={{ transitionDelay: '140ms' }}>
-              <button
-                type="button"
-                data-testid="hero-book-individual"
-                onClick={() => openExplorer('individual')}
-                className="inline-flex items-center h-12 px-6 rounded-full bg-orange text-white text-[15px] font-medium hover:bg-orange-dark transition-colors"
-              >
-                Book Individual Session
-              </button>
-              <button
-                type="button"
-                data-testid="hero-corporate-enquiry"
-                onClick={() => openExplorer('corporate')}
-                className="inline-flex items-center h-12 px-6 rounded-full bg-transparent border border-orange text-orange text-[15px] font-medium hover:bg-orange/10 transition-colors"
-              >
-                Corporate Enquiry
-              </button>
-            </div>
-          </div>
-          <div className="lg:col-span-6">
-            <div className="relative rounded-[28px] md:rounded-[36px] overflow-hidden shadow-[0_40px_80px_-40px_rgba(102,54,20,0.28)]">
-              <img
-                src="/assets/images/events/community-listening-circle.jpg"
-                alt="A guided music meditation session in a warm room"
-                className="w-full h-full object-cover aspect-[5/4]"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServiceHero
+        testId="music-meditation-hero"
+        eyebrow="Music & Meditation"
+        headline={
+          <>
+            Experience the{' '}
+            <span className="text-italic-serif text-orange">healing power</span>{' '}
+            of music.
+          </>
+        }
+        description="Guided music wellness experiences designed to reduce stress, improve focus, and help you reconnect through the transformative power of music."
+        pills={['Individual', 'Corporate', 'Group', 'Wellness', 'Focus']}
+        imageSrc="/assets/images/events/community-listening-circle.jpg"
+        imageAlt="A guided music meditation session in a warm room"
+        chipTitle="Music As Medicine"
+        chipSubtitle="A daily wellness practice"
+      />
 
-      {/* ---------------- WHY MUSIC WELLNESS ---------------- */}
-      <section className="bg-cream">
+      {/* Why music wellness */}
+      <section className="bg-white">
         <div className="udukku-section py-16 md:py-20">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-            <div className="uppercase tracking-[0.28em] text-xs text-orange mb-4">Why Music Wellness?</div>
-            <p className="text-brown-mid text-base md:text-lg leading-relaxed">
-              Music engages attention while simultaneously promoting emotional
-              and physical relaxation. It helps regulate breathing, reduces
-              stress levels, and enhances focus and performance through guided
-              music experiences.
-            </p>
-          </div>
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
+            Why music wellness
+          </h2>
+          <p className="max-w-2xl text-brown-mid text-base md:text-lg leading-relaxed mb-10">
+            Music engages attention while promoting emotional and physical
+            relaxation. It regulates breathing, reduces stress, and enhances
+            focus through guided experiences.
+          </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {WHY_ITEMS.map((w) => {
               const Icon = w.icon;
               return (
                 <article
                   key={w.label}
-                  className="rounded-2xl bg-white border border-brown-dark/10 p-5 flex flex-col items-center text-center min-h-[130px] justify-center"
+                  className="rounded-2xl bg-cream border border-brown-dark/10 p-5 flex flex-col items-center text-center min-h-[130px] justify-center"
                 >
-                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-orange/10 text-orange">
+                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
                     <Icon className="w-[18px] h-[18px]" strokeWidth={1.8} />
                   </span>
                   <div className="mt-3 text-brown-dark text-sm font-medium leading-snug">
@@ -311,11 +257,11 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* ---------------- CHOOSE YOUR WELLNESS JOURNEY ---------------- */}
-      <section className="bg-white/60">
+      {/* Choose journey */}
+      <section className="bg-cream">
         <div className="udukku-section py-16 md:py-20">
-          <h2 className="text-center text-display text-brown-dark text-2xl md:text-3xl mb-10 md:mb-12">
-            CHOOSE YOUR WELLNESS JOURNEY
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-8">
+            Choose your wellness journey
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
             <ChoiceCard
@@ -338,10 +284,9 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* ---------------- INTERACTIVE PROGRAM EXPLORER ---------------- */}
-      <section ref={explorerRef} className="bg-cream">
+      {/* Interactive explorer */}
+      <section ref={explorerRef} className="bg-white">
         <div className="udukku-section py-16 md:py-20">
-          {/* Panels */}
           {tab === 'individual' ? (
             <IndividualPanel
               key="individual"
@@ -356,13 +301,13 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* ---------------- FAQ ---------------- */}
+      {/* FAQ */}
       <section className="bg-cream">
-        <div className="udukku-section pb-16 md:pb-20">
-          <h2 className="text-center text-display text-brown-dark text-3xl md:text-4xl mb-10">
-            FAQ
+        <div className="udukku-section py-16 md:py-20">
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-8">
+            Frequently asked
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {FAQS.map((f, i) => (
               <FaqRow
                 key={f.q}
@@ -377,25 +322,25 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* ---------------- BOOKING FORM ---------------- */}
-      <section ref={bookingRef} className="bg-cream">
-        <div className="udukku-section pb-16 md:pb-20">
-          <div className="rounded-[28px] md:rounded-[36px] bg-brown-dark text-white p-7 sm:p-9 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+      {/* Booking form — light cream card matching template tokens */}
+      <section ref={bookingRef} className="bg-white">
+        <div className="udukku-section py-16 md:py-20">
+          <div className="rounded-[28px] md:rounded-[36px] bg-cream border border-brown-dark/10 p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
             <div className="lg:col-span-4">
-              <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange/20 border border-orange/40 text-orange">
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.8} />
               </span>
-              <h3 className="text-display text-orange text-3xl md:text-4xl mt-5">
-                BOOK YOUR SESSION
+              <h3 className="text-display text-brown-dark text-3xl md:text-4xl mt-5">
+                Book your session
               </h3>
-              <p className="mt-3 text-white/75 text-sm md:text-base leading-relaxed">
-                Ready to begin your wellness journey? Tell us about yourself
-                and we will recommend the right wellness experience.
+              <p className="mt-3 text-brown-mid text-sm md:text-base leading-relaxed">
+                Tell us about yourself and we will recommend the right
+                wellness experience.
               </p>
             </div>
 
             <div className="lg:col-span-8">
-              <div className="text-[11px] uppercase tracking-[0.22em] text-white/60 mb-3">
+              <div className="text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-3">
                 I am interested in
               </div>
               <div
@@ -421,22 +366,19 @@ export default function MusicMeditation() {
                   }}
                 />
               </div>
-              <p className="text-white/50 text-xs mb-6">
-                Form fields will change based on your selection.
-              </p>
 
               {ok ? (
                 <div
                   data-testid="booking-success"
-                  className="rounded-2xl bg-orange/[0.1] border border-orange/40 p-6"
+                  className="rounded-2xl bg-white border border-orange/40 p-6"
                 >
                   <div className="flex items-center gap-3 text-orange">
                     <CheckCircle2 className="w-6 h-6" />
-                    <span className="text-display text-2xl text-white">
+                    <span className="text-display text-2xl text-brown-dark">
                       {kind === 'individual' ? "You're in." : 'Request received.'}
                     </span>
                   </div>
-                  <p className="mt-2 text-white/80 text-sm md:text-base">
+                  <p className="mt-2 text-brown-mid text-sm md:text-base">
                     {kind === 'individual'
                       ? 'A wellness curator will WhatsApp you shortly to confirm your slot.'
                       : 'Our corporate team will send a tailored proposal within a day.'}
@@ -462,45 +404,14 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* ---------------- BOTTOM CTA BANNER ---------------- */}
-      <section className="bg-cream">
-        <div className="udukku-section pb-20 md:pb-24">
-          <div className="relative overflow-hidden rounded-[28px] md:rounded-[36px] bg-hero-gradient text-white p-8 md:p-12 text-center">
-            <div className="absolute inset-0 hero-radial-overlay pointer-events-none" aria-hidden />
-            <div className="relative max-w-3xl mx-auto">
-              <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/15 border border-white/30 text-white mb-5">
-                <Music className="w-5 h-5" strokeWidth={1.8} />
-              </span>
-              <h2 className="text-display text-white text-3xl md:text-4xl lg:text-[44px] leading-[1.05]">
-                Ready to Experience the{' '}
-                <span className="text-italic-serif">Power of Music</span>?
-              </h2>
-              <p className="mt-4 text-white/85 text-sm md:text-base">
-                Whether you&apos;re seeking personal wellbeing or a healthier,
-                more focused workplace, let music guide your journey.
-              </p>
-              <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-                <button
-                  type="button"
-                  data-testid="bottom-book-individual"
-                  onClick={() => openBooking('individual')}
-                  className="inline-flex items-center h-12 px-6 rounded-full bg-white text-brown-dark text-[15px] font-medium hover:bg-cream transition-colors"
-                >
-                  Book Individual Session
-                </button>
-                <button
-                  type="button"
-                  data-testid="bottom-corporate"
-                  onClick={() => openBooking('corporate')}
-                  className="inline-flex items-center h-12 px-6 rounded-full bg-transparent border border-white text-white text-[15px] font-medium hover:bg-white/10 transition-colors"
-                >
-                  Talk to Our Team
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServiceCTA
+        eyebrow="Begin your practice"
+        headline={<>Let music guide your <span className="text-italic-serif text-orange">wellbeing</span>.</>}
+        description="Whether you are seeking personal wellbeing or a healthier workplace, we will help you begin."
+        ctaLabel="Book Now"
+        ctaTo="/booking"
+        testId="mm-book-cta"
+      />
     </main>
   );
 }
@@ -511,9 +422,9 @@ const ChoiceCard = ({ testid, icon: Icon, title, body, onClick, selected }) => (
   <article
     data-testid={testid}
     aria-pressed={selected}
-    className={`rounded-3xl p-7 md:p-8 flex flex-col md:flex-row items-start gap-5 border-2 transition-all duration-500 ${
+    className={`rounded-2xl p-7 md:p-8 flex flex-col md:flex-row items-start gap-5 border transition-all duration-500 ${
       selected
-        ? 'bg-orange/[0.08] border-orange shadow-[0_20px_60px_-30px_rgba(232,136,58,0.55)]'
+        ? 'bg-white border-orange shadow-[0_20px_60px_-30px_rgba(232,136,58,0.55)]'
         : 'bg-white border-brown-dark/10 hover:border-orange/40'
     }`}
   >
@@ -525,7 +436,7 @@ const ChoiceCard = ({ testid, icon: Icon, title, body, onClick, selected }) => (
       <Icon className="w-6 h-6" strokeWidth={1.6} />
     </span>
     <div className="flex-1">
-      <h3 className="text-display text-orange text-2xl md:text-[28px] leading-tight">
+      <h3 className="text-display text-brown-dark text-2xl md:text-[28px] leading-tight">
         {title}
       </h3>
       <p className="mt-2 text-brown-mid text-sm md:text-base leading-relaxed">
@@ -547,25 +458,22 @@ const ChoiceCard = ({ testid, icon: Icon, title, body, onClick, selected }) => (
   </article>
 );
 
-/* ----- Individual panel ----- */
 const IndividualPanel = ({ onBook }) => (
-  <div className="tab-panel rounded-[28px] bg-white border border-brown-dark/10 p-6 md:p-10">
-    <div className="text-center max-w-3xl mx-auto mb-8">
+  <div className="tab-panel rounded-2xl bg-cream border border-brown-dark/10 p-6 md:p-10">
+    <div className="max-w-3xl mb-8">
       <div className="uppercase tracking-[0.28em] text-xs text-orange mb-3">
         Individual & Group Wellness
       </div>
       <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
-        Find Balance Through Music
+        Find balance through music
       </h3>
       <p className="mt-4 text-brown-mid text-sm md:text-base leading-relaxed">
-        Working professionals often experience significant cognitive demands,
-        constant performance pressure, and ongoing stress in their daily
-        lives. These sessions combine:
+        Working professionals often experience cognitive demands, performance
+        pressure, and ongoing stress. These sessions combine:
       </p>
     </div>
 
-    {/* Elements grid */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-3xl mx-auto mb-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-3xl mb-10">
       {INDIVIDUAL_ELEMENTS.map((e) => {
         const Icon = e.icon;
         return (
@@ -577,16 +485,15 @@ const IndividualPanel = ({ onBook }) => (
       })}
     </div>
 
-    {/* Program structure */}
-    <div className="text-center uppercase tracking-[0.28em] text-xs text-orange mb-5">
-      Program Structure
+    <div className="uppercase tracking-[0.28em] text-xs text-orange mb-5">
+      Program structure
     </div>
     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
       {INDIVIDUAL_STRUCTURE.map((s) => {
         const Icon = s.icon;
         return (
-          <div key={s.label} className="rounded-2xl bg-cream border border-brown-dark/10 p-4 text-center">
-            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white text-orange mb-2">
+          <div key={s.label} className="rounded-2xl bg-white border border-brown-dark/10 p-4 text-center">
+            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-cream text-orange mb-2">
               <Icon className="w-[16px] h-[16px]" strokeWidth={1.8} />
             </span>
             <div className="text-brown-dark text-sm font-medium">{s.label}</div>
@@ -596,11 +503,10 @@ const IndividualPanel = ({ onBook }) => (
       })}
     </div>
 
-    {/* Outcomes */}
-    <div className="text-center uppercase tracking-[0.28em] text-xs text-orange mb-5">
-      What You Will Gain
+    <div className="uppercase tracking-[0.28em] text-xs text-orange mb-5">
+      What you will gain
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-3xl mx-auto mb-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-3xl mb-10">
       {INDIVIDUAL_OUTCOMES.map((o) => (
         <div key={o} className="flex items-start gap-2.5 text-brown-dark text-sm">
           <CheckCircle2 className="w-4 h-4 text-orange mt-[2px] shrink-0" strokeWidth={2} />
@@ -609,16 +515,15 @@ const IndividualPanel = ({ onBook }) => (
       ))}
     </div>
 
-    {/* Pricing */}
-    <div className="text-center uppercase tracking-[0.28em] text-xs text-orange mb-5">
-      Choose Your Plan
+    <div className="uppercase tracking-[0.28em] text-xs text-orange mb-5">
+      Choose your plan
     </div>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-4">
       {INDIVIDUAL_PLANS.map((p) => (
         <div
           key={p.id}
           data-testid={`plan-${p.id}`}
-          className="rounded-2xl bg-cream border border-brown-dark/10 p-5 text-center"
+          className="rounded-2xl bg-white border border-brown-dark/10 p-5 text-center"
         >
           <div className="text-orange text-base font-semibold">{p.name}</div>
           <div className="mt-1 text-brown-mid text-xs">{p.sessions}</div>
@@ -634,11 +539,11 @@ const IndividualPanel = ({ onBook }) => (
         </div>
       ))}
     </div>
-    <p className="text-center text-brown-mid/70 text-xs mb-8">
+    <p className="text-brown-mid/70 text-xs mb-8">
       International pricing available upon request.
     </p>
 
-    <div className="text-center">
+    <div>
       <button
         type="button"
         onClick={() => onBook()}
@@ -651,15 +556,14 @@ const IndividualPanel = ({ onBook }) => (
   </div>
 );
 
-/* ----- Corporate panel ----- */
 const CorporatePanel = ({ onRequest }) => (
-  <div className="tab-panel rounded-[28px] bg-white border border-brown-dark/10 p-6 md:p-10">
-    <div className="text-center max-w-3xl mx-auto mb-8">
+  <div className="tab-panel rounded-2xl bg-cream border border-brown-dark/10 p-6 md:p-10">
+    <div className="max-w-3xl mb-8">
       <div className="uppercase tracking-[0.28em] text-xs text-orange mb-3">
         Corporate Wellness
       </div>
       <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
-        Music as a Performance Tool for Your Workforce
+        Music as a performance tool for your workforce
       </h3>
       <p className="mt-4 text-brown-mid text-sm md:text-base leading-relaxed">
         A structured, evidence-informed wellness program designed to build
@@ -667,16 +571,15 @@ const CorporatePanel = ({ onRequest }) => (
       </p>
     </div>
 
-    {/* Why organisations */}
-    <div className="text-center uppercase tracking-[0.28em] text-xs text-orange mb-5">
-      Why Organisations Choose This
+    <div className="uppercase tracking-[0.28em] text-xs text-orange mb-5">
+      Why organisations choose this
     </div>
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-10">
       {CORPORATE_WHY.map((w) => {
         const Icon = w.icon;
         return (
-          <div key={w.label} className="rounded-2xl bg-cream border border-brown-dark/10 p-4 text-center min-h-[120px] flex flex-col items-center justify-center">
-            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white text-orange mb-2">
+          <div key={w.label} className="rounded-2xl bg-white border border-brown-dark/10 p-4 text-center min-h-[120px] flex flex-col items-center justify-center">
+            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-cream text-orange mb-2">
               <Icon className="w-[16px] h-[16px]" strokeWidth={1.8} />
             </span>
             <div className="text-brown-dark text-xs md:text-[13px] font-medium leading-snug">
@@ -688,10 +591,9 @@ const CorporatePanel = ({ onRequest }) => (
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mb-10">
-      {/* Program journey */}
       <div>
         <div className="uppercase tracking-[0.28em] text-xs text-orange mb-4">
-          Program Journey
+          Program journey
         </div>
         <div className="space-y-4">
           {CORPORATE_JOURNEY.map((s) => (
@@ -712,10 +614,9 @@ const CorporatePanel = ({ onRequest }) => (
         </div>
       </div>
 
-      {/* Employee outcomes */}
       <div>
         <div className="uppercase tracking-[0.28em] text-xs text-orange mb-4">
-          Employee Outcomes
+          Employee outcomes
         </div>
         <div className="grid grid-cols-1 gap-2.5">
           {CORPORATE_OUTCOMES.map((o) => (
@@ -728,9 +629,8 @@ const CorporatePanel = ({ onRequest }) => (
       </div>
     </div>
 
-    {/* Delivery format */}
-    <div className="text-center uppercase tracking-[0.28em] text-xs text-orange mb-5">
-      Delivery Format
+    <div className="uppercase tracking-[0.28em] text-xs text-orange mb-5">
+      Delivery format
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-10">
       {CORPORATE_DELIVERY.map((d) => {
@@ -738,9 +638,9 @@ const CorporatePanel = ({ onRequest }) => (
         return (
           <div
             key={d.label}
-            className="rounded-2xl bg-cream border border-brown-dark/10 p-4 flex items-center gap-3"
+            className="rounded-2xl bg-white border border-brown-dark/10 p-4 flex items-center gap-3"
           >
-            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white text-orange">
+            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-cream text-orange">
               <Icon className="w-[16px] h-[16px]" strokeWidth={1.8} />
             </span>
             <div className="text-brown-dark text-sm">{d.label}</div>
@@ -749,7 +649,7 @@ const CorporatePanel = ({ onRequest }) => (
       })}
     </div>
 
-    <div className="text-center">
+    <div>
       <button
         type="button"
         onClick={onRequest}
@@ -762,7 +662,6 @@ const CorporatePanel = ({ onRequest }) => (
   </div>
 );
 
-/* ----- FAQ row ----- */
 const FaqRow = ({ q, a, open, onToggle, testid }) => (
   <div
     data-testid={testid}
@@ -794,7 +693,6 @@ const FaqRow = ({ q, a, open, onToggle, testid }) => (
   </div>
 );
 
-/* ----- Booking kind option (radio pill on dark card) ----- */
 const KindOption = ({ selected, label, onClick, testid }) => (
   <button
     type="button"
@@ -802,15 +700,15 @@ const KindOption = ({ selected, label, onClick, testid }) => (
     data-testid={testid}
     className={`text-left rounded-2xl px-5 py-4 border transition-all ${
       selected
-        ? 'bg-orange/[0.14] border-orange text-white'
-        : 'bg-white/[0.04] border-white/15 text-white/70 hover:border-white/30'
+        ? 'bg-white border-orange text-brown-dark'
+        : 'bg-white border-brown-dark/10 text-brown-mid hover:border-orange/40'
     }`}
     aria-pressed={selected}
   >
     <div className="flex items-center gap-3">
       <span
         className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-          selected ? 'border-orange' : 'border-white/40'
+          selected ? 'border-orange' : 'border-brown-dark/30'
         }`}
       >
         {selected && <span className="w-2 h-2 rounded-full bg-orange" />}
@@ -820,7 +718,7 @@ const KindOption = ({ selected, label, onClick, testid }) => (
   </button>
 );
 
-/* ----- Individual form ----- */
+/* ----- Individual form (light) ----- */
 const IndividualForm = ({ form, setForm, loading, onSubmit }) => {
   const on = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   return (
@@ -829,18 +727,18 @@ const IndividualForm = ({ form, setForm, loading, onSubmit }) => {
       data-testid="individual-form"
       className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5"
     >
-      <DarkField label="Full Name *" name="name" value={form.name} onChange={on} testid="ind-field-name" required />
-      <DarkField label="Email *" type="email" name="email" value={form.email} onChange={on} testid="ind-field-email" required />
-      <DarkField wide label="WhatsApp Number *" type="tel" name="phone" value={form.phone} onChange={on} placeholder="+91 98xxxxxxxx" testid="ind-field-phone" required />
+      <LightField label="Full Name *" name="name" value={form.name} onChange={on} testid="ind-field-name" required />
+      <LightField label="Email *" type="email" name="email" value={form.email} onChange={on} testid="ind-field-email" required />
+      <LightField wide label="WhatsApp Number *" type="tel" name="phone" value={form.phone} onChange={on} placeholder="+91 98xxxxxxxx" testid="ind-field-phone" required />
       <label className="md:col-span-2 block">
-        <span className="block text-[11px] uppercase tracking-[0.22em] text-white/60 mb-2">Preferred Plan *</span>
+        <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-2">Preferred Plan *</span>
         <select
           name="plan"
           value={form.plan}
           onChange={on}
           required
           data-testid="ind-field-plan"
-          className="mm-input w-full h-12 rounded-2xl px-4 text-sm bg-white/[0.06] border border-white/15 text-white focus:outline-none focus:border-orange"
+          className="w-full h-12 rounded-2xl bg-white border border-brown-dark/15 px-4 text-brown-dark focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition text-sm"
         >
           <option value="" disabled>Select a plan</option>
           {INDIVIDUAL_PLANS.map((p) => (
@@ -850,7 +748,7 @@ const IndividualForm = ({ form, setForm, loading, onSubmit }) => {
           ))}
         </select>
       </label>
-      <DarkTextarea label="Your Wellness Goals" name="goals" value={form.goals} onChange={on} rows={3} placeholder="e.g. reduce stress, improve focus, sleep better" testid="ind-field-goals" />
+      <LightTextarea label="Your Wellness Goals" name="goals" value={form.goals} onChange={on} rows={3} placeholder="e.g. reduce stress, improve focus, sleep better" testid="ind-field-goals" />
       <div className="md:col-span-2 mt-1">
         <button
           type="submit"
@@ -866,7 +764,6 @@ const IndividualForm = ({ form, setForm, loading, onSubmit }) => {
   );
 };
 
-/* ----- Corporate form ----- */
 const CorporateForm = ({ form, setForm, loading, onSubmit }) => {
   const on = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   return (
@@ -875,11 +772,11 @@ const CorporateForm = ({ form, setForm, loading, onSubmit }) => {
       data-testid="corporate-form"
       className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5"
     >
-      <DarkField label="Contact Name *" name="name" value={form.name} onChange={on} testid="corp-field-name" required />
-      <DarkField label="Work Email *" type="email" name="workEmail" value={form.workEmail} onChange={on} testid="corp-field-email" required />
-      <DarkField label="Company Name *" name="company" value={form.company} onChange={on} testid="corp-field-company" required />
-      <DarkField label="Team Size" name="team" value={form.team} onChange={on} placeholder="e.g. 25 to 50" testid="corp-field-team" />
-      <DarkTextarea label="Goals for Your Team" name="goals" value={form.goals} onChange={on} rows={3} placeholder="e.g. reduce burnout, improve focus, build cohesion" testid="corp-field-goals" />
+      <LightField label="Contact Name *" name="name" value={form.name} onChange={on} testid="corp-field-name" required />
+      <LightField label="Work Email *" type="email" name="workEmail" value={form.workEmail} onChange={on} testid="corp-field-email" required />
+      <LightField label="Company Name *" name="company" value={form.company} onChange={on} testid="corp-field-company" required />
+      <LightField label="Team Size" name="team" value={form.team} onChange={on} placeholder="e.g. 25 to 50" testid="corp-field-team" />
+      <LightTextarea label="Goals for Your Team" name="goals" value={form.goals} onChange={on} rows={3} placeholder="e.g. reduce burnout, improve focus, build cohesion" testid="corp-field-goals" />
       <div className="md:col-span-2 mt-1">
         <button
           type="submit"
@@ -895,25 +792,25 @@ const CorporateForm = ({ form, setForm, loading, onSubmit }) => {
   );
 };
 
-/* ----- Dark form fields (on brown-dark card) ----- */
-const DarkField = ({ label, wide, testid, ...props }) => (
+/* ----- Light form fields ----- */
+const LightField = ({ label, wide, testid, ...props }) => (
   <label className={`block ${wide ? 'md:col-span-2' : ''}`}>
-    <span className="block text-[11px] uppercase tracking-[0.22em] text-white/60 mb-2">{label}</span>
+    <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-2">{label}</span>
     <input
       {...props}
       data-testid={testid}
-      className="w-full h-12 rounded-2xl bg-white/[0.06] border border-white/15 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-orange focus:bg-white/[0.1] transition-colors text-sm"
+      className="w-full h-12 rounded-2xl bg-white border border-brown-dark/15 px-4 text-brown-dark placeholder:text-brown-mid/60 focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition text-sm"
     />
   </label>
 );
 
-const DarkTextarea = ({ label, testid, ...props }) => (
+const LightTextarea = ({ label, testid, ...props }) => (
   <label className="md:col-span-2 block">
-    <span className="block text-[11px] uppercase tracking-[0.22em] text-white/60 mb-2">{label}</span>
+    <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-2">{label}</span>
     <textarea
       {...props}
       data-testid={testid}
-      className="w-full rounded-2xl bg-white/[0.06] border border-white/15 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-orange focus:bg-white/[0.1] transition-colors resize-none text-sm"
+      className="w-full rounded-2xl bg-white border border-brown-dark/15 px-4 py-3 text-brown-dark placeholder:text-brown-mid/60 focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition resize-none text-sm"
     />
   </label>
 );

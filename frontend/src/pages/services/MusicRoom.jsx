@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
-  ArrowLeft,
   ArrowUpRight,
   Repeat,
   Users,
@@ -18,35 +16,16 @@ import {
   Moon,
   Sunrise,
 } from 'lucide-react';
-import BrandIcon from '../../components/BrandIcon';
+import ServiceHero from '../../components/services/ServiceHero';
+import ServiceCTA from '../../components/services/ServiceCTA';
 import { sessionBookingsService } from '../../services/supabase';
 
 const FEATURES = [
-  {
-    icon: Repeat,
-    title: 'Consistent Practice',
-    body: "Bring your own practice, or follow the teacher's.",
-  },
-  {
-    icon: Users,
-    title: 'Community Network',
-    body: 'Warm gatherings with people who love music.',
-  },
-  {
-    icon: ClipboardCheck,
-    title: 'Accountability',
-    body: 'An Udukku teacher; learn exactly what you want as you need.',
-  },
-  {
-    icon: Heart,
-    title: '1-on-1 Checks',
-    body: 'An individual touchpoint with the Udukku team.',
-  },
-  {
-    icon: LineChart,
-    title: 'Progress Plotting',
-    body: 'Revaluation and planning to make progress tangible.',
-  },
+  { icon: Repeat, title: 'Consistent Practice', body: "Bring your own practice, or follow the teacher's." },
+  { icon: Users, title: 'Community Network', body: 'Warm gatherings with people who love music.' },
+  { icon: ClipboardCheck, title: 'Accountability', body: 'An Udukku teacher; learn exactly what you want as you need.' },
+  { icon: Heart, title: '1-on-1 Checks', body: 'An individual touchpoint with the Udukku team.' },
+  { icon: LineChart, title: 'Progress Plotting', body: 'Revaluation and planning to make progress tangible.' },
 ];
 
 const PLANS = [
@@ -101,16 +80,6 @@ const TIME_SLOTS = [
   { value: 'night', label: 'Night', icon: Moon },
 ];
 
-const BackLink = () => (
-  <Link
-    to="/services"
-    data-testid="back-to-services"
-    className="flex w-fit items-center gap-2 text-orange hover:text-orange-dark text-sm font-medium transition-colors"
-  >
-    <ArrowLeft className="w-4 h-4" /> Back to Services
-  </Link>
-);
-
 const PlanCard = ({ plan, selected, onSelect }) => (
   <button
     type="button"
@@ -118,8 +87,8 @@ const PlanCard = ({ plan, selected, onSelect }) => (
     data-testid={`plan-${plan.id}`}
     className={`relative text-left rounded-3xl p-7 md:p-8 border transition-all duration-500 ${
       plan.featured || selected
-        ? 'bg-orange/[0.08] border-orange shadow-[0_20px_60px_-30px_rgba(232,136,58,0.55)]'
-        : 'bg-white/[0.03] border-white/12 hover:border-white/25'
+        ? 'bg-white border-orange shadow-[0_20px_60px_-30px_rgba(232,136,58,0.55)]'
+        : 'bg-cream border-brown-dark/10 hover:border-orange/40'
     }`}
   >
     {plan.featured && (
@@ -128,16 +97,16 @@ const PlanCard = ({ plan, selected, onSelect }) => (
       </span>
     )}
     <div className="flex items-start justify-between gap-6">
-      <h3 className="text-display text-white text-2xl md:text-3xl">
+      <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
         {plan.name}
       </h3>
       <div className="text-right">
-        <div className="text-white/40 text-xs line-through">{plan.strike}</div>
+        <div className="text-brown-mid/60 text-xs line-through">{plan.strike}</div>
         <div className="flex items-baseline gap-1 justify-end">
-          <span className="text-display text-white text-3xl md:text-4xl">
+          <span className="text-display text-brown-dark text-3xl md:text-4xl">
             {plan.price}
           </span>
-          <span className="text-white/60 text-xs">/{plan.per}</span>
+          <span className="text-brown-mid text-xs">/{plan.per}</span>
         </div>
       </div>
     </div>
@@ -146,26 +115,23 @@ const PlanCard = ({ plan, selected, onSelect }) => (
       {plan.rows.map(([k, v]) => (
         <div
           key={k}
-          className="flex items-center justify-between text-sm border-b border-white/10 pb-3 last:border-0"
+          className="flex items-center justify-between text-sm border-b border-brown-dark/10 pb-3 last:border-0"
         >
-          <dt className="text-white/60">{k}</dt>
-          <dd className="text-white font-medium">{v}</dd>
+          <dt className="text-brown-mid">{k}</dt>
+          <dd className="text-brown-dark font-medium">{v}</dd>
         </div>
       ))}
     </dl>
 
     <div className="mt-7">
-      <div className="text-[11px] uppercase tracking-[0.22em] text-white/45 mb-3">
+      <div className="text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-3">
         Cashback / refund
       </div>
       <ul className="space-y-2.5">
         {plan.tiers.map((t) => (
-          <li
-            key={t.range}
-            className="flex items-center justify-between text-sm"
-          >
+          <li key={t.range} className="flex items-center justify-between text-sm">
             <span className="text-orange">{t.label}</span>
-            <span className="text-white/70">{t.range}</span>
+            <span className="text-brown-mid">{t.range}</span>
           </li>
         ))}
       </ul>
@@ -196,7 +162,7 @@ export default function MusicRoom() {
 
   const submit = async (e) => {
     e.preventDefault();
-    if (loading) return; // prevent duplicate submissions
+    if (loading) return;
     if (!form.name || !form.whatsapp || !form.location || !form.frequency || !form.time) {
       toast.error('Please fill in all required fields.');
       return;
@@ -229,78 +195,53 @@ export default function MusicRoom() {
   };
 
   return (
-    <main
-      data-testid="music-room-page"
-      className="bg-brown-dark text-white page-fade-in"
-    >
+    <main data-testid="music-room-page" className="bg-white page-fade-in">
       <style>{`
-        @keyframes udukku-rise {
-          from { opacity: 0; transform: translateY(14px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .umr-input {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.14);
-          color: #fff;
-        }
-        .umr-input::placeholder { color: rgba(255,255,255,0.35); }
-        .umr-input:focus { outline: none; border-color: #E8883A; background: rgba(255,255,255,0.06); }
-        select.umr-input option { color: #1a1410; background: #fff; }
+        @keyframes udukku-rise { from { opacity:0; transform:translateY(14px);} to { opacity:1; transform:translateY(0);} }
+        @keyframes udukku-drift { 0% { transform: translateY(0px) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(-2deg); } 100% { transform: translateY(0px) rotate(-2deg); } }
       `}</style>
 
-      {/* Hero */}
-      <section className="relative udukku-section pt-28 md:pt-32 pb-16 md:pb-24">
-        <BackLink />
-
-        <span
-          className="reveal mt-8 inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-orange mb-6"
-        >
-          <BrandIcon size={14} /> Udukku Music Room
-        </span>
-
-        <h1
-          className="reveal text-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-[1.02] max-w-5xl"
-          style={{ transitionDelay: '80ms' }}
-        >
-          You didn&apos;t stop loving music.{' '}
-          <span className="text-italic-serif text-orange">
-            You just stopped having a place for it.
-          </span>
-        </h1>
-
-        <p
-          className="reveal mt-8 max-w-2xl text-white/70 text-base md:text-lg leading-relaxed"
-          style={{ transitionDelay: '160ms' }}
-        >
-          Monthly online practice sessions, a real community, with structure
-          built to hold your riyaz. Every session is yours to use. The teacher
-          is present, the structure is there, but your practice and your pace
-          remain yours.
-        </p>
-      </section>
+      <ServiceHero
+        testId="music-room-hero"
+        eyebrow="Udukku Music Room"
+        headline={
+          <>
+            You didn&apos;t stop loving music.{' '}
+            <span className="text-italic-serif text-orange">
+              You just stopped having a place for it.
+            </span>
+          </>
+        }
+        description="Monthly online practice sessions, a real community, with structure built to hold your riyaz. Every session is yours to use."
+        pills={['Habit 12', 'Habit 24', 'Community', 'Cashback', 'Referrals']}
+        imageSrc="/assets/images/events/student-masterclass.jpg"
+        imageAlt="A student masterclass in progress"
+        chipTitle="Show Up, Every Week"
+        chipSubtitle="Community and structure for your riyaz"
+      />
 
       {/* What you sign up for */}
-      <section className="relative">
-        <div className="udukku-section pb-16 md:pb-20">
-          <div className="text-[11px] md:text-xs uppercase tracking-[0.28em] text-white/45 mb-8">
+      <section className="bg-white">
+        <div className="udukku-section py-16 md:py-20">
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
             What you sign up for
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {FEATURES.map((f) => {
               const Icon = f.icon;
               return (
                 <article
                   key={f.title}
                   data-testid={`umr-feature-${f.title.toLowerCase().replace(/[^a-z]/g, '-')}`}
-                  className="rounded-3xl p-7 bg-white/[0.03] border border-white/10 hover:border-white/20 transition-colors min-h-[220px] flex flex-col"
+                  className="rounded-2xl border border-brown-dark/10 bg-cream p-6 hover:border-orange/40 transition-colors min-h-[200px] flex flex-col"
                 >
-                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange/15 border border-orange/30 text-orange">
+                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
                     <Icon className="w-5 h-5" strokeWidth={1.8} />
                   </span>
-                  <h3 className="text-display text-white text-xl md:text-2xl mt-6">
+                  <h3 className="text-display text-brown-dark text-xl mt-5">
                     {f.title}
                   </h3>
-                  <p className="mt-2 text-white/65 text-sm md:text-base leading-relaxed">
+                  <p className="mt-2 text-brown-mid text-sm leading-relaxed">
                     {f.body}
                   </p>
                 </article>
@@ -311,12 +252,12 @@ export default function MusicRoom() {
       </section>
 
       {/* Choose your plan */}
-      <section className="relative">
-        <div className="udukku-section pb-16 md:pb-20">
-          <div className="text-[11px] md:text-xs uppercase tracking-[0.28em] text-white/45 mb-8">
+      <section className="bg-cream">
+        <div className="udukku-section py-16 md:py-20">
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
             Choose your plan
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
             {PLANS.map((p) => (
               <PlanCard
                 key={p.id}
@@ -330,30 +271,30 @@ export default function MusicRoom() {
       </section>
 
       {/* Cashback + Referrals */}
-      <section className="relative">
-        <div className="udukku-section pb-16 md:pb-20 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
-          <article className="rounded-3xl p-8 md:p-10 bg-white/[0.03] border border-white/10">
-            <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange/15 border border-orange/30 text-orange">
+      <section className="bg-white">
+        <div className="udukku-section py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <article className="rounded-2xl p-8 bg-cream border border-brown-dark/10">
+            <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
               <Percent className="w-5 h-5" strokeWidth={1.8} />
             </span>
-            <h3 className="text-display text-white text-2xl md:text-3xl mt-6">
+            <h3 className="text-display text-brown-dark text-2xl md:text-3xl mt-5">
               Cashback Offer
             </h3>
-            <p className="mt-3 text-white/70 leading-relaxed">
+            <p className="mt-3 text-brown-mid leading-relaxed">
               At full attendance, you get 90% of your subscription fee back.
               You would be paying ₹99 a month. No, this is not a typo. The
               cashback scales from 60% upward, because we genuinely believe
               showing up should feel like it counts for something.
             </p>
           </article>
-          <article className="rounded-3xl p-8 md:p-10 bg-white/[0.03] border border-white/10">
-            <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange/15 border border-orange/30 text-orange">
+          <article className="rounded-2xl p-8 bg-cream border border-brown-dark/10">
+            <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
               <Gift className="w-5 h-5" strokeWidth={1.8} />
             </span>
-            <h3 className="text-display text-white text-2xl md:text-3xl mt-6">
+            <h3 className="text-display text-brown-dark text-2xl md:text-3xl mt-5">
               Referrals
             </h3>
-            <p className="mt-3 text-white/70 leading-relaxed">
+            <p className="mt-3 text-brown-mid leading-relaxed">
               Bring someone into Music Room. A week free for you and an easy
               entry point for them, with zero pressure on either end. Students
               who have stayed the longest are not the most talented. They are
@@ -365,19 +306,19 @@ export default function MusicRoom() {
       </section>
 
       {/* Booking form */}
-      <section className="relative">
-        <div className="udukku-section pb-20 md:pb-24">
+      <section className="bg-cream">
+        <div className="udukku-section py-16 md:py-20">
           <div className="max-w-2xl mb-8 md:mb-10">
-            <div className="text-[11px] md:text-xs uppercase tracking-[0.28em] text-white/45 mb-4">
+            <div className="text-[11px] md:text-xs uppercase tracking-[0.28em] text-orange mb-4">
               Reserve your spot
             </div>
-            <h2 className="text-display text-white text-3xl sm:text-4xl md:text-[48px] leading-[1.05]">
+            <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[44px] leading-[1.05]">
               Start your{' '}
               <span className="text-italic-serif text-orange">riyaz</span>.
             </h2>
-            <p className="mt-4 text-white/65 text-sm md:text-base">
+            <p className="mt-4 text-brown-mid text-sm md:text-base">
               Selected plan:{' '}
-              <span className="text-white font-medium">
+              <span className="text-brown-dark font-medium">
                 {PLANS.find((p) => p.id === selected)?.name}
               </span>
               . Change above anytime.
@@ -387,17 +328,17 @@ export default function MusicRoom() {
           {ok ? (
             <div
               data-testid="umr-success"
-              className="rounded-3xl bg-orange/[0.08] border border-orange/40 p-8 max-w-xl"
+              className="rounded-2xl bg-white border border-orange/40 p-7 max-w-xl"
             >
               <div className="flex items-center gap-3 text-orange">
                 <CheckCircle2 className="w-6 h-6" />
-                <span className="text-display text-2xl text-white">
+                <span className="text-display text-2xl text-brown-dark">
                   You&apos;re in.
                 </span>
               </div>
-              <p className="mt-3 text-white/70">
-                A curator from Udukku will WhatsApp you within a day to confirm
-                your slot and answer any questions.
+              <p className="mt-3 text-brown-mid">
+                A curator from Udukku will WhatsApp you within a day to
+                confirm your slot and answer any questions.
               </p>
             </div>
           ) : (
@@ -406,7 +347,7 @@ export default function MusicRoom() {
               data-testid="umr-form"
               className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-3xl"
             >
-              <Field
+              <LightField
                 label="Name *"
                 name="name"
                 testid="umr-field-name"
@@ -414,7 +355,7 @@ export default function MusicRoom() {
                 onChange={onChange}
                 required
               />
-              <Field
+              <LightField
                 label="WhatsApp number *"
                 name="whatsapp"
                 type="tel"
@@ -424,7 +365,7 @@ export default function MusicRoom() {
                 placeholder="+91 98xxxxxxxx"
                 required
               />
-              <Field
+              <LightField
                 label="City, Country *"
                 name="location"
                 testid="umr-field-location"
@@ -435,9 +376,8 @@ export default function MusicRoom() {
                 wide
               />
 
-              {/* Practice frequency */}
               <div className="md:col-span-2">
-                <span className="block text-[11px] uppercase tracking-[0.22em] text-white/50 mb-3">
+                <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-3">
                   How often would you like to practice? *
                 </span>
                 <div
@@ -450,8 +390,8 @@ export default function MusicRoom() {
                       data-testid={`umr-frequency-${opt.value}`}
                       className={`cursor-pointer rounded-2xl px-5 py-4 border transition-all ${
                         form.frequency === opt.value
-                          ? 'bg-orange/[0.1] border-orange text-white'
-                          : 'bg-white/[0.03] border-white/12 text-white/75 hover:border-white/25'
+                          ? 'bg-white border-orange text-brown-dark'
+                          : 'bg-white border-brown-dark/10 text-brown-mid hover:border-orange/40'
                       }`}
                     >
                       <input
@@ -468,7 +408,7 @@ export default function MusicRoom() {
                           className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                             form.frequency === opt.value
                               ? 'border-orange'
-                              : 'border-white/30'
+                              : 'border-brown-dark/30'
                           }`}
                         >
                           {form.frequency === opt.value && (
@@ -482,15 +422,14 @@ export default function MusicRoom() {
                     </label>
                   ))}
                 </div>
-                <p className="mt-2 text-white/40 text-xs">
+                <p className="mt-2 text-brown-mid/70 text-xs">
                   We currently host up to 3 sessions per week. More slots
                   coming soon.
                 </p>
               </div>
 
-              {/* Preferred time */}
               <div className="md:col-span-2">
-                <span className="block text-[11px] uppercase tracking-[0.22em] text-white/50 mb-3">
+                <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-3">
                   Preferred time *
                 </span>
                 <div
@@ -505,8 +444,8 @@ export default function MusicRoom() {
                         data-testid={`umr-time-${slot.value}`}
                         className={`cursor-pointer rounded-2xl px-5 py-4 border transition-all flex items-center gap-3 ${
                           form.time === slot.value
-                            ? 'bg-orange/[0.1] border-orange text-white'
-                            : 'bg-white/[0.03] border-white/12 text-white/75 hover:border-white/25'
+                            ? 'bg-white border-orange text-brown-dark'
+                            : 'bg-white border-brown-dark/10 text-brown-mid hover:border-orange/40'
                         }`}
                       >
                         <input
@@ -520,7 +459,7 @@ export default function MusicRoom() {
                         />
                         <Icon
                           className={`w-4 h-4 ${
-                            form.time === slot.value ? 'text-orange' : 'text-white/60'
+                            form.time === slot.value ? 'text-orange' : 'text-brown-mid'
                           }`}
                           strokeWidth={1.8}
                         />
@@ -533,12 +472,12 @@ export default function MusicRoom() {
                 </div>
               </div>
 
-              <div className="md:col-span-2 mt-2">
+              <div className="md:col-span-2 mt-1">
                 <button
                   type="submit"
                   disabled={loading}
                   data-testid="umr-submit"
-                  className="btn-glow inline-flex items-center gap-2 h-12 px-8 rounded-full bg-orange text-white text-base font-medium hover:bg-orange-dark disabled:opacity-60 transition-colors"
+                  className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-orange text-white text-[15px] font-medium hover:bg-orange-dark disabled:opacity-60 transition-colors"
                 >
                   {loading ? 'Reserving…' : 'Join Now'}
                   <ArrowUpRight className="w-4 h-4" />
@@ -549,31 +488,28 @@ export default function MusicRoom() {
         </div>
       </section>
 
-      {/* Closing */}
-      <section className="relative border-t border-white/10">
-        <div className="udukku-section py-20 md:py-24 text-center flex flex-col items-center">
-          <h2 className="text-display text-white text-4xl sm:text-5xl lg:text-[56px] max-w-3xl leading-[1.05]">
-            The room is open.{' '}
-            <span className="text-italic-serif text-orange">
-              Your riyaz is waiting.
-            </span>
-          </h2>
-        </div>
-      </section>
+      <ServiceCTA
+        eyebrow="The room is open"
+        headline={<>Your <span className="text-italic-serif text-orange">riyaz</span> is waiting.</>}
+        description="Reserve your spot in Music Room and let the practice hold you."
+        ctaLabel="Reserve My Spot"
+        ctaTo="/booking"
+        testId="umr-book-cta"
+      />
     </main>
   );
 }
 
-/* ---------- Dark-theme field ---------- */
-const Field = ({ label, wide, testid, ...props }) => (
+/* ---------- Light form fields ---------- */
+const LightField = ({ label, wide, testid, ...props }) => (
   <label className={`block ${wide ? 'md:col-span-2' : ''}`}>
-    <span className="block text-[11px] uppercase tracking-[0.22em] text-white/50 mb-2">
+    <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-2">
       {label}
     </span>
     <input
       {...props}
       data-testid={testid}
-      className="umr-input w-full h-12 rounded-full px-5 text-sm md:text-base transition-colors"
+      className="w-full h-12 rounded-2xl bg-white border border-brown-dark/15 px-4 text-brown-dark placeholder:text-brown-mid/60 focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition text-sm"
     />
   </label>
 );

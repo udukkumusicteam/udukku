@@ -250,19 +250,19 @@ export default function About() {
 
 const VALUES = [
   {
-    title: 'Begin with patience',
-    body: 'Every lesson opens with listening, never with pressure.',
+    title: 'Match before method',
+    body: 'We match you with a mentor whose teaching style complements yours.',
   },
   {
-    title: 'Match before method',
-    body: 'You are paired with a mentor whose temperament fits yours.',
+    title: 'Begin with patience',
+    body: 'Every lesson opens with listening, finding your rhythm.',
   },
   {
     title: 'Effort over polish',
     body: 'We celebrate the leap, not the landing. Honesty over perfection.',
   },
   {
-    title: 'No gatekeepers',
-    body: 'No auditions, no waitlists. If you want to learn, you are welcome.',
+    title: 'Progress, Not Pressure ',
+    body: 'Every lesson moves with your pace, not a fixed curriculum.',
   },
 ];

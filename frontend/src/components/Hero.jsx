@@ -63,7 +63,7 @@ export const Hero = () => {
           style={{ transitionDelay: '180ms' }}
         >
           Music does not need to be earned. It only needs to be felt. Step in,
-          slow down, and let a gentle mentor help you find the sound that has
+          slow down, and let a mentor help you find the sound that has
           quietly been yours all along.
         </p>
 

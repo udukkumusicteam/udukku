@@ -1,71 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  MapPin,
-  Send,
-  CheckCircle2,
-} from 'lucide-react';
+import { ArrowUpRight, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import BrandIcon from '../../components/BrandIcon';
+import ServiceHero from '../../components/services/ServiceHero';
+import ServiceCTA from '../../components/services/ServiceCTA';
 import { cityRequestsService } from '../../services/supabase';
 
 const PHOTOS = [
-  {
-    src: '/assets/images/events/community-listening-circle.jpg',
-    alt: 'A community listening circle in session',
-    caption: 'Community Listening Circle',
-    ratio: 'aspect-[4/5]',
-  },
-  {
-    src: '/assets/images/events/indian-classical-evening.jpg',
-    alt: 'An intimate Indian classical performance',
-    caption: 'Indian Classical Evening',
-    ratio: 'aspect-[3/4]',
-  },
-  {
-    src: '/assets/images/events/gathering-in-the-round.jpg',
-    alt: 'A gathering held around live music',
-    caption: 'Gathering In The Round',
-    ratio: 'aspect-[4/3]',
-  },
-  {
-    src: '/assets/images/events/student-masterclass.jpg',
-    alt: 'A student masterclass in progress',
-    caption: 'Student Masterclass',
-    ratio: 'aspect-[3/4]',
-  },
-  {
-    src: '/assets/images/events/before-the-first-note.jpg',
-    alt: 'A quiet moment before the concert begins',
-    caption: 'Before The First Note',
-    ratio: 'aspect-[4/3]',
-  },
-  {
-    src: '/assets/images/events/cultural-evening.jpg',
-    alt: 'A cultural performance in full swing',
-    caption: 'Cultural Evening',
-    ratio: 'aspect-[3/4]',
-  },
-  {
-    src: '/assets/images/events/workshop-in-session.jpg',
-    alt: 'A workshop with musicians and audience',
-    caption: 'Workshop In Session',
-    ratio: 'aspect-[4/5]',
-  },
-  {
-    src: '/assets/images/events/the-closing-bow.jpg',
-    alt: 'A performance closing with applause',
-    caption: 'The Closing Bow',
-    ratio: 'aspect-[4/3]',
-  },
-  {
-    src: '/assets/images/events/between-the-ragas.jpg',
-    alt: 'Musicians in conversation between sets',
-    caption: 'Between The Ragas',
-    ratio: 'aspect-[3/4]',
-  },
+  { src: '/assets/images/events/community-listening-circle.jpg', alt: 'A community listening circle in session', caption: 'Community Listening Circle', ratio: 'aspect-[4/5]' },
+  { src: '/assets/images/events/indian-classical-evening.jpg', alt: 'An intimate Indian classical performance', caption: 'Indian Classical Evening', ratio: 'aspect-[3/4]' },
+  { src: '/assets/images/events/gathering-in-the-round.jpg', alt: 'A gathering held around live music', caption: 'Gathering In The Round', ratio: 'aspect-[4/3]' },
+  { src: '/assets/images/events/student-masterclass.jpg', alt: 'A student masterclass in progress', caption: 'Student Masterclass', ratio: 'aspect-[3/4]' },
+  { src: '/assets/images/events/before-the-first-note.jpg', alt: 'A quiet moment before the concert begins', caption: 'Before The First Note', ratio: 'aspect-[4/3]' },
+  { src: '/assets/images/events/cultural-evening.jpg', alt: 'A cultural performance in full swing', caption: 'Cultural Evening', ratio: 'aspect-[3/4]' },
+  { src: '/assets/images/events/workshop-in-session.jpg', alt: 'A workshop with musicians and audience', caption: 'Workshop In Session', ratio: 'aspect-[4/5]' },
+  { src: '/assets/images/events/the-closing-bow.jpg', alt: 'A performance closing with applause', caption: 'The Closing Bow', ratio: 'aspect-[4/3]' },
+  { src: '/assets/images/events/between-the-ragas.jpg', alt: 'Musicians in conversation between sets', caption: 'Between The Ragas', ratio: 'aspect-[3/4]' },
 ];
 
 const CATEGORIES = [
@@ -79,31 +29,15 @@ const CATEGORIES = [
   { title: 'Custom Performances' },
 ];
 
-const BackLink = () => (
-  <Link
-    to="/services"
-    data-testid="back-to-services"
-    className="flex w-fit items-center gap-2 text-white/80 hover:text-white text-sm transition-colors"
-  >
-    <ArrowLeft className="w-4 h-4" /> Back to Services
-  </Link>
-);
-
 export default function Events() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    city: '',
-    interest: '',
-  });
-  const onChange = (e) =>
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  const [form, setForm] = useState({ name: '', email: '', city: '', interest: '' });
+  const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const submit = async (e) => {
     e.preventDefault();
-    if (loading) return; // prevent duplicate submissions
+    if (loading) return;
     if (!form.name || !form.email || !form.city) {
       toast.error('Name, email and city are required.');
       return;
@@ -128,68 +62,29 @@ export default function Events() {
 
   return (
     <main data-testid="events-page" className="bg-white page-fade-in">
-      {/* ---------- Hero — full-bleed photo ---------- */}
-      <section
-        data-testid="events-hero"
-        className="relative overflow-hidden text-white"
-      >
-        <div className="absolute inset-0">
-          <img
-            src="/assets/images/events/between-the-ragas.jpg"
-            alt="An Udukku evening in full swing"
-            className="w-full h-full object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(180deg, rgba(20,15,10,0.70) 0%, rgba(20,15,10,0.45) 40%, rgba(20,15,10,0.85) 100%)',
-            }}
-          />
-        </div>
+      <style>{`
+        @keyframes udukku-rise { from { opacity:0; transform:translateY(14px);} to { opacity:1; transform:translateY(0);} }
+        @keyframes udukku-drift { 0% { transform: translateY(0px) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(-2deg); } 100% { transform: translateY(0px) rotate(-2deg); } }
+      `}</style>
 
-        <div className="relative udukku-section pt-28 md:pt-40 pb-16 md:pb-24 min-h-[86vh] flex flex-col justify-end">
-          <BackLink />
-          <span
-            data-testid="events-eyebrow"
-            className="reveal mt-8 inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/90 mb-6"
-          >
-            <BrandIcon size={14} /> Events
-          </span>
-          <h1
-            data-testid="events-headline"
-            className="reveal text-display text-white text-4xl sm:text-5xl md:text-7xl lg:text-[92px] leading-[1.02] max-w-5xl"
-            style={{ transitionDelay: '80ms' }}
-          >
-            Where music becomes{' '}
-            <span className="text-italic-serif text-orange">community</span>.
-          </h1>
-          <p
-            className="reveal mt-6 max-w-2xl text-white/85 text-base md:text-lg leading-relaxed"
-            style={{ transitionDelay: '160ms' }}
-          >
-            From intimate raga listening circles to corporate wellness
-            workshops, Udukku events bring people together through the shared
-            experience of music. Each event is a space for curiosity,
-            connection, and calm.
-          </p>
-        </div>
-      </section>
+      <ServiceHero
+        testId="events-hero"
+        eyebrow="Events"
+        headline={<>Where music becomes <span className="text-italic-serif text-orange">community</span>.</>}
+        description="From intimate raga listening circles to corporate wellness workshops, Udukku events bring people together through the shared experience of music."
+        pills={['Corporate', 'Cultural', 'Community', 'Private', 'Workshops']}
+        imageSrc="/assets/images/events/cultural-evening.jpg"
+        imageAlt="A cultural performance in full swing"
+        chipTitle="Live, In Person"
+        chipSubtitle="Where music becomes community"
+      />
 
-      {/* ---------- Editorial gallery ---------- */}
-      <section className="bg-cream">
-        <div className="udukku-section pt-16 md:pt-20 pb-20 md:pb-28">
-          <div className="mb-10 md:mb-14">
-            <span className="uppercase tracking-[0.28em] text-xs text-orange">
-              From our events
-            </span>
-            <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[52px] leading-[1.05] mt-4 max-w-3xl">
-              Evenings that{' '}
-              <span className="text-italic-serif text-orange">stayed with us</span>.
-            </h2>
-          </div>
-
-          {/* Masonry columns — natural varied sizes */}
+      {/* Editorial gallery — sits on the cream/white rhythm of the master template */}
+      <section className="bg-white">
+        <div className="udukku-section py-16 md:py-20">
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
+            Evenings that stayed with us
+          </h2>
           <div
             data-testid="events-gallery"
             className="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-5 [column-fill:_balance]"
@@ -217,32 +112,22 @@ export default function Events() {
               </figure>
             ))}
           </div>
-
-          <p className="mt-10 md:mt-12 text-center text-brown-mid/70 text-sm">
+          <p className="mt-10 text-center text-brown-mid/70 text-sm">
             More event photos coming soon. Follow us for updates.
           </p>
         </div>
       </section>
 
-      {/* ---------- Category icon cards (examples, not navigational) ---------- */}
-      <section className="bg-white">
-        <div className="udukku-section py-20 md:py-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 mb-12 md:mb-16">
-            <div className="lg:col-span-5">
-              <span className="uppercase tracking-[0.28em] text-xs text-orange">
-                What we hold
-              </span>
-              <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[52px] leading-[1.05] mt-4">
-                A few kinds of{' '}
-                <span className="text-italic-serif text-orange">evenings</span>.
-              </h2>
-            </div>
-            <p className="lg:col-span-6 lg:col-start-7 text-brown-mid text-base md:text-lg leading-relaxed">
-              Just a few examples of what we hold. If what you have in mind is
-              not listed here, tell us.
-            </p>
-          </div>
-
+      {/* Category cards — cream tiles matching the Instruments visual rhythm */}
+      <section className="bg-cream">
+        <div className="udukku-section py-16 md:py-20">
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
+            A few kinds of evenings
+          </h2>
+          <p className="max-w-2xl text-brown-mid text-base md:text-lg leading-relaxed mb-10">
+            Just a few examples of what we hold. If what you have in mind is
+            not listed here, tell us.
+          </p>
           <div
             data-testid="events-category-grid"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
@@ -253,12 +138,13 @@ export default function Events() {
                 <article
                   key={c.title}
                   data-testid={`events-category-${slug}`}
-                  className="card-lift rounded-3xl p-7 bg-cream border border-brown-dark/10 flex items-center min-h-[110px]"
-                  style={{
-                    animation: `udukku-rise 0.55s ease ${0.05 * i}s both`,
-                  }}
+                  className="rounded-2xl p-6 bg-white border border-brown-dark/10 hover:border-orange/40 transition-colors min-h-[110px] flex items-center"
+                  style={{ animation: `udukku-rise 0.55s ease ${0.05 * i}s both` }}
                 >
-                  <h3 className="text-display text-brown-dark text-xl md:text-2xl">
+                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-cream border border-brown-dark/10 text-orange mr-4 shrink-0">
+                    <BrandIcon size={16} />
+                  </span>
+                  <h3 className="text-display text-brown-dark text-lg md:text-xl leading-tight">
                     {c.title}
                   </h3>
                 </article>
@@ -268,146 +154,143 @@ export default function Events() {
         </div>
       </section>
 
-      {/* ---------- Bring Udukku to Your City ---------- */}
-      <section className="bg-cream">
-        <div className="udukku-section pb-24 md:pb-32">
+      {/* Bring Udukku to your city — cream card, matches template tokens */}
+      <section className="bg-white">
+        <div className="udukku-section py-16 md:py-20">
           <div
             data-testid="bring-udukku-card"
-            className="relative overflow-hidden rounded-[28px] md:rounded-[36px] bg-hero-gradient text-white"
+            className="rounded-[28px] md:rounded-[36px] bg-cream border border-brown-dark/10 p-8 md:p-12"
           >
-            <div className="absolute inset-0 hero-radial-overlay pointer-events-none" />
-            <div className="relative p-8 sm:p-10 md:p-14 lg:p-16">
-              <div className="max-w-3xl mb-10 md:mb-12">
-                <span className="inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/90 mb-5">
-                  <MapPin className="w-4 h-4" strokeWidth={1.8} />
-                  Bring Udukku To You
-                </span>
-                <h2
-                  data-testid="bring-udukku-headline"
-                  className="text-display text-white text-3xl sm:text-4xl md:text-5xl lg:text-[56px] leading-[1.05]"
-                >
-                  Want us to visit your{' '}
-                  <span className="text-italic-serif text-white/95">city</span>?
-                </h2>
-                <p className="mt-5 text-white/85 text-base md:text-lg leading-relaxed max-w-2xl">
-                  We are always looking to expand our events. Tell us where you
-                  are and what kind of session you would love. We will reach
-                  out when we are heading your way.
+            <div className="max-w-3xl mb-8 md:mb-10">
+              <span className="inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-orange mb-4">
+                <MapPin className="w-4 h-4" strokeWidth={1.8} />
+                Bring Udukku To You
+              </span>
+              <h2
+                data-testid="bring-udukku-headline"
+                className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[44px] leading-[1.05]"
+              >
+                Want us to visit your{' '}
+                <span className="text-italic-serif text-orange">city</span>?
+              </h2>
+              <p className="mt-4 text-brown-mid text-base md:text-lg leading-relaxed max-w-2xl">
+                Tell us where you are and what kind of session you would love.
+                We will reach out when we are heading your way.
+              </p>
+            </div>
+
+            {ok ? (
+              <div
+                data-testid="bring-udukku-success"
+                className="rounded-2xl bg-white border border-orange/40 p-7 max-w-xl"
+              >
+                <div className="flex items-center gap-3 text-orange">
+                  <CheckCircle2 className="w-6 h-6" />
+                  <span className="text-display text-2xl text-brown-dark">
+                    Request received.
+                  </span>
+                </div>
+                <p className="mt-3 text-brown-mid">
+                  A curator from Udukku will reach out soon to explore what
+                  we could hold together in {form.city || 'your city'}.
                 </p>
               </div>
-
-              {ok ? (
-                <div
-                  data-testid="bring-udukku-success"
-                  className="rounded-2xl bg-white/10 border border-white/25 backdrop-blur-sm p-7 md:p-8 max-w-xl"
-                >
-                  <div className="flex items-center gap-3 text-white">
-                    <CheckCircle2 className="w-6 h-6" />
-                    <span className="text-display text-2xl">
-                      Request received.
-                    </span>
-                  </div>
-                  <p className="mt-3 text-white/85">
-                    A curator from Udukku will reach out soon to explore what
-                    we could hold together in {form.city || 'your city'}.
-                  </p>
+            ) : (
+              <form
+                onSubmit={submit}
+                data-testid="bring-udukku-form"
+                className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-3xl"
+              >
+                <LightField
+                  label="Your Name *"
+                  name="name"
+                  testid="bring-field-name"
+                  placeholder="John Smith"
+                  value={form.name}
+                  onChange={onChange}
+                  required
+                />
+                <LightField
+                  label="Email *"
+                  name="email"
+                  type="email"
+                  testid="bring-field-email"
+                  placeholder="example@gmail.com"
+                  value={form.email}
+                  onChange={onChange}
+                  required
+                />
+                <LightField
+                  wide
+                  label="Your City *"
+                  name="city"
+                  testid="bring-field-city"
+                  placeholder="e.g. Bangalore, Singapore, Dubai..."
+                  value={form.city}
+                  onChange={onChange}
+                  required
+                />
+                <LightTextarea
+                  label="What kind of event interests you?"
+                  name="interest"
+                  testid="bring-field-interest"
+                  rows={4}
+                  placeholder="e.g. Corporate wellness workshop, music meditation session, instrument masterclass..."
+                  value={form.interest}
+                  onChange={onChange}
+                />
+                <div className="md:col-span-2 mt-1">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    data-testid="bring-submit"
+                    className="inline-flex items-center gap-2 h-12 px-7 rounded-full bg-orange text-white text-[15px] font-medium hover:bg-orange-dark transition-colors disabled:opacity-60"
+                  >
+                    {loading ? 'Sending…' : 'Send My Request'}
+                    <Send className="w-4 h-4" />
+                  </button>
                 </div>
-              ) : (
-                <form
-                  onSubmit={submit}
-                  data-testid="bring-udukku-form"
-                  className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-3xl"
-                >
-                  <BringField
-                    label="Your Name *"
-                    name="name"
-                    testid="bring-field-name"
-                    placeholder="John Smith"
-                    value={form.name}
-                    onChange={onChange}
-                    required
-                  />
-                  <BringField
-                    label="Email *"
-                    name="email"
-                    type="email"
-                    testid="bring-field-email"
-                    placeholder="example@gmail.com"
-                    value={form.email}
-                    onChange={onChange}
-                    required
-                  />
-                  <BringField
-                    wide
-                    label="Your City *"
-                    name="city"
-                    testid="bring-field-city"
-                    placeholder="e.g. Bangalore, Singapore, Dubai..."
-                    value={form.city}
-                    onChange={onChange}
-                    required
-                  />
-                  <BringTextarea
-                    label="What kind of event interests you?"
-                    name="interest"
-                    testid="bring-field-interest"
-                    rows={4}
-                    placeholder="e.g. Corporate wellness workshop, music meditation session, instrument masterclass..."
-                    value={form.interest}
-                    onChange={onChange}
-                  />
-                  <div className="md:col-span-2 mt-2">
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      data-testid="bring-submit"
-                      className="inline-flex items-center gap-2.5 h-12 md:h-[52px] px-7 rounded-full bg-brown-dark text-white text-base font-medium hover:bg-black transition-colors disabled:opacity-60"
-                    >
-                      {loading ? 'Sending…' : 'Send My Request'}
-                      <Send className="w-4 h-4" />
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
+              </form>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Local animation for staggered photo reveals */}
-      <style>{`
-        @keyframes udukku-rise {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
+      <ServiceCTA
+        eyebrow="Host an evening"
+        headline={<>Ready to hold an <span className="text-italic-serif text-orange">evening</span>?</>}
+        description="Talk to our events team and shape a gathering that feels distinctly yours."
+        ctaLabel="Talk to our team"
+        ctaTo="/contact"
+        testId="events-book-cta"
+      />
     </main>
   );
 }
 
-/* ---------- Bring Udukku form fields (glass on orange) ---------- */
-const BringField = ({ label, wide, testid, ...props }) => (
+/* ---------- Light form fields (on cream card) ---------- */
+const LightField = ({ label, wide, testid, ...props }) => (
   <label className={`block ${wide ? 'md:col-span-2' : ''}`}>
-    <span className="block text-[11px] uppercase tracking-[0.22em] text-white/85 mb-2">
+    <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-2">
       {label}
     </span>
     <input
       {...props}
       data-testid={testid}
-      className="w-full h-12 md:h-[52px] rounded-2xl bg-white/[0.16] border border-white/30 px-5 text-white placeholder:text-white/55 focus:outline-none focus:border-white focus:bg-white/[0.22] transition-colors"
+      className="w-full h-12 rounded-2xl bg-white border border-brown-dark/15 px-4 text-brown-dark placeholder:text-brown-mid/60 focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition text-sm"
     />
   </label>
 );
 
-const BringTextarea = ({ label, wide = true, testid, ...props }) => (
+const LightTextarea = ({ label, wide = true, testid, ...props }) => (
   <label className={`block ${wide ? 'md:col-span-2' : ''}`}>
-    <span className="block text-[11px] uppercase tracking-[0.22em] text-white/85 mb-2">
+    <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-2">
       {label}
     </span>
     <textarea
       {...props}
       data-testid={testid}
-      className="w-full rounded-2xl bg-white/[0.16] border border-white/30 px-5 py-4 text-white placeholder:text-white/55 focus:outline-none focus:border-white focus:bg-white/[0.22] transition-colors resize-none"
+      className="w-full rounded-2xl bg-white border border-brown-dark/15 px-4 py-3 text-brown-dark placeholder:text-brown-mid/60 focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition resize-none text-sm"
     />
   </label>
 );

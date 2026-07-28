@@ -90,7 +90,7 @@ export const Gallery = () => {
             <span className="text-italic-serif text-orange">memory</span>.
           </h2>
           <p className="reveal mt-4 text-brown-mid text-base md:text-lg max-w-xl leading-relaxed" style={{ transitionDelay: '160ms' }}>
-            Open jams, first recitals, quiet workshops, friendships born over a
+            Open jams, first recitals, workshops, friendships born over a
             shared chord. Small moments from the life that gathers here, week
             after week.
           </p>

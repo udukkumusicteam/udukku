@@ -32,7 +32,9 @@ export const Header = () => {
   // + light nav for contrast. Once scrolled past the hero the frosted header
   // sits over lighter content and we cross-fade to the orange logo. This is
   // the same behaviour used on the homepage — kept in a single list so every
-  // orange-hero page stays perfectly consistent.
+  // orange-hero page stays perfectly consistent. All /services/* detail
+  // pages share the Instruments cream-hero template, so they all get the
+  // standard dark-logo treatment below.
   const ORANGE_HERO_ROUTES = new Set([
     '/',
     '/about',
@@ -41,23 +43,15 @@ export const Header = () => {
     '/services',
   ]);
   const hasOrangeHero = ORANGE_HERO_ROUTES.has(location.pathname);
-  // Dark-theme pages (deep brown background from top to bottom) need the
-  // header to stay light throughout — cream logo, white nav links, light
-  // Book Now button, and a dark frosted overlay when scrolled.
-  const isDarkTheme = location.pathname === '/services/music-room';
-  // Full-bleed photo-hero pages (dark image behind the hero) need a light
-  // header while the hero is in view, then flip to the standard dark nav
-  // once the user scrolls past it.
-  const isPhotoHero = location.pathname === '/services/events';
-  const isLightHeader = isDarkTheme || ((hasOrangeHero || isPhotoHero) && !scrolled);
+  const isLightHeader = hasOrangeHero && !scrolled;
   const linkColor = isLightHeader
     ? 'text-white/90 hover:text-white'
     : 'text-brown-dark hover:text-orange';
-  // The cream/light logo variant only reads well over the dark or orange
-  // backdrops (any orange hero, music room, photo hero on events). Everywhere
-  // else (cream pages, scrolled state on orange-hero pages) we want the dark
-  // orange logo — matching the homepage cross-fade exactly.
-  const wantsCreamLogo = isDarkTheme || ((hasOrangeHero || isPhotoHero) && !scrolled);
+  // The cream/light logo variant only reads well over the orange hero. Every
+  // other surface (cream service pages, scrolled orange-hero pages, any
+  // white/cream section) shows the dark orange logo — matching the homepage
+  // cross-fade exactly.
+  const wantsCreamLogo = hasOrangeHero && !scrolled;
   const showDarkLogo = !wantsCreamLogo;
 
   return (
@@ -70,11 +64,7 @@ export const Header = () => {
       }`}
       style={
         scrolled
-          ? {
-              backgroundColor: isDarkTheme
-                ? 'rgba(20, 15, 10, 0.55)'
-                : 'rgba(255, 255, 255, 0.12)',
-            }
+          ? { backgroundColor: 'rgba(255, 255, 255, 0.12)' }
           : { backgroundColor: 'transparent' }
       }
     >
@@ -119,11 +109,7 @@ export const Header = () => {
           <Link
             to="/booking"
             data-testid="header-book-now"
-            className={`inline-flex items-center justify-center h-11 px-6 rounded-full text-[15px] font-medium transition-colors min-w-[44px] ${
-              isDarkTheme
-                ? 'bg-white text-brown-dark hover:bg-cream'
-                : 'bg-brown-dark text-white hover:bg-black'
-            }`}
+            className="inline-flex items-center justify-center h-11 px-6 rounded-full text-[15px] font-medium transition-colors min-w-[44px] bg-brown-dark text-white hover:bg-black"
           >
             Book Now
           </Link>
