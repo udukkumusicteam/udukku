@@ -214,8 +214,8 @@ export default function MusicRoom() {
         }
         description="Monthly online practice sessions, a real community, with structure built to hold your riyaz. Every session is yours to use."
         pills={['Habit 12', 'Habit 24', 'Community', 'Cashback', 'Referrals']}
-        imageSrc="/assets/images/events/student-masterclass.jpg"
-        imageAlt="A student masterclass in progress"
+        imageSrc="/assets/images/services/music-room-hero.jpg"
+        imageAlt="A laptop showing an Udukku Music Room online session"
         chipTitle="Show Up, Every Week"
         chipSubtitle="Community and structure for your riyaz"
       />
