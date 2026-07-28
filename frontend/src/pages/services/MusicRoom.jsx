@@ -86,16 +86,19 @@ const PlanCard = ({ plan, selected, onSelect }) => (
     type="button"
     onClick={() => onSelect(plan.id)}
     data-testid={`plan-${plan.id}`}
-    className={`relative overflow-hidden text-left rounded-3xl p-7 md:p-8 transition-all duration-500 ${
+    className={`relative text-left rounded-3xl p-7 md:p-8 transition-all duration-500 ${
       selected
         ? 'bg-white border-2 border-orange shadow-[0_25px_70px_-20px_rgba(200,75,26,0.45)] hover:-translate-y-1 hover:shadow-[0_35px_90px_-20px_rgba(200,75,26,0.55)]'
         : 'bg-cream border border-brown-dark/10 hover:border-orange/40 hover:-translate-y-0.5'
     }`}
   >
-    {/* Premium accent bar across the top edge — only when selected */}
+    {/* Premium accent bar across the top edge — only when selected.
+        Rounded-t-3xl keeps it flush with the card's own rounded corners so we
+        don't need overflow-hidden on the parent (which was clipping the
+        MOST POPULAR pill that floats above the card). */}
     {selected && (
       <span
-        className="absolute top-0 left-0 right-0 h-[5px] bg-orange"
+        className="absolute top-0 left-0 right-0 h-[5px] bg-orange rounded-t-3xl"
         aria-hidden
       />
     )}
