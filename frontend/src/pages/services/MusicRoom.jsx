@@ -221,20 +221,20 @@ export default function MusicRoom() {
         chipSubtitle="Community and structure for your riyaz"
       />
 
-      {/* About the room — the warm editorial intro */}
-      <section className="bg-white">
+      {/* About the room — dark editorial band */}
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-10 md:mb-14">
             <div className="lg:col-span-5">
               <span className="inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-orange mb-4">
                 <BrandIcon size={14} /> The room, explained
               </span>
-              <h2 className="text-display text-brown-dark text-3xl md:text-4xl lg:text-5xl leading-[1.05]">
+              <h2 className="text-display text-white text-3xl md:text-4xl lg:text-5xl leading-[1.05]">
                 A quiet promise to keep{' '}
                 <span className="text-italic-serif text-orange">showing up</span>.
               </h2>
             </div>
-            <div className="lg:col-span-6 lg:col-start-7 text-brown-mid text-base md:text-lg leading-relaxed space-y-4">
+            <div className="lg:col-span-6 lg:col-start-7 text-white/75 text-base md:text-lg leading-relaxed space-y-4">
               <p>
                 Udukku Music Room is a monthly practice home for anyone who
                 has ever loved music and quietly hoped to come back to it. Not
@@ -294,8 +294,8 @@ export default function MusicRoom() {
         </div>
       </section>
 
-      {/* What you sign up for */}
-      <section className="bg-white">
+      {/* What you sign up for — cream */}
+      <section className="bg-cream">
         <div className="udukku-section py-16 md:py-20">
           <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
             What you sign up for
@@ -307,9 +307,9 @@ export default function MusicRoom() {
                 <article
                   key={f.title}
                   data-testid={`umr-feature-${f.title.toLowerCase().replace(/[^a-z]/g, '-')}`}
-                  className="rounded-2xl border border-brown-dark/10 bg-cream p-6 hover:border-orange/40 transition-colors min-h-[200px] flex flex-col"
+                  className="rounded-2xl border border-brown-dark/10 bg-white p-6 hover:border-orange/40 transition-colors min-h-[200px] flex flex-col"
                 >
-                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
+                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-cream border border-brown-dark/10 text-orange">
                     <Icon className="w-5 h-5" strokeWidth={1.8} />
                   </span>
                   <h3 className="text-display text-brown-dark text-xl mt-5">
@@ -325,10 +325,10 @@ export default function MusicRoom() {
         </div>
       </section>
 
-      {/* Choose your plan */}
-      <section className="bg-cream">
+      {/* Choose your plan — dark editorial band */}
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
-          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
+          <h2 className="text-display text-white text-3xl md:text-4xl mb-6">
             Choose your plan
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
@@ -344,11 +344,11 @@ export default function MusicRoom() {
         </div>
       </section>
 
-      {/* Cashback + Referrals */}
-      <section className="bg-white">
+      {/* Cashback + Referrals — cream */}
+      <section className="bg-cream">
         <div className="udukku-section py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          <article className="rounded-2xl p-8 bg-cream border border-brown-dark/10">
-            <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
+          <article className="rounded-2xl p-8 bg-white border border-brown-dark/10">
+            <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-cream border border-brown-dark/10 text-orange">
               <Percent className="w-5 h-5" strokeWidth={1.8} />
             </span>
             <h3 className="text-display text-brown-dark text-2xl md:text-3xl mt-5">
@@ -361,8 +361,8 @@ export default function MusicRoom() {
               showing up should feel like it counts for something.
             </p>
           </article>
-          <article className="rounded-2xl p-8 bg-cream border border-brown-dark/10">
-            <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white border border-brown-dark/10 text-orange">
+          <article className="rounded-2xl p-8 bg-white border border-brown-dark/10">
+            <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-cream border border-brown-dark/10 text-orange">
               <Gift className="w-5 h-5" strokeWidth={1.8} />
             </span>
             <h3 className="text-display text-brown-dark text-2xl md:text-3xl mt-5">
@@ -379,43 +379,44 @@ export default function MusicRoom() {
         </div>
       </section>
 
-      {/* Booking form */}
-      <section className="bg-cream">
+      {/* Booking form — dark editorial band, form wrapped in cream card */}
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
           <div className="max-w-2xl mb-8 md:mb-10">
             <div className="text-[11px] md:text-xs uppercase tracking-[0.28em] text-orange mb-4">
               Reserve your spot
             </div>
-            <h2 className="text-display text-brown-dark text-3xl sm:text-4xl md:text-[44px] leading-[1.05]">
+            <h2 className="text-display text-white text-3xl sm:text-4xl md:text-[44px] leading-[1.05]">
               Start your{' '}
               <span className="text-italic-serif text-orange">riyaz</span>.
             </h2>
-            <p className="mt-4 text-brown-mid text-sm md:text-base">
+            <p className="mt-4 text-white/75 text-sm md:text-base">
               Selected plan:{' '}
-              <span className="text-brown-dark font-medium">
+              <span className="text-white font-medium">
                 {PLANS.find((p) => p.id === selected)?.name}
               </span>
               . Change above anytime.
             </p>
           </div>
 
-          {ok ? (
-            <div
-              data-testid="umr-success"
-              className="rounded-2xl bg-white border border-orange/40 p-7 max-w-xl"
-            >
-              <div className="flex items-center gap-3 text-orange">
-                <CheckCircle2 className="w-6 h-6" />
-                <span className="text-display text-2xl text-brown-dark">
-                  You&apos;re in.
-                </span>
+          <div className="rounded-[28px] md:rounded-[36px] bg-cream border border-brown-dark/10 p-8 md:p-12">
+            {ok ? (
+              <div
+                data-testid="umr-success"
+                className="rounded-2xl bg-white border border-orange/40 p-7 max-w-xl"
+              >
+                <div className="flex items-center gap-3 text-orange">
+                  <CheckCircle2 className="w-6 h-6" />
+                  <span className="text-display text-2xl text-brown-dark">
+                    You&apos;re in.
+                  </span>
+                </div>
+                <p className="mt-3 text-brown-mid">
+                  A curator from Udukku will WhatsApp you within a day to
+                  confirm your slot and answer any questions.
+                </p>
               </div>
-              <p className="mt-3 text-brown-mid">
-                A curator from Udukku will WhatsApp you within a day to
-                confirm your slot and answer any questions.
-              </p>
-            </div>
-          ) : (
+            ) : (
             <form
               onSubmit={submit}
               data-testid="umr-form"
@@ -559,6 +560,7 @@ export default function MusicRoom() {
               </div>
             </form>
           )}
+          </div>
         </div>
       </section>
 

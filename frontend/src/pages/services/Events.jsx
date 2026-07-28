@@ -79,10 +79,10 @@ export default function Events() {
         chipSubtitle="Where music becomes community"
       />
 
-      {/* Editorial gallery — sits on the cream/white rhythm of the master template */}
-      <section className="bg-white">
+      {/* Editorial gallery — dark editorial band */}
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
-          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
+          <h2 className="text-display text-white text-3xl md:text-4xl mb-6">
             Evenings that stayed with us
           </h2>
           <div
@@ -93,7 +93,7 @@ export default function Events() {
               <figure
                 key={p.src}
                 data-testid={`events-photo-${i}`}
-                className="mb-4 md:mb-5 break-inside-avoid group relative overflow-hidden rounded-2xl md:rounded-3xl bg-brown-dark/5"
+                className="mb-4 md:mb-5 break-inside-avoid group relative overflow-hidden rounded-2xl md:rounded-3xl bg-white/5"
                 style={{ animation: `udukku-rise 0.7s ease ${0.05 * i}s both` }}
               >
                 <div className={`${p.ratio} w-full overflow-hidden`}>
@@ -112,7 +112,7 @@ export default function Events() {
               </figure>
             ))}
           </div>
-          <p className="mt-10 text-center text-brown-mid/70 text-sm">
+          <p className="mt-10 text-center text-white/60 text-sm">
             More event photos coming soon. Follow us for updates.
           </p>
         </div>
@@ -154,8 +154,8 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Bring Udukku to your city — cream card, matches template tokens */}
-      <section className="bg-white">
+      {/* Bring Udukku to your city — dark editorial band, form in cream card */}
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
           <div
             data-testid="bring-udukku-card"

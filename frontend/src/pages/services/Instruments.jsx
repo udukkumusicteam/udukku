@@ -91,12 +91,12 @@ export default function Instruments() {
         chipSubtitle="Neither should your learning"
       />
 
-      {/* Categories */}
-      <section className="bg-white">
+      {/* Categories — dark editorial band */}
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20 space-y-14 md:space-y-16">
           {GROUPS.map((group) => (
             <div key={group.name} data-testid={`group-${group.name.toLowerCase()}`}>
-              <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
+              <h2 className="text-display text-white text-3xl md:text-4xl mb-6">
                 {group.name}
               </h2>
               <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
@@ -108,7 +108,7 @@ export default function Instruments() {
                     <span className="text-orange text-italic-serif text-xl md:text-2xl">
                       and more...
                     </span>
-                    <span className="text-brown-mid/70 text-xs mt-1">
+                    <span className="text-white/50 text-xs mt-1">
                       Not limited to this list
                     </span>
                   </div>

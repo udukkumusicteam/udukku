@@ -225,13 +225,13 @@ export default function MusicMeditation() {
         chipSubtitle="A daily wellness practice"
       />
 
-      {/* Why music wellness */}
-      <section className="bg-white">
+      {/* Why music wellness — dark editorial band */}
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
-          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
+          <h2 className="text-display text-white text-3xl md:text-4xl mb-6">
             Why music wellness
           </h2>
-          <p className="max-w-2xl text-brown-mid text-base md:text-lg leading-relaxed mb-10">
+          <p className="max-w-2xl text-white/75 text-base md:text-lg leading-relaxed mb-10">
             Music engages attention while promoting emotional and physical
             relaxation. It regulates breathing, reduces stress, and enhances
             focus through guided experiences.
@@ -284,8 +284,8 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* Interactive explorer */}
-      <section ref={explorerRef} className="bg-white">
+      {/* Interactive explorer — dark editorial band */}
+      <section ref={explorerRef} className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
           {tab === 'individual' ? (
             <IndividualPanel
@@ -322,8 +322,8 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* Booking form — light cream card matching template tokens */}
-      <section ref={bookingRef} className="bg-white">
+      {/* Booking form — dark editorial band, form wrapped in cream card */}
+      <section ref={bookingRef} className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
           <div className="rounded-[28px] md:rounded-[36px] bg-cream border border-brown-dark/10 p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
             <div className="lg:col-span-4">
