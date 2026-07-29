@@ -128,7 +128,6 @@ const scrollTo = (ref) => {
 
 export default function MusicMeditation() {
   const [tab, setTab] = useState('individual'); // 'individual' | 'corporate'
-  const explorerRef = useRef(null);
   const bookingRef = useRef(null);
 
   const [kind, setKind] = useState('individual');
@@ -139,10 +138,6 @@ export default function MusicMeditation() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
 
-  const openExplorer = (which) => {
-    setTab(which);
-    setTimeout(() => scrollTo(explorerRef), 30);
-  };
   const openBooking = (which, plan) => {
     setKind(which);
     if (which === 'individual' && plan) setInd((f) => ({ ...f, plan }));
@@ -258,35 +253,63 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* Choose journey */}
+      {/* Choose journey — segmented toggle */}
       <section className="bg-cream">
         <div className="udukku-section py-16 md:py-20">
-          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-8">
+          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
             Choose your wellness journey
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-            <ChoiceCard
-              testid="choice-individual"
+
+          <div
+            role="tablist"
+            aria-label="Wellness journey"
+            data-testid="journey-toggle"
+            className="relative inline-flex flex-wrap sm:flex-nowrap rounded-full p-1.5 bg-white border border-brown-dark/10 shadow-[0_10px_30px_-20px_rgba(102,54,20,0.35)] max-w-full"
+          >
+            <ToggleOption
+              active={tab === 'individual'}
+              icon={Users}
+              label="Individual & Group Wellness"
+              onClick={() => setTab('individual')}
+              testid="toggle-individual"
+            />
+            <ToggleOption
+              active={tab === 'corporate'}
+              icon={Building2}
+              label="Corporate Wellness Programs"
+              onClick={() => setTab('corporate')}
+              testid="toggle-corporate"
+            />
+          </div>
+          <p className="mt-3 mb-8 md:mb-10 text-brown-mid/75 text-sm">
+            Select a wellness journey to explore its programs.
+          </p>
+
+          <div
+            key={tab}
+            data-testid="journey-cards"
+            className="tab-panel grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
+          >
+            <JourneyCard
               icon={Users}
               title="Individual & Group Wellness"
               body="Reduce stress, improve focus and emotional balance."
               selected={tab === 'individual'}
-              onClick={() => openExplorer('individual')}
+              testid="card-individual"
             />
-            <ChoiceCard
-              testid="choice-corporate"
+            <JourneyCard
               icon={Building2}
               title="Corporate Wellness Programs"
               body="Improve employee focus, resilience and overall wellbeing."
               selected={tab === 'corporate'}
-              onClick={() => openExplorer('corporate')}
+              testid="card-corporate"
             />
           </div>
         </div>
       </section>
 
       {/* Interactive explorer — dark editorial band */}
-      <section ref={explorerRef} className="bg-brown-dark">
+      <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
           {tab === 'individual' ? (
             <IndividualPanel
@@ -419,19 +442,37 @@ export default function MusicMeditation() {
 
 /* --------------------------- SUBCOMPONENTS --------------------------- */
 
-const ChoiceCard = ({ testid, icon: Icon, title, body, onClick, selected }) => (
+const ToggleOption = ({ active, icon: Icon, label, onClick, testid }) => (
+  <button
+    type="button"
+    role="tab"
+    aria-selected={active}
+    onClick={onClick}
+    data-testid={testid}
+    className={`inline-flex items-center gap-2 h-11 px-5 rounded-full text-sm md:text-[15px] font-medium transition-all duration-300 whitespace-nowrap ${
+      active
+        ? 'bg-orange text-white shadow-[0_8px_20px_-8px_rgba(200,75,26,0.5)]'
+        : 'text-brown-mid hover:text-brown-dark'
+    }`}
+  >
+    <Icon className="w-4 h-4" strokeWidth={1.8} />
+    {label}
+  </button>
+);
+
+const JourneyCard = ({ icon: Icon, title, body, selected, testid }) => (
   <article
     data-testid={testid}
-    aria-pressed={selected}
+    aria-hidden={!selected}
     className={`rounded-2xl p-7 md:p-8 flex flex-col md:flex-row items-start gap-5 border transition-all duration-500 ${
       selected
-        ? 'bg-white border-orange shadow-[0_20px_60px_-30px_rgba(232,136,58,0.55)]'
-        : 'bg-white border-brown-dark/10 hover:border-orange/40'
+        ? 'bg-white border-orange shadow-[0_20px_60px_-30px_rgba(200,75,26,0.45)]'
+        : 'bg-white/50 border-brown-dark/10 opacity-60 md:opacity-70'
     }`}
   >
     <span
-      className={`shrink-0 inline-flex items-center justify-center w-14 h-14 rounded-full transition-colors ${
-        selected ? 'bg-orange text-white' : 'bg-orange/15 text-orange'
+      className={`shrink-0 inline-flex items-center justify-center w-14 h-14 rounded-full transition-colors duration-300 ${
+        selected ? 'bg-orange text-white' : 'bg-cream text-brown-mid'
       }`}
     >
       <Icon className="w-6 h-6" strokeWidth={1.6} />
@@ -443,18 +484,6 @@ const ChoiceCard = ({ testid, icon: Icon, title, body, onClick, selected }) => (
       <p className="mt-2 text-brown-mid text-sm md:text-base leading-relaxed">
         {body}
       </p>
-      <button
-        type="button"
-        onClick={onClick}
-        data-testid={`${testid}-cta`}
-        className={`mt-5 inline-flex items-center h-11 px-6 rounded-full text-sm font-medium transition-colors ${
-          selected
-            ? 'bg-brown-dark text-white hover:bg-black'
-            : 'bg-orange text-white hover:bg-orange-dark'
-        }`}
-      >
-        {selected ? 'Currently Viewing' : 'Explore Program'}
-      </button>
     </div>
   </article>
 );
