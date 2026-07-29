@@ -253,7 +253,7 @@ export default function MusicMeditation() {
         </div>
       </section>
 
-      {/* Choose journey — segmented toggle */}
+      {/* Choose journey — segmented toggle (single selector) */}
       <section className="bg-cream">
         <div className="udukku-section py-16 md:py-20">
           <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
@@ -281,30 +281,9 @@ export default function MusicMeditation() {
               testid="toggle-corporate"
             />
           </div>
-          <p className="mt-3 mb-8 md:mb-10 text-brown-mid/75 text-sm">
+          <p className="mt-3 text-brown-mid/75 text-sm">
             Select a wellness journey to explore its programs.
           </p>
-
-          <div
-            key={tab}
-            data-testid="journey-cards"
-            className="tab-panel grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
-          >
-            <JourneyCard
-              icon={Users}
-              title="Individual & Group Wellness"
-              body="Reduce stress, improve focus and emotional balance."
-              selected={tab === 'individual'}
-              testid="card-individual"
-            />
-            <JourneyCard
-              icon={Building2}
-              title="Corporate Wellness Programs"
-              body="Improve employee focus, resilience and overall wellbeing."
-              selected={tab === 'corporate'}
-              testid="card-corporate"
-            />
-          </div>
         </div>
       </section>
 
@@ -458,34 +437,6 @@ const ToggleOption = ({ active, icon: Icon, label, onClick, testid }) => (
     <Icon className="w-4 h-4" strokeWidth={1.8} />
     {label}
   </button>
-);
-
-const JourneyCard = ({ icon: Icon, title, body, selected, testid }) => (
-  <article
-    data-testid={testid}
-    aria-hidden={!selected}
-    className={`rounded-2xl p-7 md:p-8 flex flex-col md:flex-row items-start gap-5 border transition-all duration-500 ${
-      selected
-        ? 'bg-white border-orange shadow-[0_20px_60px_-30px_rgba(200,75,26,0.45)]'
-        : 'bg-white/50 border-brown-dark/10 opacity-60 md:opacity-70'
-    }`}
-  >
-    <span
-      className={`shrink-0 inline-flex items-center justify-center w-14 h-14 rounded-full transition-colors duration-300 ${
-        selected ? 'bg-orange text-white' : 'bg-cream text-brown-mid'
-      }`}
-    >
-      <Icon className="w-6 h-6" strokeWidth={1.6} />
-    </span>
-    <div className="flex-1">
-      <h3 className="text-display text-brown-dark text-2xl md:text-[28px] leading-tight">
-        {title}
-      </h3>
-      <p className="mt-2 text-brown-mid text-sm md:text-base leading-relaxed">
-        {body}
-      </p>
-    </div>
-  </article>
 );
 
 const IndividualPanel = ({ onBook }) => (
