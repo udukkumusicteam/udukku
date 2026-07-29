@@ -27,6 +27,7 @@ import {
   Award,
   Gift,
   CalendarCheck,
+  Info,
 } from 'lucide-react';
 import ServiceHero from '../../components/services/ServiceHero';
 import ServiceCTA from '../../components/services/ServiceCTA';
@@ -730,6 +731,7 @@ const IndividualForm = ({ form, setForm, loading, onSubmit }) => {
         </select>
       </label>
       <LightTextarea label="Your Wellness Goals" name="goals" value={form.goals} onChange={on} rows={3} placeholder="e.g. reduce stress, improve focus, sleep better" testid="ind-field-goals" />
+      <WhatHappensNext />
       <div className="md:col-span-2 mt-1">
         <button
           type="submit"
@@ -758,6 +760,7 @@ const CorporateForm = ({ form, setForm, loading, onSubmit }) => {
       <LightField label="Company Name *" name="company" value={form.company} onChange={on} testid="corp-field-company" required />
       <LightField label="Team Size" name="team" value={form.team} onChange={on} placeholder="e.g. 25 to 50" testid="corp-field-team" />
       <LightTextarea label="Goals for Your Team" name="goals" value={form.goals} onChange={on} rows={3} placeholder="e.g. reduce burnout, improve focus, build cohesion" testid="corp-field-goals" />
+      <WhatHappensNext />
       <div className="md:col-span-2 mt-1">
         <button
           type="submit"
@@ -772,6 +775,48 @@ const CorporateForm = ({ form, setForm, loading, onSubmit }) => {
     </form>
   );
 };
+
+/* ----- Reassuring "What happens next?" block ----- */
+const WhatHappensNext = () => (
+  <div
+    data-testid="what-happens-next"
+    className="md:col-span-2 rounded-2xl bg-white border border-brown-dark/10 p-5 md:p-6"
+  >
+    <div className="flex items-center gap-2.5 mb-3">
+      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange/10 text-orange">
+        <Info className="w-4 h-4" strokeWidth={2} />
+      </span>
+      <h4 className="text-brown-dark text-sm md:text-base font-semibold tracking-tight">
+        What happens next?
+      </h4>
+    </div>
+    <ul className="space-y-1.5 pl-1">
+      <li className="flex items-start gap-2 text-brown-mid text-xs md:text-sm leading-relaxed">
+        <span className="mt-[6px] inline-block w-1.5 h-1.5 rounded-full bg-orange shrink-0" />
+        <span>Submit your request using the form.</span>
+      </li>
+      <li className="flex items-start gap-2 text-brown-mid text-xs md:text-sm leading-relaxed">
+        <span className="mt-[6px] inline-block w-1.5 h-1.5 rounded-full bg-orange shrink-0" />
+        <span>Our team will review your requirements.</span>
+      </li>
+      <li className="flex items-start gap-2 text-brown-mid text-xs md:text-sm leading-relaxed">
+        <span className="mt-[6px] inline-block w-1.5 h-1.5 rounded-full bg-orange shrink-0" />
+        <span>
+          We&apos;ll contact you within{' '}
+          <span className="text-orange font-medium">24 hours</span> to discuss
+          the right program, availability, pricing and the next steps.
+        </span>
+      </li>
+      <li className="flex items-start gap-2 text-brown-mid text-xs md:text-sm leading-relaxed">
+        <span className="mt-[6px] inline-block w-1.5 h-1.5 rounded-full bg-orange shrink-0" />
+        <span>
+          <span className="text-orange font-medium">No payment</span> is
+          required at this stage.
+        </span>
+      </li>
+    </ul>
+  </div>
+);
 
 /* ----- Light form fields ----- */
 const LightField = ({ label, wide, testid, ...props }) => (
