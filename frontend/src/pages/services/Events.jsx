@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { ArrowUpRight, MapPin, Send, CheckCircle2 } from 'lucide-react';
-import BrandIcon from '../../components/BrandIcon';
+import {
+  ArrowUpRight,
+  ArrowRight,
+  Calendar,
+  Clock,
+  MapPin,
+  Send,
+  CheckCircle2,
+  CalendarX2,
+} from 'lucide-react';
 import ServiceHero from '../../components/services/ServiceHero';
 import ServiceCTA from '../../components/services/ServiceCTA';
 import { cityRequestsService } from '../../services/supabase';
+import { fetchUpcomingEvents } from '../../data/upcomingEvents';
 
 const PHOTOS = [
   { src: '/assets/images/events/community-listening-circle.jpg', alt: 'A community listening circle in session', caption: 'Community Listening Circle', ratio: 'aspect-[4/5]' },
@@ -18,22 +27,26 @@ const PHOTOS = [
   { src: '/assets/images/events/between-the-ragas.jpg', alt: 'Musicians in conversation between sets', caption: 'Between The Ragas', ratio: 'aspect-[3/4]' },
 ];
 
-const CATEGORIES = [
-  { title: 'Corporate Events' },
-  { title: 'Cultural Festivals' },
-  { title: 'School & College Programs' },
-  { title: 'Private Concerts' },
-  { title: 'Spiritual Gatherings' },
-  { title: 'Community Events' },
-  { title: 'Workshops' },
-  { title: 'Custom Performances' },
-];
-
 export default function Events() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', city: '', interest: '' });
   const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    let live = true;
+    fetchUpcomingEvents()
+      .then((data) => {
+        if (live) setEvents(data);
+      })
+      .catch(() => {
+        if (live) setEvents([]);
+      });
+    return () => {
+      live = false;
+    };
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -118,39 +131,56 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Category cards — cream tiles matching the Instruments visual rhythm */}
+      {/* Upcoming Events — dynamic, Supabase-ready */}
       <section className="bg-cream">
         <div className="udukku-section py-16 md:py-20">
-          <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-6">
-            A few kinds of evenings
-          </h2>
-          <p className="max-w-2xl text-brown-mid text-base md:text-lg leading-relaxed mb-10">
-            Just a few examples of what we hold. If what you have in mind is
-            not listed here, tell us.
-          </p>
-          <div
-            data-testid="events-category-grid"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
-          >
-            {CATEGORIES.map((c, i) => {
-              const slug = c.title.toLowerCase().replace(/[^a-z]+/g, '-');
-              return (
-                <article
-                  key={c.title}
-                  data-testid={`events-category-${slug}`}
-                  className="rounded-2xl p-6 bg-white border border-brown-dark/10 hover:border-orange/40 transition-colors min-h-[110px] flex items-center"
-                  style={{ animation: `udukku-rise 0.55s ease ${0.05 * i}s both` }}
-                >
-                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-cream border border-brown-dark/10 text-orange mr-4 shrink-0">
-                    <BrandIcon size={16} />
-                  </span>
-                  <h3 className="text-display text-brown-dark text-lg md:text-xl leading-tight">
-                    {c.title}
-                  </h3>
-                </article>
-              );
-            })}
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <h2 className="text-display text-brown-dark text-3xl md:text-4xl">
+              Upcoming <span className="text-italic-serif text-orange">Events</span>
+            </h2>
+            <p className="mt-4 text-brown-mid text-base md:text-lg leading-relaxed">
+              Discover what&apos;s happening next at Udukku. Join our upcoming
+              concerts, workshops, music rooms and community experiences.
+            </p>
           </div>
+
+          {events.length > 0 ? (
+            <>
+              <div
+                data-testid="upcoming-events-grid"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
+              >
+                {events.map((event, i) => (
+                  <EventCard key={event.id} event={event} index={i} />
+                ))}
+              </div>
+              <div className="mt-10 md:mt-12 flex justify-center">
+                <a
+                  href="#"
+                  data-testid="view-all-events"
+                  className="inline-flex items-center gap-2 h-12 px-7 rounded-full bg-white border border-brown-dark/15 text-brown-dark text-[15px] font-medium hover:border-orange hover:text-orange transition-colors"
+                >
+                  View All Events
+                  <ArrowRight className="w-4 h-4" strokeWidth={1.8} />
+                </a>
+              </div>
+            </>
+          ) : (
+            <div
+              data-testid="upcoming-events-empty"
+              className="rounded-2xl bg-white border border-brown-dark/10 p-10 md:p-12 flex flex-col items-center text-center"
+            >
+              <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-orange/10 text-orange mb-4">
+                <CalendarX2 className="w-6 h-6" strokeWidth={1.8} />
+              </span>
+              <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
+                No upcoming events at the moment.
+              </h3>
+              <p className="mt-3 text-brown-mid max-w-md leading-relaxed">
+                Stay tuned — new experiences will be announced soon.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -267,6 +297,117 @@ export default function Events() {
     </main>
   );
 }
+
+/* ---------- Upcoming event card ---------- */
+const STATUS_STYLES = {
+  Upcoming: 'bg-white border-brown-dark/15 text-brown-dark',
+  'Limited Seats': 'bg-orange text-white border-orange',
+  'Sold Out': 'bg-brown-dark text-white border-brown-dark',
+};
+
+const formatEventDate = (iso) => {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+  } catch {
+    return iso;
+  }
+};
+
+const EventCard = ({ event, index = 0 }) => {
+  const statusClass =
+    STATUS_STYLES[event.status] || STATUS_STYLES.Upcoming;
+  const soldOut = event.status === 'Sold Out';
+  return (
+    <article
+      data-testid={`event-card-${event.id}`}
+      className="group rounded-2xl md:rounded-3xl bg-white border border-brown-dark/10 overflow-hidden flex flex-col hover:border-orange/40 hover:shadow-[0_25px_70px_-40px_rgba(102,54,20,0.35)] transition-all duration-500"
+      style={{ animation: `udukku-rise 0.6s ease ${0.06 * index}s both` }}
+    >
+      {event.cover_image ? (
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <img
+            src={event.cover_image}
+            alt={event.title}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+          />
+          {event.status && (
+            <span
+              className={`absolute top-3 right-3 inline-flex items-center h-7 px-3 rounded-full border text-[11px] uppercase tracking-[0.18em] font-medium ${statusClass}`}
+            >
+              {event.status}
+            </span>
+          )}
+        </div>
+      ) : null}
+
+      <div className="p-6 md:p-7 flex-1 flex flex-col">
+        {event.category && (
+          <span className="inline-flex self-start items-center h-7 px-3 rounded-full bg-cream border border-brown-dark/10 text-orange text-[11px] uppercase tracking-[0.22em] font-medium mb-4">
+            {event.category}
+          </span>
+        )}
+
+        <h3 className="text-display text-brown-dark text-xl md:text-2xl leading-tight">
+          {event.title}
+        </h3>
+
+        <dl className="mt-4 grid grid-cols-1 gap-1.5 text-brown-mid text-sm">
+          {event.event_date && (
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-orange shrink-0" strokeWidth={1.8} />
+              <span>{formatEventDate(event.event_date)}</span>
+            </div>
+          )}
+          {event.event_time && (
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-orange shrink-0" strokeWidth={1.8} />
+              <span>{event.event_time}</span>
+            </div>
+          )}
+          {event.venue && (
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-orange shrink-0" strokeWidth={1.8} />
+              <span>{event.venue}</span>
+            </div>
+          )}
+        </dl>
+
+        {event.description && (
+          <p className="mt-4 text-brown-mid text-sm md:text-[15px] leading-relaxed line-clamp-3">
+            {event.description}
+          </p>
+        )}
+
+        <div className="mt-6 pt-2">
+          {soldOut ? (
+            <span
+              data-testid={`event-card-${event.id}-cta`}
+              aria-disabled
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-brown-dark/10 text-brown-mid text-sm font-medium cursor-not-allowed"
+            >
+              Sold Out
+            </span>
+          ) : (
+            <a
+              href={event.cta_url || '#'}
+              data-testid={`event-card-${event.id}-cta`}
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-orange text-white text-sm font-medium hover:bg-orange-dark transition-colors"
+            >
+              {event.cta_label || 'Learn More'}
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+};
 
 /* ---------- Light form fields (on cream card) ---------- */
 const LightField = ({ label, wide, testid, ...props }) => (
