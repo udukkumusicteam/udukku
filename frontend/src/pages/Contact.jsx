@@ -85,7 +85,7 @@ export default function Contact() {
               />
               <InfoLine
                 icon={<MapPin className="w-5 h-5" />}
-                label="Studio"
+                label="Address"
                 value={SITE.address}
               />
             </div>

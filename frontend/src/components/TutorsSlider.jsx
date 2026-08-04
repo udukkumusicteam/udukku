@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Users } from 'lucide-react';
 import { TUTORS } from '../data/mockData';
+
+// Take the first phrase from a tutor's role (e.g. "Hindustani Vocals & Music
+// Theory" → "Hindustani Vocals") to render inside the small pill badge.
+const primaryInstrument = (role) => (role ? role.split(/\s*&\s*/)[0].trim() : '');
 
 export const TutorsSlider = () => {
   const scrollRef = useRef(null);

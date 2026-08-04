@@ -83,6 +83,5 @@ export const SAMPLE_UPCOMING_EVENTS = [
 ];
 
 export const fetchUpcomingEvents = async () => {
-  // TODO: swap for the Supabase query above when the table is ready.
-  return SAMPLE_UPCOMING_EVENTS;
+  return [];
 };

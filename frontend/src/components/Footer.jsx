@@ -124,7 +124,7 @@ export const Footer = () => (
 
       <div className="mt-10 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/70">
         <span>© {new Date().getFullYear()} udukku. The music in you.</span>
-        <span className="text-italic-serif">Made with quiet intention.</span>
+        <span className="text-italic-serif">A Place to Pause, Play and Grow.</span>
       </div>
     </div>
   </footer>
