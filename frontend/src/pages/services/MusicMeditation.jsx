@@ -521,11 +521,11 @@ const IndividualPanel = ({ onBook }) => (
         </div>
       ))}
     </div>
-    <p className="text-brown-mid/70 text-xs mb-8">
+    <p className="text-brown-mid/70 text-xs mb-8 text-center md:text-left">
       International pricing available upon request.
     </p>
 
-    <div>
+    <div className="text-center md:text-left">
       <button
         type="button"
         onClick={() => onBook()}
@@ -732,7 +732,7 @@ const IndividualForm = ({ form, setForm, loading, onSubmit }) => {
       </label>
       <LightTextarea label="Your Wellness Goals" name="goals" value={form.goals} onChange={on} rows={3} placeholder="e.g. reduce stress, improve focus, sleep better" testid="ind-field-goals" />
       <WhatHappensNext />
-      <div className="md:col-span-2 mt-1">
+      <div className="md:col-span-2 mt-1 text-center md:text-left">
         <button
           type="submit"
           disabled={loading}
