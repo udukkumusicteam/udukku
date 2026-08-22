@@ -265,7 +265,7 @@ export default function MusicMeditation() {
             role="tablist"
             aria-label="Wellness journey"
             data-testid="journey-toggle"
-            className="relative inline-flex flex-wrap sm:flex-nowrap rounded-full p-1.5 bg-white border border-brown-dark/10 shadow-[0_10px_30px_-20px_rgba(102,54,20,0.35)] max-w-full"
+            className="relative flex flex-col sm:inline-flex sm:flex-row w-full sm:w-auto rounded-3xl sm:rounded-full p-1.5 gap-1.5 sm:gap-0 bg-white border border-brown-dark/10 shadow-[0_10px_30px_-20px_rgba(102,54,20,0.35)]"
           >
             <ToggleOption
               active={tab === 'individual'}
@@ -429,14 +429,14 @@ const ToggleOption = ({ active, icon: Icon, label, onClick, testid }) => (
     aria-selected={active}
     onClick={onClick}
     data-testid={testid}
-    className={`inline-flex items-center gap-2 h-11 px-5 rounded-full text-sm md:text-[15px] font-medium transition-all duration-300 whitespace-nowrap ${
+    className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 h-11 px-5 rounded-full text-sm md:text-[15px] font-medium transition-all duration-300 whitespace-nowrap ${
       active
         ? 'bg-orange text-white shadow-[0_8px_20px_-8px_rgba(200,75,26,0.5)]'
         : 'text-brown-mid hover:text-brown-dark'
     }`}
   >
-    <Icon className="w-4 h-4" strokeWidth={1.8} />
-    {label}
+    <Icon className="w-4 h-4 shrink-0" strokeWidth={1.8} />
+    <span className="truncate">{label}</span>
   </button>
 );
 

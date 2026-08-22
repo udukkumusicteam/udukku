@@ -86,13 +86,13 @@ export const Gallery = () => {
             Life at Udukku
           </span>
           <h2 className="reveal text-display mt-4 text-4xl sm:text-5xl lg:text-[56px] text-brown-dark" style={{ transitionDelay: '80ms' }}>
-            Where every session becomes a{' '}
-            <span className="text-italic-serif text-orange">memory</span>.
+            They came, they experienced, they left {' '}
+            <span className="text-italic-serif text-orange">with memories</span>.
           </h2>
           <p className="reveal mt-4 text-brown-mid text-base md:text-lg max-w-xl leading-relaxed" style={{ transitionDelay: '160ms' }}>
-            Open jams, first recitals, workshops, friendships born over a
-            shared chord. Small moments from the life that gathers here, week
-            after week.
+            Open jams, poetry recitals, music meditation workshops, Sound to Strokes 
+            sessions, and a few new friendships along the way.
+          
           </p>
         </div>
 

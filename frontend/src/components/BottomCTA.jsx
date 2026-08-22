@@ -34,7 +34,7 @@ export const BottomCTA = () => (
           className="reveal btn-glow mt-10 inline-flex items-center gap-2 h-12 px-8 rounded-full bg-orange text-white text-base font-medium hover:bg-orange-dark min-w-[44px]"
           style={{ transitionDelay: '240ms' }}
         >
-          Book Now <ArrowUpRight className="w-4 h-4" />
+          Book a Free Session <ArrowUpRight className="w-4 h-4" />
         </Link>
       </div>
     </div>

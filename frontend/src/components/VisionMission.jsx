@@ -33,7 +33,7 @@ export const VisionMission = () => (
         {/* Text */}
         <div className="reveal" style={{ transitionDelay: '120ms' }}>
           <span className="uppercase tracking-[0.28em] text-xs text-white/80">
-            Shaping musicians since {VISION_MISSION.est}
+            Bringing music into lives since {VISION_MISSION.est}
           </span>
           <h2 className="text-display mt-3 text-3xl sm:text-4xl lg:text-[44px] leading-[1.1]">
             A space that holds you{' '}

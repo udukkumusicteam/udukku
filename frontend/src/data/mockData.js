@@ -15,26 +15,26 @@ export const SITE = {
   ],
 };
 
-export const HERO_PILLS = ['Keys', 'Strings', 'Vocals', 'Percussion', 'Theory & Composition'];
+export const HERO_PILLS = ['Music skills', 'Udukku Music Room', 'Music Meditation', 'Events'];
 
 export const STATS = [
   {
-    number: '53',
-    title: 'Students Across Formats',
+    number: '70+',
+    title: 'Music journeys shaped',
     body:
       'from 1:1 lessons to a 35-student exam stress workshop',
   },
   {
     number: '4',
-    title: 'Events Run',
+    title: 'Experiences created',
     body:
-      'Successfully with 120+ attendees for workshops, open mics and more',
+      '400+ attendees across a variety of workshops, open mics, and activities',
   },
   {
     number: '100+',
-    title: 'Educators in Database',
+    title: 'Educators to learn from',
     body:
-      'Across subjects ranging from Vocals, Songwriting, Production and Instruments',
+      'Across subjects ranging from Vocals, Instruments, Production, and Songwriting',
   },
 ];
 
@@ -45,12 +45,12 @@ export const VISION_MISSION = {
   vision: {
     title: 'Our Vision',
     body:
-      'A world where music is for everyone, and expression is never out of reach.',
+      ' A world where music belongs to everyone, opening doors to learning, healing, connection, and growth.',
   },
   mission: {
     title: 'Our Mission',
     body:
-      'To walk beside each student, gently, on a musical journey that is wholly their own.',
+      ' To break barriers to music education by connecting people with the right teachers, tools, and ways to learn.',
   },
 };
 
@@ -148,9 +148,9 @@ export const COURSE_CATEGORIES = [
 ];
 
 export const BOTTOM_CTA = {
-  heading: 'Want to try a free demo?',
+  heading: 'Your “I’ll Learn It Someday” Ends Here',
   subheading:
-    'No pressure. No auditions. Your first time with us is a gift. A quiet space to listen, to play, and to remember what music means to you.',
+    'You’ve been meaning to start for a while. Let’s finally make it happen, with no pressure.',
   image: '/assets/backgrounds/story-hero.jpg',
 };
 
