@@ -11,13 +11,27 @@ const iconMap = {
   music: Music,
 };
 
+/* ------------------------------------------------------------------
+   The four services pages.
+   Confirm these `to` paths match the routes in your App router — they
+   are the only thing in this file you may need to edit.
+   Consider moving this array into src/data/mockData.js alongside
+   COURSE_CATEGORIES if other components need it too.
+   ------------------------------------------------------------------ */
+const SERVICES = [
+  { label: 'Music Classes', to: '/services/instruments' },
+  { label: 'Udukku Music Room', to: '/services/music-room' },
+  { label: 'Music Meditation', to: '/services/music-meditation' },
+  { label: 'Events & Experiences', to: '/services/events' },
+];
+
 export const Footer = () => (
   <footer
     data-testid="site-footer"
     className="bg-orange-dark text-white border-t border-white/15"
   >
     <div className="udukku-section py-12 md:py-16">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
         {/* Brand */}
         <div className="space-y-6">
           <Logo variant="light" size={36} />
@@ -78,7 +92,7 @@ export const Footer = () => (
           </ul>
         </div>
 
-        {/* Categories */}
+        {/* Courses */}
         <div>
           <h4 className="text-sm uppercase tracking-[0.18em] text-white/70 mb-5">
             Courses
@@ -92,6 +106,28 @@ export const Footer = () => (
                   className="hover:text-white text-white/90"
                 >
                   {c}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Services — sits directly next to the Courses list */}
+        <div>
+          <h4 className="text-sm uppercase tracking-[0.18em] text-white/70 mb-5">
+            Services
+          </h4>
+          <ul className="space-y-3 text-[15px]">
+            {SERVICES.map((s) => (
+              <li key={s.label}>
+                <Link
+                  to={s.to}
+                  data-testid={`footer-service-${s.label
+                    .toLowerCase()
+                    .replace(/[^a-z]+/g, '-')}`}
+                  className="hover:text-white text-white/90"
+                >
+                  {s.label}
                 </Link>
               </li>
             ))}

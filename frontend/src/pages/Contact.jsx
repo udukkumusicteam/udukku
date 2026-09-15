@@ -100,12 +100,12 @@ export default function Contact() {
                   </span>
                 </div>
                 <h3 className="text-display mt-3 text-2xl md:text-[28px] text-brown-dark leading-tight">
-                  Hoping to book a session{' '}
+                  Hoping to book a music lesson{' '}
                   <span className="text-italic-serif text-orange">instead</span>?
                 </h3>
                 <p className="mt-3 text-brown-mid text-sm leading-relaxed max-w-sm">
-                  Lessons, trial classes, and quiet first steps live on a
-                  separate page. Step in and we'll find a time that feels right.
+                  Learn to sing, play, or compose music from experts all across the country.
+                  Reserve a time that works for you.
                 </p>
                 <Link
                   to="/booking"

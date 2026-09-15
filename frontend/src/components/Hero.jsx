@@ -41,7 +41,7 @@ export const Hero = () => {
           data-testid="hero-eyebrow"
           className="reveal inline-block uppercase tracking-[0.28em] text-[11px] md:text-xs text-white/80 mb-4"
         >
-          Where music finds you
+          Wellness through Music
         </span>
 
         <h1
@@ -52,7 +52,7 @@ export const Hero = () => {
           Helping You Tap Into
           <br />
           The{' '}
-          <span className="text-italic-serif text-white/95">Power Of</span>
+          <span className="text-italic-serif text-white/95"> Power Of</span>
           <br />
           <span className="text-italic-serif text-white/95">Music</span>.
         </h1>
@@ -62,9 +62,9 @@ export const Hero = () => {
           className="reveal mt-5 max-w-xl text-base md:text-lg text-white/85 leading-relaxed"
           style={{ transitionDelay: '180ms' }}
         >
-          Music does not need to be earned. It only needs to be felt. Step in,
-          slow down, and let a mentor help you find the sound that has
-          quietly been yours all along.
+          Explore music learning at your own pace through neuroscience-backed sessions 
+          that support creativity, cognitive wellbeing, and the simple joy of learning.
+        
         </p>
 
         <div
@@ -72,11 +72,11 @@ export const Hero = () => {
           style={{ transitionDelay: '260ms' }}
         >
           <Link
-            to="/booking"
+            to="/services"
             data-testid="hero-book-now"
             className="btn-glow inline-flex items-center gap-2 h-11 px-6 rounded-full bg-brown-dark text-white text-sm font-medium hover:bg-black min-w-[44px]"
           >
-            Book Now
+            Start your Journey
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>

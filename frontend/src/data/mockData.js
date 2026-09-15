@@ -15,26 +15,26 @@ export const SITE = {
   ],
 };
 
-export const HERO_PILLS = ['Keys', 'Strings', 'Vocals', 'Percussion', 'Theory & Composition'];
+export const HERO_PILLS = ['Music skills', 'Udukku Music Room', 'Music Meditation', 'Events'];
 
 export const STATS = [
   {
-    number: '53',
-    title: 'Students Across Formats',
+    number: '70+',
+    title: 'Music journeys shaped',
     body:
       'from 1:1 lessons to a 35-student exam stress workshop',
   },
   {
     number: '4',
-    title: 'Events Run',
+    title: 'Experiences created',
     body:
-      'Successfully with 120+ attendees for workshops, open mics and more',
+      '400+ attendees across a variety of workshops, open mics, and activities',
   },
   {
     number: '100+',
-    title: 'Educators in Database',
+    title: 'Educators to learn from',
     body:
-      'Across subjects ranging from Vocals, Songwriting, Production and Instruments',
+      'Across subjects ranging from Vocals, Instruments, Production, and Songwriting',
   },
 ];
 
@@ -45,12 +45,12 @@ export const VISION_MISSION = {
   vision: {
     title: 'Our Vision',
     body:
-      'A world where music is for everyone, and expression is never out of reach.',
+      ' A world where music belongs to everyone, opening doors to learning, healing, connection, and growth.',
   },
   mission: {
     title: 'Our Mission',
     body:
-      'To walk beside each student, gently, on a musical journey that is wholly their own.',
+      ' To break barriers to music education by connecting people with the right teachers, tools, and ways to learn.',
   },
 };
 
@@ -66,21 +66,21 @@ export const TUTORS = [
   },
   {
     id: 't2',
-    name: 'Suchitra',
+    name: 'Aditya',
     role: 'Hindustani Vocals & Music Theory',
     experience: '10+ years exp.',
     image: '/assets/images/people/suchitra.jpg',
     bio:
-      'With over a decade of experience in Hindustani Classical Music, Suchitra combines traditional Guru-Shishya training with a thoughtful, disciplined approach. She helps students build a strong foundation in sur, taal, raag, voice culture, and confident stage performance.',
+      'A skilled guitarist and performer with over a decade of experience playing with bands and covering songs. Trinity College London Grade 3 certified, Aditya teaches guitar and music theory through flexible online lessons tailored to each student\'s pace and interests.',
   },
   {
     id: 't3',
-    name: 'Payal',
-    role: 'Hindustani Vocals',
+    name: 'Sirisha',
+    role: 'Carnatic Vocals',
     experience: '10+ years exp.',
     image: '/assets/images/people/payal.jpg',
     bio:
-      'A playback singer and experienced performer, Payal blends classical training with a patient, encouraging teaching style. She has guided students of all ages while nurturing strong vocal foundations through dedicated practice and a lifelong passion for music.',
+      'With over a decade of experience, Sirisha specializes in Carnatic vocals, kritis, and bhajans. She teaches students of all ages and skill levels, preparing learners across India and abroad for recitals. A certified Carnatic music instructor, she blends traditional training with a modern, adaptable approach to teaching.',
   },
   {
     id: 't4',
@@ -95,7 +95,7 @@ export const TUTORS = [
     id: 't5',
     name: 'Nitesh',
     role: 'Music Production',
-    experience: 'Professional Producer',
+    experience: '10+ years exp.',
     image: '/assets/images/people/nitesh.jpg',
     bio:
       'A music producer and beatmaker, Nitesh creates distinctive sounds by blending vintage samples with modern production techniques. His work has been featured on VH1, Lakmé Fashion Week, and acclaimed web series, while his live performances showcase his expertise with analog gear and drum machines.',
@@ -114,27 +114,27 @@ export const TUTORS = [
 export const TESTIMONIALS = [
   {
     id: 'q1',
-    initials: 'AS',
-    name: 'Arjun Sharma',
-    role: 'Software Engineer, Mumbai',
+    initials: 'V',
+    name: 'Veeral',
+    role: 'Student',
     quote:
-      'I had tried learning guitar twice before and stepped away both times. At Udukku, from the very first lesson, something felt different. Quieter. Kinder. My teacher did not push me to play. He helped me remember why I wanted to.',
+      'I started my flute journey during lockdown, and after almost three and a half years, it’s been wonderful to get back to learning with Udukku. The online classes are incredibly convenient, and my teacher’s flexibility and guidance have made learning easy and enjoyable. It feels good to finally pick up where I left off, with the right support and a pace that works for me. I’m really glad I found my way back to music with Udukku.',
   },
   {
     id: 'q2',
-    initials: 'SM',
-    name: 'Sunita Menon',
-    role: 'Teacher, Bengaluru',
+    initials: 'RS',
+    name: 'Raisin Saini',
+    role: 'Model',
     quote:
-      'I came in at forty two, convinced I had missed my window. Two years on, I sing Carnatic vocals at small community gatherings. Udukku did not give me talent. It gave me permission to try.',
+      'I’ve been loving the classes. With every session, I feel myself improving and understanding how to catch the notes in a song better. Since I started learning how to sing, I’ve also become much more confident singing by myself, even when it’s a completely new song. The classes have become something I genuinely look forward to every week, and seeing myself improve with each one makes the whole experience even more rewarding.',
   },
   {
     id: 'q3',
-    initials: 'RP',
-    name: 'Rajesh & Priti Kapoor',
-    role: 'Parents, Pune',
+    initials: 'AS',
+    name: 'Anonymous Student',
+    role: 'Harmonica Student',
     quote:
-      'Our daughter was quiet and kept things inside. After six months of violin lessons here, she walks onto the school stage like she belongs there. Music gave her a language she did not have before.',
+      'I was looking for a harmonica teacher for my first instrument and had a hard time finding good options online. Then I found Udukku. The founder personally helped me find the right teacher, and the classes turned out to be systematic, easy to follow, and great for a beginner. You can really tell they care about music and their students. They made my first music-learning experience feel easy, comfortable, and genuinely fun.',
   },
 ];
 
@@ -148,9 +148,9 @@ export const COURSE_CATEGORIES = [
 ];
 
 export const BOTTOM_CTA = {
-  heading: 'Want to try a free demo?',
+  heading: 'So, What Do You Want To Learn?',
   subheading:
-    'No pressure. No auditions. Your first time with us is a gift. A quiet space to listen, to play, and to remember what music means to you.',
+    'Guitar, piano, vocals, or something completely new. Start with whatever sounds like you.',
   image: '/assets/backgrounds/story-hero.jpg',
 };
 
