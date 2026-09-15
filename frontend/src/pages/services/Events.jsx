@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { toast } from 'sonner';
 import {
   ArrowUpRight,
@@ -15,23 +15,134 @@ import ServiceCTA from '../../components/services/ServiceCTA';
 import { cityRequestsService } from '../../services/supabase';
 import { fetchUpcomingEvents } from '../../data/upcomingEvents';
 
+/* Gallery tiles.
+   Ratios are not random: each column's heights are summed and balanced below,
+   so the three columns end at (almost) exactly the same height. If you add or
+   remove a photo, keep roughly this mix of portrait (3/4, 4/5), square (1/1)
+   and landscape (4/3) tiles. */
 const PHOTOS = [
   { src: '/assets/images/events/community-listening-circle.jpg', alt: 'A community listening circle in session', caption: 'Community Listening Circle', ratio: 'aspect-[4/5]' },
-  { src: '/assets/images/events/indian-classical-evening.jpg', alt: 'An intimate Indian classical performance', caption: 'Indian Classical Evening', ratio: 'aspect-[3/4]' },
+  { src: '/assets/images/events/indian-classical-evening.jpg', alt: 'An intimate Indian classical performance', caption: 'Indian Classical Evening', ratio: 'aspect-[1/1]' },
   { src: '/assets/images/events/gathering-in-the-round.jpg', alt: 'A gathering held around live music', caption: 'Gathering In The Round', ratio: 'aspect-[4/3]' },
-  { src: '/assets/images/events/student-masterclass.jpg', alt: 'A student masterclass in progress', caption: 'Student Masterclass', ratio: 'aspect-[3/4]' },
-  { src: '/assets/images/events/before-the-first-note.jpg', alt: 'A quiet moment before the concert begins', caption: 'Before The First Note', ratio: 'aspect-[4/3]' },
-  { src: '/assets/images/events/cultural-evening.jpg', alt: 'A cultural performance in full swing', caption: 'Cultural Evening', ratio: 'aspect-[3/4]' },
-  { src: '/assets/images/events/workshop-in-session.jpg', alt: 'A workshop with musicians and audience', caption: 'Workshop In Session', ratio: 'aspect-[4/5]' },
+  { src: '/assets/images/events/student-masterclass.jpg', alt: 'A student masterclass in progress', caption: 'Student Masterclass', ratio: 'aspect-[5/6]' },
+  { src: '/assets/images/events/before-the-first-note.jpg', alt: 'A quiet moment before the concert begins', caption: 'Before The First Note', ratio: 'aspect-[3/4]' },
+  { src: '/assets/images/events/cultural-evening.jpg', alt: 'A cultural performance in full swing', caption: 'Cultural Evening', ratio: 'aspect-[4/5]' },
+  { src: '/assets/images/events/workshop-in-session.jpg', alt: 'A workshop with musicians and audience', caption: 'Workshop In Session', ratio: 'aspect-[4/3]' },
   { src: '/assets/images/events/the-closing-bow.jpg', alt: 'A performance closing with applause', caption: 'The Closing Bow', ratio: 'aspect-[4/3]' },
-  { src: '/assets/images/events/between-the-ragas.jpg', alt: 'Musicians in conversation between sets', caption: 'Between The Ragas', ratio: 'aspect-[3/4]' },
+  { src: '/assets/images/events/between-the-ragas.jpg', alt: 'Musicians in conversation between sets', caption: 'Between The Ragas', ratio: 'aspect-[4/3]' },
+  { src: '/assets/images/events/event1.jpeg', alt: 'Udukku community event', caption: 'Creative Music Expression', ratio: 'aspect-[1/1]' },
+  { src: '/assets/images/events/event3.jpeg', alt: 'Udukku community event', caption: 'Music Brings Everyone', ratio: 'aspect-[1/1]' },
+  { src: '/assets/images/events/event4.jpeg', alt: 'Udukku community event', caption: 'Painting Musical Stories', ratio: 'aspect-[4/5]' },
+  { src: '/assets/images/events/event5.jpeg', alt: 'Udukku community event', caption: 'Art Meets Music', ratio: 'aspect-[3/4]' },
+  { src: '/assets/images/events/event6.jpeg', alt: 'Udukku community event', caption: 'Live Musical Performance', ratio: 'aspect-[1/1]' },
+  { src: '/assets/images/events/event7.jpeg', alt: 'Udukku community event', caption: 'Soulful Live Singing', ratio: 'aspect-[5/6]' },
+  { src: '/assets/images/events/event2.jpeg', alt: 'Udukku community event', caption: 'Joyful Audience Participation', ratio: 'aspect-[4/3]' },
 ];
+
+/* ---------- Gallery masonry ----------
+   A plain CSS `columns-*` block balances by number of tiles, not by height, so
+   the columns end ragged — which is exactly what was happening before. Instead
+   we stack the tiles into real columns and choose the split whose columns come
+   out closest to the same height, weighing every tile by its own aspect ratio.
+   Result: level bottoms at 1, 2 and 3 columns. */
+
+/* Height of each ratio, expressed in column-widths. */
+const RATIO_HEIGHT = {
+  'aspect-[3/4]': 4 / 3,
+  'aspect-[4/5]': 5 / 4,
+  'aspect-[5/6]': 6 / 5,
+  'aspect-[1/1]': 1,
+  'aspect-[4/3]': 3 / 4,
+};
+
+/* Rough allowance for the gap between tiles, in column-widths (~20px at 1000px). */
+const GALLERY_GAP = 0.02;
+
+const GALLERY_COLUMNS = [0, 1, 2]; // renders one column on mobile, two from sm, three from lg
+
+const buildGalleryColumns = (photos, columnCount) => {
+  if (photos.length === 0) return [];
+
+  const heightOf = ([a, b]) => {
+    let h = 0;
+    for (let i = a; i < b; i += 1) h += RATIO_HEIGHT[photos[i].ratio] || 1;
+    return h + Math.max(0, b - a - 1) * GALLERY_GAP;
+  };
+
+  /* Each column stays a contiguous run of tiles, so visual order is preserved
+     left to right, top to bottom. That makes this a partition problem — and at
+     gallery size we can simply try every split and keep the most level one. */
+  let best = null;
+
+  const split = (start, remaining, parts) => {
+    if (remaining === 1) {
+      const candidate = [...parts, [start, photos.length]];
+      const heights = candidate.map(heightOf);
+      const spread = Math.max(...heights) - Math.min(...heights);
+      const tallest = Math.max(...heights);
+      if (
+        !best ||
+        spread < best.spread - 1e-9 ||
+        (Math.abs(spread - best.spread) < 1e-9 && tallest < best.tallest)
+      ) {
+        best = { parts: candidate, spread, tallest };
+      }
+      return;
+    }
+    const lastStart = photos.length - remaining + 1;
+    for (let end = start + 1; end <= lastStart; end += 1) {
+      split(end, remaining - 1, [...parts, [start, end]]);
+    }
+  };
+
+  if (photos.length < columnCount) {
+    return photos.map((photo, index) => [{ photo, index }]);
+  }
+
+  split(0, columnCount, []);
+
+  return best.parts.map(([a, b]) =>
+    photos.slice(a, b).map((photo, i) => ({ photo, index: a + i }))
+  );
+};
+
+/* Number of columns used at the current viewport (1 mobile / 2 sm / 3 lg),
+   so the balancing can happen in JS where it is measurable. */
+const useGalleryColumnCount = () => {
+  const [count, setCount] = useState(() =>
+    typeof window === 'undefined'
+      ? 3
+      : window.matchMedia('(min-width: 1024px)').matches
+      ? 3
+      : window.matchMedia('(min-width: 640px)').matches
+      ? 2
+      : 1
+  );
+
+  useLayoutEffect(() => {
+    const mqSm = window.matchMedia('(min-width: 640px)');
+    const mqLg = window.matchMedia('(min-width: 1024px)');
+    const sync = () => setCount(mqLg.matches ? 3 : mqSm.matches ? 2 : 1);
+
+    sync();
+    mqSm.addEventListener('change', sync);
+    mqLg.addEventListener('change', sync);
+    return () => {
+      mqSm.removeEventListener('change', sync);
+      mqLg.removeEventListener('change', sync);
+    };
+  }, []);
+
+  return count;
+};
 
 export default function Events() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', city: '', interest: '' });
   const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const galleryColumns = buildGalleryColumns(PHOTOS, useGalleryColumnCount());
 
   const [events, setEvents] = useState([]);
   useEffect(() => {
@@ -83,13 +194,13 @@ export default function Events() {
       <ServiceHero
         testId="events-hero"
         eyebrow="Events"
-        headline={<>Where music becomes <span className="text-italic-serif text-orange">community</span>.</>}
-        description="From intimate raga listening circles to corporate wellness workshops, Udukku events bring people together through the shared experience of music."
-        pills={['Corporate', 'Cultural', 'Community', 'Private', 'Workshops']}
+        headline={<>Our rooms  full of <span className="text-italic-serif text-orange">music</span></>}
+        description="From turning music into art to coming together for jams and immersive experiences, our events are about coming together, expressing yourself and enjoying music in all its forms."
+        pills={['Art', 'Poetry', 'Creativity', 'Open mics', 'Workshops']}
         imageSrc="/assets/images/events/cultural-evening.jpg"
         imageAlt="A cultural performance in full swing"
-        chipTitle="Live, In Person"
-        chipSubtitle="Where music becomes community"
+        //chipTitle="Live, In Person"
+        //chipSubtitle="Where music becomes community"
       />
 
       {/* Editorial gallery — dark editorial band */}
@@ -100,33 +211,41 @@ export default function Events() {
           </h2>
           <div
             data-testid="events-gallery"
-            className="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-5 [column-fill:_balance]"
+            className="flex items-start gap-4 md:gap-5"
           >
-            {PHOTOS.map((p, i) => (
-              <figure
-                key={p.src}
-                data-testid={`events-photo-${i}`}
-                className="mb-4 md:mb-5 break-inside-avoid group relative overflow-hidden rounded-2xl md:rounded-3xl bg-white/5"
-                style={{ animation: `udukku-rise 0.7s ease ${0.05 * i}s both` }}
+            {GALLERY_COLUMNS.slice(0, galleryColumns.length).map((c) => (
+              <div
+                key={c}
+                data-testid={`events-gallery-column-${c}`}
+                className="flex-1 min-w-0 flex flex-col gap-4 md:gap-5"
               >
-                <div className={`${p.ratio} w-full overflow-hidden`}>
-                  <img
-                    src={p.src}
-                    alt={p.alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-                  />
-                </div>
-                <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 p-5 md:p-6 bg-gradient-to-t from-black/55 via-black/10 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="text-italic-serif text-lg md:text-xl leading-tight">
-                    {p.caption}
-                  </div>
-                </figcaption>
-              </figure>
+                {galleryColumns[c].map(({ photo: p, index: i }) => (
+                  <figure
+                    key={p.src}
+                    data-testid={`events-photo-${i}`}
+                    className="group relative overflow-hidden rounded-2xl md:rounded-3xl bg-white/5"
+                    style={{ animation: `udukku-rise 0.7s ease ${0.05 * i}s both` }}
+                  >
+                    <div className={`${p.ratio} w-full overflow-hidden`}>
+                      <img
+                        src={p.src}
+                        alt={p.alt}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                      />
+                    </div>
+                    <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 p-5 md:p-6 bg-gradient-to-t from-black/55 via-black/10 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="text-italic-serif text-lg md:text-xl leading-tight">
+                        {p.caption}
+                      </div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
             ))}
           </div>
           <p className="mt-10 text-center text-white/60 text-sm">
-            More event photos coming soon. Follow us for updates.
+            Follow us for updates.
           </p>
         </div>
       </section>
@@ -177,7 +296,7 @@ export default function Events() {
                 No upcoming events at the moment.
               </h3>
               <p className="mt-3 text-brown-mid max-w-md leading-relaxed">
-                Stay tuned — new experiences will be announced soon.
+                Stay tuned, new experiences will be announced soon.
               </p>
             </div>
           )}
@@ -287,11 +406,11 @@ export default function Events() {
       </section>
 
       <ServiceCTA
-        eyebrow="Host an evening"
-        headline={<>Ready to hold an <span className="text-italic-serif text-orange">evening</span>?</>}
-        description="Talk to our events team and shape a gathering that feels distinctly yours."
-        ctaLabel="Talk to our team"
-        ctaTo="/contact"
+        eyebrow="WANT US THERE?"
+        headline={<>Bring an Udukku experience <span className="text-italic-serif text-orange">to your city</span></>}
+        description="Talk to our events team to make it happen."
+        //ctaLabel="Talk to our team"
+        //ctaTo="/contact"
         testId="events-book-cta"
       />
     </main>

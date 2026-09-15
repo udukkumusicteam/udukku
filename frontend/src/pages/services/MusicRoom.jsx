@@ -24,32 +24,50 @@ import BrandIcon from '../../components/BrandIcon';
 import { sessionBookingsService } from '../../services/supabase';
 
 const FEATURES = [
-  { icon: Repeat, title: 'Consistent Practice', body: "Bring your own practice, or follow the teacher's." },
-  { icon: Users, title: 'Community Network', body: 'Warm gatherings with people who love music.' },
-  { icon: ClipboardCheck, title: 'Accountability', body: 'An Udukku teacher; learn exactly what you want as you need.' },
-  { icon: Heart, title: '1-on-1 Checks', body: 'An individual touchpoint with the Udukku team.' },
-  { icon: LineChart, title: 'Progress Plotting', body: 'Revaluation and planning to make progress tangible.' },
-  { icon: Video, title: 'Session Replays', body: 'Missed a session? Every practice hour is recorded and yours to keep.' },
+  { icon: Heart, title: 'Regular Check-ins', body: "We check in on you, one on one, so your practice never goes unnoticed. Showing up is easier when someone's actually paying attention." },
+  { icon: Users, title: 'Community Network', body: "You're never practicing alone. It's a room full of musicians, all showing up for the same thing, at the same time, learning, sharing, and growing together." },
+  { icon: ClipboardCheck, title: 'Cashback and Rewards', body: "Show up, and earn cashback. Or trade it in for a session with our teachers, on production, songwriting, or whatever you've been wanting to work on." },
+  //{ icon: Heart, title: '1-on-1 Checks', body: 'An individual touchpoint with the Udukku team.' },
+  //{ icon: LineChart, title: 'Progress Plotting', body: 'Revaluation and planning to make progress tangible.' },
+  //{ icon: Video, title: 'Session Replays', body: 'Missed a session? Every practice hour is recorded and yours to keep.' },
 ];
 
 const PLANS = [
+  {
+    id: 'casual',
+    name: 'Casual',
+    //price: 'Free',
+    strike: null,
+    per: null,
+    sessions: 'Flexible',
+    practiceType: 'Any instrument or style',
+    community: false,
+    savings: null,
+    benefits: false,
+  },
+  {
+    id: 'habit-8',
+    name: 'Habit 8-Day',
+    price: '₹799',
+    strike: null,
+    per: 'month',
+    sessions: '2 days / week',
+    practiceType: 'Any instrument or style',
+    community: true,
+    savings: 'Around 60% back',
+    benefits: true,
+  },
   {
     id: 'habit-12',
     name: 'Habit 12-Day',
     price: '₹999',
     strike: '₹1,200',
     per: 'month',
-    rows: [
-      ['Sessions', '3 days / week'],
-      ['Practice type', 'Any instrument or style'],
-      ['Community events', '✓'],
-      ['Max savings', 'Up to 90% back'],
-    ],
-    tiers: [
-      { label: 'No refund', range: '0 to 6 lessons' },
-      { label: '50% refund', range: '7 to 10 lessons' },
-      { label: '90% refund', range: '11 to 12 lessons' },
-    ],
+    sessions: '3 days / week',
+    practiceType: 'Any instrument or style',
+    community: true,
+    savings: 'Up to 90% back',
+    benefits: true,
   },
   {
     id: 'habit-24',
@@ -57,24 +75,35 @@ const PLANS = [
     price: '₹1,899',
     strike: '₹2,400',
     per: 'month',
-    featured: true,
-    rows: [
-      ['Sessions', '6 days / week'],
-      ['Practice type', 'Any instrument or style'],
-      ['Community events', '✓'],
-      ['Max savings', 'Up to 90% back'],
-    ],
-    tiers: [
-      { label: 'No refund', range: '0 to 12 lessons' },
-      { label: '50% refund', range: '14 to 20 lessons' },
-      { label: '90% refund', range: '20 to 24 lessons' },
-    ],
+    sessions: '6 days / week',
+    practiceType: 'Any instrument or style',
+    community: true,
+    savings: 'Up to 90% back',
+    benefits: true,
   },
 ];
 
+const PLAN_ROWS = [
+  { key: 'sessions', label: 'Sessions per week' },
+  { key: 'practiceType', label: 'Practice type' },
+  { key: 'community', label: 'Community events' },
+  { key: 'savings', label: 'Maximum savings' },
+  { key: 'benefits', label: 'Benefits' },
+];
+
+/* Maps a plan to the matching option in the booking form's frequency group */
+const PLAN_FREQUENCY = {
+  casual: 'flexible',
+  'habit-8': 'twice',
+  'habit-12': 'thrice',
+  'habit-24': 'six',
+};
+
 const FREQUENCY_OPTIONS = [
-  { value: 'once-twice', label: 'Once or twice a week' },
-  { value: 'thrice-plus', label: 'Thrice or more a week' },
+  { value: 'flexible', label: 'Flexible, as and when' },
+  { value: 'twice', label: '2 days a week' },
+  { value: 'thrice', label: '3 days a week' },
+  { value: 'six', label: '6 days a week' },
 ];
 
 const TIME_SLOTS = [
@@ -84,79 +113,162 @@ const TIME_SLOTS = [
   { value: 'night', label: 'Night', icon: Moon },
 ];
 
-const PlanCard = ({ plan, selected, onSelect }) => (
-  <button
-    type="button"
-    onClick={() => onSelect(plan.id)}
-    data-testid={`plan-${plan.id}`}
-    className={`relative text-left rounded-3xl p-7 md:p-8 transition-all duration-500 ${
-      selected
-        ? 'bg-white border-2 border-orange shadow-[0_25px_70px_-20px_rgba(200,75,26,0.45)] -translate-y-1.5 hover:-translate-y-2 hover:shadow-[0_35px_90px_-20px_rgba(200,75,26,0.55)]'
-        : 'bg-cream border border-brown-dark/10 hover:border-orange/40 hover:-translate-y-0.5'
-    }`}
-  >
+/* ---------- Plan comparison table ---------- */
 
-    {plan.featured && (
-      <span className="absolute -top-3.5 left-7 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-orange text-white text-[11px] font-semibold uppercase tracking-[0.22em] shadow-[0_10px_22px_-6px_rgba(200,75,26,0.6)]">
-        Most popular
-      </span>
-    )}
+/* ---------- Plan comparison table ---------- */
 
-    {selected && (
-      <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-white pl-1 pr-3 py-1 rounded-full shadow-[0_4px_14px_-2px_rgba(200,75,26,0.25)] ring-1 ring-orange/20">
-        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange text-white">
-          <Check className="w-3 h-3" strokeWidth={3} />
-        </span>
-        <span className="text-orange text-xs font-medium">Selected</span>
-      </span>
-    )}
+const renderPlanCell = (plan, key, selected) => {
+  const muted = selected ? 'text-white/70' : 'text-brown-mid/60';
+  const value = selected ? 'text-white font-medium' : 'text-brown-dark font-medium';
 
-    <div className="flex items-start justify-between gap-6">
-      <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
-        {plan.name}
-      </h3>
-      <div className="text-right">
-        <div className="text-brown-mid/60 text-xs line-through">{plan.strike}</div>
-        <div className="flex items-baseline gap-1 justify-end">
-          <span
-            className={`text-display text-3xl md:text-4xl ${
-              selected ? 'text-orange' : 'text-brown-dark'
-            }`}
-          >
-            {plan.price}
-          </span>
-          <span className="text-brown-mid text-xs">/{plan.per}</span>
-        </div>
-      </div>
-    </div>
-
-    <dl className="mt-7 space-y-3.5">
-      {plan.rows.map(([k, v]) => (
-        <div
-          key={k}
-          className="flex items-center justify-between text-sm border-b border-brown-dark/10 pb-3 last:border-0"
+  if (key === 'price') {
+    return (
+      <span className="inline-flex flex-wrap items-baseline justify-center gap-x-1.5">
+        {plan.strike && (
+          <span className={`text-xs line-through ${muted}`}>{plan.strike}</span>
+        )}
+        <span
+          className={`text-display text-base md:text-lg ${
+            selected ? 'text-white' : 'text-brown-dark'
+          }`}
         >
-          <dt className="text-brown-mid">{k}</dt>
-          <dd className="text-brown-dark font-medium">{v}</dd>
-        </div>
-      ))}
-    </dl>
+          {plan.price}
+        </span>
+        {plan.per && (
+          <span className={`text-xs ${selected ? 'text-white/70' : 'text-brown-mid'}`}>
+            /{plan.per}
+          </span>
+        )}
+      </span>
+    );
+  }
 
-    <div className="mt-7">
-      <div className="text-[11px] uppercase tracking-[0.22em] text-brown-mid mb-3">
-        Cashback / refund
+  if (key === 'community' || key === 'benefits') {
+    return plan[key] ? (
+      <span className={value}>✓</span>
+    ) : (
+      <span className={muted}>–</span>
+    );
+  }
+
+  return <span className={value}>{plan[key]}</span>;
+};
+
+const PlanTable = ({ selected, onSelect }) => {
+  const [hovered, setHovered] = useState(null);
+
+  const cellState = (id) =>
+    selected === id ? 'selected' : hovered === id ? 'hovered' : 'idle';
+
+  const columnHandlers = (id) => ({
+    onClick: () => onSelect(id),
+    onMouseEnter: () => setHovered(id),
+    onMouseLeave: () => setHovered(null),
+  });
+
+  return (
+    <div className="rounded-2xl md:rounded-3xl bg-cream border border-brown-dark/10 overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[720px] border-separate border-spacing-0 text-sm">
+          <thead>
+            <tr>
+              <th scope="col" className="w-[22%] px-5 py-5 text-left align-middle">
+                <span className="block text-[11px] uppercase tracking-[0.22em] text-brown-mid">
+                  Udukku Music Room
+                </span>
+                <span className="sr-only">Plan details</span>
+              </th>
+              {PLANS.map((plan) => {
+                const state = cellState(plan.id);
+                const isSelected = state === 'selected';
+                return (
+                  <th
+                    key={plan.id}
+                    scope="col"
+                    aria-selected={isSelected}
+                    title={`Select the ${plan.name} plan`}
+                    {...columnHandlers(plan.id)}
+                    className={`w-[19.5%] px-4 py-5 text-center align-middle border-l cursor-pointer transition-colors duration-500 ${
+                      isSelected
+                        ? 'bg-orange border-white/25'
+                        : `bg-cream border-brown-dark/10 ${
+                            state === 'hovered' ? 'bg-white border-orange/40' : ''
+                          }`
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      data-testid={`plan-${plan.id}`}
+                      aria-pressed={isSelected}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelect(plan.id);
+                      }}
+                      className={`inline-flex items-center justify-center w-full text-display text-lg md:text-xl rounded-full transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/50 ${
+                        isSelected
+                          ? 'text-white'
+                          : 'text-brown-dark hover:text-orange'
+                      }`}
+                    >
+                      {plan.name}
+                    </button>
+
+                    {isSelected && (
+                      <span className="mt-2.5 inline-flex items-center gap-1.5 bg-white pl-1 pr-3 py-1 rounded-full shadow-[0_4px_14px_-2px_rgba(200,75,26,0.25)] ring-1 ring-orange/20">
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange text-white">
+                          <Check className="w-3 h-3" strokeWidth={3} />
+                        </span>
+                        <span className="text-orange text-xs font-medium">
+                          Selected
+                        </span>
+                      </span>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {PLAN_ROWS.map((row) => (
+              <tr key={row.key}>
+                <th
+                  scope="row"
+                  className="px-5 py-4 text-left align-middle font-normal text-brown-mid border-t border-brown-dark/10"
+                >
+                  {row.label}
+                </th>
+                {PLANS.map((plan) => {
+                  const state = cellState(plan.id);
+                  const isSelected = state === 'selected';
+                  return (
+                    <td
+                      key={plan.id}
+                      data-testid={`plan-${plan.id}-${row.key}`}
+                      title={`Select the ${plan.name} plan`}
+                      {...columnHandlers(plan.id)}
+                      className={`px-4 py-4 text-center align-middle border-t border-l cursor-pointer transition-colors duration-500 ${
+                        isSelected
+                          ? 'bg-orange border-white/25 text-white'
+                          : `border-brown-dark/10 text-brown-dark ${
+                              state === 'hovered'
+                                ? 'bg-white border-orange/40'
+                                : 'bg-cream'
+                            }`
+                      }`}
+                    >
+                      {renderPlanCell(plan, row.key, isSelected)}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <ul className="space-y-2.5">
-        {plan.tiers.map((t) => (
-          <li key={t.range} className="flex items-center justify-between text-sm">
-            <span className="text-orange">{t.label}</span>
-            <span className="text-brown-mid">{t.range}</span>
-          </li>
-        ))}
-      </ul>
     </div>
-  </button>
-);
+  );
+};
+
 
 export default function MusicRoom() {
   const [selected, setSelected] = useState('habit-24');
@@ -172,6 +284,12 @@ export default function MusicRoom() {
 
   const onChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const selectPlan = (id) => {
+    setSelected(id);
+    const frequency = PLAN_FREQUENCY[id];
+    if (frequency) setForm((f) => ({ ...f, frequency }));
+  };
 
   const submit = async (e) => {
     e.preventDefault();
@@ -207,6 +325,8 @@ export default function MusicRoom() {
     }
   };
 
+  const activePlan = PLANS.find((p) => p.id === selected);
+
   return (
     <main data-testid="music-room-page" className="bg-white page-fade-in">
       <style>{`
@@ -219,18 +339,18 @@ export default function MusicRoom() {
         eyebrow="Udukku Music Room"
         headline={
           <>
-            You didn&apos;t stop loving music.{' '}
+            Your music grows when {' '}
             <span className="text-italic-serif text-orange">
-              You just stopped having a place for it.
+            practice becomes a habit.
             </span>
           </>
         }
-        description="Monthly online practice sessions, a real community, with structure built to hold your riyaz. Every session is yours to use."
+        description="An online music practice community that helps you practise consistently, stay accountable, and make real progress through regular sessions."
         pills={['Habit 12', 'Habit 24', 'Community', 'Cashback', 'Referrals']}
         imageSrc="/assets/images/services/music-room-hero.jpg"
         imageAlt="A laptop showing an Udukku Music Room online session"
-        chipTitle="Show Up, Every Week"
-        chipSubtitle="Community and structure for your riyaz"
+        //chipTitle="Show Up, Every Week"
+        //chipSubtitle="Community and structure for your riyaz"
       />
 
       {/* About the room — dark editorial band */}
@@ -239,25 +359,26 @@ export default function MusicRoom() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-10 md:mb-14">
             <div className="lg:col-span-5">
               <span className="inline-flex items-center gap-2 uppercase tracking-[0.28em] text-[11px] md:text-xs text-orange mb-4">
-                <BrandIcon size={14} /> The room, explained
+                <BrandIcon size={14} /> The room, open for you.
               </span>
               <h2 className="text-display text-white text-3xl md:text-4xl lg:text-5xl leading-[1.05]">
-                A quiet promise to keep{' '}
-                <span className="text-italic-serif text-orange">showing up</span>.
+                A promise to keep{' '}
+                <span className="text-italic-serif text-orange">showing up</span>
               </h2>
             </div>
             <div className="lg:col-span-6 lg:col-start-7 text-white/75 text-base md:text-lg leading-relaxed space-y-4">
               <p>
-                Udukku Music Room is a monthly practice home for anyone who
-                has ever loved music and quietly hoped to come back to it. Not
-                a course. Not a class. A steady, warm place to keep showing
-                up, at your own pace, alongside people who care about the
-                same thing.
+                Udukku Music Room (UMR) is a music practice community
+                designed for learners who want to build or rebuild consistency in
+                their musical journey.
+                
               </p>
               <p>
-                The teacher is present. The structure is there. Your practice,
-                your songs, and the shape of your riyaz stay entirely yours.
-                We only hold the room.
+                Whether you're just starting out or returning
+                after a long break, UMR provides structured practice sessions, 
+                accountability, and a supportive environment that helps transform
+                intention into regular musical practice.
+              
               </p>
             </div>
           </div>
@@ -268,12 +389,13 @@ export default function MusicRoom() {
                 <BrandIcon size={16} />
               </span>
               <p className="text-display text-brown-dark text-xl md:text-2xl leading-tight mt-5">
-                Structure without{' '}
-                <span className="text-italic-serif text-orange">pressure</span>.
+                Accountability{' '}
+                <span className="text-italic-serif text-orange"></span>
               </p>
               <p className="mt-2 text-brown-mid text-sm leading-relaxed">
-                Teachers who sit beside you, never above you. Everything moves
-                at the tempo you can honour.
+                Our facilitator keeps you accountable to your practice,
+                with every goal you reach earning you cashback and rewards.
+                
               </p>
             </article>
             <article className="rounded-2xl p-7 bg-cream border border-brown-dark/10">
@@ -281,12 +403,13 @@ export default function MusicRoom() {
                 <BrandIcon size={16} />
               </span>
               <p className="text-display text-brown-dark text-xl md:text-2xl leading-tight mt-5">
-                Your songs.{' '}
-                <span className="text-italic-serif text-orange">Our room</span>.
+                Consistency{' '}
+                <span className="text-italic-serif text-orange"></span>
               </p>
               <p className="mt-2 text-brown-mid text-sm leading-relaxed">
-                You bring the practice. We hold the space, the rhythm, and the
-                gentle company you need to keep it going.
+                Build a practice that fits into your life by choosing a fixed schedule of  
+                2, 3, or 6 days a week, and committing to show up for it consistently. 
+                
               </p>
             </article>
             <article className="rounded-2xl p-7 bg-cream border border-brown-dark/10">
@@ -294,12 +417,13 @@ export default function MusicRoom() {
                 <BrandIcon size={16} />
               </span>
               <p className="text-display text-brown-dark text-xl md:text-2xl leading-tight mt-5">
-                A place to{' '}
-                <span className="text-italic-serif text-orange">return</span>.
+                Growth & Progress{' '}
+                <span className="text-italic-serif text-orange"></span>
               </p>
               <p className="mt-2 text-brown-mid text-sm leading-relaxed">
-                For everyone who has ever put music down and quietly hoped to
-                find their way back. The room stays open.
+                 Your practice should have a purpose, which is why we do regular 
+                 check-ins to analyse your growth and help ensure you’re always moving in the right direction.
+                
               </p>
             </article>
           </div>
@@ -341,18 +465,23 @@ export default function MusicRoom() {
       <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
           <h2 className="text-display text-white text-3xl md:text-4xl mb-6">
-            Choose your plan
+            Choose your <span className="text-italic-serif text-orange">plan</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-            {PLANS.map((p) => (
-              <PlanCard
-                key={p.id}
-                plan={p}
-                selected={selected === p.id}
-                onSelect={setSelected}
-              />
-            ))}
-          </div>
+          <PlanTable selected={selected} onSelect={selectPlan} />
+
+          <p
+            data-testid="umr-pricing-note"
+            className="mt-4 text-xs md:text-sm text-white/60"
+          >
+            Pricing is shared on request ; {' '}
+            <a
+              href="/contact"
+              className="text-orange underline-offset-4 hover:underline"
+            >
+              contact us for pricing
+            </a>{' '}
+            and we&apos;ll help you pick the plan that fits.
+          </p>
         </div>
       </section>
 
@@ -367,10 +496,15 @@ export default function MusicRoom() {
               Cashback Offer
             </h3>
             <p className="mt-3 text-brown-mid leading-relaxed">
-              At full attendance, you get 90% of your subscription fee back.
-              You would be paying ₹99 a month. No, this is not a typo. The
-              cashback scales from 60% upward, because we genuinely believe
-              showing up should feel like it counts for something.
+            Your consistency can pay you back. Attend{" "}
+            <strong>50% or more</strong> of the classes in any batch to become eligible
+            for <strong>cashback</strong>, and choose how you'd like to be rewarded.
+            Take the <strong>cashback</strong>, or trade it in for a{" "}
+            <strong>customised tutor session</strong> instead. The more regularly you
+            attend, the <strong>more cashback you earn</strong>, and the{" "}
+            <strong>longer your reward session can be</strong>. Keep showing up and let
+            your commitment bring you rewards, however you'd like to receive them.
+              
             </p>
           </article>
           <article className="rounded-2xl p-8 bg-white border border-brown-dark/10">
@@ -381,11 +515,13 @@ export default function MusicRoom() {
               Referrals
             </h3>
             <p className="mt-3 text-brown-mid leading-relaxed">
-              Bring someone into Music Room. A week free for you and an easy
-              entry point for them, with zero pressure on either end. Students
-              who have stayed the longest are not the most talented. They are
-              the ones who found a room they trusted enough to keep coming
-              back to.
+              Bring a friend to Music Room, and you both get a head start. When they join
+              through you, we'll credit your account with <strong>free attendance</strong>: {" "}
+              <strong> a couple of classes, or a percentage of your batch</strong>,{" "}
+              <strong> depending on your Habit package</strong>. That attendance brings you
+              closer to unlocking your choice of{" "}
+              <strong> cashback or a reward session</strong> with one of our tutors. It's a
+              simple way to grow the room together and get rewarded for it.
             </p>
           </article>
         </div>
@@ -406,9 +542,16 @@ export default function MusicRoom() {
             <p className="mt-4 text-white/75 text-sm md:text-base">
               Selected plan:{' '}
               <span className="text-white font-medium">
-                {PLANS.find((p) => p.id === selected)?.name}
+                {activePlan?.name}
               </span>
-              . Change above anytime.
+              {activePlan && (
+                <span className="text-white/70">
+                  {' '}
+                  — {activePlan.price}
+                  {activePlan.per ? `/${activePlan.per}` : ''}
+                </span>
+              )}
+              . Change in the table above anytime.
             </p>
           </div>
 
@@ -511,8 +654,8 @@ export default function MusicRoom() {
                   ))}
                 </div>
                 <p className="mt-2 text-brown-mid/70 text-xs">
-                  We currently host up to 3 sessions per week. More slots
-                  coming soon.
+                  Sessions run 2, 3, or 6 days a week. We&apos;ve pre-selected
+                  your plan&apos;s schedule — change it here if you&apos;d like.
                 </p>
               </div>
 

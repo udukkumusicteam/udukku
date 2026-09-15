@@ -19,13 +19,14 @@ export default function About() {
             About Udukku
           </span>
           <h1 className="text-display mt-4 text-4xl sm:text-5xl lg:text-[72px] xl:text-[80px] max-w-[16ch]">
-            Rooted in feeling,
+            Everything here begins
             <br />
-            <span className="text-italic-serif">Built for belonging.</span>
+            <span className="text-italic-serif">with music.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-white/90 text-base md:text-lg leading-relaxed">
-            A music home built by a musician, for everyone who has ever wanted
-            to sing, play, or listen a little more deeply.
+            A home built by a musician, for musicians who are learning, 
+            creating, exploring, and finding their own sound.
+            
           </p>
         </div>
         <WaveDivider fill="#F5F0E5" />
@@ -67,25 +68,25 @@ export default function About() {
 
               <div className="mt-7 space-y-5 text-brown-mid text-base md:text-lg leading-relaxed max-w-2xl">
                 <p>
-                  Ishita Parakh is a musician, educator, and creator whose life
-                  orbits music, creativity, and the deep joy of helping others
-                  find their voice. As a singer-songwriter, she has built a
-                  following drawn to her soulful, genre-bending sound. Music
-                  that feels both intimate and expansive.
+                  Ishita Parakh is a singer-songwriter and educator who started out in 
+                  engineering before turning fully toward music. She went on to complete a
+                  Master's in Cognitive Neuroscience, focusing on Music Cognition, and holds a
+                  Grade 8 Rock and Pop certification from RSL, along with a Grade 6 Western
+                  Classical certification from Trinity.
                 </p>
                 <p>
-                  Her approach to teaching is shaped by lived experience, in
-                  the classroom, on stage, and within the quiet spaces where
-                  music meets emotion. She honours the roots of tradition while
-                  making room for personal evolution, and that philosophy is
-                  woven into everything Udukku stands for.
+                  As an artist, she blends Pop, Rock, and RnB with touches of Hindustani
+                  classical training, drawing inspiration from Rihanna, Taylor Swift, and Selena
+                  Gomez. She has released nine original songs, including the official female
+                  version of "Chaand Baaliyan" with Sony Music India, and has performed alongside
+                  with Bollywood artists like Lisa Mishra at Beatstreet Delhi.
                 </p>
                 <p>
-                  Ishita has guided learners of every age and background, not
-                  just to play better, but to feel more freely. Through Udukku,
-                  she is building something she always wished existed. A place
-                  where music education is warm, accessible, and genuinely
-                  transformative.
+                  With 5 years of experience as an educator, her teaching approach centers on
+                  customizing training to what each student needs and focusing closely on the
+                  virtual music learning company she started, built on the belief that music
+                  belongs to everyone, and that everyone deserves a way in.
+                  
                 </p>
               </div>
             </div>
@@ -194,8 +195,8 @@ export default function About() {
               <span className="text-italic-serif">for everyone</span>.
             </h2>
             <p className="mt-5 text-white/90 text-base md:text-lg leading-relaxed">
-              Whether you sing, strum, play, or are simply beginning to listen,
-              these are the quiet promises we keep.
+              Whether you're learning, creating, listening, or reconnecting with music, your journey starts here.
+              These are the values that guide everything we do.
             </p>
           </div>
 
@@ -232,8 +233,8 @@ export default function About() {
             <span className="text-italic-serif text-orange">journey</span>?
           </h2>
           <p className="mt-5 max-w-xl text-white/80 text-base md:text-lg leading-relaxed">
-            Your first session is on us. No auditions. No pressure. Just a place to 
-            remember what music feels like
+            Your first session is on us. The journey from there is yours. 
+            
           </p>
           <Link
             to="/booking"

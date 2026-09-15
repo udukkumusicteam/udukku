@@ -121,6 +121,18 @@ export const TutorsSlider = () => {
               </div>
             </article>
           ))}
+
+          {/* Trailing text after the last card — same pattern as the
+              Instruments page rows */}
+          <div className="shrink-0 snap-start flex flex-col justify-center pl-2 pr-6 min-w-[200px]">
+            <span className="text-orange text-italic-serif text-xl md:text-2xl leading-snug">
+              and many more tutors.
+            </span>
+            <span className="text-brown-mid/70 text-xs mt-1.5">
+              Tell us what you&apos;re looking for.
+            </span>
+          </div>
+
           <div className="udukku-gutter" aria-hidden="true" />
         </div>
       </div>

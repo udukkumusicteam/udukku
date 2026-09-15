@@ -15,7 +15,8 @@ import {
   Wind,
   Ear,
   PenLine,
-  Moon,
+  Eye,
+  Waves,
   Sparkles,
   Shield,
   Zap,
@@ -45,13 +46,14 @@ const WHY_ITEMS = [
 ];
 
 const INDIVIDUAL_ELEMENTS = [
-  { icon: Wind, label: 'Bhramari (Humming Breath)' },
-  { icon: Wind, label: 'Guided Breathing' },
-  { icon: Music2, label: 'Vocal Exercises' },
-  { icon: Music, label: 'Guided Music Meditation' },
-  { icon: Ear, label: 'Active Listening' },
-  { icon: PenLine, label: 'Journaling' },
-  { icon: Moon, label: 'Relaxation & Sleep Practices' },
+  { icon: Wind, label: 'Bhramari', body: 'Calms the mind' },
+  { icon: Sparkles, label: 'Om Chanting', body: 'Grounds your thoughts' },
+  { icon: Waves, label: 'Sound & Vibration', body: 'Awakens the senses' },
+  { icon: Ear, label: 'Active Listening', body: 'Improves focus' },
+  { icon: Eye, label: 'Visualizations & Affirmations', body: 'Supports positive thinking' },
+  { icon: Wind, label: 'Guided Breathing', body: 'Regulates the body' },
+  { icon: Music, label: 'Guided Music Meditation', body: 'Promotes relaxation' },
+  { icon: Music2, label: 'Raags & Healing Sounds', body: 'Heals from within' },
 ];
 
 const INDIVIDUAL_STRUCTURE = [
@@ -62,17 +64,18 @@ const INDIVIDUAL_STRUCTURE = [
 ];
 
 const INDIVIDUAL_OUTCOMES = [
-  'Shift from stress to calm',
+  'Support emotional wellbeing',
   'Improve focus and productivity',
   'Re-orient and regulate your mental state',
   'Learn calming music meditation techniques',
   'Build everyday wellness habits',
+  'Reconnect with yourself',
 ];
 
 const INDIVIDUAL_PLANS = [
-  { id: 'weekly-reset', name: 'Weekly Reset', sessions: '4 Sessions / Month', price: '₹999' },
-  { id: 'music-reset', name: 'Music Reset', sessions: '8 Sessions / Month', price: '₹1499' },
-  { id: 'deep-practice', name: 'Deep Practice', sessions: '12 Sessions / Month', price: '₹1799' },
+  { id: 'weekly-reset', name: 'Weekly Reset', sessions: '4 Sessions / Month', price: '' },
+  { id: 'music-reset', name: 'Music Reset', sessions: '8 Sessions / Month', price: '' },
+  { id: 'deep-practice', name: 'Deep Practice', sessions: '12 Sessions / Month', price: '' },
 ];
 
 const CORPORATE_WHY = [
@@ -85,18 +88,18 @@ const CORPORATE_WHY = [
 ];
 
 const CORPORATE_JOURNEY = [
-  { n: '1', title: 'RESET', body: 'Release accumulated stress.' },
-  { n: '2', title: 'REGULATE', body: 'Improve attention and focus using music and breathwork.' },
-  { n: '3', title: 'RESTORE', body: 'Build sustainable recovery habits with guided music practices.' },
+  { n: '1', title: 'RESET', body: ' Release the stress your mind carries through the day.' },
+  { n: '2', title: 'REGULATE', body: ' Use music and breathwork to regulate focus and attention.' },
+  { n: '3', title: 'RESTORE', body: 'Take guided practices beyond the session and into everyday life.' },
 ];
 
 const CORPORATE_OUTCOMES = [
-  '4-count breathing technique',
-  'Bhramari practice',
-  'Personalised music playlists',
-  'Daily 10-minute wellness protocol',
-  'Better emotional regulation',
-  'Improved recovery',
+  'Sharpen focus and stay present in meetings',
+  'Release stress before it turns into burnout',
+  'Handle pressure with more patience and less friction',
+  'Return to work feeling lighter, not drained',
+  'Reduce sick days lost to exhaustion and overwhelm',
+  'Build a workplace where people feel cared for, and where it shows in their work',
 ];
 
 const CORPORATE_DELIVERY = [
@@ -114,7 +117,7 @@ const FAQS = [
   { q: 'Can sessions be conducted online?', a: 'Yes, all sessions run online via Zoom or Google Meet. In-person sessions are available on request.' },
   { q: 'Are corporate sessions customised?', a: 'Yes, every corporate program is tailored to the specific goals and culture of your organisation.' },
   { q: 'How do bookings work?', a: 'Pick a plan or send a corporate enquiry from the form below. Our team will reach out on WhatsApp to confirm your slot.' },
-  { q: 'What if I need to reschedule or miss a session?', a: 'Life happens. Let us know at least a day in advance and we will move your slot at no extra cost. Missed live sessions are shared as a recording within a day so nothing feels lost.' },
+  { q: 'Are the meditation sessions one-on-one or in groups?', a: 'We have both options. You can choose one-on-one sessions for a more personal approach, or group sessions if you prefer meditating together with others.' },
 ];
 
 /* --------------------------- HELPERS --------------------------- */
@@ -214,24 +217,36 @@ export default function MusicMeditation() {
             of music.
           </>
         }
-        description="Guided music wellness experiences designed to reduce stress, improve focus, and help you reconnect through the transformative power of music."
-        pills={['Individual', 'Corporate', 'Group', 'Wellness', 'Focus']}
+        description="Guided music wellness experiences designed to reduce stress, improve focus, and help you tap into the transformative power of music."
+        pills={[
+          { icon: Ear, label: 'Listen' },
+          { icon: Brain, label: 'Focus' },
+          { icon: Users, label: 'Connect' },
+          { icon: PenLine, label: 'Reflect' },
+
+        ].map(({ icon: Icon, label }) => (
+          <span key={label} className="inline-flex items-center gap-1.5">
+            {Icon && <Icon className="w-3.5 h-3.5 shrink-0" strokeWidth={1.8} />}
+            {label}
+          </span>
+        ))}
         imageSrc="/assets/images/events/community-listening-circle.jpg"
         imageAlt="A guided music meditation session in a warm room"
-        chipTitle="Music As Medicine"
-        chipSubtitle="A daily wellness practice"
+        //chipTitle="Music As Medicine"
+        //chipSubtitle="A daily wellness practice"
       />
 
       {/* Why music wellness — dark editorial band */}
       <section className="bg-brown-dark">
         <div className="udukku-section py-16 md:py-20">
-          <h2 className="text-display text-white text-3xl md:text-4xl mb-6">
+          <h2 className="text-italic-serif text-orange text-3xl md:text-4xl mb-6">
             Why music wellness
           </h2>
           <p className="max-w-2xl text-white/75 text-base md:text-lg leading-relaxed mb-10">
-            Music engages attention while promoting emotional and physical
-            relaxation. It regulates breathing, reduces stress, and enhances
-            focus through guided experiences.
+            Neuroscience shows that music engages the brain’s systems for emotion, 
+            attention, memory, and relaxation. Studies indicate that music-based
+            experiences can help reduce stress, ease anxiety, improve focus, and support
+            emotional wellbeing.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {WHY_ITEMS.map((w) => {
@@ -311,7 +326,9 @@ export default function MusicMeditation() {
           <h2 className="text-display text-brown-dark text-3xl md:text-4xl mb-8">
             Frequently asked
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          {/* items-start: stops a closed FAQ from stretching to match the
+              height of the open one beside it in the same grid row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-3 md:gap-4">
             {FAQS.map((f, i) => (
               <FaqRow
                 key={f.q}
@@ -412,8 +429,8 @@ export default function MusicMeditation() {
         eyebrow="Begin your practice"
         headline={<>Let music guide your <span className="text-italic-serif text-orange">wellbeing</span>.</>}
         description="Whether you are seeking personal wellbeing or a healthier workplace, we will help you begin."
-        ctaLabel="Book Now"
-        ctaTo="/booking"
+        //ctaLabel="Book Now"
+        //ctaTo="/booking"
         testId="mm-book-cta"
       />
     </main>
@@ -447,11 +464,11 @@ const IndividualPanel = ({ onBook }) => (
         Individual & Group Wellness
       </div>
       <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
-        Find balance through music
+        Find balance through <span className="text-italic-serif text-orange">music</span>
       </h3>
       <p className="mt-4 text-brown-mid text-sm md:text-base leading-relaxed">
-        Working professionals often experience cognitive demands, performance
-        pressure, and ongoing stress. These sessions combine:
+        We’re constantly processing information, making decisions and switching between tasks. Unlike our ancestors, our days demand far more from our minds than our bodies.
+        And that’s where our music meditation sessions come in.
       </p>
     </div>
 
@@ -459,9 +476,12 @@ const IndividualPanel = ({ onBook }) => (
       {INDIVIDUAL_ELEMENTS.map((e) => {
         const Icon = e.icon;
         return (
-          <div key={e.label} className="flex items-center gap-3 text-brown-dark text-sm">
-            <Icon className="w-4 h-4 text-orange" strokeWidth={1.8} />
-            <span>{e.label}</span>
+          <div key={e.label} className="flex items-start gap-3 text-brown-dark text-sm">
+            <Icon className="w-4 h-4 text-orange mt-[2px] shrink-0" strokeWidth={1.8} />
+            <span>
+              {e.label}
+              <span className="text-brown-mid"> — {e.body}</span>
+            </span>
           </div>
         );
       })}
@@ -545,7 +565,7 @@ const CorporatePanel = ({ onRequest }) => (
         Corporate Wellness
       </div>
       <h3 className="text-display text-brown-dark text-2xl md:text-3xl">
-        Music as a performance tool for your workforce
+        Music as a performance tool for your <span className="text-italic-serif text-orange">workforce</span>
       </h3>
       <p className="mt-4 text-brown-mid text-sm md:text-base leading-relaxed">
         A structured, evidence-informed wellness program designed to build
@@ -647,7 +667,7 @@ const CorporatePanel = ({ onRequest }) => (
 const FaqRow = ({ q, a, open, onToggle, testid }) => (
   <div
     data-testid={testid}
-    className={`rounded-2xl border transition-colors ${
+    className={`self-start rounded-2xl border transition-colors ${
       open ? 'bg-white border-orange/40' : 'bg-white border-brown-dark/10'
     }`}
   >

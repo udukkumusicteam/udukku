@@ -1,35 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Music, Users, Sparkles, CalendarHeart } from 'lucide-react';
+import { ArrowUpRight, Music, Users, Flower2, CalendarHeart } from 'lucide-react';
 import BrandIcon from '../../components/BrandIcon';
+
 
 const PILLS = [
   {
     to: '/services/instruments',
     icon: Music,
-    title: 'Instruments',
+    title: 'Music Classes',
     body: 'Explore instruments and courses',
     testid: 'services-pill-instruments',
   },
   {
     to: '/services/music-room',
     icon: Users,
-    title: 'UMR',
-    body: 'Join the Udukku Music Room community',
+    title: 'Udukku Music Room',
+    body: 'Develop consistent practice habits with a community',
     testid: 'services-pill-umr',
   },
   {
     to: '/services/music-meditation',
-    icon: Sparkles,
+    icon: Flower2,
     title: 'Music Meditation',
-    body: 'Sound, breath, and stillness',
+    body: 'Train your mind, through music',
     testid: 'services-pill-meditation',
   },
   {
     to: '/services/events',
     icon: CalendarHeart,
-    title: 'Events',
-    body: 'Live musicians for gatherings',
+    title: 'Events & Experiences',
+    body: 'Workshops, Open Mics, Games & more',
     testid: 'services-pill-events',
   },
 ];
@@ -95,9 +96,9 @@ export default function Services() {
             className="reveal text-display text-white text-4xl sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.05] max-w-4xl"
             style={{ transitionDelay: '80ms' }}
           >
-            Music education designed around{' '}
+            Music education and wellness,{' '}
             <span className="text-italic-serif text-white/95">
-              every stage of your journey
+             for every stage of your journey
             </span>
             .
           </h1>
@@ -106,8 +107,8 @@ export default function Services() {
             className="reveal mt-6 max-w-2xl text-white/85 text-base md:text-lg leading-relaxed"
             style={{ transitionDelay: '160ms' }}
           >
-            Experiences that nurture learning, creativity, and wellbeing,
-            wherever you are with music.
+            Music learning that nurtures creativity, self-expression, and wellbeing, 
+            at your own pace, level, and goals.
           </p>
         </div>
 
