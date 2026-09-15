@@ -1,4 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   RefreshCw,
   Search,
@@ -142,7 +147,7 @@ export default function Admin() {
   /*                              LOAD DATA                                    */
   /* ------------------------------------------------------------------------ */
 
-  const load = async () => {
+  const load = useCallback(async () => {
     if (!session) return;
 
     setLoading(true);
@@ -156,7 +161,7 @@ export default function Admin() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [session]);
 
   /* ------------------------------------------------------------------------ */
   /*                        REALTIME SUBSCRIPTIONS                             */
@@ -214,7 +219,7 @@ export default function Admin() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [session]);
+  }, [session, load]);
 
   /* ------------------------------------------------------------------------ */
   /*                              FILTERS                                      */
