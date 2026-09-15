@@ -26,16 +26,21 @@ export default function Booking() {
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email) {
-      toast.error('Please add your name and email so we can reach you.');
+
+    if (!form.name || !form.email || !form.phone) {
+      toast.error(
+        'Please add your name, email and phone number so we can reach you.'
+      );
       return;
     }
+
     setLoading(true);
+
     try {
       const record = await sessionBookingsService.createMainBooking(form);
       setDone(record);
       setForm(initial);
-      toast.success('Session reserved. We\'ll be in touch shortly.');
+      toast.success("Session reserved. We'll be in touch shortly.");
     } catch (err) {
       toast.error(err.message || 'Something went wrong. Please try again.');
     } finally {
@@ -90,6 +95,7 @@ export default function Booking() {
                   className={inputCls}
                 />
               </Field>
+
               <Field label="Email" htmlFor="bk-email">
                 <input
                   id="bk-email"
@@ -101,16 +107,20 @@ export default function Booking() {
                   className={inputCls}
                 />
               </Field>
-              <Field label="Phone (optional)" htmlFor="bk-phone">
+
+              <Field label="Phone" htmlFor="bk-phone">
                 <input
                   id="bk-phone"
+                  type="tel"
                   data-testid="bk-phone"
                   value={form.phone}
                   onChange={onChange('phone')}
                   placeholder="+91 ..."
                   className={inputCls}
+                  required
                 />
               </Field>
+
               <Field label="Instrument of interest" htmlFor="bk-instrument">
                 <select
                   id="bk-instrument"
@@ -128,6 +138,7 @@ export default function Booking() {
                   <option value="Other">Other</option>
                 </select>
               </Field>
+
               <Field label="Experience level" htmlFor="bk-exp">
                 <select
                   id="bk-exp"
@@ -142,6 +153,7 @@ export default function Booking() {
                   <option>Advanced</option>
                 </select>
               </Field>
+
               <Field label="Preferred date" htmlFor="bk-date">
                 <input
                   id="bk-date"
@@ -152,6 +164,7 @@ export default function Booking() {
                   className={inputCls}
                 />
               </Field>
+
               <Field label="Preferred time" htmlFor="bk-time">
                 <input
                   id="bk-time"
@@ -162,8 +175,12 @@ export default function Booking() {
                   className={inputCls}
                 />
               </Field>
+
               <div className="sm:col-span-2">
-                <Field label="Anything you'd like us to know?" htmlFor="bk-notes">
+                <Field
+                  label="Anything you'd like us to know?"
+                  htmlFor="bk-notes"
+                >
                   <textarea
                     id="bk-notes"
                     data-testid="bk-notes"
@@ -206,14 +223,21 @@ export default function Booking() {
                 </p>
               </div>
             )}
+
             <div className="bg-brown-dark text-white rounded-3xl p-7">
-              <h3 className="text-italic-serif text-2xl">What happens next</h3>
+              <h3 className="text-italic-serif text-2xl">
+                What happens next
+              </h3>
               <ul className="mt-5 space-y-4 text-sm text-white/85">
                 <Step n="1" t="Tell us what you're looking for." />
-                <Step n="2" t="We pair you with a mentor who fits your learning style." />
+                <Step
+                  n="2"
+                  t="We pair you with a mentor who fits your learning style."
+                />
                 <Step n="3" t="We reach out with the next steps." />
               </ul>
             </div>
+
             <div className="bg-cream border border-brown-dark/10 rounded-3xl p-7">
               <h3 className="text-italic-serif text-xl text-brown-dark">
                 Not sure yet?
