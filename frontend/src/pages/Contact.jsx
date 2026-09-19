@@ -7,7 +7,7 @@ import { contactMessagesService } from '../services/supabase';
 import { SITE } from '../data/mockData';
 import WaveDivider from '../components/WaveDivider';
 
-const initial = { name: '', email: '', subject: '', message: '' };
+const initial = { name: '', phone: '', email: '', subject: '', message: '' };
 
 export default function Contact() {
   const [form, setForm] = useState(initial);
@@ -19,8 +19,8 @@ export default function Contact() {
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.error('Name, email, and message are required.');
+    if (!form.name || !form.phone || !form.email || !form.message) {
+      toast.error('Name, WhatsApp number, email, and message are required.');
       return;
     }
     setLoading(true);
@@ -142,6 +142,18 @@ export default function Contact() {
                   onChange={onChange('name')}
                   className={inputCls}
                   placeholder="Your full name"
+                />
+              </Field>
+              <Field label="WhatsApp number" htmlFor="ct-phone">
+                <input
+                  id="ct-phone"
+                  type="tel"
+                  required
+                  data-testid="ct-phone"
+                  value={form.phone}
+                  onChange={onChange('phone')}
+                  className={inputCls}
+                  placeholder="+91 98xxxxxxxx"
                 />
               </Field>
               <Field label="Email" htmlFor="ct-email">

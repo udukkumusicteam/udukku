@@ -55,6 +55,7 @@ export const sessionBookingsService = {
       .insert({
         form_type: 'umr',
         name,
+        // The UMR form collects `whatsapp`; the column is `phone`.
         phone: whatsapp,
         location: nonEmpty(location),
         frequency: nonEmpty(frequency),
@@ -96,22 +97,30 @@ export const sessionBookingsService = {
     return data || [];
   },
 
+  /**
+   * Returns the number of rows the server actually changed.
+   * 0 means the request was accepted but matched nothing — usually a missing
+   * RLS UPDATE policy, or an id that isn't in this table.
+   */
   async updateStatus(id, status) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('session_bookings')
       .update({ status })
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'session_bookings.updateStatus');
-    return true;
+    return data?.length ?? 0;
   },
 
+  /** Returns the number of rows actually deleted. 0 means nothing matched. */
   async remove(id) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('session_bookings')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'session_bookings.remove');
-    return true;
+    return data?.length ?? 0;
   },
 };
 
@@ -149,21 +158,23 @@ export const corporateBookingsService = {
   },
 
   async updateStatus(id, status) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('corporate_bookings')
       .update({ status })
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'corporate_bookings.updateStatus');
-    return true;
+    return data?.length ?? 0;
   },
 
   async remove(id) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('corporate_bookings')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'corporate_bookings.remove');
-    return true;
+    return data?.length ?? 0;
   },
 };
 
@@ -172,7 +183,7 @@ export const corporateBookingsService = {
 /* ================================================================== */
 
 export const contactMessagesService = {
-  async create({ name, email, subject, message }) {
+  async create({ name, phone, email, subject, message }) {
     if (!name || !email || !message) {
       throw new Error('Name, email and message are required');
     }
@@ -180,6 +191,8 @@ export const contactMessagesService = {
       .from('contact_messages')
       .insert({
         name,
+        // Added: the contact form now collects a WhatsApp number.
+        phone: nonEmpty(phone),
         email,
         subject: nonEmpty(subject),
         message,
@@ -200,21 +213,23 @@ export const contactMessagesService = {
   },
 
   async updateStatus(id, status) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('contact_messages')
       .update({ status })
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'contact_messages.updateStatus');
-    return true;
+    return data?.length ?? 0;
   },
 
   async remove(id) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('contact_messages')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'contact_messages.remove');
-    return true;
+    return data?.length ?? 0;
   },
 };
 
@@ -223,7 +238,7 @@ export const contactMessagesService = {
 /* ================================================================== */
 
 export const cityRequestsService = {
-  async create({ name, email, city, eventInterest }) {
+  async create({ name, email, phone, city, eventInterest }) {
     if (!name || !email || !city) {
       throw new Error('Name, email and city are required');
     }
@@ -232,6 +247,8 @@ export const cityRequestsService = {
       .insert({
         name,
         email,
+        // Added: the "Bring Udukku To You" form now collects a WhatsApp number.
+        phone: nonEmpty(phone),
         city,
         event_interest: nonEmpty(eventInterest),
       })
@@ -251,21 +268,23 @@ export const cityRequestsService = {
   },
 
   async updateStatus(id, status) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('city_requests')
       .update({ status })
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'city_requests.updateStatus');
-    return true;
+    return data?.length ?? 0;
   },
 
   async remove(id) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('city_requests')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
     throwIfError(error, 'city_requests.remove');
-    return true;
+    return data?.length ?? 0;
   },
 };
 
@@ -347,6 +366,8 @@ const normaliseContact = (r) => ({
   fields: {
     Name: r.name,
     Email: r.email,
+    // Added: surface the new WhatsApp number in the dashboard + CSV export.
+    ...(r.phone ? { WhatsApp: r.phone } : {}),
     ...(r.subject ? { Subject: r.subject } : {}),
     Message: r.message,
   },
@@ -362,6 +383,8 @@ const normaliseCity = (r) => ({
   fields: {
     Name: r.name,
     Email: r.email,
+    // Added: surface the new WhatsApp number in the dashboard + CSV export.
+    ...(r.phone ? { WhatsApp: r.phone } : {}),
     City: r.city,
     ...(r.event_interest ? { 'Event interest': r.event_interest } : {}),
   },
