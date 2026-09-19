@@ -139,7 +139,7 @@ const useGalleryColumnCount = () => {
 export default function Events() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', city: '', interest: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', city: '', interest: '' });
   const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const galleryColumns = buildGalleryColumns(PHOTOS, useGalleryColumnCount());
@@ -162,20 +162,21 @@ export default function Events() {
   const submit = async (e) => {
     e.preventDefault();
     if (loading) return;
-    if (!form.name || !form.email || !form.city) {
-      toast.error('Name, email and city are required.');
+    if (!form.name || !form.phone || !form.email || !form.city) {
+      toast.error('Name, WhatsApp number, email and city are required.');
       return;
     }
     setLoading(true);
     try {
       await cityRequestsService.create({
         name: form.name,
+        phone: form.phone,
         email: form.email,
         city: form.city,
         eventInterest: form.interest,
       });
       setOk(true);
-      setForm({ name: '', email: '', city: '', interest: '' });
+      setForm({ name: '', phone: '', email: '', city: '', interest: '' });
       toast.success('Request received. We will reach out when we head your way.');
     } catch (err) {
       toast.error(err.message || 'Something went wrong. Please try again.');
@@ -370,7 +371,16 @@ export default function Events() {
                   required
                 />
                 <LightField
-                  wide
+                  label="WhatsApp number *"
+                  name="phone"
+                  type="tel"
+                  testid="bring-field-phone"
+                  placeholder="+91 98xxxxxxxx"
+                  value={form.phone}
+                  onChange={onChange}
+                  required
+                />
+                <LightField
                   label="Your City *"
                   name="city"
                   testid="bring-field-city"

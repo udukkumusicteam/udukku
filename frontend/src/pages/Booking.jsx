@@ -108,7 +108,7 @@ export default function Booking() {
                 />
               </Field>
 
-              <Field label="Phone" htmlFor="bk-phone">
+              <Field label="WhatsApp Number" htmlFor="bk-phone">
                 <input
                   id="bk-phone"
                   type="tel"
