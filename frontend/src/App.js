@@ -10,6 +10,7 @@ import '@/App.css';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageMeta from '@/components/PageMeta';
 import Home from '@/pages/Home';
 import Booking from '@/pages/Booking';
 import About from '@/pages/About';
@@ -73,6 +74,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <RevealObserver />
+        <PageMeta />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
