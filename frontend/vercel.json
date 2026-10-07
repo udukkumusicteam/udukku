@@ -1,0 +1,26 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/services/instruments",
+      "destination": "/services/online-music-classes",
+      "permanent": true
+    },
+    {
+      "source": "/services/music-room",
+      "destination": "/services/online-music-practice-room",
+      "permanent": true
+    },
+    {
+      "source": "/services/events",
+      "destination": "/services/music-workshops-events",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

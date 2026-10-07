@@ -37,13 +37,13 @@ const PAGE_META = {
       'Explore Udukku’s personalised online music classes, music wellness experiences, practice groups, workshops and events. Learn vocals, guitar, piano, violin and more through flexible 1:1 music classes, or experience music for meditation, community, and creative experiences designed for different goals and learning journeys.',
   },
 
-  '/services/instruments': {
+  '/services/online-music-classes': {
     title: 'Online Music Classes for Instruments & Singing',
     description:
       'Learn music online with personalised 1:1 classes in guitar, piano, violin, singing, and more. Udukku connects you with skilled tutors based on your goals, skill level, pace and learning style, making music classes flexible and accessible.',
   },
 
-  '/services/music-room': {
+  '/services/online-music-practice-room': {
     title: 'Online Music Practice Community | Udukku',
     description:
       'Build consistent music practice with Udukku Music Room, an online community for musicians and music learners. Get regular practice, accountability, supportive community sessions and progress tracking, while being rewarded for showing up and staying consistent with your musical journey.',
@@ -55,7 +55,7 @@ const PAGE_META = {
       'Music meditation and neuroscience-backed music wellness sessions designed to support relaxation, focus, stress regulation and emotional wellbeing. Udukku combines sound, guided listening, breathwork and meditation that help you slow down, reconnect and experience the wellbeing potential of music.',
   },
 
-  '/services/events': {
+  '/services/music-workshops-events': {
     title: 'Music Events & Experiences | Udukku',
     description:
       'Discover Udukku’s offline music events, workshops, open mics, jam sessions and community experiences. From music and wellness gatherings to creative events, Udukku brings people together through meaningful, engaging experiences that celebrate music, connection and community.',

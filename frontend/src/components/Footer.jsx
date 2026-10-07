@@ -19,10 +19,10 @@ const iconMap = {
    COURSE_CATEGORIES if other components need it too.
    ------------------------------------------------------------------ */
 const SERVICES = [
-  { label: 'Music Classes', to: '/services/instruments' },
-  { label: 'Udukku Music Room', to: '/services/music-room' },
+  { label: 'Music Classes', to: '/services/online-music-classes' },
+  { label: 'Udukku Music Room', to: '/services/online-music-practice-room' },
   { label: 'Music Meditation', to: '/services/music-meditation' },
-  { label: 'Events & Experiences', to: '/services/events' },
+  { label: 'Events & Experiences', to: '/services/music-workshops-events' },
 ];
 
 export const Footer = () => (
