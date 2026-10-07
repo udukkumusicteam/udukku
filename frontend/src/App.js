@@ -3,6 +3,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Navigate,
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
@@ -81,12 +82,25 @@ function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/services/instruments" element={<Instruments />} />
-          <Route path="/services/music-room" element={<MusicRoom />} />
+          <Route path="/services/online-music-classes" element={<Instruments />} />
+          <Route path="/services/online-music-practice-room" element={<MusicRoom />} />
           <Route path="/services/music-meditation" element={<MusicMeditation />} />
-          <Route path="/services/events" element={<Events />} />
+          <Route path="/services/music-workshops-events" element={<Events />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
+          {/* Old URLs — kept so existing links, bookmarks and search results still work */}
+          <Route
+            path="/services/instruments"
+            element={<Navigate to="/services/online-music-classes" replace />}
+          />
+          <Route
+            path="/services/music-room"
+            element={<Navigate to="/services/online-music-practice-room" replace />}
+          />
+          <Route
+            path="/services/events"
+            element={<Navigate to="/services/music-workshops-events" replace />}
+          />
           <Route path="*" element={<Home />} />
         </Routes>
         <ConditionalFooter />

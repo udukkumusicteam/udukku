@@ -6,14 +6,14 @@ import BrandIcon from '../../components/BrandIcon';
 
 const PILLS = [
   {
-    to: '/services/instruments',
+    to: '/services/online-music-classes',
     icon: Music,
     title: 'Music Classes',
     body: 'Explore instruments and courses',
     testid: 'services-pill-instruments',
   },
   {
-    to: '/services/music-room',
+    to: '/services/online-music-practice-room',
     icon: Users,
     title: 'Udukku Music Room',
     body: 'Develop consistent practice habits with a community',
@@ -27,7 +27,7 @@ const PILLS = [
     testid: 'services-pill-meditation',
   },
   {
-    to: '/services/events',
+    to: '/services/music-workshops-events',
     icon: CalendarHeart,
     title: 'Events & Experiences',
     body: 'Workshops, Open Mics, Games & more',
