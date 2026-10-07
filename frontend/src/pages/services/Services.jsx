@@ -107,7 +107,7 @@ export default function Services() {
             className="reveal mt-6 max-w-2xl text-white/85 text-base md:text-lg leading-relaxed"
             style={{ transitionDelay: '160ms' }}
           >
-            Music learning that nurtures creativity, self-expression, and wellbeing, 
+            Online music learning that nurtures creativity, self-expression, and wellbeing, 
             at your own pace, level, and goals.
           </p>
         </div>

@@ -217,7 +217,7 @@ export default function MusicMeditation() {
             of music.
           </>
         }
-        description="Guided music wellness experiences designed to reduce stress, improve focus, and help you tap into the transformative power of music."
+        description="Guided music wellness experiences that use music for stress relief, improved focus, overall wellbeing and help you tap into the transformative power of music."
         pills={[
           { icon: Ear, label: 'Listen' },
           { icon: Brain, label: 'Focus' },
@@ -245,7 +245,7 @@ export default function MusicMeditation() {
           <p className="max-w-2xl text-white/75 text-base md:text-lg leading-relaxed mb-10">
             Neuroscience shows that music engages the brain’s systems for emotion, 
             attention, memory, and relaxation. Studies indicate that music-based
-            experiences can help reduce stress, ease anxiety, improve focus, and support
+            experiences such as sound healing sessions, can help reduce stress, ease anxiety, improve focus, and support
             emotional wellbeing.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
@@ -468,7 +468,7 @@ const IndividualPanel = ({ onBook }) => (
       </h3>
       <p className="mt-4 text-brown-mid text-sm md:text-base leading-relaxed">
         We’re constantly processing information, making decisions and switching between tasks. Unlike our ancestors, our days demand far more from our minds than our bodies.
-        And that’s where our music meditation sessions come in.
+        And that’s where our online music meditation sessions come in.
       </p>
     </div>
 

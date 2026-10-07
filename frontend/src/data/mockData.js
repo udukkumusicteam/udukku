@@ -25,10 +25,10 @@ export const STATS = [
       'from 1:1 lessons to a 35-student exam stress workshop',
   },
   {
-    number: '4',
-    title: 'Experiences created',
+    number: '400+',
+    title: 'Attendees reached',
     body:
-      '400+ attendees across a variety of workshops, open mics, and activities',
+      ' across 4 experiences from workshops & open mics to immersive music experiences',
   },
   {
     number: '100+',
@@ -61,6 +61,7 @@ export const TUTORS = [
     role: 'Keyboard & Western Vocals',
     experience: '5+ years exp.',
     image: '/assets/images/people/sarah.jpg',
+    alt: 'Sarah, online music tutor for keyboard and western vocals.',
     bio:
       'A certified pianist, Sarah brings technical precision and creativity to every lesson. With experience teaching learners of all ages, she builds strong musical foundations through theory, ear training, and engaging keyboard instruction.',
   },
@@ -70,6 +71,7 @@ export const TUTORS = [
     role: 'Hindustani Vocals & Music Theory',
     experience: '10+ years exp.',
     image: '/assets/images/people/suchitra.jpg',
+    alt: 'Aditya, online music tutor for Hindustani vocals and music theory.',  
     bio:
       'A skilled guitarist and performer with over a decade of experience playing with bands and covering songs. Trinity College London Grade 3 certified, Aditya teaches guitar and music theory through flexible online lessons tailored to each student\'s pace and interests.',
   },
@@ -79,6 +81,7 @@ export const TUTORS = [
     role: 'Carnatic Vocals',
     experience: '10+ years exp.',
     image: '/assets/images/people/payal.jpg',
+    alt: 'Sirisha, online music tutor for Carnatic vocals.',
     bio:
       'With over a decade of experience, Sirisha specializes in Carnatic vocals, kritis, and bhajans. She teaches students of all ages and skill levels, preparing learners across India and abroad for recitals. A certified Carnatic music instructor, she blends traditional training with a modern, adaptable approach to teaching.',
   },
@@ -88,6 +91,7 @@ export const TUTORS = [
     role: 'Flute',
     experience: '5+ years exp.',
     image: '/assets/images/people/param.jpg',
+    alt: 'Param, online music tutor for flute.',
     bio:
       'With over a decade of training in Indian flute, Param brings a rich blend of classical tradition and contemporary expression to every lesson. He teaches students worldwide, guiding learners of all ages through classical, semi-classical, ghazals, and Bollywood music with patience and clarity.',
   },
@@ -97,6 +101,7 @@ export const TUTORS = [
     role: 'Music Production',
     experience: '10+ years exp.',
     image: '/assets/images/people/nitesh.jpg',
+    alt: 'Nitesh, online music tutor for music production.',
     bio:
       'A music producer and beatmaker, Nitesh creates distinctive sounds by blending vintage samples with modern production techniques. His work has been featured on VH1, Lakmé Fashion Week, and acclaimed web series, while his live performances showcase his expertise with analog gear and drum machines.',
   },
@@ -106,6 +111,7 @@ export const TUTORS = [
     role: 'Hindustani Vocals & Music Production',
     experience: '2+ years exp.',
     image: '/assets/images/people/tathastu.jpg',
+    alt: 'Tathastu, online music tutor for Hindustani vocals and music production.',
     bio:
       'A singer, songwriter, and independent music producer, Tathastu bridges the worlds of classical and contemporary music. Trained in the Hindustani vocal tradition and professionally producing across multiple genres, he helps students develop both their artistic expression and technical skills.',
   },
