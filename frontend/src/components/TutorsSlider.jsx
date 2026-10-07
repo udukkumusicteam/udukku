@@ -103,7 +103,7 @@ export const TutorsSlider = () => {
               >
                 <img
                   src={t.image}
-                  alt={t.name}
+                  alt={t.alt || t.name}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover sepia-soft transition-transform duration-[1100ms] ease-out group-hover:scale-105"
                 />
