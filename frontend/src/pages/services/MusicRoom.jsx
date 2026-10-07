@@ -348,7 +348,7 @@ export default function MusicRoom() {
         description="An online music practice community that helps you practise consistently, stay accountable, and make real progress through regular sessions."
         pills={['Habit 12', 'Habit 24', 'Community', 'Cashback', 'Referrals']}
         imageSrc="/assets/images/services/music-room-hero.jpg"
-        imageAlt="A laptop showing an Udukku Music Room online session"
+        imageAlt="AI-generated illustration of people practising guitar, keyboard and vocals together on an online video call."
         //chipTitle="Show Up, Every Week"
         //chipSubtitle="Community and structure for your riyaz"
       />
@@ -368,7 +368,7 @@ export default function MusicRoom() {
             </div>
             <div className="lg:col-span-6 lg:col-start-7 text-white/75 text-base md:text-lg leading-relaxed space-y-4">
               <p>
-                Udukku Music Room (UMR) is a music practice community
+                Udukku Music Room (UMR) is an online music practice community
                 designed for learners who want to build or rebuild consistency in
                 their musical journey.
                 

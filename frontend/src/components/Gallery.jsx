@@ -5,47 +5,47 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 const PHOTOS = [
   {
     src: '/assets/images/events/community-listening-circle.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'Musicians performing live on tabla, harmonium and sitar at an Udukku music session.',
     caption: 'Shared moments',
   },
   {
     src: '/assets/images/events/gathering-in-the-round.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'A woman helping a young girl sing into a microphone at an Udukku music event.',
     caption: 'In harmony',
   },
   {
     src: '/assets/images/events/before-the-first-note.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'Udukku "The Music in You" logo board on an easel.',
     caption: 'Stories we carry',
   },
   {
     src: '/assets/images/events/student-masterclass.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'A man playing a flute while seated on a cushion, with Indian string instruments behind him',
     caption: 'A glimpse of joy',
   },
   {
     src: '/assets/images/events/cultural-evening.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'A group of people posing with the Udukku logo board at an evening music event.',
     caption: 'Memories in motion',
   },
   {
     src: '/assets/images/events/indian-classical-evening.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'A man playing the harmonium beside a man playing the flute, with a sitar in the foreground.',
     caption: 'Together in rhythm',
   },
   {
     src: '/assets/images/events/workshop-in-session.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'Smiling audience gathered at an Udukku community music event.',
     caption: 'Quiet between the notes',
   },
   {
     src: '/assets/images/events/the-closing-bow.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'A woman speaking into a microphone at an Udukku open mic, in front of an Udukku banner.',
     caption: 'Moments that matter',
   },
   {
     src: '/assets/images/events/between-the-ragas.jpg',
-    alt: 'A moment at Udukku',
+    alt: 'A guitarist plays as a woman and a young girl sing into microphones at an Udukku event.',
     caption: 'Captured memories',
   },
 ];

@@ -62,7 +62,7 @@ export const Hero = () => {
           className="reveal mt-5 max-w-xl text-base md:text-lg text-white/85 leading-relaxed"
           style={{ transitionDelay: '180ms' }}
         >
-          Explore music learning at your own pace through neuroscience-backed sessions 
+          Explore online music learning at your own pace through neuroscience-backed sessions 
           that support creativity, cognitive wellbeing, and the simple joy of learning.
         
         </p>

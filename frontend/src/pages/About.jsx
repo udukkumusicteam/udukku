@@ -7,7 +7,7 @@ import WaveDivider from '../components/WaveDivider';
 // IMAGE ASSETS — replace these placeholder URLs with the studio's own photos.
 // ---------------------------------------------------------------------------
 const IMAGE_FOUNDER =
-  '/assets/images/people/founder.jpg';
+  '/assets/images/people/founder.jpg'; 
 
 export default function About() {
   return (
@@ -43,7 +43,7 @@ export default function About() {
               >
                 <img
                   src={IMAGE_FOUNDER}
-                  alt="Ishita Parakh, founder of Udukku"
+                  alt="Ishita Parakh, founder of Udukku, standing beside the Udukku logo board."
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{ objectPosition: 'center 30%' }}
                 />
@@ -104,7 +104,7 @@ export default function About() {
               <div className="relative rounded-3xl overflow-hidden bg-brown-dark aspect-square">
                 <img
                   src="/assets/images/about/story.jpg"
-                  alt="The Udukku easel: The Music in You"
+                  alt="Udukku 'The Music in You' logo board on an easel."
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>

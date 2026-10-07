@@ -163,10 +163,10 @@ export default function Instruments() {
             <span className="text-italic-serif text-orange">instrument</span>.
           </>
         }
-        description="From ancient classical forms to modern production, explore every instrument we teach at Udukku."
+        description="From ancient classical forms to modern production, explore every instrument we teach at Udukku through our online music classes."
         pills={['Percussion', 'Strings', 'Wind', 'Vocals', 'Production']}
         imageSrc="/assets/images/events/indian-classical-evening.jpg"
-        imageAlt="A musician mid-performance"
+        imageAlt="A man playing the harmonium beside a man playing the flute, with a sitar in the foreground."
         //chipTitle="Music Has No Limits"
         //chipSubtitle="Neither should your learning"
       />
