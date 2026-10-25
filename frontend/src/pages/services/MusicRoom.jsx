@@ -544,13 +544,7 @@ export default function MusicRoom() {
               <span className="text-white font-medium">
                 {activePlan?.name}
               </span>
-              {activePlan && (
-                <span className="text-white/70">
-                  {' '}
-                  — {activePlan.price}
-                  {activePlan.per ? `/${activePlan.per}` : ''}
-                </span>
-              )}
+              
               . Change in the table above anytime.
             </p>
           </div>
