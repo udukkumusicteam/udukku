@@ -104,7 +104,11 @@ export default function Contact() {
                   <span className="text-italic-serif text-orange">instead</span>?
                 </h3>
                 <p className="mt-3 text-brown-mid text-sm leading-relaxed max-w-sm">
-                  Learn to sing, play, or compose music from experts all across the country.
+                  Learn to{' '}
+                  <Link to="/services/online-music-classes" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+                    sing, play, or compose music
+                  </Link>{' '}
+                  from experts all across the country.
                   Reserve a time that works for you.
                 </p>
                 <Link
@@ -129,7 +133,11 @@ export default function Contact() {
               Tell us about your idea.
             </h3>
             <p className="text-brown-mid mt-2 text-sm">
-              Collaborations, events, partnerships, press, or just a thought.
+              Collaborations,{' '}
+              <Link to="/services/music-workshops-events" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+                events
+              </Link>
+              , partnerships, press, or just a thought.
               We read every word.
             </p>
 

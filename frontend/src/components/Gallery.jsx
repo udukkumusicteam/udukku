@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 // Photographs from life at Udukku. All served from local /assets/images/events/.
@@ -90,8 +91,22 @@ export const Gallery = () => {
             <span className="text-italic-serif text-orange">with memories</span>.
           </h2>
           <p className="reveal mt-4 text-brown-mid text-base md:text-lg max-w-xl leading-relaxed" style={{ transitionDelay: '160ms' }}>
-            Open jams, poetry recitals, music meditation workshops, Sound to Strokes 
-            sessions, and a few new friendships along the way.
+            <Link to="/services/music-workshops-events" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+              Open jams
+            </Link>
+            ,{' '}
+            <Link to="/services/music-workshops-events" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+              poetry recitals
+            </Link>
+            ,{' '}
+            <Link to="/services/music-meditation" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+              music meditation workshops
+            </Link>
+            ,{' '}
+            <Link to="/services/music-meditation" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+              Sound to Strokes sessions
+            </Link>
+            , and a few new friendships along the way.
           
           </p>
         </div>

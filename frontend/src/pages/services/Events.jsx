@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
   ArrowUpRight,
@@ -260,7 +261,11 @@ export default function Events() {
             </h2>
             <p className="mt-4 text-brown-mid text-base md:text-lg leading-relaxed">
               Discover what&apos;s happening next at Udukku. Join our upcoming
-              concerts, workshops, music rooms and community experiences.
+              concerts, workshops,{' '}
+              <Link to="/services/online-music-practice-room" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+                music rooms
+              </Link>{' '}
+              and community experiences.
             </p>
           </div>
 
@@ -419,8 +424,8 @@ export default function Events() {
         eyebrow="WANT US THERE?"
         headline={<>Bring an Udukku experience <span className="text-italic-serif text-orange">to your city</span></>}
         description="Talk to our events team to make it happen."
-        //ctaLabel="Talk to our team"
-        //ctaTo="/contact"
+        ctaLabel="Talk to our team"
+        ctaTo="/contact"
         testId="events-book-cta"
       />
     </main>

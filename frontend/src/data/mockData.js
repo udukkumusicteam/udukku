@@ -1,3 +1,11 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const orangeLinkCls =
+  'font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark';
+const whiteLinkCls =
+  'font-medium text-white underline underline-offset-4 transition-colors hover:text-cream';
+
 // All marketing copy + sample content. Single source of truth used by the
 // service layer in `src/services/apiService.js`. Tone is intentionally soft,
 // warm, and unhurried. No em dashes anywhere.
@@ -21,14 +29,28 @@ export const STATS = [
   {
     number: '70+',
     title: 'Music journeys shaped',
-    body:
-      'from 1:1 lessons to a 35-student exam stress workshop',
+    body: (
+      <>
+        from{' '}
+        <Link to="/services/online-music-classes" className={orangeLinkCls}>
+          1:1 lessons
+        </Link>{' '}
+        to a 35-student exam stress workshop
+      </>
+    ),
   },
   {
     number: '400+',
     title: 'Attendees reached',
-    body:
-      ' across 4 experiences from workshops & open mics to immersive music experiences',
+    body: (
+      <>
+        across 4 experiences from{' '}
+        <Link to="/services/music-workshops-events" className={orangeLinkCls}>
+          workshops &amp; open mics
+        </Link>{' '}
+        to immersive music experiences
+      </>
+    ),
   },
   {
     number: '100+',
@@ -49,8 +71,15 @@ export const VISION_MISSION = {
   },
   mission: {
     title: 'Our Mission',
-    body:
-      ' To break barriers to music education by connecting people with the right teachers, tools, and ways to learn.',
+    body: (
+      <>
+        To break barriers to{' '}
+        <Link to="/services/online-music-classes" className={whiteLinkCls}>
+          music education
+        </Link>{' '}
+        by connecting people with the right teachers, tools, and ways to learn.
+      </>
+    ),
   },
 };
 
@@ -155,8 +184,14 @@ export const COURSE_CATEGORIES = [
 
 export const BOTTOM_CTA = {
   heading: 'So, What Do You Want To Learn?',
-  subheading:
-    'Guitar, piano, vocals, or something completely new. Start with whatever sounds like you.',
+  subheading: (
+    <>
+      <Link to="/services/online-music-classes" className={whiteLinkCls}>
+        Guitar, piano, vocals
+      </Link>
+      , or something completely new. Start with whatever sounds like you.
+    </>
+  ),
   image: '/assets/backgrounds/story-hero.jpg',
 };
 
