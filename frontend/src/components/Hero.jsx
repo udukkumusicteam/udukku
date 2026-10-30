@@ -5,6 +5,13 @@ import { HERO_PILLS } from '../data/mockData';
 import WaveDivider from './WaveDivider';
 import FloatingParticles from './FloatingParticles';
 
+const HERO_PILL_LINKS = {
+  'Music skills': '/services/online-music-classes',
+  'Udukku Music Room': '/services/online-music-practice-room',
+  'Music Meditation': '/services/music-meditation',
+  Events: '/services/music-workshops-events',
+};
+
 export const Hero = () => {
   // Gentle scroll parallax on the radial overlay only (text stays put).
   const overlayRef = useRef(null);
@@ -62,8 +69,22 @@ export const Hero = () => {
           className="reveal mt-5 max-w-xl text-base md:text-lg text-white/85 leading-relaxed"
           style={{ transitionDelay: '180ms' }}
         >
-          Explore online music learning at your own pace through neuroscience-backed sessions 
-          that support creativity, cognitive wellbeing, and the simple joy of learning.
+          Explore{' '}
+          <Link
+            to="/services/online-music-classes"
+            className="font-medium text-white underline underline-offset-4 transition-colors hover:text-cream"
+          >
+            online music learning
+          </Link>{' '}
+          at your own pace through neuroscience-backed sessions that support
+          creativity,{' '}
+          <Link
+            to="/services/music-meditation"
+            className="font-medium text-white underline underline-offset-4 transition-colors hover:text-cream"
+          >
+            cognitive wellbeing
+          </Link>
+          , and the simple joy of learning.
         
         </p>
 
@@ -87,13 +108,14 @@ export const Hero = () => {
           style={{ transitionDelay: '340ms' }}
         >
           {HERO_PILLS.map((p, i) => (
-            <span
+            <Link
               key={p}
+              to={HERO_PILL_LINKS[p] || '/services'}
               className="inline-flex items-center h-9 px-4 rounded-full bg-white/10 border border-white/30 text-white/95 text-xs sm:text-sm backdrop-blur-sm transition-all duration-500 hover:bg-white/20 hover:-translate-y-0.5"
               style={{ transitionDelay: `${60 + i * 40}ms` }}
             >
               {p}
-            </span>
+            </Link>
           ))}
         </div>
       </div>

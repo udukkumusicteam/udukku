@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
   ArrowUpRight,
@@ -112,9 +113,33 @@ const CORPORATE_DELIVERY = [
 ];
 
 const FAQS = [
-  { q: 'Who can join these sessions?', a: 'Anyone looking to reduce stress, improve focus, or explore music as a wellness tool. No prior music training is required.' },
+  {
+    q: 'Who can join these sessions?',
+    a: (
+      <>
+        Anyone looking to reduce stress, improve focus, or explore music as a
+        wellness tool. No prior{' '}
+        <Link to="/services/online-music-classes" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+          music training
+        </Link>{' '}
+        is required.
+      </>
+    ),
+  },
   { q: 'Do I need prior music experience?', a: 'Not at all. Everything is guided, and the sessions are designed for absolute beginners as well as experienced musicians.' },
-  { q: 'Can sessions be conducted online?', a: 'Yes, all sessions run online via Zoom or Google Meet. In-person sessions are available on request.' },
+  {
+    q: 'Can sessions be conducted online?',
+    a: (
+      <>
+        Yes, all sessions run online via Zoom or Google Meet. In-person
+        sessions are available{' '}
+        <Link to="/contact" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+          on request
+        </Link>
+        .
+      </>
+    ),
+  },
   { q: 'Are corporate sessions customised?', a: 'Yes, every corporate program is tailored to the specific goals and culture of your organisation.' },
   { q: 'How do bookings work?', a: 'Pick a plan or send a corporate enquiry from the form below. Our team will reach out on WhatsApp to confirm your slot.' },
   { q: 'Are the meditation sessions one-on-one or in groups?', a: 'We have both options. You can choose one-on-one sessions for a more personal approach, or group sessions if you prefer meditating together with others.' },

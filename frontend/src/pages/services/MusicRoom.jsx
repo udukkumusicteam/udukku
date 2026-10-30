@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
   ArrowUpRight,
@@ -26,7 +27,19 @@ import { sessionBookingsService } from '../../services/supabase';
 const FEATURES = [
   { icon: Heart, title: 'Regular Check-ins', body: "We check in on you, one on one, so your practice never goes unnoticed. Showing up is easier when someone's actually paying attention." },
   { icon: Users, title: 'Community Network', body: "You're never practicing alone. It's a room full of musicians, all showing up for the same thing, at the same time, learning, sharing, and growing together." },
-  { icon: ClipboardCheck, title: 'Cashback and Rewards', body: "Show up, and earn cashback. Or trade it in for a session with our teachers, on production, songwriting, or whatever you've been wanting to work on." },
+  {
+    icon: ClipboardCheck,
+    title: 'Cashback and Rewards',
+    body: (
+      <>
+        Show up, and earn cashback. Or trade it in for a{' '}
+        <Link to="/services/online-music-classes" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+          session with our teachers
+        </Link>
+        , on production, songwriting, or whatever you've been wanting to work on.
+      </>
+    ),
+  },
   //{ icon: Heart, title: '1-on-1 Checks', body: 'An individual touchpoint with the Udukku team.' },
   //{ icon: LineChart, title: 'Progress Plotting', body: 'Revaluation and planning to make progress tangible.' },
   //{ icon: Video, title: 'Session Replays', body: 'Missed a session? Every practice hour is recorded and yours to keep.' },
@@ -500,7 +513,10 @@ export default function MusicRoom() {
             <strong>50% or more</strong> of the classes in any batch to become eligible
             for <strong>cashback</strong>, and choose how you'd like to be rewarded.
             Take the <strong>cashback</strong>, or trade it in for a{" "}
-            <strong>customised tutor session</strong> instead. The more regularly you
+            <Link to="/services/online-music-classes" className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-orange-dark">
+              <strong>customised tutor session</strong>
+            </Link>{' '}
+            instead. The more regularly you
             attend, the <strong>more cashback you earn</strong>, and the{" "}
             <strong>longer your reward session can be</strong>. Keep showing up and let
             your commitment bring you rewards, however you'd like to receive them.

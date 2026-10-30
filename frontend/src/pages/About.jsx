@@ -132,7 +132,13 @@ export default function About() {
                 </p>
                 <p>
                   Then life took an unexpected turn. During the COVID years,
-                  our founder began teaching music online. It started with
+                  our founder began{' '}
+                  <Link
+                    to="/services/online-music-classes"
+                    className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-white"
+                  >
+                    teaching music online
+                  </Link>. It started with
                   just ten students and one on one lessons, but it was enough
                   to keep the passion alive. Even after that chapter ended,
                   the questions kept coming from friends, families, and
@@ -155,8 +161,14 @@ export default function About() {
                 </p>
                 <p>
                   On 20th August 2025, Udukku Music was officially registered.
-                  Musicians came together, a summer camp was organised, events
-                  followed, and what started as an idea began turning into
+                  Musicians came together, a summer camp was organised,{' '}
+                  <Link
+                    to="/services/music-workshops-events"
+                    className="font-medium text-orange underline underline-offset-4 transition-colors hover:text-white"
+                  >
+                    events
+                  </Link>{' '}
+                   followed, and what started as an idea began turning into
                   something much bigger.
                 </p>
                 <p>

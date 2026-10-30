@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { CheckCircle2, ArrowUpRight } from 'lucide-react';
 import { sessionBookingsService } from '../services/supabase';
@@ -232,7 +233,18 @@ export default function Booking() {
                 <Step n="1" t="Tell us what you're looking for." />
                 <Step
                   n="2"
-                  t="We pair you with a mentor who fits your learning style."
+                  t={
+                    <>
+                      We{' '}
+                      <Link
+                        to="/services/online-music-classes"
+                        className="font-medium text-white underline underline-offset-4 transition-colors hover:text-orange"
+                      >
+                        pair you with a mentor
+                      </Link>{' '}
+                      who fits your learning style.
+                    </>
+                  }
                 />
                 <Step n="3" t="We reach out with the next steps." />
               </ul>
@@ -245,12 +257,12 @@ export default function Booking() {
               <p className="mt-2 text-brown-mid text-sm">
                 You can also write to us. We answer every message personally.
               </p>
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="mt-4 inline-flex items-center gap-2 text-orange font-medium"
               >
                 Contact us instead <ArrowUpRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
           </aside>
         </div>

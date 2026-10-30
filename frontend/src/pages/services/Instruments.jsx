@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ServiceHero from '../../components/services/ServiceHero';
 import ServiceCTA from '../../components/services/ServiceCTA';
 
@@ -118,7 +119,15 @@ const InstrumentTile = ({ item }) => (
     <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-brown-dark via-brown-dark/85 to-transparent" />
 
     <div className="relative h-full flex flex-col justify-end p-5">
-      <h4 className="text-display text-white text-xl">{item.name}</h4>
+      <h4 className="text-display text-white text-xl">
+        <Link
+          to="/booking"
+          aria-label={`Book a free session for ${item.name}`}
+          className="transition-colors hover:text-orange hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-sm"
+        >
+          {item.name}
+        </Link>
+      </h4>
       <p className="text-white/70 text-sm mt-1 leading-relaxed">
         {item.description}
       </p>

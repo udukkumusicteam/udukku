@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Users } from 'lucide-react';
 import { TUTORS } from '../data/mockData';
 
@@ -128,9 +129,12 @@ export const TutorsSlider = () => {
             <span className="text-orange text-italic-serif text-xl md:text-2xl leading-snug">
               and many more tutors.
             </span>
-            <span className="text-brown-mid/70 text-xs mt-1.5">
+            <Link
+              to="/booking"
+              className="text-brown-mid/70 text-xs mt-1.5 underline underline-offset-4 transition-colors hover:text-orange"
+            >
               Tell us what you&apos;re looking for.
-            </span>
+            </Link>
           </div>
 
           <div className="udukku-gutter" aria-hidden="true" />
