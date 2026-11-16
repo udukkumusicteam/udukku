@@ -12,6 +12,7 @@ import '@/App.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageMeta from '@/components/PageMeta';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import Home from '@/pages/Home';
 import Booking from '@/pages/Booking';
 import About from '@/pages/About';
@@ -104,6 +105,7 @@ function App() {
           <Route path="*" element={<Home />} />
         </Routes>
         <ConditionalFooter />
+        <WhatsAppButton />
         <Toaster
           position="bottom-right"
           theme="light"
