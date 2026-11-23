@@ -18,6 +18,21 @@ const throwIfError = (error, action) => {
 
 const nonEmpty = (v) => (v === undefined || v === '' ? null : v);
 
+// Generate the booking reference locally so the public form does not need to
+// read the inserted row back from Supabase.
+const createUuid = () => {
+  if (typeof globalThis.crypto?.randomUUID === 'function') {
+    return globalThis.crypto.randomUUID();
+  }
+
+  const bytes = new Uint8Array(16);
+  globalThis.crypto.getRandomValues(bytes);
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+};
+
 /* ================================================================== */
 /*  1. session_bookings                                                */
 /* ================================================================== */
@@ -28,9 +43,11 @@ export const sessionBookingsService = {
     if (!name || (!email && !phone)) {
       throw new Error('Name and a contact (email or phone) are required');
     }
-    const { data, error } = await supabase
+    const id = createUuid();
+    const { error } = await supabase
       .from('session_bookings')
       .insert({
+        id,
         form_type: 'main_booking',
         name,
         email: nonEmpty(email),
@@ -40,17 +57,15 @@ export const sessionBookingsService = {
         preferred_date: nonEmpty(preferredDate),
         preferred_time: nonEmpty(preferredTime),
         notes: nonEmpty(notes),
-      })
-      .select()
-      .single();
+      });
     throwIfError(error, 'createMainBooking');
-    return data;
+    return { id };
   },
 
   /** Start Your Riyaz (Udukku Music Room) */
   async createUMR({ name, whatsapp, location, frequency, preferredTime, notes }) {
     if (!name || !whatsapp) throw new Error('Name and WhatsApp number are required');
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('session_bookings')
       .insert({
         form_type: 'umr',
@@ -61,17 +76,14 @@ export const sessionBookingsService = {
         frequency: nonEmpty(frequency),
         preferred_time: nonEmpty(preferredTime),
         notes: nonEmpty(notes),
-      })
-      .select()
-      .single();
+      });
     throwIfError(error, 'createUMR');
-    return data;
   },
 
   /** Music Meditation · Individual & Group Wellness */
   async createMMIndividual({ name, email, phone, plan, goals, notes }) {
     if (!name || !email) throw new Error('Name and email are required');
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('session_bookings')
       .insert({
         form_type: 'mm_individual',
@@ -81,11 +93,8 @@ export const sessionBookingsService = {
         plan: nonEmpty(plan),
         goals: nonEmpty(goals),
         notes: nonEmpty(notes),
-      })
-      .select()
-      .single();
+      });
     throwIfError(error, 'createMMIndividual');
-    return data;
   },
 
   async list() {
@@ -133,7 +142,7 @@ export const corporateBookingsService = {
     if (!contactName || !workEmail || !companyName) {
       throw new Error('Contact name, work email and company name are required');
     }
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('corporate_bookings')
       .insert({
         contact_name: contactName,
@@ -141,11 +150,8 @@ export const corporateBookingsService = {
         company_name: companyName,
         team_size: nonEmpty(teamSize),
         goals: nonEmpty(goals),
-      })
-      .select()
-      .single();
+      });
     throwIfError(error, 'corporate_bookings.create');
-    return data;
   },
 
   async list() {
@@ -187,7 +193,7 @@ export const contactMessagesService = {
     if (!name || !email || !message) {
       throw new Error('Name, email and message are required');
     }
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('contact_messages')
       .insert({
         name,
@@ -196,11 +202,8 @@ export const contactMessagesService = {
         email,
         subject: nonEmpty(subject),
         message,
-      })
-      .select()
-      .single();
+      });
     throwIfError(error, 'contact_messages.create');
-    return data;
   },
 
   async list() {
@@ -242,7 +245,7 @@ export const cityRequestsService = {
     if (!name || !email || !city) {
       throw new Error('Name, email and city are required');
     }
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('city_requests')
       .insert({
         name,
@@ -251,11 +254,8 @@ export const cityRequestsService = {
         phone: nonEmpty(phone),
         city,
         event_interest: nonEmpty(eventInterest),
-      })
-      .select()
-      .single();
+      });
     throwIfError(error, 'city_requests.create');
-    return data;
   },
 
   async list() {
