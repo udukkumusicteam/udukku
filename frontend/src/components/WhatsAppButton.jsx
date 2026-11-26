@@ -4,7 +4,7 @@ import { SITE } from '../data/mockData';
 // Keep the chat link tied to the contact number already used by the site.
 // wa.me requires digits only, including the country code and without a leading +.
 const whatsappNumber = SITE.phone.replace(/\D/g, '');
-const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi`;
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi! I came across your website and would love to know more about your offerings. Could you share some details?`;
 
 export default function WhatsAppButton() {
   const [hasBottomRightToast, setHasBottomRightToast] = useState(false);
